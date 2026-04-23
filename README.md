@@ -23,7 +23,11 @@ $env:USERPROFILE\.windsurf\
     ├── team/                         # ทีมงาน 11 คน + การตั้งค่า
     │   └── README.md                 # รายชื่อทีมงานและหน้าที่
     ├── Luna/                         # ความจำยาวนานของ Luna
-    │   └── README.md                 # วิธีเรียนรู้และจดจำ
+    │   ├── README.md                 # วิธีเรียนรู้และจดจำ
+    │   ├── preferences.md            # Pattern ยืนยันแล้ว (Evidence ≥ 3)
+    │   ├── insights.md                # Pattern ที่เริ่มเห็นซ้ำ (Evidence 1-2)
+    │   ├── hypothesis.md              # Pattern ใหม่ที่ยังไม่ชัดเจน (Evidence 0)
+    │   └── team/daily/                # Daily log ของทีมงาน (YYYY-MM-DD.md)
     ├── knowledge-package-generic/    # มาตรฐานการเขียนโค้ดทั่วไป
     │   └── README.md                 # คู่มือการใช้
     ├── templates/                    # แม่แบบสำหรับเริ่มโปรเจกต์ใหม่
@@ -251,7 +255,9 @@ Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\
 - A: ตรวจสอบว่าไฟล์ `<repo>/.windsurf/rules/project-context.md` มีอยู่และแก้ไฟล์นี้แล้ว
 
 **Q: Daily log ไม่ถูกเขียน**
-- A: ตรวจสอบว่าโฟลเดอร์ `<repo>/Luna/daily/` และ `<repo>/team/daily/` มีอยู่
+- A: ตรวจสอบว่าโฟลเดอร์ `<repo>/Luna/team/daily/` มีอยู่ (สำหรับงานทีมงาน)
+- A: ตรวจสอบว่าโฟลเดอร์ `<repo>/Luna/daily/` มีอยู่ (สำหรับงานส่วนตัว Luna)
+- A: Luna ควรบันทึก daily log ทุกครั้งหลังทำงานเสร็จตาม protocol
 
 **Q: ลืม backup ข้อมูล**
 - A: zip โฟลเดอร์ `$env:USERPROFILE\.windsurf` ทันที ก่อนเครื่องจะเสีย
@@ -263,6 +269,8 @@ Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\
 - **Luna Persona:** ดูที่ global `rules/luna-core.md`
 - **รายละเอียดทีมงาน:** ดูที่ global `team/roles/`
 - **ตัวอย่าง project-context:** ดูที่ global `templates/project-context.template.md` (มีตัวอย่าง 3 แบบ)
+- **Daily Log:** ดูที่ `<repo>/Luna/team/daily/YYYY-MM-DD.md` — บันทึกงานที่ทีมทำในแต่ละวัน
+- **Learning Patterns:** ดูที่ global `Luna/hypothesis.md`, `Luna/insights.md`, `Luna/preferences.md` — ระบบเรียนรู้ของ Luna
 
 ---
 *อัปเดต: 2026-04-23 — Global structure cleanup by Orion + Galaxy + Lyra*
