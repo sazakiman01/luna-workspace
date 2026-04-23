@@ -40,6 +40,15 @@
   - Context: พี่แมนชี้ว่า "10 roles" ใน Luna/preferences.md ไม่ถูกต้องเพราะทีมขยายได้
   - Source: PMAM Web session — refactor Luna/team structure
 
+### DevOps / Tools
+- **Pattern:** Windsurf's commit message generator (UI "Generate" button) อาจ fail ด้วย error "no git diffs found" แม้ว่าไฟล์จะถูก `git add` แล้ว
+  - Evidence: 1/3
+  - First seen: 2026-04-23
+  - Last confirmed: 2026-04-23
+  - Context: พี่แมนลอง commit README.md ผ่าน Windsurf UI แต่ได้ error แม้ว่า git status แสดง staged changes
+  - Workaround: ใช้ `git commit -m "message"` แบบ manual แทน
+  - Source: luna-workspace — README.md update
+
 ## การยืนยัน Hypothesis
 
 เมื่อได้หลักฐานเพิ่ม:
