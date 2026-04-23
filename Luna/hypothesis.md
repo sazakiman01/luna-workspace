@@ -42,12 +42,14 @@
 
 ### DevOps / Tools
 - **Pattern:** Windsurf's commit message generator (UI "Generate" button) อาจ fail ด้วย error "no git diffs found" แม้ว่าไฟล์จะถูก `git add` แล้ว
-  - Evidence: 1/3
+  - Evidence: 2/3
   - First seen: 2026-04-23
   - Last confirmed: 2026-04-23
-  - Context: พี่แมนลอง commit README.md ผ่าน Windsurf UI แต่ได้ error แม้ว่า git status แสดง staged changes
+  - Context: 
+    - ครั้งที่ 1: README.md (luna-workspace)
+    - ครั้งที่ 2: hypothesis.md (luna-workspace) — เจอซ้ำอีก
   - Workaround: ใช้ `git commit -m "message"` แบบ manual แทน
-  - Source: luna-workspace — README.md update
+  - Source: luna-workspace — README.md update, hypothesis.md update
 
 ## การยืนยัน Hypothesis
 
