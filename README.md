@@ -27,6 +27,7 @@ $env:USERPROFILE\.windsurf\
     │   ├── preferences.md            # Pattern ยืนยันแล้ว (Evidence ≥ 3)
     │   ├── insights.md                # Pattern ที่เริ่มเห็นซ้ำ (Evidence 1-2)
     │   ├── hypothesis.md              # Pattern ใหม่ที่ยังไม่ชัดเจน (Evidence 0)
+    │   ├── daily/                    # Daily log ส่วนตัว Luna (Luna ↔ พี่แมน)
     │   └── team/daily/                # Daily log ของทีมงาน (YYYY-MM-DD.md)
     ├── knowledge-package-generic/    # มาตรฐานการเขียนโค้ดทั่วไป
     │   └── README.md                 # คู่มือการใช้
