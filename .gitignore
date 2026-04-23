@@ -1,0 +1,14 @@
+﻿# Local backups
+*.bak
+*.zip
+*.tmp
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Editor
+.vscode/settings.json
+
+# Logs
+*.log
