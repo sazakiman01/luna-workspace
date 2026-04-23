@@ -1,188 +1,203 @@
 ﻿# Luna + Team — คู่มือการใช้งาน
 
-*Luna + Team ติดตั้งครั้งเดียวที่ `$env:USERPROFILE\.windsurf\luna-workspace\` ใช้ได้ทุก repo บนเครื่องนี้*
+**Luna + Team** คือระบบ AI Assistant ที่ติดตั้งครั้งเดียว แล้วใช้ได้กับทุก repo บนเครื่องนี้
+
+ติดตั้งที่: `$env:USERPROFILE\.windsurf\luna-workspace\`
 
 ---
 
-## 📁 โครงสร้าง
+## 📁 โครงสร้างระบบ
 
 ```
 $env:USERPROFILE\.windsurf\
-├── argv.json                         # Windsurf config (ไม่แตะ)
-├── extensions/                       # Managed by Windsurf (ไม่แตะ)
-└── luna-workspace/                   ← Luna AI system (git-controlled)
-    ├── README.md                     # ไฟล์นี้
-    ├── rules/                        # Luna core + team protocol + project-detect
-    │   └── README.md                 # → reading order, priority
-    ├── workflows/                    # /daily-log, /team-delegate, /feedback-learn, /weekly-retro
-    │   └── README.md                 # → slash commands catalog
-    ├── skills/                       # Windsurf skills (global) + planned skills
+├── argv.json                         # ตั้งค่า Windsurf (ไม่ต้องแก้)
+├── extensions/                       # Extensions ของ Windsurf (ไม่ต้องแก้)
+└── luna-workspace/                   ← ระบบ Luna + Team (git-controlled)
+    ├── README.md                     # คู่มือนี้
+    ├── rules/                        # กฎการทำงานของ Luna
+    │   └── README.md                 # คู่มือการอ่านกฎต่างๆ
+    ├── workflows/                    # คำสั่งทางลัด (slash commands)
+    │   └── README.md                 # รายการคำสั่งที่ใช้ได้
+    ├── skills/                       # Skills ของ Windsurf
     │   └── README.md
-    ├── team/                         # team-config + 11 Roles (roles/ + preferences/)
-    │   └── README.md                 # → team overview + role catalog
-    ├── Luna/                         # Luna long-term memory
-    │   └── README.md                 # → 3-tier learning
-    ├── knowledge-package-generic/    # Generic coding standards (cross-repo)
-    │   └── README.md                 # → scope & usage
-    ├── templates/                    # Templates สำหรับ setup repo ใหม่
-    │   └── README.md                 # → template catalog
-    ├── plans/                        # Planning mode artifacts (active)
-    │   ├── README.md                 # → naming convention + lifecycle
-    │   └── archive/YYYY/             # Completed/superseded plans
-    └── repo-index/                   # Centralized per-repo index (Hybrid)
+    ├── team/                         # ทีมงาน 11 คน + การตั้งค่า
+    │   └── README.md                 # รายชื่อทีมงานและหน้าที่
+    ├── Luna/                         # ความจำยาวนานของ Luna
+    │   └── README.md                 # วิธีเรียนรู้และจดจำ
+    ├── knowledge-package-generic/    # มาตรฐานการเขียนโค้ดทั่วไป
+    │   └── README.md                 # คู่มือการใช้
+    ├── templates/                    # แม่แบบสำหรับเริ่มโปรเจกต์ใหม่
+    │   └── README.md                 # รายการแม่แบบที่มี
+    ├── plans/                        # แผนงานที่กำลังทำอยู่
+    │   ├── README.md                 # วิธีตั้งชื่อแผนงาน
+    │   └── archive/YYYY/             # แผนงานที่เสร็จแล้ว
+    └── repo-index/                   # ดัชนีของแต่ละ repo
         ├── README.md
-        └── <repo-name>/              # Index ของแต่ละ repo
+        └── <repo-name>/              # ข้อมูลของแต่ละ repo
 ```
 
-ทุก sub-folder มี `README.md` อธิบายจุดประสงค์ + วิธีใช้
+**ทุกโฟลเดอร์มี README.md** อธิบายไว้ว่าใช้ทำอะไรและวิธีใช้อย่างไร
 
 ---
 
 ## 🚀 วิธีใช้กับ Repo ใหม่ (บนเครื่องเดียว)
 
-### แบบง่ายที่สุด: ใช้ Setup Script
+### วิธีที่ 1: ใช้ Script แนะนำ (ง่ายที่สุด)
+
+รัน script เดียวเสร็จเลย:
 
 ```powershell
 & "$env:USERPROFILE\.windsurf\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
 ```
 
-> **หมายเหตุ:** Script ใช้ dynamic path แล้ว — ใช้ได้กับ user ต่างกันโดยไม่ต้องแก้อะไร
-
-Script จะทำให้อัตโนมัติ:
+Script จะสร้างโฟลเดอร์และไฟล์ที่จำเป็นให้อัตโนมัติ:
 - ✅ สร้างโฟลเดอร์ `.windsurf/rules/`, `Luna/daily/`, `Luna/retrospective/`, `team/daily/`
-- ✅ Copy `project-context.md` จาก template
-- ✅ สร้าง `Luna/decisions.md`, `Luna/feedback.md`, `team/performance.md`
+- ✅ Copy แม่แบบ `project-context.md`
+- ✅ สร้างไฟล์ `Luna/decisions.md`, `Luna/feedback.md`, `team/performance.md`
 
-**หลัง setup:**
-1. แก้ `<repo>\.windsurf\rules\project-context.md` ให้ตรงกับ tech stack/constraints
+**หลังรัน script:**
+1. แก้ไฟล์ `<repo>\.windsurf\rules\project-context.md` ให้ตรงกับโปรเจกต์ของคุณ (tech stack, constraints)
 2. เปิด repo ใน Windsurf → Luna + Team พร้อมใช้งาน
 
-### Options ของ Script
-- `-ProjectName "ชื่อโปรเจกต์"` — ระบุชื่อเอง (default = ชื่อโฟลเดอร์)
-- `-Force` — overwrite ไฟล์ที่มีอยู่แล้ว
-
-### แบบ Manual (ถ้าไม่อยากใช้ script)
-
-1. สร้างโฟลเดอร์:
-   ```
-   <repo>/.windsurf/rules/
-   <repo>/Luna/daily/
-   <repo>/Luna/retrospective/
-   <repo>/team/daily/
-   ```
-
-2. Copy template:
-   ```powershell
-   Copy-Item "$env:USERPROFILE\.windsurf\luna-workspace\templates\project-context.template.md" "<repo>\.windsurf\rules\project-context.md"
-   ```
-
-3. สร้างไฟล์เริ่มต้น:
-   ```
-   <repo>/Luna/decisions.md
-   <repo>/Luna/feedback.md
-   <repo>/team/performance.md
-   ```
-
-4. แก้ `project-context.md` ให้ตรงกับโปรเจกต์
+**ตัวเลือกเพิ่มเติม:**
+- `-ProjectName "ชื่อโปรเจกต์"` — ระบุชื่อเอง (ค่าเริ่มต้น = ชื่อโฟลเดอร์)
+- `-Force` — ถ้าไฟล์มีอยู่แล้ว จะเขียนทับ
 
 ---
 
-## � 2-Tier Team Model
+### วิธีที่ 2: ทำเองแบบ Manual
 
-Luna ใช้ทีมแบบ 2 ชั้น:
+ถ้าไม่อยากใช้ script ทำตามนี้:
 
-### Tier 1: Global Team (generic) — อยู่ที่ global
-- 10 Role ทั่วไป (Nova, Stella, Aurora, ฯลฯ) — รู้งาน generic
-- เก็บที่ `$env:USERPROFILE\.windsurf\luna-workspace\team\roles\`
+**1. สร้างโฟลเดอร์:**
+```
+<repo>/.windsurf/rules/
+<repo>/Luna/daily/
+<repo>/Luna/retrospective/
+<repo>/team/daily/
+```
 
-### Tier 2: Per-Repo Team (specific) — อยู่ในแต่ละ repo
-- **Context Extension** — extend global role ด้วย knowledge เฉพาะ repo
-  - ไฟล์: `<repo>\team\roles\[role]-context.md` (เช่น `nova-context.md`)
-- **Custom Role** — role ใหม่เฉพาะ repo (ไม่มีใน global)
-  - ไฟล์: `<repo>\team\roles\[role].md` (เช่น `phoenix.md`)
-- **Team Roster** — list ทีม specialist ของ repo
-  - ไฟล์: `<repo>\team\team-local.md`
+**2. Copy แม่แบบ:**
+```powershell
+Copy-Item "$env:USERPROFILE\.windsurf\luna-workspace\templates\project-context.template.md" "<repo>\.windsurf\rules\project-context.md"
+```
 
-### ตัวอย่างใน UniformFlow
+**3. สร้างไฟล์เริ่มต้น:**
+```
+<repo>/Luna/decisions.md
+<repo>/Luna/feedback.md
+<repo>/team/performance.md
+```
+
+**4. แก้ไฟล์ `project-context.md`** ให้ตรงกับโปรเจกต์ของคุณ
+
+---
+
+## 👥 ระบบทีมงาน 2 ชั้น
+
+Luna มีทีมงาน 11 คน แบ่งเป็น 2 ชั้น:
+
+### ชั้นที่ 1: Global Team (ทีมทั่วไป)
+- อยู่ที่ global เดียว ใช้ได้กับทุก repo
+- มี 11 Role เช่น Nova (Backend), Stella (Frontend), Aurora (Integration)
+- เก็บไฟล์ที่: `$env:USERPROFILE\.windsurf\luna-workspace\team\roles\`
+- ใช้กับงานทั่วไปที่ไม่ต้องรู้รายละเอียดเฉพาะโปรเจกต์
+
+### ชั้นที่ 2: Per-Repo Team (ทีมเฉพาะโปรเจกต์)
+- อยู่ในแต่ละ repo เฉพาะเจาะจง
+- มี 3 แบบ:
+  1. **Context Extension** — เพิ่มความรู้เฉพาะโปรเจกต์ให้ global role
+     - ไฟล์: `<repo>\team\roles\[role]-context.md`
+     - ตัวอย่าง: `nova-context.md` (บอก Nova ว่าโปรเจกต์นี้ใช้ Firestore schema แบบไหน)
+  2. **Custom Role** — สร้าง role ใหม่ที่ไม่มีใน global
+     - ไฟล์: `<repo>\team\roles\[role].md`
+     - ตัวอย่าง: `phoenix.md` (ผู้เชี่ยวชาญด้านเสื้อผ้า สำหรับโปรเจกต์ UniformFlow)
+  3. **Team Roster** — รายชื่อทีม specialist ของ repo
+     - ไฟล์: `<repo>\team\team-local.md`
+
+### ตัวอย่างจริงในโปรเจกต์ UniformFlow
 ```
 UniformFlow/team/
-├── team-local.md                 # roster — list specialist
+├── team-local.md                 # รายชื่อทีม specialist
 ├── roles/
-│   ├── nova-context.md          # extend Nova (รู้ Firestore schema ของ UniformFlow)
-│   ├── aurora-context.md        # extend Aurora (รู้ LIFF + PromptPay)
-│   └── phoenix.md               # custom role (Garment Domain Expert)
+│   ├── nova-context.md          # เพิ่มความรู้ Firestore schema ให้ Nova
+│   ├── aurora-context.md        # เพิ่มความรู้ LIFF + PromptPay ให้ Aurora
+│   └── phoenix.md               # Role ใหม่: ผู้เชี่ยวชาญเสื้อผ้า
 ├── daily/
 └── performance.md
 ```
 
-### วิธีใช้งาน
-- **เรียก global role ธรรมดา:** Luna อ่าน global role เท่านั้น
-- **เรียก role ที่มี context:** Luna อ่าน global + context → รู้ทั้ง generic + specific
-- **เรียก custom role:** Luna อ่านจาก per-repo `team/roles/` โดยตรง
+### วิธีเรียกใช้
+- **เรียก global role:** Luna อ่านจาก global เท่านั้น
+- **เรียก role ที่มี context:** Luna อ่าน global + context → รู้ทั้งงานทั่วไป + งานเฉพาะโปรเจกต์
+- **เรียก custom role:** Luna อ่านจาก repo นั้นโดยตรง
 
-### Templates ใน global (ใช้สร้างไฟล์ใหม่)
-- `templates/team-local.template.md` — สำหรับ team roster
-- `templates/role-context.template.md` — สำหรับ context extension
-- `templates/role-custom.template.md` — สำหรับ custom role
+### แม่แบบไฟล์ (Templates)
+มีอยู่ใน global `templates/`:
+- `team-local.template.md` — สำหรับสร้าง team roster
+- `role-context.template.md` — สำหรับสร้าง context extension
+- `role-custom.template.md` — สำหรับสร้าง custom role
 
 ---
 
-## �💻 วิธีใช้กับเครื่องอื่น
+## 💻 วิธีใช้กับเครื่องอื่น
 
-ตอนนี้ global folder อยู่ที่ `C:\Users\sansakritsuk\.windsurf\` บนเครื่องเดียว
+ตอนนี้ระบบ Luna อยู่ที่ `C:\Users\sansakritsuk\.windsurf\` บนเครื่องเดียว
 
-ถ้าพี่แมนใช้เครื่องอื่น (เช่น laptop) และอยากใช้ Luna บนเครื่องนั้นด้วย:
+ถ้าคุณใช้เครื่องอื่น (เช่น laptop) และอยากใช้ Luna บนเครื่องนั้นด้วย:
 
-### วิธีที่ 1: Manual Copy (ง่ายที่สุด)
+### วิธีที่ 1: Copy แบบ Manual (ง่ายที่สุด)
 
-1. **Backup global folder** บนเครื่องเดิม:
-   ```powershell
-   Compress-Archive -Path "C:\Users\sansakritsuk\.windsurf" -DestinationPath "D:\backup\windsurf-luna-backup.zip"
-   ```
+**1. Backup บนเครื่องเดิม:**
+```powershell
+Compress-Archive -Path "C:\Users\sansakritsuk\.windsurf" -DestinationPath "D:\backup\windsurf-luna-backup.zip"
+```
 
-2. **Copy zip ไปเครื่องใหม่**
+**2. Copy ไฟล์ zip ไปเครื่องใหม่** (ผ่าน USB, Google Drive, ฯลฯ)
 
-3. **Extract ไปที่เดียวกัน**:
-   ```
-   C:\Users\sansakritsuk\.windsurf\  (บนเครื่องใหม่)
-   ```
+**3. Extract ไปที่เดียวกันบนเครื่องใหม่:**
+```
+C:\Users\sansakritsuk\.windsurf\
+```
 
-4. **ตรวจสอบ** — เปิด Windsurf บนเครื่องใหม่ → Luna ควรทำงานเหมือนเครื่องเดิม
+**4. เปิด Windsurf บนเครื่องใหม่** → Luna ควรทำงานเหมือนเครื่องเดิม
+
+---
 
 ### วิธีที่ 2: Git Sync (แนะนำถ้าใช้ git บ่อย)
 
-1. **สร้าง private repo** บน GitHub/GitLab (เช่น `luna-workspace`)
+**1. สร้าง private repo** บน GitHub/GitLab (ตั้งชื่อเช่น `luna-workspace`)
 
-2. **Init git** บนเครื่องเดิม:
-   ```powershell
-   cd $env:USERPROFILE\.windsurf\luna-workspace
-   git init
-   git add .
-   git commit -m "Initial Luna workspace"
-   git remote add origin https://github.com/sazakiman01/luna-workspace.git
-   git push -u origin main
-   ```
+**2. เริ่มใช้ git บนเครื่องเดิม:**
+```powershell
+cd $env:USERPROFILE\.windsurf\luna-workspace
+git init
+git add .
+git commit -m "Initial Luna workspace"
+git remote add origin https://github.com/YOUR_USERNAME/luna-workspace.git
+git push -u origin main
+```
 
-3. **Clone ไปเครื่องใหม่**:
-   ```powershell
-   git clone https://github.com/sazakiman01/luna-workspace.git $env:USERPROFILE\.windsurf\luna-workspace
-   ```
+**3. Clone ไปเครื่องใหม่:**
+```powershell
+git clone https://github.com/YOUR_USERNAME/luna-workspace.git $env:USERPROFILE\.windsurf\luna-workspace
+```
 
-4. **Sync ข้ามเครื่อง**:
-   - เครื่องเดิม: `git add . && git commit && git push`
-   - เครื่องใหม่: `git pull`
+**4. Sync ข้อมูลข้ามเครื่อง:**
+- บนเครื่องเดิม: `git add . && git commit && git push`
+- บนเครื่องใหม่: `git pull`
 
 ---
 
-## 💾 Backup Strategy
+## 💾 การ Backup
 
-### Manual Backup (แนะนำสำหรับเครื่องเดียว)
+### แบบ Manual (สำหรับเครื่องเดียว)
 
-**Backup เมื่อ:**
-- Role preferences เปลี่ยนสำคัญ
-- Luna preferences/insights อัปเดตเยอะ
-- ก่อน update Windsurf version ใหญ่
-- เดือนละ 1 ครั้ง (ขั้นต่ำ)
+**ควร backup เมื่อ:**
+- เปลี่ยนการตั้งค่า Role สำคัญๆ
+- Luna เรียนรู้ข้อมูลใหม่เยอะๆ
+- ก่อนอัปเดต Windsurf version ใหญ่
+- อย่างน้อยเดือนละ 1 ครั้ง
 
 **วิธี backup:**
 ```powershell
@@ -190,62 +205,64 @@ $ts = Get-Date -Format "yyyyMMdd-HHmmss"
 Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\windsurf-luna-$ts.zip"
 ```
 
-### Git Backup (ถ้าใช้ Git Sync)
+---
 
-Git repo คือ backup อัตโนมัติ — ไม่ต้อง zip
+### แบบ Git (ถ้าใช้ Git Sync)
+
+ถ้าใช้วิธี Git Sync ข้างบน ไม่ต้อง backup แบบ manual เพราะ git เก็บประวัติไว้ให้อัตโนมัติ
 
 ---
 
 ## 🔧 ตรวจสอบว่า Luna ทำงานได้
 
-หลัง setup repo ใหม่ หรือเปลี่ยนเครื่อง:
+หลังจาก setup repo ใหม่ หรือย้ายไปเครื่องอื่น ทดสอบตามนี้:
 
-1. **เปิด repo ใน Windsurf**
+**1. เปิด repo ใน Windsurf**
 
-2. **ถาม Luna คำถามง่ายๆ:**
-   - "คนในทีมมีใครบ้าง"
-   - Luna ตอบได้ → อ่าน global `team/team-config.md` สำเร็จ
+**2. ถาม Luna คำถามง่ายๆ:**
+- "คนในทีมมีใครบ้าง"
+- ถ้า Luna ตอบได้ → อ่าน global `team/team-config.md` สำเร็จ
 
-3. **เรียกทีมให้ทำงาน:**
-   - "ช่วยเขียน component หน้า login ให้หน่อย"
-   - Luna ประกาศเรียก Stella → อ่าน global `team/roles/stella.md` สำเร็จ
+**3. สั่งให้ทีมทำงาน:**
+- "ช่วยเขียน component หน้า login ให้หน่อย"
+- ถ้า Luna เรียก Stella มาทำงาน → อ่าน global `team/roles/stella.md` สำเร็จ
 
 ---
 
-## 📂 ไฟล์สำคัญที่ต้องรู้
+## 📂 ไฟล์สำคัญที่ควรรู้
 
 | ไฟล์ | อยู่ที่ไหน | ใช้ทำอะไร |
 |------|-----------|-----------|
-| `luna-core.md` | Global `rules/` | Persona + behavior ของ Luna |
-| `project-detect.md` | Global `rules/` | สอน Luna detect repo ปัจจุบัน |
-| `team-config.md` | Global `team/` | Mapping งาน → Role |
-| `project-context.md` | Per-repo `.windsurf/rules/` | บริบทเฉพน repo (tech stack, constraints) |
-| `Setup-LunaRepo.ps1` | Global `templates/` | Script setup repo ใหม่ |
-| `project-context.template.md` | Global `templates/` | Template พร้อมตัวอย่าง mockup |
+| `luna-core.md` | Global `rules/` | บุคลิกและวิธีการทำงานของ Luna |
+| `project-detect.md` | Global `rules/` | สอน Luna รู้ว่ากำลังอยู่ repo ไหน |
+| `team-config.md` | Global `team/` | รายชื่อทีมงานและหน้าที่ |
+| `project-context.md` | Per-repo `.windsurf/rules/` | ข้อมูลเฉพาะโปรเจกต์ (tech stack, constraints) |
+| `Setup-LunaRepo.ps1` | Global `templates/` | Script สำหรับ setup repo ใหม่ |
+| `project-context.template.md` | Global `templates/` | แม่แบบพร้อมตัวอย่าง |
 
 ---
 
 ## ❓ ปัญหาที่พบบ่อย
 
 **Q: Luna ตอบไม่ได้ว่าคนในทีมมีใครบ้าง**
-- A: ตรวจว่า global `team/team-config.md` มีอยู่จริง
+- A: ตรวจสอบว่าไฟล์ `team/team-config.md` ใน global มีอยู่จริง
 
 **Q: Luna ไม่รู้ว่า repo นี้ใช้ tech stack อะไร**
-- A: ตรวจว่า `<repo>/.windsurf/rules/project-context.md` มีอยู่และแก้แล้ว
+- A: ตรวจสอบว่าไฟล์ `<repo>/.windsurf/rules/project-context.md` มีอยู่และแก้ไฟล์นี้แล้ว
 
-**Q: Daily log ไม่เขียน**
-- A: ตรวจว่า `<repo>/Luna/daily/` และ `<repo>/team/daily/` มีอยู่
+**Q: Daily log ไม่ถูกเขียน**
+- A: ตรวจสอบว่าโฟลเดอร์ `<repo>/Luna/daily/` และ `<repo>/team/daily/` มีอยู่
 
-**Q: ลืม backup global folder**
-- A: zip `$env:USERPROFILE\.windsurf` ทันที ก่อนเครื่องพัง
+**Q: ลืม backup ข้อมูล**
+- A: zip โฟลเดอร์ `$env:USERPROFILE\.windsurf` ทันที ก่อนเครื่องจะเสีย
 
 ---
 
-## 🌙 ข้อมูลเพิ่มเติม
+## 🌙 อ่านเพิ่มเติม
 
-- **Luna Persona:** ดู global `rules/luna-core.md`
-- **Team Roles:** ดู global `team/roles/`
-- **Project Context Template:** ดู global `templates/project-context.template.md` (มีตัวอย่าง mockup 3 แบบ)
+- **Luna Persona:** ดูที่ global `rules/luna-core.md`
+- **รายละเอียดทีมงาน:** ดูที่ global `team/roles/`
+- **ตัวอย่าง project-context:** ดูที่ global `templates/project-context.template.md` (มีตัวอย่าง 3 แบบ)
 
 ---
 *อัปเดต: 2026-04-23 — Global structure cleanup by Orion + Galaxy + Lyra*
