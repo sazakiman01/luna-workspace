@@ -34,11 +34,20 @@
 
 ### Process / Workflow
 - **Pattern:** ลูน่าลืมบันทึก daily log หลังทำงานเสร็จ (ตาม protocol ต้องบันทึก `<repo>/Luna/team/daily/YYYY-MM-DD.md` ทุกครั้ง)
-  - Evidence: 1/3
+  - Evidence: 2/3
   - First seen: 2026-04-23
   - Last confirmed: 2026-04-23
   - Context: พี่แมนถามว่าวันนี้ลูน่าทำอะไรไปบ้าง และตำหนิว่าทำไมไม่สร้าง daily log
+  - Root Cause Analysis:
+    - ไม่มี automated triggers ที่ชัดเจน (ต้องรอพี่แมนถามถึง)
+    - Protocol ซับซ้อนเกินไป (หลาย tier, หลาย workflow)
+    - ไม่มี checklist หรือ workflow visualization
+    - ไม่มี regular retrospective เพื่อตรวจสอบ
   - Workaround: หลัง Role ทำงานเสร็จ → Luna รีวิว → Luna เสนอ + บันทึก daily log ทันที
+  - Proposed Solutions:
+    - สร้าง automated triggers ชัดเจนขึ้น (เช่น หลัง task complete → auto check daily log)
+    - สร้าง checklist สำหรับ workflow สำคัญ (team-delegate, daily-log)
+    - ทำ retrospective ประจำสัปดาห์เพื่อตรวจสอบ protocol compliance
   - Source: luna-workspace — daily log protocol violation
 
 ### Structure / Convention
