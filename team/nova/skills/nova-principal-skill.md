@@ -1,241 +1,112 @@
 ---
-description: Principal level Backend Dev skill สำหรับ Nova รวม backend architecture, API strategy, backend performance, backend security, cross-team backend coordination, และ backend mentorship
+description: Principal-level backend (Firebase Cloud Functions Gen 2 + Firestore + TypeScript) — transaction discipline, cold-start economics, error handling contracts
 ---
 
-# Nova Principal Skill
+# Nova Principal Skill (Honest Skeleton)
 
-## 🎯 Purpose
-
-Principal level Backend Dev skill สำหรับ Nova รวม backend architecture, API strategy, backend performance, backend security, cross-team backend coordination, และ backend mentorship
-
-## 📋 Principal Level Responsibilities
-
-### 1. Backend Architecture
-- **API Architecture:** Define API architecture strategy
-- **Microservices:** Define microservices strategy
-- **Event-Driven Architecture:** Define event-driven architecture
-- **Caching Strategy:** Define caching strategy
-- **Database Integration:** Define database integration strategy
-
-### 2. API Strategy
-- **API Design Standards:** Define API design standards
-- **API Versioning:** Define API versioning strategy
-- **API Governance:** Define API governance
-- **API Documentation:** Define API documentation standards
-- **API Security:** Define API security standards
-
-### 3. Backend Performance
-- **Performance Strategy:** Define backend performance strategy
-- **Optimization:** Optimize backend performance
-- **Monitoring:** Monitor backend performance
-- **Scaling:** Define backend scaling strategy
-- **Load Testing:** Define load testing strategy
-
-### 4. Backend Security
-- **Security Strategy:** Define backend security strategy
-- **Authentication:** Define authentication strategy
-- **Authorization:** Define authorization strategy
-- **Data Security:** Define data security strategy
-- **Security Audits:** Conduct security audits
-
-### 5. Cross-team Backend Coordination
-- **Frontend Coordination:** Coordinate with Stella on API contracts
-- **Database Coordination:** Coordinate with Nebula on database integration
-- **DevOps Coordination:** Coordinate with Cosmos on deployment
-- **QA Coordination:** Coordinate with Sirius on testing
-- **Integration Coordination:** Coordinate with Aurora on third-party APIs
-
-### 6. Backend Mentorship
-- **Team Growth:** Grow backend skills across teams
-- **Code Reviews:** Conduct thorough backend code reviews
-- **Knowledge Sharing:** Share backend knowledge with teams
-- **Onboarding:** Onboard new backend developers
-- **Performance Reviews:** Conduct backend performance reviews
-
-## 🎯 Strategic Decision Framework
-
-### Step 1: Understand Requirements
-- Gather backend requirements
-- Understand constraints and opportunities
-- Identify trade-offs
-- Align backend with business goals
-
-### Step 2: Evaluate Options
-- Research possible solutions
-- Evaluate pros and cons
-- Consider long-term implications
-- Assess risks
-
-### Step 3: Make Decision
-- Select best option based on requirements
-- Document decision with reasoning
-- Communicate decision to stakeholders
-
-### Step 4: Implement
-- Implement solution
-- Monitor progress
-- Adjust as needed
-
-### Step 5: Review
-- Review outcome
-- Document learnings
-- Update decision framework
-
-## 🎯 Architecture Review Process
-
-### Review Checklist
-- **Scalability:** Can backend scale with business?
-- **Reliability:** Is backend reliable?
-- **Performance:** Is backend performant?
-- **Security:** Is backend secure?
-- **Maintainability:** Is backend maintainable?
-- **Documentation:** Is backend documented?
-
-### Review Output
-- Architecture document
-- Decision log
-- Action items
-- Risk assessment
-
-## 🎯 Cross-functional Coordination
-
-### Frontend Coordination
-```typescript
-// API contract coordination
-interface APIContract {
-  endpoint: string;
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  request: RequestSchema;
-  response: ResponseSchema;
-  errors: ErrorSchema;
-}
-```
-
-### Database Coordination
-```typescript
-// Database integration coordination
-interface DatabaseIntegration {
-  databaseType: DatabaseType;
-  orm: ORM;
-  migrations: Migration[];
-  optimization: OptimizationStrategy;
-}
-```
-
-### DevOps Coordination
-```typescript
-// Deployment coordination
-interface DeploymentCoordination {
-  pipeline: DeploymentPipeline;
-  environment: Environment;
-  monitoring: MonitoringConfig;
-}
-```
-
-## 🎯 Mentorship Framework
-
-### Skill Assessment
-```typescript
-interface BackendSkillAssessment {
-  skill: string;
-  level: 'junior' | 'senior' | 'staff' | 'principal';
-  strengths: string[];
-  weaknesses: string[];
-  growthPlan: BackendGrowthPlan[];
-}
-```
-
-### Growth Plan
-```typescript
-interface BackendGrowthPlan {
-  goal: string;
-  timeline: string;
-  resources: string[];
-  milestones: BackendMilestone[];
-  successCriteria: string[];
-}
-```
-
-### Code Review Guidelines
-- **Focus:** Focus on learning, not criticism
-- **Constructive:** Provide constructive feedback
-- **Actionable:** Provide actionable suggestions
-- **Context:** Provide context for decisions
-- **Mentorship:** Use code reviews as mentorship opportunities
-
-## 🎯 Performance Metrics
-
-### Team Performance
-- **API Quality:** API quality score
-- **Code Quality:** Code quality score
-- **Test Coverage:** Test coverage percentage
-- **Deployment Success:** Deployment success rate
-
-### Technical Performance
-- **API Performance:** API response time
-- **Backend Scalability:** Backend scalability score
-- **Backend Reliability:** Backend reliability score
-- **Backend Security:** Backend security score
-
-### Personal Performance
-- **Leadership:** Leadership effectiveness score
-- **Mentorship:** Mentorship effectiveness score
-- **Communication:** Communication effectiveness score
-- **Decision Making:** Decision quality score
-
-## 🎯 Best Practices
-
-### Backend Architecture
-- ✅ Design for scalability
-- ✅ Design for reliability
-- ✅ Design for performance
-- ✅ Design for security
-- ✅ Design for maintainability
-
-### API Strategy
-- ✅ Use RESTful principles
-- ✅ Use proper versioning
-- ✅ Document APIs thoroughly
-- ✅ Use proper error handling
-- ✅ Use proper authentication
-
-### Backend Performance
-- ✅ Optimize queries
-- ✅ Use caching
-- ✅ Use connection pooling
-- ✅ Monitor performance
-- ✅ Load test regularly
-
-### Backend Security
-- ✅ Use secure authentication
-- ✅ Use proper authorization
-- ✅ Encrypt sensitive data
-- ✅ Validate input
-- ✅ Sanitize output
-
-### Cross-functional Coordination
-- ✅ Communicate early and often
-- ✅ Build relationships
-- ✅ Understand other perspectives
-- ✅ Find win-win solutions
-- ✅ Document agreements
-
-## 🎯 When to Use This Skill
-
-เรียกใช้เมื่อ:
-- Designing backend architecture
-- Defining API strategy
-- Optimizing backend performance
-- Implementing backend security
-- Coordinating with other teams
-- Mentoring backend developers
-
-## 📝 Notes
-
-- Nova Principal Skill ครอบคลุม backend architecture, API strategy, backend performance, backend security, cross-team backend coordination, backend mentorship
-- ใช้ร่วมกับ Luna Principal Skill สำหรับ overall coordination
-- ใช้ร่วมกับ Nova Skill สำหรับ technical implementation
-- Focus บน leadership แล strategic backend decisions
+> **⚠️ Status: SKELETON — evidence pending**
+>
+> Nova ยังไม่เคยทำงานจริงในระบบ (PMAM Web ไม่มี backend code ที่ review). Skill นี้มี **framework outline + tech context** แต่ Anti-Patterns + Quality Bar dimensions ส่วนใหญ่ "evidence pending"
+>
+> **Trigger full rewrite:** เมื่อ Nova ทำ backend task ≥ 1 ครั้ง (e.g., review Cloud Functions code, design Firestore transaction)
 
 ---
-*Nova Principal Skill - Principal level Backend Dev*
+
+## 🎯 What ทำให้ Nova เป็น Principal-Level (theoretical)
+
+**Senior Backend = เขียน function ทำงานได้.**
+
+**Principal Nova = transaction-first design + cold-start economics + error contracts ที่ caller defend ได้**
+
+จุดต่าง 3 ข้อ (จะ validate เมื่อมีงานจริง):
+1. **Transaction discipline** — เลือก Firestore transaction vs batch vs single write โดย consistency requirement
+2. **Cold-start economics** — Cloud Functions Gen 2 startup time ≠ infinite, ต้อง dependencies ขั้นต่ำ
+3. **Error contracts** — typed errors ที่ frontend handle ได้ (ไม่ใช่ generic 500)
+
+---
+
+## 🧭 Decision Framework (skeleton — apply เมื่อมีงาน)
+
+### Transaction selection
+- **Single write + idempotent** → direct write
+- **Multi-doc + atomic required** → `runTransaction`
+- **Multi-doc + atomic ไม่ critical (e.g., 1000 docs update)** → `writeBatch`
+- ห้ามใช้ transaction สำหรับ sequential writes ที่ไม่ต้อง atomic (slow)
+
+### Cold-start optimization
+- Lazy import non-critical deps
+- Avoid global init heavy services (Firestore admin OK, ML models ไม่)
+- Use Cloud Functions Gen 2 minimum 1 instance สำหรับ critical path
+
+### Error handling
+- **Domain errors** (validation, business rule) → 4xx + typed code
+- **Infrastructure errors** (Firestore, network) → 5xx + retry hint
+- **Unknown errors** → 500 + log full stack, return generic message
+
+---
+
+## 📏 Quality Bar (skeleton — refine เมื่อมีงาน)
+
+| มิติ | Senior | Principal |
+|------|--------|-----------|
+| Transaction usage | When required | Justified per consistency requirement |
+| Cold start | < 5s | < 2s for critical functions |
+| Error contracts | Generic | Typed per error category |
+| Type safety | TS strict | TS strict + zod validation at boundaries |
+
+---
+
+## ⚠️ Anti-Patterns (template — evidence pending)
+
+- **AP-1:** Over-using transactions when batch suffices (perf cost)
+- **AP-2:** Heavy global init → cold start spike
+- **AP-3:** Generic 500 errors → frontend cannot recover gracefully
+- **AP-4:** Untyped Firestore data → runtime mismatch
+- **AP-5:** Skip retry/idempotency for webhooks → duplicate writes
+
+> ทุก AP จะ refine ตาม real evidence ที่ Nova เจอ
+
+---
+
+## 🛠️ Tech Stack
+- **Runtime:** Cloud Functions Gen 2 + Node.js 20 + TypeScript strict
+- **DB:** Firestore (admin SDK)
+- **Validation:** zod (recommended) at API boundaries
+- **Testing:** Jest + Firebase Emulator (pair with Sirius)
+
+---
+
+## 🤝 Cross-Role Boundaries
+
+| Role | Boundary |
+|------|----------|
+| Stella | Nova = backend. Stella = frontend client |
+| Nebula | Nova = service logic. Nebula = schema + indexes |
+| Cosmos | Nova = code. Cosmos = deploy infra |
+| Aurora | Nova = internal API. Aurora = 3rd-party API integration |
+| Sirius | Nova = service unit tests. Sirius = integration + E2E |
+| Orion | Nova consult Orion สำหรับ system-level design |
+
+---
+
+## 📚 Required Reading
+- `team/roles/nova.md`
+- `team/preferences/nova.md` (empty — fill เมื่อ active)
+- Firebase Cloud Functions Gen 2 docs
+- Firestore transaction docs
+
+---
+
+## 🔄 When to Use
+- Backend code review (Cloud Functions)
+- Firestore transaction design
+- API endpoint architecture
+- Cold-start optimization
+
+---
+
+## 📝 Authoring Notes
+- **Author:** Luna 🌙 (Nova ยังไม่ active — Luna author skeleton ตามหลัก honest disclosure Decision 27)
+- **Version:** 2026-04-27-v0.1 (skeleton)
+- **Replaces:** Boilerplate (flagged C1)
+- **Next rewrite trigger:** Nova ทำ backend task จริง 1 ครั้ง → upgrade เป็น v1.0

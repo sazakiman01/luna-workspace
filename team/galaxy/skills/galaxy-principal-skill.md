@@ -2,6 +2,16 @@
 description: Principal level Business Analyst skill สำหรับ Galaxy รวม business strategy, requirements governance, product vision, cross-team business coordination, และ business mentorship
 ---
 
+> ⚠️ **AUDIT WARNING — Boilerplate Template (จะถูก rewrite ใน Phase 3)**
+>
+> ไฟล์นี้ถูก flag โดย Polaris Baseline Audit (W18) ว่าเป็น **generic boilerplate** ที่ใช้ template เดียวกับ role อื่น (pattern: `Define X strategy`, `Define X standards`) ไม่ได้สะท้อน expertise จริงของ role นี้
+>
+> **ห้ามใช้อ้างอิงเพื่อ define decision** จนกว่าจะได้ rewrite ใน **Phase 3** ของ `plans/luna-principal-elevation-roadmap-6faefc.md`
+>
+> **Reference:** `team/audits/2026-W18-baseline-audit.md` — Finding C1
+>
+> ---
+
 # Galaxy Principal Skill
 
 ## 🎯 Purpose

@@ -58,6 +58,28 @@
   - Context: พี่แมนชี้ว่า "10 roles" ใน Luna/preferences.md ไม่ถูกต้องเพราะทีมขยายได้
   - Source: PMAM Web session — refactor Luna/team structure
 
+### Content Generation
+- **Pattern:** Mass-Generation Anti-Pattern — การสร้าง content (skills/knowledge/case-studies) ในรอบเดียว แบบ batch ทำให้ output เป็น generic boilerplate ที่ replicate กัน ขาด role identity / domain expertise
+  - Evidence: 1/3
+  - First seen: 2026-04-27
+  - Last confirmed: 2026-04-27
+  - Context: Luna mass-generated `*-principal-skill.md` ทุก role ในรอบเดียว → ทุกไฟล์ structure + boilerplate ซ้ำ ("Define X strategy", "Define X standards", TypeScript interfaces ซ้ำ)
+  - Detection: Polaris baseline audit Finding C1 + C2 + C3 (audits/2026-W18-baseline-audit.md)
+  - Proposed prevention:
+    - สร้าง role-principal-skill template ที่บังคับ role-specific content (Phase 3 prerequisite, A7)
+    - Rule ใหม่: "ห้าม mass-generate ในรอบเดียว — 1 role / 1 session, ต้องอ่าน role definition + preferences ก่อนเขียน"
+  - Source: luna-workspace — daily-log 2026-04-27 + W17 retro escalation
+
+### Team Utilization
+- **Pattern:** Active rate ของทีมต่ำ — 7/12 roles (Nova, Nebula, Cosmos, Galaxy, Vega, Aurora, Pulsar) ไม่เคยถูกเรียกใช้เลย Luna อาจ default ไปที่ role ที่คุ้น (Lyra, Stella)
+  - Evidence: 1/3
+  - First seen: 2026-04-27
+  - Last confirmed: 2026-04-27
+  - Context: W17 retro พบ active rate 42% (5/12) — ต่ำกว่าครึ่งทีม
+  - Hypothesis: Luna อาจไม่ scan team-config.md เต็มก่อนเลือก role
+  - Proposed validation: Polaris audit role utilization ต่อสัปดาห์ — ถ้าเจอซ้ำ → promote
+  - Source: team/retrospective/2026-W17.md (Pulsar)
+
 ### DevOps / Tools
 - **Pattern:** Windsurf's commit message generator (UI "Generate" button) อาจ fail ด้วย error "no git diffs found" แม้ว่าไฟล์จะถูก `git add` แล้ว
   - Evidence: 2/3
@@ -79,4 +101,4 @@
 5. ถ้าไม่ยืนยันภายใน 4 สัปดาห์ → ลบออก (ที่ Weekly Retrospective)
 
 ---
-*อัปเดตล่าสุด: 2026-04-23*
+*อัปเดตล่าสุด: 2026-04-27 (W17 retro escalations: Mass-Generation, Team Utilization)*

@@ -5,6 +5,8 @@
 
 *ส่วนนี้บันทึก pattern ของ Role Pulsar เพื่อการเรียนรู้และพัฒนาตัวเองอย่างต่อเนื่อง*
 
+> **First activation:** 2026-04-27 — Coordinated W17 retrospective (`team/retrospective/2026-W17.md`) — first historical retro ของ Luna system
+
 ## 📝 Evidence Counter Format
 
 ```markdown

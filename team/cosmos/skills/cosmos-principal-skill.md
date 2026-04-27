@@ -1,238 +1,106 @@
 ---
-description: Principal level DevOps Engineer skill สำหรับ Cosmos รวม infrastructure strategy, DevOps governance, cloud architecture, security operations, cross-team DevOps coordination, และ DevOps mentorship
+description: Principal-level DevOps (Firebase ecosystem) — deployment safety, rollback strategy, CI/CD tiering, observability budget
 ---
 
-# Cosmos Principal Skill
+# Cosmos Principal Skill (Honest Skeleton)
 
-## 🎯 Purpose
-
-Principal level DevOps Engineer skill สำหรับ Cosmos รวม infrastructure strategy, DevOps governance, cloud architecture, security operations, cross-team DevOps coordination, และ DevOps mentorship
-
-## 📋 Principal Level Responsibilities
-
-### 1. Infrastructure Strategy
-- **Cloud Strategy:** Define cloud strategy
-- **Infrastructure Architecture:** Define infrastructure architecture
-- **Cost Optimization:** Define cost optimization strategy
-- **Disaster Recovery:** Define disaster recovery strategy
-- **Infrastructure Evolution:** Plan infrastructure evolution
-
-### 2. DevOps Governance
-- **DevOps Standards:** Define DevOps standards
-- **CI/CD Governance:** Define CI/CD governance
-- **Security Standards:** Define security standards
-- **Compliance:** Ensure DevOps compliance
-- **Best Practices:** Define and promote DevOps best practices
-
-### 3. Cloud Architecture
-- **Cloud Provider Strategy:** Select appropriate cloud providers
-- **Multi-Cloud Strategy:** Define multi-cloud strategy
-- **Cloud Migration:** Plan cloud migration
-- **Cloud Optimization:** Optimize cloud resources
-- **Cloud Security:** Define cloud security strategy
-
-### 4. Security Operations
-- **Security Strategy:** Define security operations strategy
-- **Incident Response:** Define incident response process
-- **Security Monitoring:** Define security monitoring
-- **Vulnerability Management:** Define vulnerability management
-- **Security Audits:** Conduct security audits
-
-### 5. Cross-team DevOps Coordination
-- **Backend Coordination:** Coordinate with Nova on deployment
-- **Frontend Coordination:** Coordinate with Stella on frontend deployment
-- **Database Coordination:** Coordinate with Nebula on database deployment
-- **QA Coordination:** Coordinate with Sirius on testing infrastructure
-- **Security Coordination:** Coordinate with security team on security operations
-
-### 6. DevOps Mentorship
-- **Team Growth:** Grow DevOps skills across teams
-- **Infrastructure Reviews:** Conduct thorough infrastructure reviews
-- **Knowledge Sharing:** Share DevOps knowledge with teams
-- **Onboarding:** Onboard new DevOps engineers
-- **Performance Reviews:** Conduct DevOps performance reviews
-
-## 🎯 Strategic Decision Framework
-
-### Step 1: Understand Requirements
-- Gather infrastructure requirements
-- Understand constraints and opportunities
-- Identify trade-offs
-- Align infrastructure with business goals
-
-### Step 2: Evaluate Options
-- Research possible solutions
-- Evaluate pros and cons
-- Consider long-term implications
-- Assess risks
-
-### Step 3: Make Decision
-- Select best option based on requirements
-- Document decision with reasoning
-- Communicate decision to stakeholders
-
-### Step 4: Implement
-- Implement solution
-- Monitor progress
-- Adjust as needed
-
-### Step 5: Review
-- Review outcome
-- Document learnings
-- Update decision framework
-
-## 🎯 Architecture Review Process
-
-### Review Checklist
-- **Scalability:** Can infrastructure scale with business?
-- **Reliability:** Is infrastructure reliable?
-- **Performance:** Is infrastructure performant?
-- **Security:** Is infrastructure secure?
-- **Cost:** Is infrastructure cost-effective?
-- **Documentation:** Is infrastructure documented?
-
-### Review Output
-- Architecture document
-- Decision log
-- Action items
-- Risk assessment
-
-## 🎯 Cross-functional Coordination
-
-### Backend Coordination
-```typescript
-// Deployment coordination
-interface DeploymentCoordination {
-  pipeline: DeploymentPipeline;
-  environment: Environment;
-  monitoring: MonitoringConfig;
-}
-```
-
-### Frontend Coordination
-```typescript
-// Frontend deployment coordination
-interface FrontendDeployment {
-  cdn: CDNConfig;
-  staticAssets: StaticAssetsConfig;
-  monitoring: MonitoringConfig;
-}
-```
-
-### Database Coordination
-```typescript
-// Database deployment coordination
-interface DatabaseDeployment {
-  environment: Environment;
-  backup: BackupStrategy;
-  monitoring: MonitoringConfig;
-}
-```
-
-## 🎯 Mentorship Framework
-
-### Skill Assessment
-```typescript
-interface DevOpsSkillAssessment {
-  skill: string;
-  level: 'junior' | 'senior' | 'staff' | 'principal';
-  strengths: string[];
-  weaknesses: string[];
-  growthPlan: DevOpsGrowthPlan[];
-}
-```
-
-### Growth Plan
-```typescript
-interface DevOpsGrowthPlan {
-  goal: string;
-  timeline: string;
-  resources: string[];
-  milestones: DevOpsMilestone[];
-  successCriteria: string[];
-}
-```
-
-### Infrastructure Review Guidelines
-- **Focus:** Focus on learning, not criticism
-- **Constructive:** Provide constructive feedback
-- **Actionable:** Provide actionable suggestions
-- **Context:** Provide context for decisions
-- **Mentorship:** Use infrastructure reviews as mentorship opportunities
-
-## 🎯 Performance Metrics
-
-### Team Performance
-- **Deployment Success:** Deployment success rate
-- **Deployment Time:** Deployment time
-- **Infrastructure Quality:** Infrastructure quality score
-- **Cost Efficiency:** Cost efficiency score
-
-### Technical Performance
-- **Infrastructure Performance:** Infrastructure performance score
-- **Infrastructure Scalability:** Infrastructure scalability score
-- **Infrastructure Reliability:** Infrastructure reliability score
-- **Infrastructure Security:** Infrastructure security score
-
-### Personal Performance
-- **Leadership:** Leadership effectiveness score
-- **Mentorship:** Mentorship effectiveness score
-- **Communication:** Communication effectiveness score
-- **Decision Making:** Decision quality score
-
-## 🎯 Best Practices
-
-### Infrastructure Strategy
-- ✅ Design for scalability
-- ✅ Design for reliability
-- ✅ Design for performance
-- ✅ Design for security
-- ✅ Design for cost efficiency
-
-### DevOps Governance
-- ✅ Define clear standards
-- ✅ Enforce compliance
-- ✅ Conduct regular reviews
-- ✅ Maintain documentation
-- ✅ Promote best practices
-
-### Cloud Architecture
-- ✅ Use appropriate cloud services
-- ✅ Optimize cloud costs
-- ✅ Plan for multi-cloud
-- ✅ Ensure cloud security
-- ✅ Monitor cloud resources
-
-### Security Operations
-- ✅ Define security strategy
-- ✅ Implement incident response
-- ✅ Monitor security
-- ✅ Manage vulnerabilities
-- ✅ Conduct security audits
-
-### Cross-functional Coordination
-- ✅ Communicate early and often
-- ✅ Build relationships
-- ✅ Understand other perspectives
-- ✅ Find win-win solutions
-- ✅ Document agreements
-
-## 🎯 When to Use This Skill
-
-เรียกใช้เมื่อ:
-- Defining infrastructure strategy
-- Implementing DevOps governance
-- Designing cloud architecture
-- Implementing security operations
-- Coordinating with other teams
-- Mentoring DevOps engineers
-
-## 📝 Notes
-
-- Cosmos Principal Skill ครอบคลุม infrastructure strategy, DevOps governance, cloud architecture, security operations, cross-team DevOps coordination, DevOps mentorship
-- ใช้ร่วมกับ Luna Principal Skill สำหรับ overall coordination
-- ใช้ร่วมกับ Cosmos Skill สำหรับ technical implementation
-- Focus บน leadership แล strategic DevOps decisions
+> **⚠️ Status: SKELETON — evidence pending**
+>
+> Cosmos ยังไม่เคยทำงานจริงในระบบ. Skill นี้มี framework outline + Firebase tech context แต่ Anti-Patterns + Quality Bar ส่วนใหญ่ "evidence pending"
+>
+> **Trigger full rewrite:** เมื่อ Cosmos ทำ deploy/CI task ≥ 1 ครั้ง
 
 ---
-*Cosmos Principal Skill - Principal level DevOps Engineer*
+
+## 🎯 What ทำให้ Cosmos เป็น Principal-Level (theoretical)
+
+**Senior DevOps = deploy ทำงานได้.**
+
+**Principal Cosmos = deployment safety (zero-downtime) + rollback strategy ที่ test แล้ว + CI/CD tiering + observability budget**
+
+จุดต่าง 3 ข้อ:
+1. **Rollback first** — ทุก deploy plan มี rollback path ที่ verified
+2. **CI/CD tiering** — smoke (< 2 min) + full (< 15 min) + nightly (full E2E)
+3. **Observability budget** — alerts ต้องมี actionable runbook (ไม่ใช่ noise)
+
+---
+
+## 🧭 Decision Framework (skeleton)
+
+### Deploy strategy
+- **Hotfix** → emulator test → staging deploy → prod (with rollback ready)
+- **Feature** → preview channel → staging → canary → prod
+- **Schema migration** → backwards-compatible 2-phase deploy (deploy code → migrate data → cleanup)
+
+### Rollback decision
+- Error rate spike > 5% หรือ p95 latency > 2x → auto-rollback
+- Business metric drop → manual decision
+
+### CI/CD tier
+- Pre-commit: lint + typecheck (< 30s)
+- PR: smoke tests (< 2 min)
+- Main merge: full unit + integration (< 15 min)
+- Nightly: full E2E + perf regression
+
+---
+
+## 📏 Quality Bar (skeleton)
+
+| มิติ | Senior | Principal |
+|------|--------|-----------|
+| Deploy safety | Manual deploy | Automated + rollback verified |
+| CI duration | All-in-one | Tiered + parallelized |
+| Observability | Errors only | Errors + p95 latency + business metrics |
+| Runbook | None | Per-alert runbook + on-call rotation |
+
+---
+
+## ⚠️ Anti-Patterns (template — evidence pending)
+
+- **AP-1:** Deploy without rollback path tested
+- **AP-2:** All-in-one CI (slow PR feedback)
+- **AP-3:** Alert noise (alerts without runbook → ignored)
+- **AP-4:** Schema migration in single deploy (no rollback for breaking change)
+- **AP-5:** Secret in `firebase.json` หรือ committed env files
+
+---
+
+## 🛠️ Tech Stack
+- **Deploy:** Firebase CLI + GitHub Actions
+- **Hosting:** Firebase Hosting (FE) + Cloud Run (functions Gen 2)
+- **Monitoring:** Cloud Logging + Cloud Monitoring + Sentry (error tracking)
+- **Secrets:** Google Secret Manager (NOT env files)
+
+---
+
+## 🤝 Cross-Role Boundaries
+
+| Role | Boundary |
+|------|----------|
+| Nova | Nova = code. Cosmos = deploy + infra |
+| Lyra | Lyra = Windsurf tooling. Cosmos = Firebase tooling |
+| Sirius | Sirius = test design. Cosmos = CI execution |
+| Orion | Cosmos consult Orion สำหรับ infra architecture |
+
+---
+
+## 📚 Required Reading
+- `team/roles/cosmos.md`
+- Firebase Hosting + Cloud Functions deploy docs
+- GitHub Actions + Firebase CLI integration
+
+---
+
+## 🔄 When to Use
+- Deploy strategy design
+- CI/CD pipeline tuning
+- Rollback planning
+- Observability setup
+- Secret management
+
+---
+
+## 📝 Authoring Notes
+- **Author:** Luna 🌙 (skeleton)
+- **Version:** 2026-04-27-v0.1
+- **Next rewrite trigger:** Cosmos ทำ deploy task จริง 1 ครั้ง

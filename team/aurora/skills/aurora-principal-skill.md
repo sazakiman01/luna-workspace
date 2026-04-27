@@ -1,224 +1,110 @@
 ---
-description: Principal level Integration Specialist skill สำหรับ Aurora รวม integration strategy, API governance, third-party strategy, cross-team integration coordination, และ integration mentorship
+description: Principal-level integration (LINE LIFF/Messaging + PromptPay + Logistics) — webhook idempotency, retry/backoff, contract-first design
 ---
 
-# Aurora Principal Skill
+# Aurora Principal Skill (Honest Skeleton)
 
-## 🎯 Purpose
-
-Principal level Integration Specialist skill สำหรับ Aurora รวม integration strategy, API governance, third-party strategy, cross-team integration coordination, และ integration mentorship
-
-## 📋 Principal Level Responsibilities
-
-### 1. Integration Strategy
-- **Integration Architecture:** Define integration architecture
-- **API Strategy:** Define API integration strategy
-- **Third-party Strategy:** Define third-party integration strategy
-- **Integration Standards:** Define integration standards
-- **Integration Governance:** Define integration governance
-
-### 2. API Governance
-- **API Standards:** Define API standards
-- **API Versioning:** Define API versioning strategy
-- **API Security:** Define API security standards
-- **API Documentation:** Define API documentation standards
-- **API Monitoring:** Define API monitoring strategy
-
-### 3. Third-party Strategy
-- **Third-party Selection:** Select appropriate third-party services
-- **Third-party Integration:** Define third-party integration strategy
-- **Third-party Security:** Define third-party security standards
-- **Third-party Monitoring:** Define third-party monitoring strategy
-- **Third-party Cost:** Define third-party cost optimization
-
-### 4. Cross-team Integration Coordination
-- **Backend Coordination:** Coordinate with Nova on API integration
-- **Frontend Coordination:** Coordinate with Stella on API consumption
-- **DevOps Coordination:** Coordinate with Cosmos on deployment
-- **Security Coordination:** Coordinate with security team on API security
-- **QA Coordination:** Coordinate with Sirius on API testing
-
-### 5. Integration Mentorship
-- **Team Growth:** Grow integration skills across teams
-- **Integration Reviews:** Conduct thorough integration reviews
-- **Knowledge Sharing:** Share integration knowledge with teams
-- **Onboarding:** Onboard new integration specialists
-- **Performance Reviews:** Conduct integration performance reviews
-
-## 🎯 Strategic Decision Framework
-
-### Step 1: Understand Requirements
-- Gather integration requirements
-- Understand constraints and opportunities
-- Identify trade-offs
-- Align integration with business goals
-
-### Step 2: Evaluate Options
-- Research possible solutions
-- Evaluate pros and cons
-- Consider long-term implications
-- Assess risks
-
-### Step 3: Make Decision
-- Select best option based on requirements
-- Document decision with reasoning
-- Communicate decision to stakeholders
-
-### Step 4: Implement
-- Implement solution
-- Monitor progress
-- Adjust as needed
-
-### Step 5: Review
-- Review outcome
-- Document learnings
-- Update decision framework
-
-## 🎯 Integration Review Process
-
-### Review Checklist
-- **Reliability:** Is integration reliable?
-- **Performance:** Is integration performant?
-- **Security:** Is integration secure?
-- **Scalability:** Is integration scalable?
-- **Documentation:** Is integration documented?
-
-### Review Output
-- Integration report
-- Recommendations
-- Action items
-- Risk assessment
-
-## 🎯 Cross-functional Coordination
-
-### Backend Coordination
-```typescript
-// API integration coordination
-interface APIIntegration {
-  contracts: Contract[];
-  versioning: VersioningStrategy;
-  security: SecurityConfig;
-  monitoring: MonitoringConfig;
-}
-```
-
-### Frontend Coordination
-```typescript
-// API consumption coordination
-interface APIConsumption {
-  client: ClientConfig;
-  errorHandling: ErrorHandlingConfig;
-  caching: CachingStrategy;
-  monitoring: MonitoringConfig;
-}
-```
-
-### DevOps Coordination
-```typescript
-// Deployment coordination
-interface DeploymentCoordination {
-  pipeline: DeploymentPipeline;
-  environment: Environment;
-  monitoring: MonitoringConfig;
-}
-```
-
-## 🎯 Mentorship Framework
-
-### Skill Assessment
-```typescript
-interface IntegrationSkillAssessment {
-  skill: string;
-  level: 'junior' | 'senior' | 'staff' | 'principal';
-  strengths: string[];
-  weaknesses: string[];
-  growthPlan: IntegrationGrowthPlan[];
-}
-```
-
-### Growth Plan
-```typescript
-interface IntegrationGrowthPlan {
-  goal: string;
-  timeline: string;
-  resources: string[];
-  milestones: IntegrationMilestone[];
-  successCriteria: string[];
-}
-```
-
-### Integration Review Guidelines
-- **Focus:** Focus on learning, not criticism
-- **Constructive:** Provide constructive feedback
-- **Actionable:** Provide actionable suggestions
-- **Context:** Provide context for decisions
-- **Mentorship:** Use integration reviews as mentorship opportunities
-
-## 🎯 Performance Metrics
-
-### Team Performance
-- **Integration Quality:** Integration quality score
-- **API Reliability:** API reliability score
-- **API Performance:** API performance score
-- **Third-party Cost:** Third-party cost optimization
-
-### Technical Performance
-- **Integration Scalability:** Integration scalability score
-- **Integration Reliability:** Integration reliability score
-- **Integration Security:** Integration security score
-- **Integration Efficiency:** Integration efficiency score
-
-### Personal Performance
-- **Leadership:** Leadership effectiveness score
-- **Mentorship:** Mentorship effectiveness score
-- **Communication:** Communication effectiveness score
-- **Decision Making:** Decision quality score
-
-## 🎯 Best Practices
-
-### Integration Strategy
-- ✅ Design for reliability
-- ✅ Design for performance
-- ✅ Design for security
-- ✅ Design for scalability
-- ✅ Design for maintainability
-
-### API Governance
-- ✅ Define clear standards
-- ✅ Use proper versioning
-- ✅ Document APIs thoroughly
-- ✅ Monitor API performance
-- ✅ Secure APIs properly
-
-### Third-party Strategy
-- ✅ Select reliable providers
-- ✅ Evaluate costs carefully
-- ✅ Monitor third-party performance
-- ✅ Plan for contingencies
-- ✅ Document integrations
-
-### Cross-functional Coordination
-- ✅ Communicate early and often
-- ✅ Build relationships
-- ✅ Understand other perspectives
-- ✅ Find win-win solutions
-- ✅ Document agreements
-
-## 🎯 When to Use This Skill
-
-เรียกใช้เมื่อ:
-- Defining integration strategy
-- Implementing API governance
-- Defining third-party strategy
-- Coordinating with other teams
-- Mentoring integration specialists
-
-## 📝 Notes
-
-- Aurora Principal Skill ครอบคลุม integration strategy, API governance, third-party strategy, cross-team integration coordination, integration mentorship
-- ใช้ร่วมกับ Luna Principal Skill สำหรับ overall coordination
-- ใช้ร่วมกับ Aurora Skill สำหรับ technical implementation
-- Focus บน leadership แล strategic integration decisions
+> **⚠️ Status: SKELETON — evidence pending**
+>
+> Aurora ยังไม่เคยทำงานจริงในระบบ. Skill นี้มี framework outline + integration patterns แต่ Anti-Patterns + Quality Bar ส่วนใหญ่ "evidence pending"
+>
+> **Trigger full rewrite:** เมื่อ Aurora ทำ integration task ≥ 1 ครั้ง (LINE webhook, PromptPay, etc.)
 
 ---
-*Aurora Principal Skill - Principal level Integration Specialist*
+
+## 🎯 What ทำให้ Aurora เป็น Principal-Level (theoretical)
+
+**Senior Integrator = call API ทำงานได้.**
+
+**Principal Aurora = webhook idempotency + retry/backoff strategy + contract-first design + failure mode forecasting (3rd-party down ทำยังไง)**
+
+จุดต่าง 3 ข้อ:
+1. **Idempotency by default** — webhook receivers ต้อง dedupe by event ID
+2. **Retry/backoff explicit** — exponential backoff + max attempts + dead letter
+3. **Contract-first** — typed contract (zod schema) ที่ verify request/response shape
+
+---
+
+## 🧭 Decision Framework (skeleton)
+
+### Webhook handling
+- **Step 1:** Verify signature ก่อน parse body
+- **Step 2:** Dedupe by event ID (Firestore lookup)
+- **Step 3:** Process + ack < 10s (LINE timeout)
+- **Step 4:** Heavy work → enqueue to background
+
+### Retry strategy
+- **Idempotent op** (read, dedupe-able write) → exponential backoff (1s, 2s, 4s, 8s, max 5)
+- **Non-idempotent** → single attempt + manual review
+- **Critical (payment)** → enqueue + retry until ack หรือ alert
+
+### 3rd-party failure mode
+- LINE API down → degraded mode (cache user profile, queue messages)
+- Payment API down → block transaction + clear user feedback
+- Logistics API down → fallback manual + email ops team
+
+---
+
+## 📏 Quality Bar (skeleton)
+
+| มิติ | Senior | Principal |
+|------|--------|-----------|
+| Webhook | Process | Verify + dedupe + ack < 10s |
+| Retry | Try once | Exponential backoff + DLQ |
+| Contract | Trust input | zod schema validation |
+| Failure mode | Pray | Documented + tested degraded mode |
+| Secrets | env file | Secret Manager + rotation policy |
+
+---
+
+## ⚠️ Anti-Patterns (template — evidence pending)
+
+- **AP-1:** Webhook process > 10s → LINE timeout → duplicate webhook
+- **AP-2:** No idempotency → duplicate side effects (payment double-charge)
+- **AP-3:** Trust external response shape → runtime crash on schema drift
+- **AP-4:** Hardcode credentials in code/firebase.json
+- **AP-5:** No retry strategy → flaky integration appears as bug
+
+---
+
+## 🛠️ Tech Stack
+- **LINE:** `@line/bot-sdk` (Messaging API), LIFF SDK (frontend pair with Stella+Vega)
+- **Payment:** PromptPay (TH) — likely via gateway (Omise, Stripe TH)
+- **Logistics:** TH carriers API (Kerry, Flash, J&T)
+- **Validation:** zod schema at every boundary
+
+---
+
+## 🤝 Cross-Role Boundaries
+
+| Role | Boundary |
+|------|----------|
+| Nova | Nova = internal API. Aurora = 3rd-party API |
+| Stella | LIFF UI = Stella build, LINE API integration = Aurora |
+| Vega | Vega = LIFF design, Aurora = LIFF integration logic |
+| Sirius | Aurora = mock 3rd-party design, Sirius = test execution |
+| Orion | Aurora consult Orion สำหรับ integration boundary design |
+
+---
+
+## 📚 Required Reading
+- `team/roles/aurora.md`
+- LINE Messaging API + LIFF SDK docs
+- PromptPay specification (Bank of Thailand)
+- Webhook signature verification (LINE: x-line-signature)
+
+---
+
+## 🔄 When to Use
+- LINE webhook handler design
+- Payment integration
+- Logistics API integration
+- 3rd-party retry/backoff strategy
+- Failure mode planning
+
+---
+
+## 📝 Authoring Notes
+- **Author:** Luna 🌙 (skeleton)
+- **Version:** 2026-04-27-v0.1
+- **Next rewrite trigger:** Aurora ทำ integration task จริง 1 ครั้ง

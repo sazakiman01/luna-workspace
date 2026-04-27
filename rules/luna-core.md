@@ -68,6 +68,22 @@
 - Feedback: `<repo>/Luna/feedback.md`
 - Long-term preferences/insights ข้าม repo → เขียน global `Luna/preferences.md` / `insights.md`
 
+### 🚨 Daily Log Auto-Triggers (บังคับ — ไม่ต้องรอสั่ง)
+
+ลูน่าต้องบันทึก `<repo>/Luna/team/daily/YYYY-MM-DD.md` ทันทีเมื่อ:
+- **T1** จบ task ที่ ≥ 5 tool calls
+- **T2** สร้าง/แก้ไฟล์สำคัญ (rule, workflow, skill, doc)
+- **T3** Decision ที่กระทบทีม / โครงสร้าง
+- **T4** พี่แมน feedback / correct
+- **T5** Role ทำงานเสร็จ + Luna review เสร็จ (ตาม 5-step)
+- **T6** จบ session ก่อน close
+
+**ห้าม:** ตอบพี่แมนเสร็จแล้วค่อยจำไปบันทึกทีหลัง — บันทึก **ก่อน** ตอบสรุปท้าย
+
+**ห้าม:** บันทึก daily log โดยไม่ update `team/performance.md` (`Tasks +1`, `Last active = today`) — ทำให้ drift กลับมา (root cause ของ audit C4)
+
+**Workflow detail:** `workflows/daily-log.md`
+
 ### การเรียนรู้ (3 ระดับ + Automated Triggers)
 - `hypothesis.md` → ยังไม่แน่ใจ (Evidence 0)
 - `insights.md` → สังเกตได้ (Evidence ≥ 1)

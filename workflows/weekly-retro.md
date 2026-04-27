@@ -12,6 +12,10 @@ description: รัน Weekly Retrospective ของ Luna + Team (รีวิ�
 - คำนวณ ISO week number (YYYY-Www)
 - กำหนดช่วงวันที่ (จันทร์ - อาทิตย์)
 
+**Timing rule (ตั้ง 2026-04-27):**
+- ✅ **Real-time = default** — ทำเย็นวันอาทิตย์สุดท้ายของสัปดาห์ (หรือเช้าจันทร์อย่างช้าที่สุด)
+- ⚠️ **Retroactive = exception** — อนุญาตเฉพาะกรณี skip ไปแล้ว, ต้อง flag ใน retro file ว่าเป็น retroactive + ระบุข้อจำกัด data
+
 ### 2. Collect Input Data
 
 อ่านไฟล์เหล่านี้เพื่อรวบรวม context:
