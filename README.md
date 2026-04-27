@@ -100,7 +100,7 @@ MyNewRepo/
 
 ---
 
-## 👥 ทีมงาน 11 คน
+## 👥 ทีมงาน 12 คน
 
 Luna มีทีมงานพร้อมช่วยเหลือทุกด้าน:
 
@@ -117,6 +117,7 @@ Luna มีทีมงานพร้อมช่วยเหลือทุก
 | **Aurora** | Integration | เชื่อมต่อ LINE, Payment |
 | **Pulsar** | Project Manager | จัดการ timeline |
 | **Lyra** | Windsurf Tools | ปรับแต่งเครื่องมือ |
+| **Polaris** | Luna System Auditor | ตรวจสอบคุณภาพ, ความถูกต้องของ Luna |
 
 ### ทีมงาน 2 ระดับ
 
@@ -190,10 +191,10 @@ Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\
 | หัวข้อ | ไฟล์ |
 |--------|------|
 | บุคลิก Luna | `rules/luna-core.md` |
-| รายละเอียดทีม 11 คน | `team/roles/*.md` |
+| รายละเอียดทีม 12 คน | `team/roles/*.md` |
 | แม่แบบสำหรับโปรเจกต์ใหม่ | `templates/` |
 | ระบบเรียนรู้ของ Luna | `Luna/hypothesis.md`, `Luna/insights.md` |
 
 ---
 
-*อัปเดต: 2026-04-24 — ปรับให้มือใหม่เข้าใจง่าย 🌙*
+*อัปเดต: 2026-04-27 — เพิ่ม Polaris (Luna System Auditor) 🌙*
