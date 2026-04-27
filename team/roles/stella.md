@@ -41,4 +41,7 @@
 - ทำ code review สำหรับ frontend PR
 
 ## Skill ที่เกี่ยวข้อง
+- **frontend-repo-review** - รีวิว frontend codebase ตามมาตรฐานสากล 8 dimensions (functional correctness, architecture, maintainability, accessibility, performance, security, testing, production readiness)
+  - Location: `team/stella/skills/frontend-repo-review/`
+  - เป็น skill เฉพาะของ Stella (Frontend Dev)
 - stella-skill (จะถูกสร้างใน Phase 2)
