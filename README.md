@@ -135,19 +135,33 @@ Luna มีทีมงานพร้อมช่วยเหลือทุก
 
 ## 💻 ใช้ Luna บนเครื่องอื่น
 
-**วิธีง่ายที่สุด:**
-1. Backup โฟลเดอร์ `C:\Users\sansakritsuk\.windsurf` เป็น zip
-2. Copy ไปเครื่องใหม่ แตกไว้ที่ path เดียวกัน
-3. เปิด Windsurf → พร้อมใช้!
+> 📐 ดู `ARCHITECTURE.md` สำหรับรายละเอียดว่าไฟล์ไหนเป็น SYSTEM / DATA
 
-**วิธี Git (แนะนำ):**
+### วิธีที่ 1: Clone ทุกอย่าง (ย้ายเครื่อง — แนะนำ)
 ```powershell
-cd $env:USERPROFILE\.windsurf\luna-workspace
-git init
-git add .
-git commit -m "Luna backup"
-git push
+# ได้ทั้ง SYSTEM + DATA + history
+git clone <repo-url> "$env:USERPROFILE\.windsurf\luna-workspace"
 ```
+
+### วิธีที่ 2: Export เฉพาะ SYSTEM (ให้คนอื่นใช้)
+```powershell
+# ได้เฉพาะ rules, templates, workflows, skills, knowledge
+& "$env:USERPROFILE\.windsurf\luna-workspace\templates\Export-LunaSystem.ps1" -OutputPath "D:\luna-export"
+```
+→ คนรับได้ SYSTEM พร้อมใช้ + DATA directories ว่าง (เริ่มสะสมใหม่)
+
+### วิธีที่ 3: Reset fresh (เครื่องเดิม เริ่มใหม่)
+```powershell
+# ลบ DATA + reset preferences → keep SYSTEM intact (backup อัตโนมัติ)
+& "$env:USERPROFILE\.windsurf\luna-workspace\templates\Reset-LunaData.ps1" -Confirm
+```
+
+### ไฟล์อะไรคืออะไร?
+| ประเภท | คือ | ตัวอย่าง |
+|--------|-----|---------|
+| 🔧 **SYSTEM** | โครงสร้างหลัก ไม่เปลี่ยนตามการใช้ | `rules/`, `templates/`, `workflows/`, role skills |
+| 📊 **DATA** | เกิดจากการใช้งาน เปลี่ยนทุกวัน | `daily/`, `audits/`, `performance.md` |
+| 🔗 **MIXED** | เริ่มว่าง → เติมจากงานจริง | `preferences/<role>.md` |
 
 ---
 
