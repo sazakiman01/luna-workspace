@@ -1,6 +1,10 @@
-# Knowledge Package — Generic
+# Knowledge Package — Generic (Universal)
 
-*Generic knowledge ที่ใช้ข้าม repo — coding standards, best practices*
+*Universal coding principles ใช้ได้ข้าม repo, ข้าม tech stack*
+
+> **สร้างใหม่** 2026-04-27 (Phase 4 KA1 Option A)
+> PMAM-specific content ย้ายไป `knowledge-package-pmam/`
+> ที่นี่เก็บเฉพาะ universal rules เท่านั้น
 
 ---
 
@@ -8,45 +12,41 @@
 
 | ไฟล์ | Scope | เมื่อไหร่อ่าน |
 |------|-------|----------------|
-| `03-coding-standards.md` | Generic coding style, naming, structure | ก่อนเขียน code ใหม่ / รีวิว PR |
-| `05-best-practices.md` | General best practices (security, performance, DX) | Architecture / design decisions |
+| `01-universal-principles.md` | Core principles ที่ใช้ได้ทุก tech stack | เสมอ (foundation) |
 
 ---
 
 ## 🎯 Scope
 
 **อะไรควรอยู่ที่นี่:**
-- ✅ Generic patterns ใช้ได้ข้าม tech stack
-- ✅ Universal best practices
-- ✅ Cross-language coding standards
+- ✅ Universal principles (DRY, SOLID, KISS, YAGNI)
+- ✅ Language-agnostic patterns (error handling philosophy, naming principles)
+- ✅ Cross-repo standards (commit messages, PR process, documentation)
+- ✅ Review methodology ที่ใช้ได้ทุก project
 
 **อะไรไม่ควรอยู่ที่นี่:**
-- ❌ Tech-specific guidelines (ไปอยู่ใน `<repo>/knowledge-package/` แทน)
-- ❌ Business logic / domain knowledge
-- ❌ Repo-specific conventions
+- ❌ Tech-specific patterns → ไปอยู่ `knowledge-package-<project>/`
+- ❌ Business logic → ไปอยู่ `repo-index/<repo>/`
+- ❌ Library-specific code (React, Firebase, etc.)
 
 ---
 
-## 🔗 Per-Repo Equivalent
+## 🔗 Tech-Specific Packages
 
-แต่ละ repo ที่ต้องการ knowledge เฉพาะ สร้าง:
-```
-<repo>/knowledge-package/
-├── README.md
-├── 01-tech-stack.md
-├── 02-schema.md
-├── 03-domain-knowledge.md
-└── ...
-```
+| Package | Stack | Location |
+|---------|-------|----------|
+| PMAM Web | React + Firebase + TypeScript + Firestore | `knowledge-package-pmam/` |
 
-ไฟล์ generic อ่านก่อน → per-repo เฉพาะทางอ่านเสริม
+*เพิ่ม package ใหม่เมื่อมี repo ที่มี tech stack ต่างจาก PMAM*
 
 ---
 
 ## ✏️ เมื่อไหร่ต้องเพิ่ม
 
-- เจอ pattern/standard ที่ใช้ได้ข้าม repo ≥ 2 แห่ง
-- พี่แมน confirm ว่าเป็น universal rule
+- เจอ principle ที่ใช้ได้ข้าม repo ≥ 2 แห่ง
+- ไม่ผูกกับ specific library/framework
+- พี่แมน confirm ว่าเป็น universal standard
 
 ---
 *Maintained by Luna + Orion (Architecture)*
+*Created 2026-04-27 — Phase 4 Knowledge Depth*

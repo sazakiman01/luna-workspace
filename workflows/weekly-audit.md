@@ -37,14 +37,16 @@ description: Weekly audit of Luna system + team performance by Polaris
 
 ---
 
-## Step 3: Team Performance Check
+## Step 3: Team Performance Check (with Rubric)
 
-จาก `performance.md`:
+จาก `performance.md` + `templates/scoring-rubric.md` Part B:
 
 - Role usage distribution (count per role)
 - Orphan roles (0 usage 2+ weeks) → flag
 - Overloaded roles (>50% of tasks) → hire/delegate?
 - Quality score trends
+- **NEW (Phase 5):** Score active roles ด้วย rubric Part B (5 dimensions)
+- **NEW (Phase 5):** Check growth triggers — any role crossed L1→L2? (see `workflows/growth-triggers.md`)
 
 ---
 
@@ -53,6 +55,8 @@ description: Weekly audit of Luna system + team performance by Polaris
 - Stale hypotheses (first-seen > 14 days, no evidence increase) → promote or drop?
 - Ready-to-promote insights (Evidence 3+ but still in insights.md)?
 - Evidence counters mismatch actual occurrences?
+- **NEW (Phase 5):** Knowledge maturity spot-check 2-3 roles ด้วย rubric Part C
+- **NEW (Monthly M1):** Full knowledge maturity review ทุก role (1st week of month)
 
 ---
 
@@ -100,7 +104,18 @@ description: Weekly audit of Luna system + team performance by Polaris
 
 ---
 
-## Step 7: Update Daily Log
+## Step 7: Update Health Dashboard
+
+**NEW (Phase 5):** อัปเดต `team/health-dashboard.md`:
+- Overall health metrics
+- Role health matrix (ถ้ามี score change)
+- Trend table (+1 row)
+- Alerts (add/remove)
+- Backlog (add/remove/reprioritize)
+
+---
+
+## Step 8: Update Daily Log
 
 บันทึกใน `<repo>/Luna/team/daily/YYYY-MM-DD.md`:
 - Task: Weekly audit
@@ -119,3 +134,4 @@ description: Weekly audit of Luna system + team performance by Polaris
 
 ---
 *Managed by Polaris + Lyra (workflow design)*
+*Updated 2026-04-27 — Phase 5: added rubric integration (Steps 3,4), health dashboard (Step 7), growth triggers*
