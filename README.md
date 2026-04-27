@@ -1,7 +1,7 @@
 ﻿# Luna + Team — คู่มือสำหรับมือใหม่
 
 **Luna คือใคร?** คือ AI Assistant ประจำตัวคุณ (เหมือนเลขาส่วนตัวที่จำได้ทุกอย่าง)
-**Team คืออะไร?** คือทีมงาน 11 คนที่ Luna เรียกมาช่วยทำงานต่างๆ (เหมือนมีทีม Developer ในมือ)
+**Team คืออะไร?** คือทีมงาน 12 คนที่ Luna เรียกมาช่วยทำงานต่างๆ (เหมือนมีทีม Developer ในมือ)
 
 **ติดตั้งที่:** `$env:USERPROFILE\.windsurf\luna-workspace\`
 
@@ -28,10 +28,12 @@ Luna จะวิเคราะห์งาน → เรียกทีมง�
 |-----------|-------------|
 | บริษัท | Repo (โปรเจกต์) |
 | เลขาส่วนตัว | **Luna** |
-| ทีมงาน 11 คน | **Orion, Nova, Stella, Nebula...** |
-| คู่มือบริษัท | `README.md`, `rules/` |
-| งานประจำวัน | `daily/` |
-| การประชุมสรุป | `retrospective/` |
+| ทีมงาน 12 คน | **Orion, Nova, Stella, Nebula, Cosmos, Sirius, Galaxy, Vega, Aurora, Pulsar, Lyra, Polaris** |
+| คู่มือบริษัท | `README.md`, `rules/`, `ARCHITECTURE.md` |
+| งานประจำวัน | `Luna/team/daily/` |
+| การประชุมสรุป | `team/retrospective/` |
+| ตรวจสอบคุณภาพ | `team/audits/` |
+| วัดผลงาน | `team/performance.md`, `templates/scoring-rubric.md` |
 
 ---
 
@@ -39,19 +41,34 @@ Luna จะวิเคราะห์งาน → เรียกทีมง�
 
 ```
 luna-workspace/
-├── rules/              ← กฎการทำงานของ Luna (อ่านก่อนใช้)
-├── workflows/          ← คำสั่งสั้นๆ ที่พิมพ์ได้ (เช่น /weekly-retro)
-├── skills/             ← ชุดความรู้เฉพาะทาง (เช่น code-review)
-├── team/               ← ประวัติทีมงาน 11 คน + การตั้งค่า
-│   └── roles/          ← ประวัติแต่ละคน (orion.md, stella.md, ...)
-├── Luna/               ← ความจำของ Luna (เรียนรู้จากการคุย)
-│   ├── daily/          ← บันทึกงานแต่ละวัน
-│   └── team/daily/     ← บันทึกงานทีมแต่ละวัน
-├── templates/          ← แม่แบบสำหรับสร้างโปรเจกต์ใหม่
-└── plans/              ← แผนงานที่กำลังทำ
+├── 🔧 SYSTEM (ย้ายข้ามเครื่องได้)
+│   ├── rules/                       ← กฎหลักของ Luna
+│   ├── workflows/                   ← คำสั่ง (/weekly-audit, /weekly-retro, ...)
+│   ├── templates/                   ← แม่แบบทุกชนิด + scripts
+│   ├── team/roles/                  ← role definitions (12 คน)
+│   ├── team/<role>/skills/           ← principal skills + basic skills
+│   ├── team/<role>/knowledge/        ← domain knowledge
+│   ├── knowledge-package-generic/    ← universal coding principles
+│   ├── knowledge-package-pmam/       ← PMAM-specific standards
+│   └── Luna/skills/                 ← Luna’s own principal skill
+│
+├── 📊 DATA (เกิดจากการใช้งาน)
+│   ├── Luna/team/daily/             ← บันทึกงานทีมรายวัน
+│   ├── Luna/hypothesis.md           ← pattern ที่สังเกตได้ (รอยืนยัน)
+│   ├── Luna/insights.md             ← pattern ที่ยืนยันแล้ว
+│   ├── Luna/preferences.md          ← พฤติกรรมที่เรียนรู้แล้ว
+│   ├── team/audits/                 ← รายงานตรวจสอบ
+│   ├── team/case-studies/           ← case studies จากงานจริง
+│   ├── team/retrospective/          ← retro รายสัปดาห์
+│   ├── team/performance.md          ← คะแนนทีม (rubric-calibrated)
+│   ├── team/health-dashboard.md     ← system health ภาพรวม
+│   └── plans/                       ← แผนงานที่กำลังทำ
+│
+└── 🔗 MIXED (เริ่มว่าง → เติมจากงานจริง)
+    └── team/preferences/<role>.md    ← learnings ของแต่ละ role
 ```
 
-> **💡 ทิป:** ทุกโฟลเดอร์มี `README.md` อธิบายไว้ — ถ้าสงสัยให้เปิดอ่าน
+> **💡 ทิป:** ดู `ARCHITECTURE.md` สำหรับรายละเอียดว่าไฟล์ไหนเป็น SYSTEM / DATA / MIXED
 
 ---
 
@@ -59,38 +76,22 @@ luna-workspace/
 
 ### วิธีที่ 1: ใช้ Script (ง่ายที่สุด)
 
-เปิด PowerShell แล้วรัน:
-
 ```powershell
 & "$env:USERPROFILE\.windsurf\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
 ```
 
-Script จะสร้างโฟลเดอร์ที่จำเป็นทั้งหมดให้คุณ
-
-**หลังรัน:**
-1. แก้ไฟล์ `MyNewRepo\.windsurf\rules\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร (เช่น React + Firebase)
-2. เปิดโปรเจกต์ใน Windsurf → พร้อมใช้!
-
----
+หลังรัน: แก้ไฟล์ `MyNewRepo\.windsurf\rules\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน Windsurf → พร้อมใช้!
 
 ### วิธีที่ 2: ทำเอง (Manual)
 
-ถ้าอยากทำเอง แค่สร้างโฟลเดอร์และไฟล์นี้:
-
 ```
 MyNewRepo/
-├── .windsurf/
-│   └── rules/
-│       └── project-context.md     ← บอก Luna ว่าโปรเจกต์นี้คืออะไร
-├── Luna/
-│   ├── daily/                     ← บันทึกงาน Luna
-│   └── team/
-│       └── daily/                 ← บันทึกงานทีม
-└── team/
-    └── daily/
+├── .windsurf/rules/project-context.md   ← บอก Luna ว่าโปรเจกต์นี้คืออะไร
+├── Luna/team/daily/                     ← บันทึกงานทีม
+└── Luna/daily/                          ← บันทึก Luna ส่วนตัว
 ```
 
-**ไฟล์ `project-context.md` ตัวอย่าง:**
+**ตัวอย่าง `project-context.md`:**
 ```markdown
 # Project: MyNewRepo
 - Tech: React + Vite + Firebase
@@ -102,34 +103,31 @@ MyNewRepo/
 
 ## 👥 ทีมงาน 12 คน
 
-Luna มีทีมงานพร้อมช่วยเหลือทุกด้าน:
+Luna มีทีมงาน 12 คน ทุกคนมี principal skill เฉพาะทาง:
 
-| ชื่อ | หน้าที่ | ใช้เมื่อไหร่ |
-|------|---------|-------------|
-| **Orion** | ออกแบบระบบ | ต้องวางแผน architecture |
-| **Nova** | Backend Dev | เขียน API, database |
-| **Stella** | Frontend Dev | สร้างหน้าเว็บ, UI |
-| **Nebula** | Database | ออกแบบตารางข้อมูล |
-| **Cosmos** | DevOps | Deploy, ตั้งค่า server |
-| **Sirius** | QA / Tester | เทสระบบหา bug |
-| **Galaxy** | Business Analyst | วิเคราะห์ requirement |
-| **Vega** | UI/UX Designer | ออกแบบหน้าตา |
-| **Aurora** | Integration | เชื่อมต่อ LINE, Payment |
-| **Pulsar** | Project Manager | จัดการ timeline |
-| **Lyra** | Windsurf Tools | ปรับแต่งเครื่องมือ |
-| **Polaris** | Luna System Auditor | ตรวจสอบคุณภาพ, ความถูกต้องของ Luna |
+| ชื่อ | หน้าที่ | ใช้เมื่อไหร่ | Skill Score |
+|------|---------|-------------|------------|
+| **Orion** | System Architect | วางแผน architecture | 9.3 🌟 |
+| **Nova** | Backend Dev | เขียน API, Cloud Functions | 4.3 🟡 |
+| **Stella** | Frontend Dev | สร้างหน้าเว็บ, React, UI | 10.0 🌟 |
+| **Nebula** | Database Designer | ออกแบบ Firestore schema | 4.3 🟡 |
+| **Cosmos** | DevOps Engineer | Deploy, CI/CD, Firebase | 4.3 🟡 |
+| **Sirius** | QA Engineer | เทสระบบ, Risk-Coverage Matrix | 9.3 🌟 |
+| **Galaxy** | Business Analyst | วิเคราะห์ requirement | ~1.4 🔴 |
+| **Vega** | UI/UX Designer | ออกแบบหน้าตา, accessibility | 7.1 🟢 |
+| **Aurora** | Integration Specialist | เชื่อมต่อ LINE, Payment | 4.3 🟡 |
+| **Pulsar** | Project Manager | จัดการ timeline, retro | 8.6 🌟 |
+| **Lyra** | Windsurf Tooling | ปรับแต่งเครื่องมือ, workflows | 9.3 🌟 |
+| **Polaris** | Luna System Auditor | ตรวจสอบคุณภาพ, ความถูกต้อง | 9.3 🌟 |
+
+> คะแนนใช้ **Scoring Rubric 3-Part** — ดู `templates/scoring-rubric.md`
+> 🌟 Principal (8.5+) · 🟢 Genuine (7.0+) · 🟡 Skeleton (4.0+) · 🔴 Fail (<4.0)
 
 ### ทีมงาน 2 ระดับ
 
-**ระดับ 1: ทีมหลัก (Global)**
-- อยู่ใน `luna-workspace/team/roles/` — ใช้ได้กับทุกโปรเจกต์
-- ตัวอย่าง: ถ้าขอ "สร้างหน้า login" → Stella จะมาทำให้
+**ระดับ 1: ทีมหลัก (Global)** — อยู่ใน `luna-workspace/team/roles/` ใช้ได้กับทุกโปรเจกต์
 
-**ระดับ 2: ทีมเฉพาะโปรเจกต์ (Per-Repo)**
-- อยู่ใน `MyRepo/team/` — เพิ่มเติมความรู้เฉพาะ
-- ตัวอย่าง: ถ้าโปรเจกต์ขายเสื้อผ้า → เพิ่มไฟล์ `team/roles/phoenix.md` (ผู้เชี่ยวชาญเสื้อผ้า)
-
-> **💡 ตัวอย่าง:** ถ้า Nova (Backend) มาทำงาน แต่ต้องรู้ว่าโปรเจกต์นี้ใช้ Firestore schema แบบไหน → เพิ่มไฟล์ `team/roles/nova-context.md` บอกเขา
+**ระดับ 2: ทีมเฉพาะโปรเจกต์ (Per-Repo)** — อยู่ใน `MyRepo/team/` เพิ่ม domain knowledge
 
 ---
 
@@ -182,8 +180,9 @@ Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\
 ## ✅ ทดสอบว่า Luna ทำงานได้
 
 ลองถามในช่องแชท:
-1. *"คนในทีมมีใครบ้าง"* → ควรตอบได้ (อ่านจาก `team/team-config.md`)
+1. *"คนในทีมมีใครบ้าง"* → ควรตอบได้ 12 คน (อ่านจาก `team/team-config.md`)
 2. *"ช่วยสร้างหน้า login"* → ควรเรียก **Stella** มาทำงาน
+3. *"สถานะระบบเป็นยังไง"* → ควรเห็น `team/health-dashboard.md`
 
 ถ้าตอบได้ = พร้อมใช้งาน!
 
@@ -193,10 +192,12 @@ Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\
 
 | ปัญหา | แก้ไข |
 |--------|--------|
-| Luna ตอบไม่ได้ว่าทีมมีใคร | เช็คไฟล์ `team/team-config.md` |
-| Luna ไม่รู้ tech stack โปรเจกต์ | แก้ไฟล์ `MyRepo/.windsurf/rules/project-context.md` |
-| ไม่มี daily log | สร้างโฟลเดอร์ `Luna/daily/` และ `team/daily/` |
-| กลัวข้อมูลหาย | Backup โฟลเดอร์ `.windsurf` เป็น zip |
+| Luna ตอบไม่ได้ว่าทีมมีใคร | เช็ค `team/team-config.md` |
+| Luna ไม่รู้ tech stack โปรเจกต์ | แก้ `MyRepo/.windsurf/rules/project-context.md` |
+| ไม่มี daily log | สร้างโฟลเดอร์ `Luna/team/daily/` |
+| กลัวข้อมูลหาย | Backup โฟลเดอร์ `.windsurf` เป็น zip หรือ `git push` |
+| ย้ายเครื่อง | `git clone` หรือ `Export-LunaSystem.ps1` |
+| เริ่มใหม่สะอาด | `Reset-LunaData.ps1 -Confirm` |
 
 ---
 
@@ -204,11 +205,31 @@ Compress-Archive -Path "$env:USERPROFILE\.windsurf" -DestinationPath "D:\backup\
 
 | หัวข้อ | ไฟล์ |
 |--------|------|
+| โครงสร้างระบบ (SYSTEM/DATA) | `ARCHITECTURE.md` |
 | บุคลิก Luna | `rules/luna-core.md` |
 | รายละเอียดทีม 12 คน | `team/roles/*.md` |
-| แม่แบบสำหรับโปรเจกต์ใหม่ | `templates/` |
-| ระบบเรียนรู้ของ Luna | `Luna/hypothesis.md`, `Luna/insights.md` |
+| คะแนนทีม | `team/performance.md` |
+| สถานะระบบรวม | `team/health-dashboard.md` |
+| Scoring rubric | `templates/scoring-rubric.md` |
+| Workflows ทั้งหมด | `workflows/` (10 workflows) |
+| แม่แบบทุกชนิด | `templates/` |
+| ระบบเรียนรู้ | `Luna/hypothesis.md` → `insights.md` → `preferences.md` |
+| Case studies (จากงานจริง) | `team/case-studies/` |
 
 ---
 
-*อัปเดต: 2026-04-27 — เพิ่ม Polaris (Luna System Auditor) 🌙*
+## 🏆 Roadmap Status
+
+Luna Principal Elevation Roadmap — **เสร็จครบ 5 phases:**
+
+| Phase | สถานะ | Output หลัก |
+|-------|--------|------------|
+| 1. Audit & Foundation | ✅ | Baseline audit, 5 critical findings |
+| 2. Operational Discipline | ✅ | 10 workflows + auto-triggers |
+| 3. Principal Skills Rewrite | ✅ | 12/12 genuine (0 boilerplate) |
+| 4. Knowledge Depth + Rubric | ✅ | Scoring rubric 3-part + calibration |
+| 5. Continuous Loop | ✅ | Cadence + growth triggers + dashboard |
+
+---
+
+*อัปเดต: 2026-04-27 — Phase 5 complete, SYSTEM/DATA separation, 12 roles scored 🌙*
