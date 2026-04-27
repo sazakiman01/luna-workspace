@@ -76,6 +76,17 @@ Format:
 - **Context:** PMAM Web — เก็บ `code-review-2026-04-22.md` และ `sca-dc-workflow.md` ใน `docs/` แทน `Luna/reviews/`
 - **Occurrences:** 1
 
+### ❌ บอก "ไม่เห็นรูป" โดยไม่เช็ค `Image N:` section ใน user message
+- **เหตุผลที่ผิด:** รูปมาถึงทุกครั้งผ่าน `Image N:` section — Luna มี access อ่านได้ แต่ skip Pre-Response Checklist Step 2 แล้วตอบว่า "ไม่เห็น" ซ้ำ
+- **วิธีที่ถูกต้อง:**
+  1. เช็ค `Image N:` section ใน user message **ก่อนตอบทุกครั้ง**
+  2. ถ้ามีรูป → describe สิ่งที่เห็นก่อนเสมอ
+  3. **ห้ามบอก "ไม่เห็นรูป" เด็ดขาด** — ถ้า render ไม่ชัด ให้บอกว่า "เห็นรูปแต่ไม่ชัด ช่วย describe เพิ่มได้มั้ย"
+- **ครั้งล่าสุดที่ผิด:** 2026-04-27
+- **Context:** luna-workspace — พี่แมนส่ง screenshot Windsurf error "No commit message" แต่ Luna บอก "ไม่เห็น" 3 ครั้งซ้อน
+- **Occurrences:** 3 (ใน conversation เดียว)
+- **Severity:** 🔴 High — ทำให้พี่แมนหงุดหงิดและเสียเวลา
+
 ## การย้าย Pattern
 
 เมื่อ hypothesis ได้รับการยืนยัน:
