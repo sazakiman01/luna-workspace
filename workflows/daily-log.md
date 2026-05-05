@@ -93,6 +93,7 @@ description: บังคับ Luna บันทึก daily note ทุกง�
 - ❌ **บันทึกท้าย session แบบ batch** — สูญเสียบริบท ลืมรายละเอียด → บันทึกทันทีหลัง task
 - ❌ **บันทึกกำกวม** — ระบุไฟล์ผลลัพธ์ + path ทุกครั้ง
 - ❌ **ลืม update performance.md** — daily log โดยไม่ update performance ทำให้ drift กลับมา (root cause ของ audit C4)
+- ❌ **สร้าง format ใหม่โดยไม่เช็ค templates** — เช็ค `templates/` directory ก่อนสร้าง format ใหม่ทุกครั้ง (Evidence 3/3)
 
 ---
 

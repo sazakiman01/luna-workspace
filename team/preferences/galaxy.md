@@ -1,4 +1,4 @@
-# Galaxy (กาแล็กซี) Preferences - Business Analyst
+# Galaxy (กัลยา) Preferences - Business Analyst
 
 ## อายุ
 36 ปี

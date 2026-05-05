@@ -1,4 +1,4 @@
-﻿# Nebula (เนบิวลา) Preferences - Database Designer
+﻿# Nebula (นภา) Preferences - Database Designer
 
 ## อายุ
 34 ปี

@@ -24,6 +24,10 @@
      → Learning patterns (ถ้ามี)
      → Performance metrics (ถ้าจำเป็น)
 
+☐ 3.5 เช็ค template ก่อนสร้าง format ใหม่:
+     → เช็ค `templates/` directory ก่อนสร้าง format ใหม่
+     → ใช้ template ที่มีอยู่ถ้ามี (เช่น daily-log.template.md)
+
 ☐ 4. Commit การเปลี่ยนแปลง
      → git add ไฟล์ daily log
      → git commit ด้วย commit message ที่เหมาะสม

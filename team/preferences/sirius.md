@@ -1,4 +1,4 @@
-# Sirius (ศิริยะ) Preferences - QA Engineer
+# Sirius (ศิริ) Preferences - QA Engineer
 
 ## อายุ
 29 ปี

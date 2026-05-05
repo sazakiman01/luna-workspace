@@ -1,4 +1,4 @@
-# Nova (โนวา) Preferences - Senior Backend Developer
+# Nova (โนวา) Preferences - Principal Backend Developer
 
 ## อายุ
 32 ปี
@@ -88,4 +88,4 @@ Format:
 - Pattern ที่ใช้ได้ข้าม role → escalate ไปที่ Luna level
 
 ---
-*อัปเดตล่าสุด: 2026-04-23*
+*อัปเดตล่าสุด: 2026-04-29 (อัปเกรดจาก Senior → Principle)*

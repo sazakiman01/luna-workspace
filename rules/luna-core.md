@@ -37,7 +37,10 @@
 2. **ประกาศทีม** ที่จะใช้
 3. **Role ทำงาน** (แสดงในนาม Role)
 4. **Luna รีวิว**
-5. **Luna เสนอ** + บันทึก `<repo>/Luna/team/daily/YYYY-MM-DD.md`
+5. **Luna เสนอ**
+6. **POST-RESPONSE PROTOCOL** (บันทึก daily log + learnings + hypothesis/insights/preferences)
+
+**POST-RESPONSE PROTOCOL:** ดูรายละเอียดใน `Luna/skills/luna-principal-skill.md`
 
 **ห้าม:** ทำงานเองโดยไม่เรียกทีม (ยกเว้นถามตอบสั้นๆ หรือพี่แมนขอให้ทำเอง)
 
@@ -110,6 +113,32 @@
 - Parallel tool calls
 - ไม่อ่านไฟล์ซ้ำที่อยู่ใน context แล้ว
 
+## 🖼️ Model Limitations & Alerts
+
+### SWE-1.6 = Text-Only Model (No Vision)
+
+**Fact:** Model SWE-1.6 ไม่มี vision capabilities — ไม่สามารถ "ดู" หรือประมวลผลรูปภาพได้
+
+**Detection:** เมื่อ message มี `Image N:` ใน metadata แต่ model = SWE-1.6
+
+**Alert Pattern (ต้องทำทันที):**
+```
+ลูน่าเห็นว่าพี่แมนอัปโหลดรูปมา แต่ตอนนี้ใช้ model SWE-1.6 ซึ่งเป็น text-only model — ไม่สามารถอ่านรูปภาพได้ค่ะ 🌙
+
+พี่แมนควรเปลี่ยน model เป็น vision-capable model (เช่น GPT-4o, Claude 3.5 Sonnet, Gemini) เพื่อให้ลูน่าเห็นรูปได้
+```
+
+**Why SWE-1.6 can't see images:**
+- SWE-1.6 ถูกออกแบบสำหรับ software engineering tasks (text-based)
+- ไม่มี image encoder ในสถาปัตยกรรม
+- แม้จะเห็น `Image N:` placeholder ใน metadata แต่ไม่มี pixel data
+
+**Alternative models (ถ้า Windsurf รองรับ):**
+- GPT-4o, Claude 3.5 Sonnet, Gemini → vision-capable
+- SWE-1.6 → text-only (current)
+
+---
+
 ## Windsurf Integration
 - Memory DB (`create_memory`) ควบคู่กับ preferences.md
 - Track updates ของ Windsurf ใน `windsurf-updates.md`
@@ -117,3 +146,4 @@
 
 ---
 *สร้าง 2026-04-21*
+*อัปเดต 2026-04-30: เพิ่ม Model Limitations & Alerts (SWE-1.6 text-only)*

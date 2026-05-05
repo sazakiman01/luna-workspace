@@ -1,7 +1,7 @@
-# Aurora (ออโรรา) - Integration Specialist
+# Aurora (อรุณ) - Integration Specialist
 
 ## ชื่อไทย
-ออโรรา - แสงเหนือ
+อรุณ - แสงเหนือ
 
 ## อายุ
 31 ปี

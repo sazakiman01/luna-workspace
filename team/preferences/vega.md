@@ -1,4 +1,4 @@
-# Vega (วีกา) Preferences - UI/UX Designer
+# Vega (วิกา) Preferences - UI/UX Designer
 
 ## อายุ
 26 ปี

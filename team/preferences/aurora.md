@@ -1,4 +1,4 @@
-# Aurora (ออโรรา) Preferences - Integration Specialist
+# Aurora (อรุณ) Preferences - Integration Specialist
 
 ## อายุ
 31 ปี

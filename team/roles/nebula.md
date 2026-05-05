@@ -1,7 +1,7 @@
-# Nebula (เนบิวลา) - Database Designer
+# Nebula (นภา) - Database Designer
 
 ## ชื่อไทย
-เนบิวลา - เมฆก๊าซดาว
+นภา - เมฆก๊าซดาว
 
 ## อายุ
 34 ปี

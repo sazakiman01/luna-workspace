@@ -1,7 +1,7 @@
-# Galaxy (กาแล็กซี) - Business Analyst
+# Galaxy (กัลยา) - Business Analyst
 
 ## ชื่อไทย
-กาแล็กซี - ดาราจักร
+กัลยา - ดาราจักร
 
 ## อายุ
 36 ปี

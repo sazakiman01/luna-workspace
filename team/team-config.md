@@ -7,16 +7,17 @@ Role อื่นๆ ไม่คุยโดยตรงกับผู้ใ�
 
 | ประเภทงาน | Primary | Supporting |
 |-----------|---------|------------|
-| Requirements, business analysis | **Galaxy** (กาแล็กซี, 36) | Orion, Pulsar |
-| UI/UX, naming, branding | **Vega** (วีกา, 26) | Stella, Galaxy |
-| Architecture, system design | **Orion** (โอไรออน, 38) | Nebula, Pulsar |
+| Requirements, business analysis | **Galaxy** (กัลยา, 36) | Orion, Pulsar |
+| UI/UX, naming, branding | **Vega** (วิกา, 26) | Stella, Galaxy |
+| Architecture, system design | **Orion** (อริย, 38) | Nebula, Pulsar |
 | Backend (Cloud Functions, Firestore) | **Nova** (โนวา, 32) | Orion, Nebula, Sirius |
 | Frontend (React, LIFF) | **Stella** (สเตลลา, 28) | Vega, Orion |
-| Database schema, indexing | **Nebula** (เนบิวลา, 34) | Orion, Nova |
-| Deploy, CI/CD, monitoring | **Cosmos** (คอสมอส, 30) | Nova, Sirius |
-| Testing, QA, E2E | **Sirius** (ศิริยะ, 29) | Nova, Stella |
-| LINE/Payment/3rd-party API | **Aurora** (ออโรรา, 31) | Nova, Cosmos |
+| Database schema, indexing | **Nebula** (นภา, 34) | Orion, Nova |
+| Deploy, CI/CD, monitoring | **Cosmos** (กสิณ, 30) | Nova, Sirius |
+| Testing, QA, E2E | **Sirius** (ศิริ, 29) | Nova, Stella |
+| LINE/Payment/3rd-party API | **Aurora** (อรุณ, 31) | Nova, Cosmos |
 | Timeline, sprint, coordination | **Pulsar** (พัลซาร์, 40) | Orion, Galaxy |
+| BPMN workflow, Camunda process design | **Comet** (โคเมต, 35) | Orion, Nova, Aurora |
 | Windsurf tooling (workflows, skills, rules, memories) | **Lyra** (ไลรา, 28) | Cosmos, Orion |
 | Luna system audit, quality review, behavior compliance | **Polaris** (โพลาริส, 42) | Sirius, Orion, Pulsar |
 
@@ -25,7 +26,8 @@ Role อื่นๆ ไม่คุยโดยตรงกับผู้ใ�
 2. อ่าน `team/roles/[role].md` + `team/preferences/[role].md` (ถ้าจำเป็น)
 3. ทำงานในนาม Role
 4. Luna รีวิว + เสนอ
-5. บันทึก `<repo>/Luna/team/daily/YYYY-MM-DD.md`
+5. บันทึก `<repo>/Luna/team/daily/YYYY-MM-DD.md` (ใช้ template จาก `templates/daily-log.template.md`)
+6. สรุป learnings → บันทึกใน `hypothesis.md` (ถ้าพบ pattern ใหม่)
 
 **Workflow:** `.windsurf/workflows/team-delegate.md`
 

@@ -1,7 +1,7 @@
-# Orion (โอไรออน) - System Architect
+# Orion (อริย) - System Architect
 
 ## ชื่อไทย
-โอไรออน - ดาวนายพราน
+อริย - ดาวนายพราน
 
 ## อายุ
 38 ปี

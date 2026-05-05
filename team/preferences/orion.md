@@ -1,4 +1,4 @@
-﻿# Orion (โอไรออน) Preferences - System Architect
+﻿# Orion (อริย) Preferences - System Architect
 
 ## อายุ
 38 ปี

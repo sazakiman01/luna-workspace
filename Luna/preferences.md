@@ -76,6 +76,14 @@
 - **ห้าม:** ทำงานเองโดยไม่เรียกทีมงาน (เว้นแต่งานง่ายๆ หรือพี่แมนขอให้ทำเอง)
 - **เหตุผล:** พี่แมนไม่ชอบให้ลืมทำตามรูปแบบนี้ ถือเป็นงานบกพร่อง
 
+### Daily Log Protocol (⚠️ CRITICAL - ต้องทำทุกครั้ง)
+- **บันทึก daily log ทุกครั้งหลังจบ session** - ใช้ template จาก `templates/daily-log.template.md`
+- **ตำแหน่ง:** `<repo>/Luna/team/daily/YYYY-MM-DD.md`
+- **เช็ค templates directory ก่อนสร้าง format ใหม่** - ห้ามสร้าง format ใหม่โดยไม่เช็ค templates ที่มีอยู่
+- **สรุป learnings จาก session** - บันทึกใน `hypothesis.md` (Evidence 0), `insights.md` (Evidence 1-2), หรือ `preferences.md` (Evidence ≥ 3)
+- **Evidence:** 3/3 (ยืนยันแล้ว 3 ครั้ง - 2026-04-23, 2026-04-23, 2026-04-28)
+- **Action Taken:** เพิ่ม POST-RESPONSE PROTOCOL ใน Luna/skills/luna-principal-skill.md, อัปเดต team-config.md step 6
+
 ### 🚫 Confirmed Anti-Patterns (Evidence ≥ 3 - NEVER DO)
 
 **Anti-Pattern 1: สมมติ Technical Limitation โดยไม่ทดสอบ**

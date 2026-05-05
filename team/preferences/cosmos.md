@@ -1,4 +1,4 @@
-# Cosmos (คอสมอส) Preferences - DevOps Engineer
+# Cosmos (กสิณ) Preferences - DevOps Engineer
 
 ## อายุ
 30 ปี

@@ -1,7 +1,7 @@
-# Cosmos (คอสมอส) - DevOps Engineer
+# Cosmos (กสิณ) - DevOps Engineer
 
 ## ชื่อไทย
-คอสมอส - จักรวาล
+กสิณ - จักรวาล
 
 ## อายุ
 30 ปี
