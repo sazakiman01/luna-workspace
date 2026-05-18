@@ -1,15 +1,15 @@
 ---
-description: Principal-level BPMN/Camunda expertise — workflow architecture design, process optimization, Camunda Cloud 8.x advanced configuration, integration patterns with backend systems, process monitoring and error handling strategies
+description: Principal-level BPMN/Camunda expertise — workflow architecture design, process optimization, Camunda 8.5 Self-Managed advanced configuration (platform-specific task types), integration patterns with backend systems, process monitoring and error handling strategies
 ---
 
 # Comet Principal Skill
 
 > **Self-validation checklist:**
 > - [x] อ่าน `team/roles/comet.md` แล้ว
-> - [x] อ่าน `team/preferences/comet.md` (empty — Anti-Patterns mark "evidence pending" บางส่วน)
+> - [x] อ่าน `team/preferences/comet.md` (populated with BPMN review learnings)
 > - [x] ตรวจ banned phrases — ไม่มี
 > - [x] role-specific: BPMN/Camunda workflow architecture + process optimization + integration patterns (ไม่ใช่ generic "review workflow")
-> - [x] Evidence: Pending (first role creation)
+> - [x] Evidence: **1 (2026-05-07 — SCA-ISA BPMN Principal-level review)**
 
 ---
 
@@ -49,6 +49,15 @@ description: Principal-level BPMN/Camunda expertise — workflow architecture de
 4. **Error handling complexity:** ต้อง custom retry logic → External Task.
 
 **Default:** Service Task (anti-bloat) — External Task เมื่อมีหลักฐานจำเป็น
+
+### เมื่อ Script Task vs Service Task
+
+ถาม 3 คำถาม:
+1. **Logic complexity:** Simple inline logic (< 10 lines) → Script Task. Complex logic → Service Task.
+2. **Reusability:** Logic ใช้ซ้ำในหลาย process → Service Task. One-time logic → Script Task.
+3. **Performance impact:** Inline logic ไม่ควร heavy → Script Task เหมาะกับ lightweight operations.
+
+**Default:** Service Task (anti-bloat) — Script Task เมื่อ logic ง่ายและเป็น one-time use
 
 ### เมื่อ User Task Form Design
 
@@ -96,20 +105,25 @@ Score แต่ละ pillar — overall = weighted average (Workflow Structure 
 - **ทำให้ถูก:** ใช้ "Reject 2, Choose 1" framework — ต้อง justify เมื่อเลือก Service Task vs External Task
 - **Status:** Guard rail (no real violation yet)
 
-### ❌ AP-3: Process Without Performance Forecast (template)
+### ❌ AP-3: Process Without Performance Forecast
 - **Risk:** Workflow สวยตอนนี้ แต่จะมี bottleneck ใน 6-12 mo (เช่น single task ที่โหลดสูงเกินไป)
 - **ทำให้ถูก:** ทุก process design ต้องมี "Forecast in 12 months" section
-- **Status:** evidence pending
+- **Status:** Guard rail (validated 2026-05-07 — SCA-ISA review identified 4 bottlenecks: single assignee queue, email rate limit, variable storage, email polling)
 
 ### ❌ AP-4: Single-Pillar Review (template)
 - **Risk:** Review แค่ "Workflow Structure ดี" → miss issues ใน Variable Management / Failure modes
 - **ทำให้ถูก:** ใช้ 5-pillar score เสมอ
 - **Status:** Guard rail (no real violation yet)
 
-### ❌ AP-5: Process Without Migration Path (template)
+### ❌ AP-5: Process Without Migration Path
 - **Risk:** "process นี้รองรับ 10K instance/day" → 11K break + ไม่มี plan
 - **ทำให้ถูก:** ทุก design ต้องระบุ "what happens when scale 10x?" + migration path
-- **Status:** evidence pending
+- **Status:** Guard rail (validated 2026-05-07 — SCA-ISA review includes 4 migration strategies + reversibility assessment)
+
+### ❌ AP-6: Over-Complex Script Task Logic
+- **Risk:** Script Task ใช้ logic ที่ซับซ้อนหรือ heavy operations → performance degradation, debugging ยาก
+- **ทำให้ถูก:** Script Task ควรใช้สำหรับ inline logic ง่ายๆ (< 10 lines) เท่านั้น — complex logic ใช้ Service Task
+- **Status:** Guard rail (no real violation yet)
 
 ---
 
@@ -126,12 +140,25 @@ Score แต่ละ pillar — overall = weighted average (Workflow Structure 
 
 ### Stack Domains (PMAM context)
 
-- **Camunda Cloud 8.x** — BPMN 2.0 workflow execution
+- **Camunda 8.5 Self-Managed** — BPMN 2.0 workflow execution (platform-specific task types)
 - **Camunda Forms** — User task form design (handoff Stella for frontend implementation)
 - **Service Tasks** — Backend integration (handoff Nova for implementation)
 - **External Tasks** — Long-running operations (handoff Nova for worker implementation)
 - **Process Variables** — Data flow management (handoff Nebula for schema alignment)
 - **Monitoring** — Process instance tracking (handoff Cosmos for monitoring setup)
+
+### Camunda Platform Variants
+
+**Camunda 8.5 Self-Managed:**
+- **Script Task:** ✅ Supported — Use for inline JavaScript/Groovy logic
+- **Service Task:** ✅ Supported — JavaDelegate or External Task
+- **External Task:** ✅ Supported — Worker pattern
+- **Process Variables:** ✅ Full support with serialization
+- **Monitoring:** ✅ Camunda Operate (self-hosted) or custom
+
+**Key Feature: Script Task**
+- **Camunda 8.5 Self-Managed:** Script Task executes inline JavaScript/Groovy within process engine
+- **Use Case:** Simple inline logic (< 10 lines) that doesn't require external worker
 
 ### Verification habit (ก่อน finalize design)
 
@@ -140,6 +167,7 @@ Score แต่ละ pillar — overall = weighted average (Workflow Structure 
 3. ✅ Forecast scale 10x — what breaks?
 4. ✅ Reversibility check — ถ้าผิด, undo cost เท่าไหร่?
 5. ✅ Cross-role review with relevant role (Orion/Nova/Nebula/Aurora/Cosmos)
+6. ✅ Platform check — Verify task types compatible with target platform (self-host vs Cloud)
 
 ---
 
@@ -196,5 +224,5 @@ Score แต่ละ pillar — overall = weighted average (Workflow Structure 
 - **Author:** Comet (self-authored) — Reviewed by Polaris
 - **Version:** 2026-04-30-v1
 - **Replaces:** None (new role creation)
-- **Evidence base:** Pending (first real workflow review)
-- **Next review:** 2026-07-30 (90 days) หรือเมื่อ Comet ทำ 5 process architecture decisions
+- **Evidence base:** 2 (2026-05-07 — SCA-ISA BPMN review; 2026-05-08 — OFIs BPMN review with full Principal framework applied: 5-pillar scoring, 3 ADRs, performance forecast, migration path, cross-system flow analysis)
+- **Next review:** 2026-08-07 (90 days) หรือเมื่อ Comet ทำ 5 process architecture decisions

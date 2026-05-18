@@ -145,14 +145,6 @@
   - Workaround: ใช้ `git commit -m "message"` แบบ manual แทน
   - Source: luna-workspace — README.md update, hypothesis.md update
 
-### Role Evidence Base
-- **Pattern:** Principal Role ต้องมี evidence จริงจากการทำงาน Principal-level — template เปล่าๆ ไม่พอ
-  - Evidence: 2/3
-  - First seen: 2026-04-30
-  - Last confirmed: 2026-04-30
-  - Context: Polaris audit พบว่า Comet Principal Skill ไม่มี evidence จริง (6.5/10) - Comet รีวิว BPMN workflow จริงเสร็จแล้ว (Overall Score: 7.5/10)
-  - Action: Principal Role ต้องทำงานจริงก่อนจึงจะยืนยันระดับ Principal ได้
-  - Source: luna-workspace — Comet BPMN review evidence
 
 ### Template / Review Pattern
 - **Pattern:** Backend API review template สามารถอ้างอิงจาก frontend template ได้ แต่ต้องปรับ dimensions ให้เหมาะกับ backend concerns (Database Design, Error Handling, Security vs Accessibility, UI components)
@@ -165,6 +157,22 @@
     - เปลี่ยน UI Libraries → Framework-Specific (Go/Fiber, JWT/OAuth2)
     - เพิ่ม Production Readiness Checklist ที่เหมาะกับ backend (migrations, monitoring, health checks)
   - Source: luna-workspace — backend API review template creation
+
+- **Pattern:** Auto-prompt workflow ต้องมี explicit trigger conditions สำหรับ Luna เรียกใช้
+  - Evidence: 1/3
+  - First seen: 2026-05-06
+  - Last confirmed: 2026-05-06
+  - Context: Lyra ออกแบบเพิ่ม "Auto-Prompt Mode" ใน daily-log.md → กำหนด conditions C1-C5 (session จบ, มีงานทำเสร็จ, มี decision, มี feedback, จบ role work)
+  - Hypothesis: การมี explicit triggers จะช่วย Luna ไม่ลืมบันทึก daily log หลัง session
+  - Source: luna-workspace — daily-log workflow enhancement
+
+- **Pattern:** Template-Driven Reviews — ทุก review ใช้ template เดียวกัน → consistency สูง
+  - Evidence: 1/3
+  - First seen: 2026-05-05
+  - Last confirmed: 2026-05-05
+  - Context: Stella (frontend), Nova (backend), Comet (BPMN) ใช้ template เดียวกัน
+  - Action: Maintain template library — อัปเดตตาม learnings
+  - Source: luna-workspace — W18-W19 retrospective
 
 ### Security Review Pattern
 - **Pattern:** Security review สำหรับ backend API ต้องเน้น JWT parsing, SQL injection patterns, environment variables management เป็น priority สูง
@@ -218,6 +226,110 @@
     - ขาด semantic HTML
   - Recommended fix: เพิ่ม ARIA attributes และ keyboard navigation ใน components ทุกตัว
   - Source: luna-workspace — gosoft-rental frontend review
+
+### Audit Form Review Pattern
+- **Pattern:** Audit form review (React form ที่ integrate กับ Camunda) มี criteria เฉพาะที่ต่างจาก general review เช่น BPMN-Form alignment, XSS security, race condition, concurrent edit protection
+  - Evidence: 1/3
+  - First seen: 2026-05-11
+  - Last confirmed: 2026-05-11
+  - Context: Stella รีวิว ISA Audit Form พบว่ามี issues เฉพึกที่ไม่ได้ระบุใน general review template → จำเป็นต้องสร้าง audit form review template เฉพึก
+  - Critical findings to look for:
+    - BPMN-Form Alignment (variable mapping, field key consistency)
+    - Input Sanitization (XSS risk in text fields)
+    - Document Number Generation (race condition)
+    - Service Error Handling (silent failures)
+    - Concurrent Edit Protection (optimistic locking)
+  - Recommended fix: ใช้ audit-form-review.template.md สำหรับ audit form reviews
+  - Source: luna-workspace — ISA Audit Form production readiness review
+
+### Template Standardization Pattern
+- **Pattern:** Template ช่วย standardize review process ทำให้ทุกคน review ดู criteria เดิม ลดเวลา review ครั้งต่อไป และ review reports มีรูปแบบเดียวกัน
+  - Evidence: 1/3
+  - First seen: 2026-05-11
+  - Last confirmed: 2026-05-11
+  - Context: สร้าง audit-form-review.template.md หลังจาก review ISA Audit Form ครั้งแรก → ครั้งต่อไปใช้ template ได้เลยไม่ต้องคิด criteria ใหม่
+  - Benefits:
+    - Standardize review process
+    - Reduce time for subsequent reviews
+    - Consistent review report format
+    - Easy comparison across reviews
+  - Recommended action: พิจารณาสร้าง templates เฉพึกสำหรับ review types อื่นๆ ถ้า review บ่อย
+  - Source: luna-workspace — Audit form review template creation
+
+### Windsurf 2.2.17 Research
+- **Pattern:** Devin Review & Quick Review เป็น AI code review features ใหม่ใน Windsurf 2.2.17 แต่อาจ conflict กับ Luna's Role-based delegation system
+  - Evidence: 1/3
+  - First seen: 2026-05-15
+  - Last confirmed: 2026-05-15
+  - Context: Research Windsurf 2.2.17 changelog เพื่อประเมินความเหมาะสมกับ Luna's workflow
+  - Key Findings:
+    - **Devin Review:** Autonomous cloud agent ทำงาน end-to-end (debugging, deployment, testing), รวมอยู่ใน self-serve plans, sessions ปรากฏใน Agent Command Center
+    - **Quick Review:** Agentic code review บน local changes, ใช้ได้เฉพาะกับ Devin Local agent (ไม่รองรับ legacy Cascade), มี 3 models (SWE-check free, GPT 5.5, Opus 4.7 token-based)
+    - **Agent Command Center:** Kanban view สำหรับจัดการ local และ cloud agents, organize ใน Spaces, performance improvements สำหรับ loading/switching sessions
+    - **MCP Usage:** Luna ไม่ได้ใช้ MCP servers (ไม่พบ mcp_config.json ใน workspace) → MCP bug fixes ไม่มี impact
+    - **Windows Update Process:** SOP: Wait for update → Close devin.exe in Task Manager → Install update → Restart Windsurf
+  - Trade-offs Analysis:
+    - **Pros:** Devin Review อาจช่วย accelerate reviews, Quick Review ให้ second opinion สำหรับ AI-generated code
+    - **Cons:** Quick Review ใช้ได้เฉพาะกับ Devin Local (ไม่รองรับ legacy Cascade), อาจ conflict กับ Luna's Role-based delegation (Comet ทำ review แทน)
+    - **Decision:** ต้อง test จริงก่อนตัดสินใจใช้/ไม่ใช้
+  - Source: luna-workspace — Windsurf 2.2.17 research (Phase 1)
+
+- **Pattern:** Windsurf 2.2.17 Best Practices สามารถนำมาปรับใช้กับ Luna's workflow เพื่อเพิ่มประสิทธิภาพได้
+  - Evidence: 1/3
+  - First seen: 2026-05-15
+  - Last confirmed: 2026-05-15
+  - Context: Research Windsurf 2.2.17 best practices จาก external sources (Makerkit, Markaicode, KZ Softworks)
+  - Key Best Practices:
+    - **One task at a time:** Isolate tasks ใน small chunks เพื่อ success เมื่อทำงานกับ AI
+    - **Use Context files:** ใช้ context files (database schema, UI components, translations) เพื่อ reduce hallucinations
+    - **Avoid Context Pollution:** Restart new chat sessions เพื่อ avoid context pollution
+    - **Update rules after manual edit:** Commit manual edits หลังแก้ AGENTS.md หรือ .windsurf/rules/*.md
+    - **Use MCP server for grounded answers:** MCP ให้ grounded context ที่ beat hallucination
+    - **Create .windsurfrules file:** บอก Cascade stack, conventions, boundaries เพื่อ reduce prompt length
+    - **Configure Cascade's Context Window:** ใช้ Codebase mode สำหรับ projects < 50k lines, File mode สำหรับ large monorepos
+    - **Windsurf Workflows Benefits:** Consistency, Standardization, Traceability, Productivity
+  - Application to Luna:
+    - สามารถใช้ .windsurfrules pattern สำหรับ Luna's team rules
+    - สามารถใช้ context files pattern สำหรับ role definitions
+    - สามารถใช้ workflow pattern สำหรับ standardize Luna's workflows
+  - Source: luna-workspace — Windsurf 2.2.17 best practices research (Phase 2.1)
+
+- **Pattern:** AI Assistant Workflow Best Practices สามารถนำมาปรับใช้กับ Luna's Role-based system เพื่อเพิ่มประสิทธิภาพ
+  - Evidence: 1/3
+  - First seen: 2026-05-15
+  - Last confirmed: 2026-05-15
+  - Context: Research AI assistant workflow best practices จาก external sources (AddyOsmani, GitLab)
+  - Key Best Practices:
+    - **Start with clear plan (specs before code):** Brainstorm spec → outline plan → coding
+    - **Break work into small, iterative chunks:** Small tasks → gradually build on top
+    - **Provide extensive context and guidance:** Help AI find correct files
+    - **Choose the right model:** Use multiple models when needed
+    - **Keep human in loop:** Verify, test, review everything (never blindly trust AI)
+    - **Customize AI behavior with rules and examples:** AGENTS.md, .windsurf/rules/*.md
+    - **Embrace testing and automation:** Test suite amplifies AI usefulness
+    - **Continuously learn and adapt:** AI amplifies your skills
+    - **8 Agentic AI patterns:** Status updates, Work routing, Team communication, Role-specific agents, Conversational context, RBAC, Governed environments, Collaborative agent building
+  - Application to Luna:
+    - Luna's Role-based system สอดคล้องกับ "Role-specific agents" pattern
+    - Luna's 3-tier learning (hypothesis → insights → preferences) สอดคล้องกับ "Continuously learn and adapt"
+    - Luna's Pre-Response Protocol สอดคล้องกับ "Start with clear plan"
+  - Source: luna-workspace — AI assistant workflow best practices research (Phase 2.2)
+
+- **Pattern:** Devin/Quick Review Integration Patterns สามารถนำมาปรับใช้กับ Luna's review workflow ได้
+  - Evidence: 1/3
+  - First seen: 2026-05-15
+  - Last confirmed: 2026-05-15
+  - Context: Research AI code review integration patterns จาก external sources (Cloudflare, Microsoft, Merge)
+  - Key Integration Patterns:
+    - **Specialised agents:** Split review into domain-specific agents (security, performance, etc.) แทน one big prompt
+    - **Severity classification:** Use structured severity (critical, warning, suggestion) สำหรับ findings
+    - **AI code reviewer in PR workflow:** Automated checks, suggested improvements, PR summary generation, interactive Q&A
+    - **AI agent integration platform:** Use API endpoints หรือ MCP servers, pre-built connectors, managed authentication, observability layer
+  - Application to Luna:
+    - Luna's Role-based review (Comet for BPMN, Stella for frontend) สอดคล้องกับ "Specialised agents" pattern
+    - Luna's template-driven reviews สอดคล้องกับ "Structured severity" pattern
+    - Luna's review reports สอดคล้องกับ "PR summary generation" pattern
+  - Source: luna-workspace — Devin/Quick Review integration patterns research (Phase 2.3)
 
 ## การยืนยัน Hypothesis
 

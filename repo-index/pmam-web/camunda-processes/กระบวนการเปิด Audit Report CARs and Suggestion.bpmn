@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0o2noiu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.35.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:collaboration id="Collaboration_0sg235o">
+    <bpmn:participant id="Participant_00u8z1f" name="กระบวนการ Audit DC" processRef="Process_SCADC" />
+    <bpmn:textAnnotation id="TextAnnotation_00ojzhq">
+      <bpmn:text>กระบวนการนี้สามารถเปิด OFIs ได้หลายใบ</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_0zgf74e">
+      <bpmn:text>Complete มาจากเว็บภายนอก</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_15e4ci5">
+      <bpmn:text>อัพเดตฐานข้อมูลไม่อนุมัติ</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1ra50hh">
+      <bpmn:text>อัพเดตฐานข้อมูลอนุมัติเปิด CARs หรือ Suggestions</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1y9f5x8">
+      <bpmn:text>อัพเดตฐานข้อมูลส่งกลับแก้ไข</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_0pvjck4">
+      <bpmn:text>อัพเดตข้อมูลที่แก้ไขทั้งหมด</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_07t3ivl" associationDirection="None" sourceRef="Activity_0heeo9f" targetRef="TextAnnotation_0zgf74e" />
+    <bpmn:association id="Association_08qktuv" associationDirection="None" sourceRef="Activity_18cxgwn" targetRef="TextAnnotation_0pvjck4" />
+    <bpmn:association id="Association_0qrrtqb" associationDirection="None" sourceRef="Activity_1xvoh1h" targetRef="TextAnnotation_00ojzhq" />
+    <bpmn:association id="Association_1eyy6ux" associationDirection="None" sourceRef="Activity_1yvtpy5" targetRef="TextAnnotation_15e4ci5" />
+    <bpmn:association id="Association_1jdtv8f" associationDirection="None" sourceRef="Activity_1xwpy89" targetRef="TextAnnotation_1ra50hh" />
+    <bpmn:association id="Association_0gd3ptv" associationDirection="None" sourceRef="Activity_189sxwk" targetRef="TextAnnotation_1y9f5x8" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_SCADC" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="UserTaskForm_2pnscct">{
+  "components": [
+    {
+      "label": "ลิ้งสำหรับเปิดเอกสาร",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1j49aq5",
+        "columns": null
+      },
+      "id": "Field_1h8k6ga",
+      "key": "textfield_x7f24",
+      "readonly": true
+    },
+    {
+      "label": "พิจารณาอนุมัติ",
+      "values": [
+        {
+          "label": "ส่งกลับแก้ไข",
+          "value": "ส่งกลับแก้ไข"
+        },
+        {
+          "label": "ไม่อนุมัติ",
+          "value": "ไม่อนุมัติ"
+        },
+        {
+          "label": "อนุมัติ",
+          "value": "อนุมัติ"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_00lak9b",
+        "columns": null
+      },
+      "id": "Field_1yat3tw",
+      "key": "select_h4zi1vi",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "รายละเอียดแก้ไข",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_03alnl1",
+        "columns": null
+      },
+      "id": "Field_0mgl4b4",
+      "key": "edit_detail",
+      "description": "กรุณาระบุรายละเอียดสำหรับให้ Auditor แก้ไข",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=select_h4zi1vi != \"ส่งกลับแก้ไข\""
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_1ys82tj",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.35.0"
+  },
+  "schemaVersion": 18
+}</zeebe:userTaskForm>
+    </bpmn:extensionElements>
+    <bpmn:laneSet id="LaneSet_0s2hsrs">
+      <bpmn:lane id="Lane_0hstz43" name="Head of Auditor">
+        <bpmn:flowNodeRef>Gateway_0r34qte</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0tvzhci</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_125zzpm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0h5h0qb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1277tu6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1nqmgyr</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1xvoh1h</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1eu545m</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1yvtpy5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1xwpy89</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_189sxwk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0bofazd</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0bjtkm2" name="Auditor">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0pyyi0f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1ql9iot</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0028equ</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0heeo9f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1kaih1a</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1h4fuk5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1119cw9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_18cxgwn</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="เริ่มต้นกระบวนการ">
+      <bpmn:outgoing>Flow_0v6malb</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_0pyyi0f" name="Set Env" zeebe:modelerTemplate="cloud_set_global_env_connector" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAIAAABEtEjdAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFC2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTEyLTIyPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjExOTEzZDljLWIwZWYtNDcwOS1iMzdlLWJkYjgzOTY0YTc4MDwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5FTlYgLSAxPC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9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">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" />
+        <zeebe:ioMapping>
+          <zeebe:input source="={}" target="payload" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="setenv" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0v6malb</bpmn:incoming>
+      <bpmn:outgoing>Flow_109mj1q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1ql9iot" name="แจ้งเตือน(Head Of Auditor)" zeebe:modelerTemplate="Cloud_center_SendMail_Connecter" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iODAwIiB3aWR0aD0iMTIwMCIgdmlld0JveD0iLTI3NC42NjI3NSAtNDI1LjgzNCAyMzgwLjQxMDUgMjU1NS4wMDQiPjxwYXRoIGQ9Ik0xODMxLjA4MyA4OTQuMjVhNDAuODc5IDQwLjg3OSAwIDAwLTE5LjUwMy0zNS4xMzFoLS4yMTNsLS43NjctLjQyNi02MzQuNDkyLTM3NS41ODVhODYuMTc1IDg2LjE3NSAwIDAwLTguNTE3LTUuMDY3IDg1LjE3IDg1LjE3IDAgMDAtNzguMDk4IDAgODYuMzcgODYuMzcgMCAwMC04LjUxNyA1LjA2N2wtNjM0LjQ5IDM3NS41ODUtLjc2Ni40MjZjLTE5LjM5MiAxMi4wNTktMjUuMzM3IDM3LjU1Ni0xMy4yNzggNTYuOTQ4YTQxLjM0NiA0MS4zNDYgMCAwMDE0LjI1NyAxMy44NjhsNjM0LjQ5MiAzNzUuNTg1YTk1LjYxNyA5NS42MTcgMCAwMDguNTE3IDUuMDY4IDg1LjE3IDg1LjE3IDAgMDA3OC4wOTggMCA5NS41MiA5NS41MiAwIDAwOC41MTctNS4wNjhsNjM0LjQ5Mi0zNzUuNTg1YTQwLjg0IDQwLjg0IDAgMDAyMC4yNjgtMzUuNjg1eiIgZmlsbD0iIzBBMjc2NyIvPjxwYXRoIGQ9Ik01MjAuNDUzIDY0My40NzdoNDE2LjM4djM4MS42NzRoLTQxNi4zOHpNMTc0NS45MTcgMjU1LjVWODAuOTA4YzEtNDMuNjUyLTMzLjU1Mi03OS44NjItNzcuMjAzLTgwLjkwOEg1ODguMjA0QzU0NC41NTIgMS4wNDYgNTEwIDM3LjI1NiA1MTEgODAuOTA4VjI1NS41bDYzOC43NSAxNzAuMzMzeiIgZmlsbD0iIzAzNjRCOCIvPjxwYXRoIGQ9Ik01MTEgMjU1LjVoNDI1LjgzM3YzODMuMjVINTExeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNUg5MzYuODMzdjM4My4yNUwxMzYyLjY2NyAxMDIyaDM4My4yNVY2MzguNzV6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTkzNi44MzMgNjM4Ljc1aDQyNS44MzNWMTAyMkg5MzYuODMzeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik05MzYuODMzIDEwMjJoNDI1LjgzM3YzODMuMjVIOTM2LjgzM3oiIGZpbGw9IiMwMzY0QjgiLz48cGF0aCBkPSJNNTIwLjQ1MyAxMDI1LjE1MWg0MTYuMzh2MzQ2Ljk2OWgtNDE2LjM4eiIgZmlsbD0iIzE0NDQ3RCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAxMDIyaDM4My4yNXYzODMuMjVoLTM4My4yNXoiIGZpbGw9IiMwMDc4RDQiLz48bGluZWFyR3JhZGllbnQgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDE3MDUuMzMzKSIgeTI9IjEuOTk4IiB4Mj0iMTEyOC40NTgiIHkxPSI4MTEuMDgzIiB4MT0iMTEyOC40NTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzViOGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjhhOGVhIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQyNi02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4LjQzNyA4OC40MzcgMCAwMS0zNC40MDcgOC41MTdsLTM0LjY2My0yMC4yN2E4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjE2NyA5MDYuMDAzaC0uMjk4bC0yMS4wMzYtMTEuNzUzdjcyMi4zODRjLjMyOCA0OC4xOTYgMzkuNjUzIDg3LjAwNiA4Ny44NDkgODYuN2gxMjMwLjkxNGMuNzI0IDAgMS4zNjMtLjM0MSAyLjEyOS0uMzQxYTEwNy43OSAxMDcuNzkgMCAwMDI5LjgwOC02LjIxNyA4Ni4wNjYgODYuMDY2IDAgMDAxMS45NjYtNi4yMTdjMi44NTMtMS42MTggNy43NS01LjE1MiA3Ljc1LTUuMTUyYTg1Ljk3NCA4NS45NzQgMCAwMDM0LjgzMy02OC43NzJWODk0LjI1YTM4LjMyMyAzOC4zMjMgMCAwMS0xOS41MDIgMzMuMzQzeiIgZmlsbD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik0xNzk3LjAxNyA4OTEuMzk3djQ0LjI4N2wtNjYzLjQ0OCA0NTYuNzkxLTY4Ni44Ny00ODYuMTc0YS40MjYuNDI2IDAgMDAtLjQyNi0uNDI2bC02My4wMjMtMzcuODk5di0zMS45MzhsMjUuOTc2LS40MjYgNTQuOTMyIDMxLjUxMiAxLjI3Ny40MjYgNC42ODQgMi45ODFzNjQ1LjU2MyAzNjguMzQ2IDY0Ny4yNjcgMzY5LjE5N2wyNC42OTggMTQuNDc4YzIuMTI5LS44NTIgNC4yNTgtMS43MDMgNi44MTMtMi41NTUgMS4yNzgtLjg1MiA2NDAuODc5LTM2MC42ODEgNjQwLjg3OS0zNjAuNjgxeiIgZmlsbD0iIzBBMjc2NyIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQ2OC02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4Ljk2IDg4Ljk2IDAgMDEtNzguMDk4IDAgOTYuNTc4IDk2LjU3OCAwIDAxLTguNTE3LTQuNzY5bC02MzQuNDktMzU2Ljg0OC0uNzY2LS40NjhhMzguMzI2IDM4LjMyNiAwIDAxLTIwLjA1Ny0zMy4zNDN2NzIyLjM4NGMuMzA1IDQ4LjE4OCAzOS42MTYgODcuMDA0IDg3LjgwMyA4Ni43aDEyMjkuNjRjNDguMTg4LjMwNyA4Ny41LTM4LjUwOSA4Ny44MDctODYuNjk2IDAtLjAwMSAwIDAgMCAwVjg5NC4yNWEzOC4zMyAzOC4zMyAwIDAxLTE5LjUwNCAzMy4zNDN6IiBmaWxsPSIjMTQ5MERGIi8+PHBhdGggZD0iTTExODUuNTIgMTI3OS42MjlsLTkuNDk2IDUuMzIzYTkyLjgwNiA5Mi44MDYgMCAwMS04LjUxNyA0LjgxMiA4OC4xNzMgODguMTczIDAgMDEtMzMuNDcgOC44NTdsMjQxLjQwNSAyODUuNDc5IDQyMS4xMDcgMTAxLjQ3NmE4Ni43ODUgODYuNzg1IDAgMDAyNi43LTMzLjM0M3oiIG9wYWNpdHk9Ii4xIi8+PHBhdGggZD0iTTEyMjguNTI5IDEyNTUuNDQybC01Mi41MDUgMjkuNTFhOTIuODA2IDkyLjgwNiAwIDAxLTguNTE3IDQuODEyIDg4LjE3MyA4OC4xNzMgMCAwMS0zMy40NyA4Ljg1N2wxMTMuMTAxIDMxMS44MzggNTQ5LjUzOCA3NC45ODlhODYuMTA0IDg2LjEwNCAwIDAwMzQuNDA3LTY4LjgxNXYtOS4zMjZ6IiBvcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNNTE0LjgzMyAxNzAzLjMzM2gxMjI4LjMxNmE4OC4zMTYgODguMzE2IDAgMDA1Mi41OS0xNy4wMzNsLTY5Ny4wODktNDA4LjMzMWE4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjEyNSA5MDYuMDg4aC0uMjk4bC0yMC45OTMtMTEuODM4djcxOS45MTRjLS4wNDggNDkuMiAzOS43OTggODkuMTIyIDg4Ljk5OSA4OS4xNjktLjAwMSAwLS4wMDEgMCAwIDB6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTEwMjIgNDE4LjcyMnY5MDguMzAzYy0uMDc2IDMxLjg0Ni0xOS40NCA2MC40NzEtNDguOTcxIDcyLjM5MmE3My4zODIgNzMuMzgyIDAgMDEtMjguOTU3IDUuOTYySDQyNS44MzNWMzgzLjI1SDUxMXYtNDIuNTgzaDQzMy4wNzNjNDMuMDE5LjE2MyA3Ny44MzQgMzUuMDM1IDc3LjkyNyA3OC4wNTV6IiBvcGFjaXR5PSIuMSIvPjxwYXRoIGQ9Ik05NzkuNDE3IDQ2MS4zMDV2OTA4LjMwMmE2OS4zNiA2OS4zNiAwIDAxLTYuMzg4IDI5LjgwOGMtMTEuODI2IDI5LjE0OS00MC4wODMgNDguMjczLTcxLjU0IDQ4LjQxN0g0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTk3OS40MTcgNDYxLjMwNXY4MjMuMTM2Yy0uMjA4IDQzLTM0LjkyOCA3Ny44NTMtNzcuOTI3IDc4LjIyNUg0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTkzNi44MzMgNDYxLjMwNXY4MjMuMTM2Yy0uMDQ2IDQzLjA2Ny0zNC44NjEgNzguMDE1LTc3LjkyNyA3OC4yMjVINDI1LjgzM1YzODMuMjVoNDMzLjA3MmM0My4wNjIuMDIzIDc3Ljk1MSAzNC45NTEgNzcuOTI3IDc4LjAxM2EuNTg5LjU4OSAwIDAxLjAwMS4wNDJ6IiBvcGFjaXR5PSIuMiIvPjxsaW5lYXJHcmFkaWVudCBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMTcwNS4zMzMpIiB5Mj0iMzI0LjI1OSIgeDI9Ijc3NC4wODYiIHkxPSIxMzgzLjA3NCIgeDE9IjE2Mi43NDciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYiI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTc4NGQ5Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iIzEwN2FkNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhNjNjOSIvPjwvbGluZWFyR3JhZGllbnQ+PHBhdGggZD0iTTc4LjA1NSAzODMuMjVoNzgwLjcyM2M0My4xMDkgMCA3OC4wNTUgMzQuOTQ3IDc4LjA1NSA3OC4wNTV2NzgwLjcyM2MwIDQzLjEwOS0zNC45NDYgNzguMDU1LTc4LjA1NSA3OC4wNTVINzguMDU1Yy00My4xMDkgMC03OC4wNTUtMzQuOTQ3LTc4LjA1NS03OC4wNTVWNDYxLjMwNWMwLTQzLjEwOCAzNC45NDctNzguMDU1IDc4LjA1NS03OC4wNTV6IiBmaWxsPSJ1cmwoI2IpIi8+PHBhdGggZD0iTTI0My45NiA3MTAuNjMxYTIyNy4wNSAyMjcuMDUgMCAwMTg5LjE3LTk4LjQ5NSAyNjkuNTYgMjY5LjU2IDAgMDExNDEuNjc1LTM1LjUxNSAyNTAuOTEgMjUwLjkxIDAgMDExMzEuMTE0IDMzLjY4MyAyMjUuMDE0IDIyNS4wMTQgMCAwMTg2Ljc0MiA5NC4xMDkgMzAzLjc1MSAzMDMuNzUxIDAgMDEzMC40MDUgMTM4LjM5NiAzMjAuNTY3IDMyMC41NjcgMCAwMS0zMS4yOTkgMTQ0Ljc4MyAyMzAuMzcgMjMwLjM3IDAgMDEtODkuNDI1IDk3LjM4OCAyNjAuODY0IDI2MC44NjQgMCAwMS0xMzYuMDExIDM0LjU3OCAyNTYuMzU1IDI1Ni4zNTUgMCAwMS0xMzQuMDEtMzQuMDY3IDIyOC40OTcgMjI4LjQ5NyAwIDAxLTg3Ljg5Mi05NC4yOCAyOTYuNTA3IDI5Ni41MDcgMCAwMS0zMC43NDUtMTM2LjczNSAzMjkuMjkgMzI5LjI5IDAgMDEzMC4yNzYtMTQzLjg0NXptOTUuMDQ2IDIzMS4yMjdhMTQ3LjM4NiAxNDcuMzg2IDAgMDA1MC4xNjMgNjQuODEyIDEzMS4wMjggMTMxLjAyOCAwIDAwNzguMzUzIDIzLjU5MSAxMzcuMjQ0IDEzNy4yNDQgMCAwMDgzLjYzNC0yNC4zNTggMTQxLjE1NiAxNDEuMTU2IDAgMDA0OC43MTUtNjQuODEyIDI1MS41OTQgMjUxLjU5NCAwIDAwMTUuNTQzLTkwLjQwNCAyNzUuMTk4IDI3NS4xOTggMCAwMC0xNC42NDktOTEuNTU0IDE0NC43NzUgMTQ0Ljc3NSAwIDAwLTQ3LjE4Mi02Ny41MzcgMTI5LjU4IDEyOS41OCAwIDAwLTgyLjkxLTI1LjU1IDEzNS4yMDIgMTM1LjIwMiAwIDAwLTgwLjE4NCAyMy44MDQgMTQ4LjYyNiAxNDguNjI2IDAgMDAtNTEuMSA2NS4zNjUgMjU5Ljc1OSAyNTkuNzU5IDAgMDAtLjM0MSAxODYuNzI4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNWgzODMuMjV2MzgzLjI1aC0zODMuMjV6IiBmaWxsPSIjNTBEOUZGIi8+PC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" />
+        <zeebe:ioMapping>
+          <zeebe:input source="GoflowEmail" target="authentication.type" />
+          <zeebe:input source="html" target="sendMail_body_content_type" />
+          <zeebe:input source="=&#34;ผลการประมวลผลข้อมูลประจำรอบ: พบรายการ (CARs และ Suggestions) ที่ต้องดำเนินการ&#34;" target="subject" />
+          <zeebe:input source="=&#34;&#60;div style=&#39;font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 650px;&#39;&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;&#60;strong style=&#39;color: #d32f2f; font-size: 20px;&#39;&#62;แจ้งเตือนผลการประมวลผลข้อมูล&#60;/strong&#62;&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;ระบบได้ทำการตรวจสอบข้อมูลแล้ว และพบว่ามีรายการที่ต้องดำเนินการ ดังนี้:&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;ul style=&#39;padding-left: 20px; margin: 15px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;li&#62;🔸 Corrective Action Requests (CARs): &#60;strong&#62;&#34; + string(cars) + &#34;&#60;/strong&#62; รายการ&#60;/li&#62;&#34; +&#10;        &#34;&#60;li&#62;🔸 Suggestions: &#60;strong&#62;&#34; + string(suggestions) + &#34;&#60;/strong&#62; รายการ&#60;/li&#62;&#34; +&#10;        &#34;&#60;li&#62;🔸 รวมทั้งหมด: &#60;strong&#62;&#34; + string(cars + suggestions) + &#34;&#60;/strong&#62; รายการ&#60;/li&#62;&#34; +&#10;    &#34;&#60;/ul&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;background: #fff3e0; padding: 15px; border-left: 5px solid #f57c00; margin: 18px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;strong&#62;สรุปผล:&#60;/strong&#62;&#60;br&#62;&#34; +&#10;        &#34;พบรายการ CARs และ/หรือ Suggestions ที่ต้องติดตาม กรุณาเข้าสู่ระบบเพื่อตรวจสอบรายละเอียดเพิ่มเติม&#34; +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;margin-top: 20px;&#39;&#62;&#60;strong&#62;ขอบคุณค่ะ/ครับ&#60;/strong&#62;&#60;br&#62;ระบบแจ้งเตือนอัตโนมัติ&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;text-align: center; color: #888; font-size: 11px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;&#39;&#62;RPA Automation Service&#60;/p&#62;&#34; +&#10;&#34;&#60;/div&#62;&#34;" target="body" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="sendto" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="ccto" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="Cloud_SendMail" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0lfl1uw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lw4t1l</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0028equ">
+      <bpmn:incoming>Flow_022xvk4</bpmn:incoming>
+      <bpmn:incoming>Flow_0wrlxk2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lfl1uw</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_0heeo9f" name="ฟอร์มสำหรับแก้ไข">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_19fqwek</bpmn:incoming>
+      <bpmn:outgoing>Flow_0oe8qs6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_1kaih1a">
+      <bpmn:incoming>Flow_109mj1q</bpmn:incoming>
+      <bpmn:outgoing>Flow_022xvk4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1hryfbb</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_1h4fuk5" name="จบกระบวนการ">
+      <bpmn:incoming>Flow_0g2lqlv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1119cw9" name="แจ้งเตือนผู้ เกี่ยวข้อง" zeebe:modelerTemplate="Cloud_center_SendMail_Connecter" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iODAwIiB3aWR0aD0iMTIwMCIgdmlld0JveD0iLTI3NC42NjI3NSAtNDI1LjgzNCAyMzgwLjQxMDUgMjU1NS4wMDQiPjxwYXRoIGQ9Ik0xODMxLjA4MyA4OTQuMjVhNDAuODc5IDQwLjg3OSAwIDAwLTE5LjUwMy0zNS4xMzFoLS4yMTNsLS43NjctLjQyNi02MzQuNDkyLTM3NS41ODVhODYuMTc1IDg2LjE3NSAwIDAwLTguNTE3LTUuMDY3IDg1LjE3IDg1LjE3IDAgMDAtNzguMDk4IDAgODYuMzcgODYuMzcgMCAwMC04LjUxNyA1LjA2N2wtNjM0LjQ5IDM3NS41ODUtLjc2Ni40MjZjLTE5LjM5MiAxMi4wNTktMjUuMzM3IDM3LjU1Ni0xMy4yNzggNTYuOTQ4YTQxLjM0NiA0MS4zNDYgMCAwMDE0LjI1NyAxMy44NjhsNjM0LjQ5MiAzNzUuNTg1YTk1LjYxNyA5NS42MTcgMCAwMDguNTE3IDUuMDY4IDg1LjE3IDg1LjE3IDAgMDA3OC4wOTggMCA5NS41MiA5NS41MiAwIDAwOC41MTctNS4wNjhsNjM0LjQ5Mi0zNzUuNTg1YTQwLjg0IDQwLjg0IDAgMDAyMC4yNjgtMzUuNjg1eiIgZmlsbD0iIzBBMjc2NyIvPjxwYXRoIGQ9Ik01MjAuNDUzIDY0My40NzdoNDE2LjM4djM4MS42NzRoLTQxNi4zOHpNMTc0NS45MTcgMjU1LjVWODAuOTA4YzEtNDMuNjUyLTMzLjU1Mi03OS44NjItNzcuMjAzLTgwLjkwOEg1ODguMjA0QzU0NC41NTIgMS4wNDYgNTEwIDM3LjI1NiA1MTEgODAuOTA4VjI1NS41bDYzOC43NSAxNzAuMzMzeiIgZmlsbD0iIzAzNjRCOCIvPjxwYXRoIGQ9Ik01MTEgMjU1LjVoNDI1LjgzM3YzODMuMjVINTExeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNUg5MzYuODMzdjM4My4yNUwxMzYyLjY2NyAxMDIyaDM4My4yNVY2MzguNzV6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTkzNi44MzMgNjM4Ljc1aDQyNS44MzNWMTAyMkg5MzYuODMzeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik05MzYuODMzIDEwMjJoNDI1LjgzM3YzODMuMjVIOTM2LjgzM3oiIGZpbGw9IiMwMzY0QjgiLz48cGF0aCBkPSJNNTIwLjQ1MyAxMDI1LjE1MWg0MTYuMzh2MzQ2Ljk2OWgtNDE2LjM4eiIgZmlsbD0iIzE0NDQ3RCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAxMDIyaDM4My4yNXYzODMuMjVoLTM4My4yNXoiIGZpbGw9IiMwMDc4RDQiLz48bGluZWFyR3JhZGllbnQgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDE3MDUuMzMzKSIgeTI9IjEuOTk4IiB4Mj0iMTEyOC40NTgiIHkxPSI4MTEuMDgzIiB4MT0iMTEyOC40NTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzViOGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjhhOGVhIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQyNi02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4LjQzNyA4OC40MzcgMCAwMS0zNC40MDcgOC41MTdsLTM0LjY2My0yMC4yN2E4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjE2NyA5MDYuMDAzaC0uMjk4bC0yMS4wMzYtMTEuNzUzdjcyMi4zODRjLjMyOCA0OC4xOTYgMzkuNjUzIDg3LjAwNiA4Ny44NDkgODYuN2gxMjMwLjkxNGMuNzI0IDAgMS4zNjMtLjM0MSAyLjEyOS0uMzQxYTEwNy43OSAxMDcuNzkgMCAwMDI5LjgwOC02LjIxNyA4Ni4wNjYgODYuMDY2IDAgMDAxMS45NjYtNi4yMTdjMi44NTMtMS42MTggNy43NS01LjE1MiA3Ljc1LTUuMTUyYTg1Ljk3NCA4NS45NzQgMCAwMDM0LjgzMy02OC43NzJWODk0LjI1YTM4LjMyMyAzOC4zMjMgMCAwMS0xOS41MDIgMzMuMzQzeiIgZmlsbD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik0xNzk3LjAxNyA4OTEuMzk3djQ0LjI4N2wtNjYzLjQ0OCA0NTYuNzkxLTY4Ni44Ny00ODYuMTc0YS40MjYuNDI2IDAgMDAtLjQyNi0uNDI2bC02My4wMjMtMzcuODk5di0zMS45MzhsMjUuOTc2LS40MjYgNTQuOTMyIDMxLjUxMiAxLjI3Ny40MjYgNC42ODQgMi45ODFzNjQ1LjU2MyAzNjguMzQ2IDY0Ny4yNjcgMzY5LjE5N2wyNC42OTggMTQuNDc4YzIuMTI5LS44NTIgNC4yNTgtMS43MDMgNi44MTMtMi41NTUgMS4yNzgtLjg1MiA2NDAuODc5LTM2MC42ODEgNjQwLjg3OS0zNjAuNjgxeiIgZmlsbD0iIzBBMjc2NyIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQ2OC02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4Ljk2IDg4Ljk2IDAgMDEtNzguMDk4IDAgOTYuNTc4IDk2LjU3OCAwIDAxLTguNTE3LTQuNzY5bC02MzQuNDktMzU2Ljg0OC0uNzY2LS40NjhhMzguMzI2IDM4LjMyNiAwIDAxLTIwLjA1Ny0zMy4zNDN2NzIyLjM4NGMuMzA1IDQ4LjE4OCAzOS42MTYgODcuMDA0IDg3LjgwMyA4Ni43aDEyMjkuNjRjNDguMTg4LjMwNyA4Ny41LTM4LjUwOSA4Ny44MDctODYuNjk2IDAtLjAwMSAwIDAgMCAwVjg5NC4yNWEzOC4zMyAzOC4zMyAwIDAxLTE5LjUwNCAzMy4zNDN6IiBmaWxsPSIjMTQ5MERGIi8+PHBhdGggZD0iTTExODUuNTIgMTI3OS42MjlsLTkuNDk2IDUuMzIzYTkyLjgwNiA5Mi44MDYgMCAwMS04LjUxNyA0LjgxMiA4OC4xNzMgODguMTczIDAgMDEtMzMuNDcgOC44NTdsMjQxLjQwNSAyODUuNDc5IDQyMS4xMDcgMTAxLjQ3NmE4Ni43ODUgODYuNzg1IDAgMDAyNi43LTMzLjM0M3oiIG9wYWNpdHk9Ii4xIi8+PHBhdGggZD0iTTEyMjguNTI5IDEyNTUuNDQybC01Mi41MDUgMjkuNTFhOTIuODA2IDkyLjgwNiAwIDAxLTguNTE3IDQuODEyIDg4LjE3MyA4OC4xNzMgMCAwMS0zMy40NyA4Ljg1N2wxMTMuMTAxIDMxMS44MzggNTQ5LjUzOCA3NC45ODlhODYuMTA0IDg2LjEwNCAwIDAwMzQuNDA3LTY4LjgxNXYtOS4zMjZ6IiBvcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNNTE0LjgzMyAxNzAzLjMzM2gxMjI4LjMxNmE4OC4zMTYgODguMzE2IDAgMDA1Mi41OS0xNy4wMzNsLTY5Ny4wODktNDA4LjMzMWE4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjEyNSA5MDYuMDg4aC0uMjk4bC0yMC45OTMtMTEuODM4djcxOS45MTRjLS4wNDggNDkuMiAzOS43OTggODkuMTIyIDg4Ljk5OSA4OS4xNjktLjAwMSAwLS4wMDEgMCAwIDB6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTEwMjIgNDE4LjcyMnY5MDguMzAzYy0uMDc2IDMxLjg0Ni0xOS40NCA2MC40NzEtNDguOTcxIDcyLjM5MmE3My4zODIgNzMuMzgyIDAgMDEtMjguOTU3IDUuOTYySDQyNS44MzNWMzgzLjI1SDUxMXYtNDIuNTgzaDQzMy4wNzNjNDMuMDE5LjE2MyA3Ny44MzQgMzUuMDM1IDc3LjkyNyA3OC4wNTV6IiBvcGFjaXR5PSIuMSIvPjxwYXRoIGQ9Ik05NzkuNDE3IDQ2MS4zMDV2OTA4LjMwMmE2OS4zNiA2OS4zNiAwIDAxLTYuMzg4IDI5LjgwOGMtMTEuODI2IDI5LjE0OS00MC4wODMgNDguMjczLTcxLjU0IDQ4LjQxN0g0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTk3OS40MTcgNDYxLjMwNXY4MjMuMTM2Yy0uMjA4IDQzLTM0LjkyOCA3Ny44NTMtNzcuOTI3IDc4LjIyNUg0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTkzNi44MzMgNDYxLjMwNXY4MjMuMTM2Yy0uMDQ2IDQzLjA2Ny0zNC44NjEgNzguMDE1LTc3LjkyNyA3OC4yMjVINDI1LjgzM1YzODMuMjVoNDMzLjA3MmM0My4wNjIuMDIzIDc3Ljk1MSAzNC45NTEgNzcuOTI3IDc4LjAxM2EuNTg5LjU4OSAwIDAxLjAwMS4wNDJ6IiBvcGFjaXR5PSIuMiIvPjxsaW5lYXJHcmFkaWVudCBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMTcwNS4zMzMpIiB5Mj0iMzI0LjI1OSIgeDI9Ijc3NC4wODYiIHkxPSIxMzgzLjA3NCIgeDE9IjE2Mi43NDciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYiI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTc4NGQ5Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iIzEwN2FkNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhNjNjOSIvPjwvbGluZWFyR3JhZGllbnQ+PHBhdGggZD0iTTc4LjA1NSAzODMuMjVoNzgwLjcyM2M0My4xMDkgMCA3OC4wNTUgMzQuOTQ3IDc4LjA1NSA3OC4wNTV2NzgwLjcyM2MwIDQzLjEwOS0zNC45NDYgNzguMDU1LTc4LjA1NSA3OC4wNTVINzguMDU1Yy00My4xMDkgMC03OC4wNTUtMzQuOTQ3LTc4LjA1NS03OC4wNTVWNDYxLjMwNWMwLTQzLjEwOCAzNC45NDctNzguMDU1IDc4LjA1NS03OC4wNTV6IiBmaWxsPSJ1cmwoI2IpIi8+PHBhdGggZD0iTTI0My45NiA3MTAuNjMxYTIyNy4wNSAyMjcuMDUgMCAwMTg5LjE3LTk4LjQ5NSAyNjkuNTYgMjY5LjU2IDAgMDExNDEuNjc1LTM1LjUxNSAyNTAuOTEgMjUwLjkxIDAgMDExMzEuMTE0IDMzLjY4MyAyMjUuMDE0IDIyNS4wMTQgMCAwMTg2Ljc0MiA5NC4xMDkgMzAzLjc1MSAzMDMuNzUxIDAgMDEzMC40MDUgMTM4LjM5NiAzMjAuNTY3IDMyMC41NjcgMCAwMS0zMS4yOTkgMTQ0Ljc4MyAyMzAuMzcgMjMwLjM3IDAgMDEtODkuNDI1IDk3LjM4OCAyNjAuODY0IDI2MC44NjQgMCAwMS0xMzYuMDExIDM0LjU3OCAyNTYuMzU1IDI1Ni4zNTUgMCAwMS0xMzQuMDEtMzQuMDY3IDIyOC40OTcgMjI4LjQ5NyAwIDAxLTg3Ljg5Mi05NC4yOCAyOTYuNTA3IDI5Ni41MDcgMCAwMS0zMC43NDUtMTM2LjczNSAzMjkuMjkgMzI5LjI5IDAgMDEzMC4yNzYtMTQzLjg0NXptOTUuMDQ2IDIzMS4yMjdhMTQ3LjM4NiAxNDcuMzg2IDAgMDA1MC4xNjMgNjQuODEyIDEzMS4wMjggMTMxLjAyOCAwIDAwNzguMzUzIDIzLjU5MSAxMzcuMjQ0IDEzNy4yNDQgMCAwMDgzLjYzNC0yNC4zNTggMTQxLjE1NiAxNDEuMTU2IDAgMDA0OC43MTUtNjQuODEyIDI1MS41OTQgMjUxLjU5NCAwIDAwMTUuNTQzLTkwLjQwNCAyNzUuMTk4IDI3NS4xOTggMCAwMC0xNC42NDktOTEuNTU0IDE0NC43NzUgMTQ0Ljc3NSAwIDAwLTQ3LjE4Mi02Ny41MzcgMTI5LjU4IDEyOS41OCAwIDAwLTgyLjkxLTI1LjU1IDEzNS4yMDIgMTM1LjIwMiAwIDAwLTgwLjE4NCAyMy44MDQgMTQ4LjYyNiAxNDguNjI2IDAgMDAtNTEuMSA2NS4zNjUgMjU5Ljc1OSAyNTkuNzU5IDAgMDAtLjM0MSAxODYuNzI4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNWgzODMuMjV2MzgzLjI1aC0zODMuMjV6IiBmaWxsPSIjNTBEOUZGIi8+PC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" />
+        <zeebe:ioMapping>
+          <zeebe:input source="GoflowEmail" target="authentication.type" />
+          <zeebe:input source="html" target="sendMail_body_content_type" />
+          <zeebe:input source="=&#34;รายงานผลการตรวจสอบข้อมูลประจำรอบ (ไม่พบ CARs และ Suggestions)&#34;" target="subject" />
+          <zeebe:input source="=&#34;&#60;div style=&#39;font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px;&#39;&#62;&#34; +&#10;    &#34;&#60;p&#62;&#34; +&#10;        &#34;&#60;strong style=&#39;color: #1e88e5; font-size: 18px;&#39;&#62;แจ้งเตือนผลการตรวจสอบประจำรอบ&#60;/strong&#62;&#34; +&#10;    &#34;&#60;/p&#62;&#34; +&#10;    &#10;    &#34;&#60;p&#62;ระบบได้ทำการประมวลผลข้อมูล PMAM ประจำรอบที่กำหนดเรียบร้อยแล้ว โดยมีรายละเอียดดังนี้:&#60;/p&#62;&#34; +&#10;    &#10;    &#34;&#60;ul style=&#39;padding-left: 20px; margin: 15px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;li style=&#39;margin-bottom: 8px;&#39;&#62;🔹 ไม่พบรายการ CARs และ Suggestions ในรอบนี้&#60;/li&#62;&#34; +&#10;        &#34;&#60;li style=&#39;margin-bottom: 8px;&#39;&#62;🔹 ข้อมูลที่ประมวลผลถูกต้องสมบูรณ์&#60;/li&#62;&#34; +&#10;        &#34;&#60;li style=&#39;margin-bottom: 8px;&#39;&#62;🔹 ไม่พบความผิดปกติของข้อมูลเพิ่มเติม&#60;/li&#62;&#34; +&#10;    &#34;&#60;/ul&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;background: #e3f2fd; padding: 15px; border-left: 5px solid #2196f3; margin-top: 15px;&#39;&#62;&#34; +&#10;        &#34;&#60;strong&#62;สรุปผล:&#60;/strong&#62;&#60;br&#62;&#34; +&#10;        &#34;ระบบทำงานสำเร็จและไม่พบรายการ CARs หรือ Suggestions ที่ต้องดำเนินการเพิ่มเติมค่ะ/ครับ&#34; +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;margin-top: 20px;&#39;&#62;หากต้องการตรวจสอบข้อมูลย้อนหลัง สามารถเข้าใช้งานระบบ PMAM ได้ตามสิทธิ์ของท่าน&#60;/p&#62;&#34; +&#10;    &#10;    &#34;&#60;p style=&#39;margin-top: 20px;&#39;&#62;&#60;strong&#62;ขอบคุณค่ะ/ครับ&#60;/strong&#62;&#60;br&#62;ระบบแจ้งเตือนอัตโนมัติ PMAM&#60;/p&#62;&#34; +&#10;    &#10;    &#34;&#60;p style=&#39;text-align: center; color: #888; font-size: 11px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;&#39;&#62;&#34; +&#10;        &#34;RPA Automation Service&#34; +&#10;    &#34;&#60;/p&#62;&#34; +&#10;&#34;&#60;/div&#62;&#34;" target="body" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="sendto" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="ccto" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="Cloud_SendMail" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1hryfbb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g2lqlv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_18cxgwn" name="อัพเดตฐานข้อมูล" zeebe:modelerTemplate="cloud-sql-connector" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTMiIGhlaWdodD0iNTEyIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNTEzIDUxMiI+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik00MjIuMDY5IDQxNi45OTVWMjUzLjA0NGgtMjQuNzU2VjQ0NC4zMmg5OS4wMjR2LTI3LjMyNWgtNzQuMjY4Wm0tNzQuMjY4LTE2My45NTFoLTQ5LjUxMmMtNi41NjUgMC0xMi44NjIgMi44NzktMTcuNTA1IDguMDA0LTQuNjQzIDUuMTI0LTcuMjUxIDEyLjA3NC03LjI1MSAxOS4zMjJ2MTM2LjYyNWMwIDcuMjQ3IDIuNjA4IDE0LjE5NyA3LjI1MSAxOS4zMjEgNC42NDMgNS4xMjUgMTAuOTQgOC4wMDQgMTcuNTA1IDguMDA0aDEyLjM3OHYyNy4zMjVjMCA3LjI0NyAyLjYwOCAxNC4xOTcgNy4yNTEgMTkuMzIxIDQuNjQzIDUuMTI1IDEwLjk0IDguMDA0IDE3LjUwNSA4LjAwNGgyNC43NTZ2LTI3LjMyNWgtMjQuNzU2VjQ0NC4zMmgxMi4zNzhjNi41NjYgMCAxMi44NjMtMi44NzkgMTcuNTA1LTguMDA0IDQuNjQzLTUuMTI0IDcuMjUxLTEyLjA3NCA3LjI1MS0xOS4zMjFWMjgwLjM3YzAtNy4yNDgtMi42MDgtMTQuMTk4LTcuMjUxLTE5LjMyMi00LjY0Mi01LjEyNS0xMC45MzktOC4wMDQtMTcuNTA1LTguMDA0Wm0tNDkuNTEyIDE2My45NTFWMjgwLjM3aDQ5LjUxMnYxMzYuNjI1aC00OS41MTJabS03NC4yNjggMjcuMzI1aC03NC4yNjh2LTI3LjMyNWg3NC4yNjh2LTU0LjY1aC00OS41MTJjLTYuNTY2IDAtMTIuODYyLTIuODc5LTE3LjUwNS04LjAwNC00LjY0My01LjEyNC03LjI1MS0xMi4wNzQtNy4yNTEtMTkuMzIxdi01NC42NWMwLTcuMjQ4IDIuNjA4LTE0LjE5OCA3LjI1MS0xOS4zMjIgNC42NDMtNS4xMjUgMTAuOTM5LTguMDA0IDE3LjUwNS04LjAwNGg3NC4yNjh2MjcuMzI2aC03NC4yNjh2NTQuNjVoNDkuNTEyYzYuNTY2IDAgMTIuODYzIDIuODc4IDE3LjUwNSA4LjAwMyA0LjY0MyA1LjEyNCA3LjI1MSAxMi4wNzUgNy4yNTEgMTkuMzIydjU0LjY1YzAgNy4yNDctMi42MDggMTQuMTk3LTcuMjUxIDE5LjMyMS00LjY0MiA1LjEyNS0xMC45MzkgOC4wMDQtMTcuNTA1IDguMDA0WiIvPgogICAgPHBhdGggZmlsbD0iI0M2MjlDRCIgZD0iTTE2MC42OTUgMTMuMDMyYy02My4wNjYgMC0xMzAuOTQzIDE2LjQ1LTEzMC45NDMgNTIuNTU3djIzNi41MDZjMCAyMi4wNyAyNS40MDMgMzYuNzYyIDU5LjUyIDQ0Ljg3di0yNi44ODJjLTIzLjczNi02LjIxLTM1LjA2LTE1LjAxOS0zNS43MTItMTcuOTg4di00Ni45MzhjMTcuNzggOS44NDIgMTcuNzMzIDkuMTg1IDQ1LjQyNCAxMi4wMDl2LTI2LjI0N2MtNDYuMTYyLTQuOTU5LTQzLjk2NS0xMS44OTktNDUuNDI0LTE3LjY2MXYtNDYuOTM3YzI1LjMzIDE0LjAyNSA2Ny4xNjkgMjAuNjU5IDEwNy4xMzUgMjAuNjU5IDYzLjA2NiAwIDEzMC45NDMtMTYuNDUxIDEzMC45NDMtNTIuNTU3di03OC44NGMtLjAwOS0zNi4xMDctNjcuODgxLTUyLjU1LTEzMC45NDMtNTIuNTVaTTUzLjU0MiA2NS43ODdjMS44MTMtNy4yOTUgMzcuNTE0LTI2LjQ3NyAxMDcuMTUzLTI2LjQ3NyA2OS4wMTQgMCAxMDQuNjk0IDE4Ljg0MyAxMDcuMDk3IDI2LjI3OS0yLjQwMyA3LjQzNS0zOC4wODMgMjYuMjc4LTEwNy4wOTcgMjYuMjc4LTY5LjYzOSAwLTEwNS4zMzktMTkuMTgzLTEwNy4xNTMtMjYuMDhabTIxNC4yODggNzguNDdjLTEuOTEyIDcuMzItMzcuNjAxIDI2LjQ0Ni0xMDcuMTM1IDI2LjQ0Ni02OS42MzkgMC0xMDUuMzM5LTE5LjE4NC0xMDcuMTM1LTI2LjI3OVY5Ny40ODdjMjUuMzMgMTQuMDI1IDY3LjE2OSAyMC42NTkgMTA3LjEzNSAyMC42NTkgMzkuOTY2IDAgODEuODA1LTYuNjM0IDEwNy4xMzUtMjAuNjU5djQ2Ljc3WiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yOS43NTQgNmg0NTIuOTkxdjUwMEgyOS43NTR6Ii8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="POSTGRESQL" target="database" />
+          <zeebe:input source="detailed" target="connection.authType" />
+          <zeebe:input source="=&#34;{{secret.HOST_POSTGRESQL_PMAM}}&#34;" target="connection.host" />
+          <zeebe:input source="=&#34;{{secret.PORT_POSTGRESQL_PMAM}}&#34;" target="connection.port" />
+          <zeebe:input source="=&#34;{{secret.USERNAME_POSTGRESQL_PMAM}}&#34;" target="connection.username" />
+          <zeebe:input source="=&#34;{{secret.PASSWORD_POSTGRESQL_PMAM}}&#34;" target="connection.password" />
+          <zeebe:input source="=&#34;{{secret.DB_NAME_POSTGRESQL_PMAM}}&#34;" target="connection.databaseName" />
+          <zeebe:input source="=true" target="data.returnResults" />
+          <zeebe:input source="=&#34;UPDATE public.dc_audits SET audit_date = :audit_date, audit_time = :audit_time, area_id = :area_id, branch_id = :branch_id, approver = :approver, approver_title = :approver_title, approver_email = :approver_email, approver_employee_id = :approver_employee_id, car_major_count = :car_major_count, car_minor_count = :car_minor_count, suggestion_corrective_count = :suggestion_corrective_count, suggestion_preventive_count = :suggestion_preventive_count, status = :status, updated_at = NOW() WHERE doc_no = :doc_no&#34;" target="data.query" />
+          <zeebe:input source="={doc_no: doc_no, audit_date: audit_date, audit_time: audit_time, area_id: area_id, branch_id: branch_id, approver: approver, approver_title: approver_title, approver_email: approver_email, approver_employee_id: approver_employee_id, car_major_count: car_major_count, car_minor_count: car_minor_count, suggestion_corrective_count: suggestion_corrective_count, suggestion_preventive_count: suggestion_preventive_count, status: status, audit_id: audit_id, cars: cars, suggestions: suggestions, created_by: created_by, created_at: created_at, audit_systems: audit_systems, representatives: representatives, auditors: auditors, objectives: objectives, activities: activities, items: items}&#10;" target="data.variables" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="sql" />
+          <zeebe:header key="elementTemplateVersion" value="3" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.Jdbc.v1" />
+          <zeebe:header key="resultVariable" value="output" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0oe8qs6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wrlxk2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0r34qte">
+      <bpmn:incoming>Flow_00bwp54</bpmn:incoming>
+      <bpmn:outgoing>Flow_07tc3sw</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1r11yru</bpmn:outgoing>
+      <bpmn:outgoing>Flow_122pizf</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_0tvzhci" name="พิจารณาอนุมัติ">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_2pnscct" />
+        <zeebe:assignmentDefinition assignee="=approver_employee_id" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0hpndlj</bpmn:incoming>
+      <bpmn:outgoing>Flow_00bwp54</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_125zzpm" name="แจ้งเตือนผู้ เกี่ยวข้อง (Auditor)" zeebe:modelerTemplate="Cloud_center_SendMail_Connecter" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iODAwIiB3aWR0aD0iMTIwMCIgdmlld0JveD0iLTI3NC42NjI3NSAtNDI1LjgzNCAyMzgwLjQxMDUgMjU1NS4wMDQiPjxwYXRoIGQ9Ik0xODMxLjA4MyA4OTQuMjVhNDAuODc5IDQwLjg3OSAwIDAwLTE5LjUwMy0zNS4xMzFoLS4yMTNsLS43NjctLjQyNi02MzQuNDkyLTM3NS41ODVhODYuMTc1IDg2LjE3NSAwIDAwLTguNTE3LTUuMDY3IDg1LjE3IDg1LjE3IDAgMDAtNzguMDk4IDAgODYuMzcgODYuMzcgMCAwMC04LjUxNyA1LjA2N2wtNjM0LjQ5IDM3NS41ODUtLjc2Ni40MjZjLTE5LjM5MiAxMi4wNTktMjUuMzM3IDM3LjU1Ni0xMy4yNzggNTYuOTQ4YTQxLjM0NiA0MS4zNDYgMCAwMDE0LjI1NyAxMy44NjhsNjM0LjQ5MiAzNzUuNTg1YTk1LjYxNyA5NS42MTcgMCAwMDguNTE3IDUuMDY4IDg1LjE3IDg1LjE3IDAgMDA3OC4wOTggMCA5NS41MiA5NS41MiAwIDAwOC41MTctNS4wNjhsNjM0LjQ5Mi0zNzUuNTg1YTQwLjg0IDQwLjg0IDAgMDAyMC4yNjgtMzUuNjg1eiIgZmlsbD0iIzBBMjc2NyIvPjxwYXRoIGQ9Ik01MjAuNDUzIDY0My40NzdoNDE2LjM4djM4MS42NzRoLTQxNi4zOHpNMTc0NS45MTcgMjU1LjVWODAuOTA4YzEtNDMuNjUyLTMzLjU1Mi03OS44NjItNzcuMjAzLTgwLjkwOEg1ODguMjA0QzU0NC41NTIgMS4wNDYgNTEwIDM3LjI1NiA1MTEgODAuOTA4VjI1NS41bDYzOC43NSAxNzAuMzMzeiIgZmlsbD0iIzAzNjRCOCIvPjxwYXRoIGQ9Ik01MTEgMjU1LjVoNDI1LjgzM3YzODMuMjVINTExeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNUg5MzYuODMzdjM4My4yNUwxMzYyLjY2NyAxMDIyaDM4My4yNVY2MzguNzV6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTkzNi44MzMgNjM4Ljc1aDQyNS44MzNWMTAyMkg5MzYuODMzeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik05MzYuODMzIDEwMjJoNDI1LjgzM3YzODMuMjVIOTM2LjgzM3oiIGZpbGw9IiMwMzY0QjgiLz48cGF0aCBkPSJNNTIwLjQ1MyAxMDI1LjE1MWg0MTYuMzh2MzQ2Ljk2OWgtNDE2LjM4eiIgZmlsbD0iIzE0NDQ3RCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAxMDIyaDM4My4yNXYzODMuMjVoLTM4My4yNXoiIGZpbGw9IiMwMDc4RDQiLz48bGluZWFyR3JhZGllbnQgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDE3MDUuMzMzKSIgeTI9IjEuOTk4IiB4Mj0iMTEyOC40NTgiIHkxPSI4MTEuMDgzIiB4MT0iMTEyOC40NTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzViOGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjhhOGVhIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQyNi02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4LjQzNyA4OC40MzcgMCAwMS0zNC40MDcgOC41MTdsLTM0LjY2My0yMC4yN2E4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjE2NyA5MDYuMDAzaC0uMjk4bC0yMS4wMzYtMTEuNzUzdjcyMi4zODRjLjMyOCA0OC4xOTYgMzkuNjUzIDg3LjAwNiA4Ny44NDkgODYuN2gxMjMwLjkxNGMuNzI0IDAgMS4zNjMtLjM0MSAyLjEyOS0uMzQxYTEwNy43OSAxMDcuNzkgMCAwMDI5LjgwOC02LjIxNyA4Ni4wNjYgODYuMDY2IDAgMDAxMS45NjYtNi4yMTdjMi44NTMtMS42MTggNy43NS01LjE1MiA3Ljc1LTUuMTUyYTg1Ljk3NCA4NS45NzQgMCAwMDM0LjgzMy02OC43NzJWODk0LjI1YTM4LjMyMyAzOC4zMjMgMCAwMS0xOS41MDIgMzMuMzQzeiIgZmlsbD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik0xNzk3LjAxNyA4OTEuMzk3djQ0LjI4N2wtNjYzLjQ0OCA0NTYuNzkxLTY4Ni44Ny00ODYuMTc0YS40MjYuNDI2IDAgMDAtLjQyNi0uNDI2bC02My4wMjMtMzcuODk5di0zMS45MzhsMjUuOTc2LS40MjYgNTQuOTMyIDMxLjUxMiAxLjI3Ny40MjYgNC42ODQgMi45ODFzNjQ1LjU2MyAzNjguMzQ2IDY0Ny4yNjcgMzY5LjE5N2wyNC42OTggMTQuNDc4YzIuMTI5LS44NTIgNC4yNTgtMS43MDMgNi44MTMtMi41NTUgMS4yNzgtLjg1MiA2NDAuODc5LTM2MC42ODEgNjQwLjg3OS0zNjAuNjgxeiIgZmlsbD0iIzBBMjc2NyIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQ2OC02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4Ljk2IDg4Ljk2IDAgMDEtNzguMDk4IDAgOTYuNTc4IDk2LjU3OCAwIDAxLTguNTE3LTQuNzY5bC02MzQuNDktMzU2Ljg0OC0uNzY2LS40NjhhMzguMzI2IDM4LjMyNiAwIDAxLTIwLjA1Ny0zMy4zNDN2NzIyLjM4NGMuMzA1IDQ4LjE4OCAzOS42MTYgODcuMDA0IDg3LjgwMyA4Ni43aDEyMjkuNjRjNDguMTg4LjMwNyA4Ny41LTM4LjUwOSA4Ny44MDctODYuNjk2IDAtLjAwMSAwIDAgMCAwVjg5NC4yNWEzOC4zMyAzOC4zMyAwIDAxLTE5LjUwNCAzMy4zNDN6IiBmaWxsPSIjMTQ5MERGIi8+PHBhdGggZD0iTTExODUuNTIgMTI3OS42MjlsLTkuNDk2IDUuMzIzYTkyLjgwNiA5Mi44MDYgMCAwMS04LjUxNyA0LjgxMiA4OC4xNzMgODguMTczIDAgMDEtMzMuNDcgOC44NTdsMjQxLjQwNSAyODUuNDc5IDQyMS4xMDcgMTAxLjQ3NmE4Ni43ODUgODYuNzg1IDAgMDAyNi43LTMzLjM0M3oiIG9wYWNpdHk9Ii4xIi8+PHBhdGggZD0iTTEyMjguNTI5IDEyNTUuNDQybC01Mi41MDUgMjkuNTFhOTIuODA2IDkyLjgwNiAwIDAxLTguNTE3IDQuODEyIDg4LjE3MyA4OC4xNzMgMCAwMS0zMy40NyA4Ljg1N2wxMTMuMTAxIDMxMS44MzggNTQ5LjUzOCA3NC45ODlhODYuMTA0IDg2LjEwNCAwIDAwMzQuNDA3LTY4LjgxNXYtOS4zMjZ6IiBvcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNNTE0LjgzMyAxNzAzLjMzM2gxMjI4LjMxNmE4OC4zMTYgODguMzE2IDAgMDA1Mi41OS0xNy4wMzNsLTY5Ny4wODktNDA4LjMzMWE4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjEyNSA5MDYuMDg4aC0uMjk4bC0yMC45OTMtMTEuODM4djcxOS45MTRjLS4wNDggNDkuMiAzOS43OTggODkuMTIyIDg4Ljk5OSA4OS4xNjktLjAwMSAwLS4wMDEgMCAwIDB6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTEwMjIgNDE4LjcyMnY5MDguMzAzYy0uMDc2IDMxLjg0Ni0xOS40NCA2MC40NzEtNDguOTcxIDcyLjM5MmE3My4zODIgNzMuMzgyIDAgMDEtMjguOTU3IDUuOTYySDQyNS44MzNWMzgzLjI1SDUxMXYtNDIuNTgzaDQzMy4wNzNjNDMuMDE5LjE2MyA3Ny44MzQgMzUuMDM1IDc3LjkyNyA3OC4wNTV6IiBvcGFjaXR5PSIuMSIvPjxwYXRoIGQ9Ik05NzkuNDE3IDQ2MS4zMDV2OTA4LjMwMmE2OS4zNiA2OS4zNiAwIDAxLTYuMzg4IDI5LjgwOGMtMTEuODI2IDI5LjE0OS00MC4wODMgNDguMjczLTcxLjU0IDQ4LjQxN0g0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTk3OS40MTcgNDYxLjMwNXY4MjMuMTM2Yy0uMjA4IDQzLTM0LjkyOCA3Ny44NTMtNzcuOTI3IDc4LjIyNUg0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTkzNi44MzMgNDYxLjMwNXY4MjMuMTM2Yy0uMDQ2IDQzLjA2Ny0zNC44NjEgNzguMDE1LTc3LjkyNyA3OC4yMjVINDI1LjgzM1YzODMuMjVoNDMzLjA3MmM0My4wNjIuMDIzIDc3Ljk1MSAzNC45NTEgNzcuOTI3IDc4LjAxM2EuNTg5LjU4OSAwIDAxLjAwMS4wNDJ6IiBvcGFjaXR5PSIuMiIvPjxsaW5lYXJHcmFkaWVudCBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMTcwNS4zMzMpIiB5Mj0iMzI0LjI1OSIgeDI9Ijc3NC4wODYiIHkxPSIxMzgzLjA3NCIgeDE9IjE2Mi43NDciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYiI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTc4NGQ5Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iIzEwN2FkNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhNjNjOSIvPjwvbGluZWFyR3JhZGllbnQ+PHBhdGggZD0iTTc4LjA1NSAzODMuMjVoNzgwLjcyM2M0My4xMDkgMCA3OC4wNTUgMzQuOTQ3IDc4LjA1NSA3OC4wNTV2NzgwLjcyM2MwIDQzLjEwOS0zNC45NDYgNzguMDU1LTc4LjA1NSA3OC4wNTVINzguMDU1Yy00My4xMDkgMC03OC4wNTUtMzQuOTQ3LTc4LjA1NS03OC4wNTVWNDYxLjMwNWMwLTQzLjEwOCAzNC45NDctNzguMDU1IDc4LjA1NS03OC4wNTV6IiBmaWxsPSJ1cmwoI2IpIi8+PHBhdGggZD0iTTI0My45NiA3MTAuNjMxYTIyNy4wNSAyMjcuMDUgMCAwMTg5LjE3LTk4LjQ5NSAyNjkuNTYgMjY5LjU2IDAgMDExNDEuNjc1LTM1LjUxNSAyNTAuOTEgMjUwLjkxIDAgMDExMzEuMTE0IDMzLjY4MyAyMjUuMDE0IDIyNS4wMTQgMCAwMTg2Ljc0MiA5NC4xMDkgMzAzLjc1MSAzMDMuNzUxIDAgMDEzMC40MDUgMTM4LjM5NiAzMjAuNTY3IDMyMC41NjcgMCAwMS0zMS4yOTkgMTQ0Ljc4MyAyMzAuMzcgMjMwLjM3IDAgMDEtODkuNDI1IDk3LjM4OCAyNjAuODY0IDI2MC44NjQgMCAwMS0xMzYuMDExIDM0LjU3OCAyNTYuMzU1IDI1Ni4zNTUgMCAwMS0xMzQuMDEtMzQuMDY3IDIyOC40OTcgMjI4LjQ5NyAwIDAxLTg3Ljg5Mi05NC4yOCAyOTYuNTA3IDI5Ni41MDcgMCAwMS0zMC43NDUtMTM2LjczNSAzMjkuMjkgMzI5LjI5IDAgMDEzMC4yNzYtMTQzLjg0NXptOTUuMDQ2IDIzMS4yMjdhMTQ3LjM4NiAxNDcuMzg2IDAgMDA1MC4xNjMgNjQuODEyIDEzMS4wMjggMTMxLjAyOCAwIDAwNzguMzUzIDIzLjU5MSAxMzcuMjQ0IDEzNy4yNDQgMCAwMDgzLjYzNC0yNC4zNTggMTQxLjE1NiAxNDEuMTU2IDAgMDA0OC43MTUtNjQuODEyIDI1MS41OTQgMjUxLjU5NCAwIDAwMTUuNTQzLTkwLjQwNCAyNzUuMTk4IDI3NS4xOTggMCAwMC0xNC42NDktOTEuNTU0IDE0NC43NzUgMTQ0Ljc3NSAwIDAwLTQ3LjE4Mi02Ny41MzcgMTI5LjU4IDEyOS41OCAwIDAwLTgyLjkxLTI1LjU1IDEzNS4yMDIgMTM1LjIwMiAwIDAwLTgwLjE4NCAyMy44MDQgMTQ4LjYyNiAxNDguNjI2IDAgMDAtNTEuMSA2NS4zNjUgMjU5Ljc1OSAyNTkuNzU5IDAgMDAtLjM0MSAxODYuNzI4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNWgzODMuMjV2MzgzLjI1aC0zODMuMjV6IiBmaWxsPSIjNTBEOUZGIi8+PC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" />
+        <zeebe:ioMapping>
+          <zeebe:input source="GoflowEmail" target="authentication.type" />
+          <zeebe:input source="html" target="sendMail_body_content_type" />
+          <zeebe:input source="=&#34;ผลการพิจารณา: ไม่อนุมัติการเปิด (CARs และ Suggestions)&#34;" target="subject" />
+          <zeebe:input source="=&#34;&#60;div style=&#39;font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 650px;&#39;&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;&#60;strong style=&#39;color: #d32f2f; font-size: 20px;&#39;&#62;แจ้งผลการพิจารณา: ไม่อนุมัติการเปิด CARs / Suggestions&#60;/strong&#62;&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;ตามที่ท่านได้ดำเนินการส่งข้อมูลเพื่อขอเปิด CARs / Suggestions ระบบได้ส่งผลการตรวจสอบให้ผู้บริหารพิจารณาแล้ว และได้รับแจ้งว่า &#60;strong&#62;ไม่สามารถอนุมัติได้ในขณะนี้&#60;/strong&#62; เนื่องจากมีประเด็นที่ต้องตรวจสอบเพิ่มเติม&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;background: #ffebee; padding: 15px; border-left: 5px solid #d32f2f; margin: 18px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;strong&#62;สรุปผลการพิจารณา:&#60;/strong&#62;&#60;br&#62;&#34; +&#10;        &#34;คำขอเปิด CARs / Suggestions ยังไม่ผ่านการพิจารณา กรุณาทำการตรวจสอบข้อมูลที่เกี่ยวข้องและดำเนินการตามขั้นตอนที่ถูกต้องก่อนยื่นคำขอใหม่&#34; +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;หากต้องการส่งคำขออีกครั้ง กรุณาตรวจสอบความครบถ้วนของข้อมูลก่อนดำเนินการ เพื่อให้การพิจารณาเป็นไปอย่างราบรื่น&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;margin-top: 20px;&#39;&#62;&#60;strong&#62;ขอบคุณค่ะ/ครับ&#60;/strong&#62;&#60;br&#62;ระบบแจ้งเตือนอัตโนมัติ&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;text-align: center; color: #888; font-size: 11px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;&#39;&#62;&#34; +&#10;        &#34;RPA Automation Service&#34; +&#10;    &#34;&#60;/p&#62;&#34; +&#10;&#10;&#34;&#60;/div&#62;&#34;" target="body" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="sendto" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="ccto" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="Cloud_SendMail" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1f54oc2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i4cfnw</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0h5h0qb" name="แจ้งเตือนผู้ เกี่ยวข้อง (Auditor)" zeebe:modelerTemplate="Cloud_center_SendMail_Connecter" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iODAwIiB3aWR0aD0iMTIwMCIgdmlld0JveD0iLTI3NC42NjI3NSAtNDI1LjgzNCAyMzgwLjQxMDUgMjU1NS4wMDQiPjxwYXRoIGQ9Ik0xODMxLjA4MyA4OTQuMjVhNDAuODc5IDQwLjg3OSAwIDAwLTE5LjUwMy0zNS4xMzFoLS4yMTNsLS43NjctLjQyNi02MzQuNDkyLTM3NS41ODVhODYuMTc1IDg2LjE3NSAwIDAwLTguNTE3LTUuMDY3IDg1LjE3IDg1LjE3IDAgMDAtNzguMDk4IDAgODYuMzcgODYuMzcgMCAwMC04LjUxNyA1LjA2N2wtNjM0LjQ5IDM3NS41ODUtLjc2Ni40MjZjLTE5LjM5MiAxMi4wNTktMjUuMzM3IDM3LjU1Ni0xMy4yNzggNTYuOTQ4YTQxLjM0NiA0MS4zNDYgMCAwMDE0LjI1NyAxMy44NjhsNjM0LjQ5MiAzNzUuNTg1YTk1LjYxNyA5NS42MTcgMCAwMDguNTE3IDUuMDY4IDg1LjE3IDg1LjE3IDAgMDA3OC4wOTggMCA5NS41MiA5NS41MiAwIDAwOC41MTctNS4wNjhsNjM0LjQ5Mi0zNzUuNTg1YTQwLjg0IDQwLjg0IDAgMDAyMC4yNjgtMzUuNjg1eiIgZmlsbD0iIzBBMjc2NyIvPjxwYXRoIGQ9Ik01MjAuNDUzIDY0My40NzdoNDE2LjM4djM4MS42NzRoLTQxNi4zOHpNMTc0NS45MTcgMjU1LjVWODAuOTA4YzEtNDMuNjUyLTMzLjU1Mi03OS44NjItNzcuMjAzLTgwLjkwOEg1ODguMjA0QzU0NC41NTIgMS4wNDYgNTEwIDM3LjI1NiA1MTEgODAuOTA4VjI1NS41bDYzOC43NSAxNzAuMzMzeiIgZmlsbD0iIzAzNjRCOCIvPjxwYXRoIGQ9Ik01MTEgMjU1LjVoNDI1LjgzM3YzODMuMjVINTExeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNUg5MzYuODMzdjM4My4yNUwxMzYyLjY2NyAxMDIyaDM4My4yNVY2MzguNzV6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTkzNi44MzMgNjM4Ljc1aDQyNS44MzNWMTAyMkg5MzYuODMzeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik05MzYuODMzIDEwMjJoNDI1LjgzM3YzODMuMjVIOTM2LjgzM3oiIGZpbGw9IiMwMzY0QjgiLz48cGF0aCBkPSJNNTIwLjQ1MyAxMDI1LjE1MWg0MTYuMzh2MzQ2Ljk2OWgtNDE2LjM4eiIgZmlsbD0iIzE0NDQ3RCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAxMDIyaDM4My4yNXYzODMuMjVoLTM4My4yNXoiIGZpbGw9IiMwMDc4RDQiLz48bGluZWFyR3JhZGllbnQgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDE3MDUuMzMzKSIgeTI9IjEuOTk4IiB4Mj0iMTEyOC40NTgiIHkxPSI4MTEuMDgzIiB4MT0iMTEyOC40NTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzViOGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjhhOGVhIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQyNi02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4LjQzNyA4OC40MzcgMCAwMS0zNC40MDcgOC41MTdsLTM0LjY2My0yMC4yN2E4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjE2NyA5MDYuMDAzaC0uMjk4bC0yMS4wMzYtMTEuNzUzdjcyMi4zODRjLjMyOCA0OC4xOTYgMzkuNjUzIDg3LjAwNiA4Ny44NDkgODYuN2gxMjMwLjkxNGMuNzI0IDAgMS4zNjMtLjM0MSAyLjEyOS0uMzQxYTEwNy43OSAxMDcuNzkgMCAwMDI5LjgwOC02LjIxNyA4Ni4wNjYgODYuMDY2IDAgMDAxMS45NjYtNi4yMTdjMi44NTMtMS42MTggNy43NS01LjE1MiA3Ljc1LTUuMTUyYTg1Ljk3NCA4NS45NzQgMCAwMDM0LjgzMy02OC43NzJWODk0LjI1YTM4LjMyMyAzOC4zMjMgMCAwMS0xOS41MDIgMzMuMzQzeiIgZmlsbD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik0xNzk3LjAxNyA4OTEuMzk3djQ0LjI4N2wtNjYzLjQ0OCA0NTYuNzkxLTY4Ni44Ny00ODYuMTc0YS40MjYuNDI2IDAgMDAtLjQyNi0uNDI2bC02My4wMjMtMzcuODk5di0zMS45MzhsMjUuOTc2LS40MjYgNTQuOTMyIDMxLjUxMiAxLjI3Ny40MjYgNC42ODQgMi45ODFzNjQ1LjU2MyAzNjguMzQ2IDY0Ny4yNjcgMzY5LjE5N2wyNC42OTggMTQuNDc4YzIuMTI5LS44NTIgNC4yNTgtMS43MDMgNi44MTMtMi41NTUgMS4yNzgtLjg1MiA2NDAuODc5LTM2MC42ODEgNjQwLjg3OS0zNjAuNjgxeiIgZmlsbD0iIzBBMjc2NyIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQ2OC02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4Ljk2IDg4Ljk2IDAgMDEtNzguMDk4IDAgOTYuNTc4IDk2LjU3OCAwIDAxLTguNTE3LTQuNzY5bC02MzQuNDktMzU2Ljg0OC0uNzY2LS40NjhhMzguMzI2IDM4LjMyNiAwIDAxLTIwLjA1Ny0zMy4zNDN2NzIyLjM4NGMuMzA1IDQ4LjE4OCAzOS42MTYgODcuMDA0IDg3LjgwMyA4Ni43aDEyMjkuNjRjNDguMTg4LjMwNyA4Ny41LTM4LjUwOSA4Ny44MDctODYuNjk2IDAtLjAwMSAwIDAgMCAwVjg5NC4yNWEzOC4zMyAzOC4zMyAwIDAxLTE5LjUwNCAzMy4zNDN6IiBmaWxsPSIjMTQ5MERGIi8+PHBhdGggZD0iTTExODUuNTIgMTI3OS42MjlsLTkuNDk2IDUuMzIzYTkyLjgwNiA5Mi44MDYgMCAwMS04LjUxNyA0LjgxMiA4OC4xNzMgODguMTczIDAgMDEtMzMuNDcgOC44NTdsMjQxLjQwNSAyODUuNDc5IDQyMS4xMDcgMTAxLjQ3NmE4Ni43ODUgODYuNzg1IDAgMDAyNi43LTMzLjM0M3oiIG9wYWNpdHk9Ii4xIi8+PHBhdGggZD0iTTEyMjguNTI5IDEyNTUuNDQybC01Mi41MDUgMjkuNTFhOTIuODA2IDkyLjgwNiAwIDAxLTguNTE3IDQuODEyIDg4LjE3MyA4OC4xNzMgMCAwMS0zMy40NyA4Ljg1N2wxMTMuMTAxIDMxMS44MzggNTQ5LjUzOCA3NC45ODlhODYuMTA0IDg2LjEwNCAwIDAwMzQuNDA3LTY4LjgxNXYtOS4zMjZ6IiBvcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNNTE0LjgzMyAxNzAzLjMzM2gxMjI4LjMxNmE4OC4zMTYgODguMzE2IDAgMDA1Mi41OS0xNy4wMzNsLTY5Ny4wODktNDA4LjMzMWE4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjEyNSA5MDYuMDg4aC0uMjk4bC0yMC45OTMtMTEuODM4djcxOS45MTRjLS4wNDggNDkuMiAzOS43OTggODkuMTIyIDg4Ljk5OSA4OS4xNjktLjAwMSAwLS4wMDEgMCAwIDB6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTEwMjIgNDE4LjcyMnY5MDguMzAzYy0uMDc2IDMxLjg0Ni0xOS40NCA2MC40NzEtNDguOTcxIDcyLjM5MmE3My4zODIgNzMuMzgyIDAgMDEtMjguOTU3IDUuOTYySDQyNS44MzNWMzgzLjI1SDUxMXYtNDIuNTgzaDQzMy4wNzNjNDMuMDE5LjE2MyA3Ny44MzQgMzUuMDM1IDc3LjkyNyA3OC4wNTV6IiBvcGFjaXR5PSIuMSIvPjxwYXRoIGQ9Ik05NzkuNDE3IDQ2MS4zMDV2OTA4LjMwMmE2OS4zNiA2OS4zNiAwIDAxLTYuMzg4IDI5LjgwOGMtMTEuODI2IDI5LjE0OS00MC4wODMgNDguMjczLTcxLjU0IDQ4LjQxN0g0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTk3OS40MTcgNDYxLjMwNXY4MjMuMTM2Yy0uMjA4IDQzLTM0LjkyOCA3Ny44NTMtNzcuOTI3IDc4LjIyNUg0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTkzNi44MzMgNDYxLjMwNXY4MjMuMTM2Yy0uMDQ2IDQzLjA2Ny0zNC44NjEgNzguMDE1LTc3LjkyNyA3OC4yMjVINDI1LjgzM1YzODMuMjVoNDMzLjA3MmM0My4wNjIuMDIzIDc3Ljk1MSAzNC45NTEgNzcuOTI3IDc4LjAxM2EuNTg5LjU4OSAwIDAxLjAwMS4wNDJ6IiBvcGFjaXR5PSIuMiIvPjxsaW5lYXJHcmFkaWVudCBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMTcwNS4zMzMpIiB5Mj0iMzI0LjI1OSIgeDI9Ijc3NC4wODYiIHkxPSIxMzgzLjA3NCIgeDE9IjE2Mi43NDciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYiI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTc4NGQ5Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iIzEwN2FkNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhNjNjOSIvPjwvbGluZWFyR3JhZGllbnQ+PHBhdGggZD0iTTc4LjA1NSAzODMuMjVoNzgwLjcyM2M0My4xMDkgMCA3OC4wNTUgMzQuOTQ3IDc4LjA1NSA3OC4wNTV2NzgwLjcyM2MwIDQzLjEwOS0zNC45NDYgNzguMDU1LTc4LjA1NSA3OC4wNTVINzguMDU1Yy00My4xMDkgMC03OC4wNTUtMzQuOTQ3LTc4LjA1NS03OC4wNTVWNDYxLjMwNWMwLTQzLjEwOCAzNC45NDctNzguMDU1IDc4LjA1NS03OC4wNTV6IiBmaWxsPSJ1cmwoI2IpIi8+PHBhdGggZD0iTTI0My45NiA3MTAuNjMxYTIyNy4wNSAyMjcuMDUgMCAwMTg5LjE3LTk4LjQ5NSAyNjkuNTYgMjY5LjU2IDAgMDExNDEuNjc1LTM1LjUxNSAyNTAuOTEgMjUwLjkxIDAgMDExMzEuMTE0IDMzLjY4MyAyMjUuMDE0IDIyNS4wMTQgMCAwMTg2Ljc0MiA5NC4xMDkgMzAzLjc1MSAzMDMuNzUxIDAgMDEzMC40MDUgMTM4LjM5NiAzMjAuNTY3IDMyMC41NjcgMCAwMS0zMS4yOTkgMTQ0Ljc4MyAyMzAuMzcgMjMwLjM3IDAgMDEtODkuNDI1IDk3LjM4OCAyNjAuODY0IDI2MC44NjQgMCAwMS0xMzYuMDExIDM0LjU3OCAyNTYuMzU1IDI1Ni4zNTUgMCAwMS0xMzQuMDEtMzQuMDY3IDIyOC40OTcgMjI4LjQ5NyAwIDAxLTg3Ljg5Mi05NC4yOCAyOTYuNTA3IDI5Ni41MDcgMCAwMS0zMC43NDUtMTM2LjczNSAzMjkuMjkgMzI5LjI5IDAgMDEzMC4yNzYtMTQzLjg0NXptOTUuMDQ2IDIzMS4yMjdhMTQ3LjM4NiAxNDcuMzg2IDAgMDA1MC4xNjMgNjQuODEyIDEzMS4wMjggMTMxLjAyOCAwIDAwNzguMzUzIDIzLjU5MSAxMzcuMjQ0IDEzNy4yNDQgMCAwMDgzLjYzNC0yNC4zNTggMTQxLjE1NiAxNDEuMTU2IDAgMDA0OC43MTUtNjQuODEyIDI1MS41OTQgMjUxLjU5NCAwIDAwMTUuNTQzLTkwLjQwNCAyNzUuMTk4IDI3NS4xOTggMCAwMC0xNC42NDktOTEuNTU0IDE0NC43NzUgMTQ0Ljc3NSAwIDAwLTQ3LjE4Mi02Ny41MzcgMTI5LjU4IDEyOS41OCAwIDAwLTgyLjkxLTI1LjU1IDEzNS4yMDIgMTM1LjIwMiAwIDAwLTgwLjE4NCAyMy44MDQgMTQ4LjYyNiAxNDguNjI2IDAgMDAtNTEuMSA2NS4zNjUgMjU5Ljc1OSAyNTkuNzU5IDAgMDAtLjM0MSAxODYuNzI4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNWgzODMuMjV2MzgzLjI1aC0zODMuMjV6IiBmaWxsPSIjNTBEOUZGIi8+PC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" />
+        <zeebe:ioMapping>
+          <zeebe:input source="GoflowEmail" target="authentication.type" />
+          <zeebe:input source="html" target="sendMail_body_content_type" />
+          <zeebe:input source="=&#34;ผลการพิจารณา: อนุมัติการเปิด (CARs และ Suggestions)&#34;" target="subject" />
+          <zeebe:input source="=&#34;&#60;div style=&#39;font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 650px;&#39;&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;&#60;strong style=&#39;color: #1e88e5; font-size: 20px;&#39;&#62;เปิด CARs / Suggestions เรียบร้อย&#60;/strong&#62;&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;ระบบได้ดำเนินการเปิดรายการตามข้อมูลที่ท่านส่งเข้ามาเรียบร้อยแล้ว โดยมีรายละเอียดดังนี้:&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;margin: 15px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;p&#62;&#60;strong&#62;📌 Corrective Action Requests (CARs)&#60;/strong&#62;&#60;/p&#62;&#34; +&#10;        &#34;&#60;ul style=&#39;padding-left: 20px;&#39;&#62;&#34; +&#10;            &#34;&#60;li&#62;จำนวน CARs ที่เปิด: &#60;strong&#62;&#34; + string(cars) + &#34;&#60;/strong&#62; รายการ&#60;/li&#62;&#34; +&#10;        &#34;&#60;/ul&#62;&#34; +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;margin: 15px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;p&#62;&#60;strong&#62;💡 Suggestions&#60;/strong&#62;&#60;/p&#62;&#34; +&#10;        &#34;&#60;ul style=&#39;padding-left: 20px;&#39;&#62;&#34; +&#10;            &#34;&#60;li&#62;จำนวน Suggestions ที่เปิด: &#60;strong&#62;&#34; + string(suggestions) + &#34;&#60;/strong&#62; รายการ&#60;/li&#62;&#34; +&#10;        &#34;&#60;/ul&#62;&#34; +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;background: #e3f2fd; padding: 15px; border-left: 5px solid #2196f3; margin: 18px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;strong&#62;สรุปผลการดำเนินการ:&#60;/strong&#62;&#60;br&#62;&#34; +&#10;        &#34;เปิดรายการ CARs และ Suggestions รวมทั้งสิ้น &#60;strong&#62;&#34; + string(cars + suggestions) + &#34;&#60;/strong&#62; รายการ และสามารถดำเนินงานต่อได้ตามขั้นตอนที่กำหนด&#34; +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;หากต้องการตรวจสอบข้อมูลเพิ่มเติม สามารถเข้าไปดูรายละเอียดได้ในระบบตามสิทธิ์การเข้าถึงของท่าน&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;margin-top: 20px;&#39;&#62;&#60;strong&#62;ขอบคุณค่ะ/ครับ&#60;/strong&#62;&#60;br&#62;ระบบแจ้งเตือนอัตโนมัติ&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;text-align: center; color: #888; font-size: 11px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;&#39;&#62;&#34; +&#10;        &#34;RPA Automation Service&#34; +&#10;    &#34;&#60;/p&#62;&#34; +&#10;&#10;&#34;&#60;/div&#62;&#34;&#10;" target="body" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="sendto" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="ccto" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="Cloud_SendMail" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0kc9n7q</bpmn:incoming>
+      <bpmn:outgoing>Flow_154ella</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1277tu6" name="จบกระบวนการ">
+      <bpmn:incoming>Flow_1i4cfnw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_1nqmgyr" name="จบกระบวนการ">
+      <bpmn:incoming>Flow_154ella</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:manualTask id="Activity_1xvoh1h" name="เปิด CAR&#38;Suggession">
+      <bpmn:incoming>Flow_1r11yru</bpmn:incoming>
+      <bpmn:outgoing>Flow_0233bdk</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:serviceTask id="Activity_1eu545m" name="แจ้งเตือน Auditor แก้ไขข้อมูล" zeebe:modelerTemplate="Cloud_center_SendMail_Connecter" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iODAwIiB3aWR0aD0iMTIwMCIgdmlld0JveD0iLTI3NC42NjI3NSAtNDI1LjgzNCAyMzgwLjQxMDUgMjU1NS4wMDQiPjxwYXRoIGQ9Ik0xODMxLjA4MyA4OTQuMjVhNDAuODc5IDQwLjg3OSAwIDAwLTE5LjUwMy0zNS4xMzFoLS4yMTNsLS43NjctLjQyNi02MzQuNDkyLTM3NS41ODVhODYuMTc1IDg2LjE3NSAwIDAwLTguNTE3LTUuMDY3IDg1LjE3IDg1LjE3IDAgMDAtNzguMDk4IDAgODYuMzcgODYuMzcgMCAwMC04LjUxNyA1LjA2N2wtNjM0LjQ5IDM3NS41ODUtLjc2Ni40MjZjLTE5LjM5MiAxMi4wNTktMjUuMzM3IDM3LjU1Ni0xMy4yNzggNTYuOTQ4YTQxLjM0NiA0MS4zNDYgMCAwMDE0LjI1NyAxMy44NjhsNjM0LjQ5MiAzNzUuNTg1YTk1LjYxNyA5NS42MTcgMCAwMDguNTE3IDUuMDY4IDg1LjE3IDg1LjE3IDAgMDA3OC4wOTggMCA5NS41MiA5NS41MiAwIDAwOC41MTctNS4wNjhsNjM0LjQ5Mi0zNzUuNTg1YTQwLjg0IDQwLjg0IDAgMDAyMC4yNjgtMzUuNjg1eiIgZmlsbD0iIzBBMjc2NyIvPjxwYXRoIGQ9Ik01MjAuNDUzIDY0My40NzdoNDE2LjM4djM4MS42NzRoLTQxNi4zOHpNMTc0NS45MTcgMjU1LjVWODAuOTA4YzEtNDMuNjUyLTMzLjU1Mi03OS44NjItNzcuMjAzLTgwLjkwOEg1ODguMjA0QzU0NC41NTIgMS4wNDYgNTEwIDM3LjI1NiA1MTEgODAuOTA4VjI1NS41bDYzOC43NSAxNzAuMzMzeiIgZmlsbD0iIzAzNjRCOCIvPjxwYXRoIGQ9Ik01MTEgMjU1LjVoNDI1LjgzM3YzODMuMjVINTExeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNUg5MzYuODMzdjM4My4yNUwxMzYyLjY2NyAxMDIyaDM4My4yNVY2MzguNzV6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTkzNi44MzMgNjM4Ljc1aDQyNS44MzNWMTAyMkg5MzYuODMzeiIgZmlsbD0iIzAwNzhENCIvPjxwYXRoIGQ9Ik05MzYuODMzIDEwMjJoNDI1LjgzM3YzODMuMjVIOTM2LjgzM3oiIGZpbGw9IiMwMzY0QjgiLz48cGF0aCBkPSJNNTIwLjQ1MyAxMDI1LjE1MWg0MTYuMzh2MzQ2Ljk2OWgtNDE2LjM4eiIgZmlsbD0iIzE0NDQ3RCIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAxMDIyaDM4My4yNXYzODMuMjVoLTM4My4yNXoiIGZpbGw9IiMwMDc4RDQiLz48bGluZWFyR3JhZGllbnQgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDE3MDUuMzMzKSIgeTI9IjEuOTk4IiB4Mj0iMTEyOC40NTgiIHkxPSI4MTEuMDgzIiB4MT0iMTEyOC40NTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzViOGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjhhOGVhIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQyNi02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4LjQzNyA4OC40MzcgMCAwMS0zNC40MDcgOC41MTdsLTM0LjY2My0yMC4yN2E4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjE2NyA5MDYuMDAzaC0uMjk4bC0yMS4wMzYtMTEuNzUzdjcyMi4zODRjLjMyOCA0OC4xOTYgMzkuNjUzIDg3LjAwNiA4Ny44NDkgODYuN2gxMjMwLjkxNGMuNzI0IDAgMS4zNjMtLjM0MSAyLjEyOS0uMzQxYTEwNy43OSAxMDcuNzkgMCAwMDI5LjgwOC02LjIxNyA4Ni4wNjYgODYuMDY2IDAgMDAxMS45NjYtNi4yMTdjMi44NTMtMS42MTggNy43NS01LjE1MiA3Ljc1LTUuMTUyYTg1Ljk3NCA4NS45NzQgMCAwMDM0LjgzMy02OC43NzJWODk0LjI1YTM4LjMyMyAzOC4zMjMgMCAwMS0xOS41MDIgMzMuMzQzeiIgZmlsbD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik0xNzk3LjAxNyA4OTEuMzk3djQ0LjI4N2wtNjYzLjQ0OCA0NTYuNzkxLTY4Ni44Ny00ODYuMTc0YS40MjYuNDI2IDAgMDAtLjQyNi0uNDI2bC02My4wMjMtMzcuODk5di0zMS45MzhsMjUuOTc2LS40MjYgNTQuOTMyIDMxLjUxMiAxLjI3Ny40MjYgNC42ODQgMi45ODFzNjQ1LjU2MyAzNjguMzQ2IDY0Ny4yNjcgMzY5LjE5N2wyNC42OTggMTQuNDc4YzIuMTI5LS44NTIgNC4yNTgtMS43MDMgNi44MTMtMi41NTUgMS4yNzgtLjg1MiA2NDAuODc5LTM2MC42ODEgNjQwLjg3OS0zNjAuNjgxeiIgZmlsbD0iIzBBMjc2NyIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMTgxMS41OCA5MjcuNTkzbC0uODA5LjQ2OC02MzQuNDkyIDM1Ni44NDhjLTIuNzY4IDEuNzAzLTUuNTc4IDMuMzIxLTguNTE3IDQuNzY5YTg4Ljk2IDg4Ljk2IDAgMDEtNzguMDk4IDAgOTYuNTc4IDk2LjU3OCAwIDAxLTguNTE3LTQuNzY5bC02MzQuNDktMzU2Ljg0OC0uNzY2LS40NjhhMzguMzI2IDM4LjMyNiAwIDAxLTIwLjA1Ny0zMy4zNDN2NzIyLjM4NGMuMzA1IDQ4LjE4OCAzOS42MTYgODcuMDA0IDg3LjgwMyA4Ni43aDEyMjkuNjRjNDguMTg4LjMwNyA4Ny41LTM4LjUwOSA4Ny44MDctODYuNjk2IDAtLjAwMSAwIDAgMCAwVjg5NC4yNWEzOC4zMyAzOC4zMyAwIDAxLTE5LjUwNCAzMy4zNDN6IiBmaWxsPSIjMTQ5MERGIi8+PHBhdGggZD0iTTExODUuNTIgMTI3OS42MjlsLTkuNDk2IDUuMzIzYTkyLjgwNiA5Mi44MDYgMCAwMS04LjUxNyA0LjgxMiA4OC4xNzMgODguMTczIDAgMDEtMzMuNDcgOC44NTdsMjQxLjQwNSAyODUuNDc5IDQyMS4xMDcgMTAxLjQ3NmE4Ni43ODUgODYuNzg1IDAgMDAyNi43LTMzLjM0M3oiIG9wYWNpdHk9Ii4xIi8+PHBhdGggZD0iTTEyMjguNTI5IDEyNTUuNDQybC01Mi41MDUgMjkuNTFhOTIuODA2IDkyLjgwNiAwIDAxLTguNTE3IDQuODEyIDg4LjE3MyA4OC4xNzMgMCAwMS0zMy40NyA4Ljg1N2wxMTMuMTAxIDMxMS44MzggNTQ5LjUzOCA3NC45ODlhODYuMTA0IDg2LjEwNCAwIDAwMzQuNDA3LTY4LjgxNXYtOS4zMjZ6IiBvcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNNTE0LjgzMyAxNzAzLjMzM2gxMjI4LjMxNmE4OC4zMTYgODguMzE2IDAgMDA1Mi41OS0xNy4wMzNsLTY5Ny4wODktNDA4LjMzMWE4Ni43MDYgODYuNzA2IDAgMDEtOC41MTctNC44OTdMNDQ3LjEyNSA5MDYuMDg4aC0uMjk4bC0yMC45OTMtMTEuODM4djcxOS45MTRjLS4wNDggNDkuMiAzOS43OTggODkuMTIyIDg4Ljk5OSA4OS4xNjktLjAwMSAwLS4wMDEgMCAwIDB6IiBmaWxsPSIjMjhBOEVBIi8+PHBhdGggZD0iTTEwMjIgNDE4LjcyMnY5MDguMzAzYy0uMDc2IDMxLjg0Ni0xOS40NCA2MC40NzEtNDguOTcxIDcyLjM5MmE3My4zODIgNzMuMzgyIDAgMDEtMjguOTU3IDUuOTYySDQyNS44MzNWMzgzLjI1SDUxMXYtNDIuNTgzaDQzMy4wNzNjNDMuMDE5LjE2MyA3Ny44MzQgMzUuMDM1IDc3LjkyNyA3OC4wNTV6IiBvcGFjaXR5PSIuMSIvPjxwYXRoIGQ9Ik05NzkuNDE3IDQ2MS4zMDV2OTA4LjMwMmE2OS4zNiA2OS4zNiAwIDAxLTYuMzg4IDI5LjgwOGMtMTEuODI2IDI5LjE0OS00MC4wODMgNDguMjczLTcxLjU0IDQ4LjQxN0g0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTk3OS40MTcgNDYxLjMwNXY4MjMuMTM2Yy0uMjA4IDQzLTM0LjkyOCA3Ny44NTMtNzcuOTI3IDc4LjIyNUg0MjUuODMzVjM4My4yNWg0NzUuNjU2YTcxLjQ5MyA3MS40OTMgMCAwMTM1LjM0NCA4Ljk0M2MyNi4xMDQgMTMuMTUxIDQyLjU3NCAzOS44ODMgNDIuNTg0IDY5LjExMnoiIG9wYWNpdHk9Ii4yIi8+PHBhdGggZD0iTTkzNi44MzMgNDYxLjMwNXY4MjMuMTM2Yy0uMDQ2IDQzLjA2Ny0zNC44NjEgNzguMDE1LTc3LjkyNyA3OC4yMjVINDI1LjgzM1YzODMuMjVoNDMzLjA3MmM0My4wNjIuMDIzIDc3Ljk1MSAzNC45NTEgNzcuOTI3IDc4LjAxM2EuNTg5LjU4OSAwIDAxLjAwMS4wNDJ6IiBvcGFjaXR5PSIuMiIvPjxsaW5lYXJHcmFkaWVudCBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMTcwNS4zMzMpIiB5Mj0iMzI0LjI1OSIgeDI9Ijc3NC4wODYiIHkxPSIxMzgzLjA3NCIgeDE9IjE2Mi43NDciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iYiI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTc4NGQ5Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iIzEwN2FkNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhNjNjOSIvPjwvbGluZWFyR3JhZGllbnQ+PHBhdGggZD0iTTc4LjA1NSAzODMuMjVoNzgwLjcyM2M0My4xMDkgMCA3OC4wNTUgMzQuOTQ3IDc4LjA1NSA3OC4wNTV2NzgwLjcyM2MwIDQzLjEwOS0zNC45NDYgNzguMDU1LTc4LjA1NSA3OC4wNTVINzguMDU1Yy00My4xMDkgMC03OC4wNTUtMzQuOTQ3LTc4LjA1NS03OC4wNTVWNDYxLjMwNWMwLTQzLjEwOCAzNC45NDctNzguMDU1IDc4LjA1NS03OC4wNTV6IiBmaWxsPSJ1cmwoI2IpIi8+PHBhdGggZD0iTTI0My45NiA3MTAuNjMxYTIyNy4wNSAyMjcuMDUgMCAwMTg5LjE3LTk4LjQ5NSAyNjkuNTYgMjY5LjU2IDAgMDExNDEuNjc1LTM1LjUxNSAyNTAuOTEgMjUwLjkxIDAgMDExMzEuMTE0IDMzLjY4MyAyMjUuMDE0IDIyNS4wMTQgMCAwMTg2Ljc0MiA5NC4xMDkgMzAzLjc1MSAzMDMuNzUxIDAgMDEzMC40MDUgMTM4LjM5NiAzMjAuNTY3IDMyMC41NjcgMCAwMS0zMS4yOTkgMTQ0Ljc4MyAyMzAuMzcgMjMwLjM3IDAgMDEtODkuNDI1IDk3LjM4OCAyNjAuODY0IDI2MC44NjQgMCAwMS0xMzYuMDExIDM0LjU3OCAyNTYuMzU1IDI1Ni4zNTUgMCAwMS0xMzQuMDEtMzQuMDY3IDIyOC40OTcgMjI4LjQ5NyAwIDAxLTg3Ljg5Mi05NC4yOCAyOTYuNTA3IDI5Ni41MDcgMCAwMS0zMC43NDUtMTM2LjczNSAzMjkuMjkgMzI5LjI5IDAgMDEzMC4yNzYtMTQzLjg0NXptOTUuMDQ2IDIzMS4yMjdhMTQ3LjM4NiAxNDcuMzg2IDAgMDA1MC4xNjMgNjQuODEyIDEzMS4wMjggMTMxLjAyOCAwIDAwNzguMzUzIDIzLjU5MSAxMzcuMjQ0IDEzNy4yNDQgMCAwMDgzLjYzNC0yNC4zNTggMTQxLjE1NiAxNDEuMTU2IDAgMDA0OC43MTUtNjQuODEyIDI1MS41OTQgMjUxLjU5NCAwIDAwMTUuNTQzLTkwLjQwNCAyNzUuMTk4IDI3NS4xOTggMCAwMC0xNC42NDktOTEuNTU0IDE0NC43NzUgMTQ0Ljc3NSAwIDAwLTQ3LjE4Mi02Ny41MzcgMTI5LjU4IDEyOS41OCAwIDAwLTgyLjkxLTI1LjU1IDEzNS4yMDIgMTM1LjIwMiAwIDAwLTgwLjE4NCAyMy44MDQgMTQ4LjYyNiAxNDguNjI2IDAgMDAtNTEuMSA2NS4zNjUgMjU5Ljc1OSAyNTkuNzU5IDAgMDAtLjM0MSAxODYuNzI4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMzYyLjY2NyAyNTUuNWgzODMuMjV2MzgzLjI1aC0zODMuMjV6IiBmaWxsPSIjNTBEOUZGIi8+PC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" />
+        <zeebe:ioMapping>
+          <zeebe:input source="GoflowEmail" target="authentication.type" />
+          <zeebe:input source="html" target="sendMail_body_content_type" />
+          <zeebe:input source="=&#34;ผลการพิจารณาข้อมูล: ส่งกลับเพื่อปรับปรุงแก้ไข&#34;" target="subject" />
+          <zeebe:input source="=&#34;&#60;div style=&#39;font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 650px;&#39;&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;&#60;strong style=&#39;color: #d32f2f; font-size: 20px;&#39;&#62;แจ้งผลการพิจารณา: ส่งกลับเพื่อแก้ไข&#60;/strong&#62;&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;ข้อมูลที่ส่งเข้าตรวจสอบยังไม่ผ่านการอนุมัติ และจำเป็นต้องปรับปรุงตามรายละเอียดดังต่อไปนี้:&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;div style=&#39;background: #ffebee; padding: 15px; border-left: 5px solid #d32f2f; margin: 18px 0;&#39;&#62;&#34; +&#10;        &#34;&#60;strong&#62;รายละเอียดที่ต้องแก้ไข:&#60;/strong&#62;&#60;br&#62;&#34; +&#10;        edit_detail +&#10;    &#34;&#60;/div&#62;&#34; +&#10;&#10;    &#34;&#60;p&#62;กรุณาตรวจสอบและแก้ไขข้อมูลให้ถูกต้องครบถ้วน ก่อนทำการส่งกลับเข้าสู่ระบบเพื่อพิจารณาใหม่อีกครั้ง&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;margin-top: 20px;&#39;&#62;&#60;strong&#62;ขอบคุณค่ะ/ครับ&#60;/strong&#62;&#60;br&#62;ระบบแจ้งเตือนอัตโนมัติ&#60;/p&#62;&#34; +&#10;&#10;    &#34;&#60;p style=&#39;text-align: center; color: #888; font-size: 11px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;&#39;&#62;&#34; +&#10;        &#34;RPA Automation Service&#34; +&#10;    &#34;&#60;/p&#62;&#34; +&#10;&#10;&#34;&#60;/div&#62;&#34;" target="body" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="sendto" />
+          <zeebe:input source="=[&#34;jumphonkae@gosoft.co.th&#34;]" target="ccto" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="Cloud_SendMail" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_07tc3sw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ek9wkr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1yvtpy5" name="อัพเดตฐานข้อมูล" zeebe:modelerTemplate="cloud-sql-connector" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTMiIGhlaWdodD0iNTEyIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNTEzIDUxMiI+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik00MjIuMDY5IDQxNi45OTVWMjUzLjA0NGgtMjQuNzU2VjQ0NC4zMmg5OS4wMjR2LTI3LjMyNWgtNzQuMjY4Wm0tNzQuMjY4LTE2My45NTFoLTQ5LjUxMmMtNi41NjUgMC0xMi44NjIgMi44NzktMTcuNTA1IDguMDA0LTQuNjQzIDUuMTI0LTcuMjUxIDEyLjA3NC03LjI1MSAxOS4zMjJ2MTM2LjYyNWMwIDcuMjQ3IDIuNjA4IDE0LjE5NyA3LjI1MSAxOS4zMjEgNC42NDMgNS4xMjUgMTAuOTQgOC4wMDQgMTcuNTA1IDguMDA0aDEyLjM3OHYyNy4zMjVjMCA3LjI0NyAyLjYwOCAxNC4xOTcgNy4yNTEgMTkuMzIxIDQuNjQzIDUuMTI1IDEwLjk0IDguMDA0IDE3LjUwNSA4LjAwNGgyNC43NTZ2LTI3LjMyNWgtMjQuNzU2VjQ0NC4zMmgxMi4zNzhjNi41NjYgMCAxMi44NjMtMi44NzkgMTcuNTA1LTguMDA0IDQuNjQzLTUuMTI0IDcuMjUxLTEyLjA3NCA3LjI1MS0xOS4zMjFWMjgwLjM3YzAtNy4yNDgtMi42MDgtMTQuMTk4LTcuMjUxLTE5LjMyMi00LjY0Mi01LjEyNS0xMC45MzktOC4wMDQtMTcuNTA1LTguMDA0Wm0tNDkuNTEyIDE2My45NTFWMjgwLjM3aDQ5LjUxMnYxMzYuNjI1aC00OS41MTJabS03NC4yNjggMjcuMzI1aC03NC4yNjh2LTI3LjMyNWg3NC4yNjh2LTU0LjY1aC00OS41MTJjLTYuNTY2IDAtMTIuODYyLTIuODc5LTE3LjUwNS04LjAwNC00LjY0My01LjEyNC03LjI1MS0xMi4wNzQtNy4yNTEtMTkuMzIxdi01NC42NWMwLTcuMjQ4IDIuNjA4LTE0LjE5OCA3LjI1MS0xOS4zMjIgNC42NDMtNS4xMjUgMTAuOTM5LTguMDA0IDE3LjUwNS04LjAwNGg3NC4yNjh2MjcuMzI2aC03NC4yNjh2NTQuNjVoNDkuNTEyYzYuNTY2IDAgMTIuODYzIDIuODc4IDE3LjUwNSA4LjAwMyA0LjY0MyA1LjEyNCA3LjI1MSAxMi4wNzUgNy4yNTEgMTkuMzIydjU0LjY1YzAgNy4yNDctMi42MDggMTQuMTk3LTcuMjUxIDE5LjMyMS00LjY0MiA1LjEyNS0xMC45MzkgOC4wMDQtMTcuNTA1IDguMDA0WiIvPgogICAgPHBhdGggZmlsbD0iI0M2MjlDRCIgZD0iTTE2MC42OTUgMTMuMDMyYy02My4wNjYgMC0xMzAuOTQzIDE2LjQ1LTEzMC45NDMgNTIuNTU3djIzNi41MDZjMCAyMi4wNyAyNS40MDMgMzYuNzYyIDU5LjUyIDQ0Ljg3di0yNi44ODJjLTIzLjczNi02LjIxLTM1LjA2LTE1LjAxOS0zNS43MTItMTcuOTg4di00Ni45MzhjMTcuNzggOS44NDIgMTcuNzMzIDkuMTg1IDQ1LjQyNCAxMi4wMDl2LTI2LjI0N2MtNDYuMTYyLTQuOTU5LTQzLjk2NS0xMS44OTktNDUuNDI0LTE3LjY2MXYtNDYuOTM3YzI1LjMzIDE0LjAyNSA2Ny4xNjkgMjAuNjU5IDEwNy4xMzUgMjAuNjU5IDYzLjA2NiAwIDEzMC45NDMtMTYuNDUxIDEzMC45NDMtNTIuNTU3di03OC44NGMtLjAwOS0zNi4xMDctNjcuODgxLTUyLjU1LTEzMC45NDMtNTIuNTVaTTUzLjU0MiA2NS43ODdjMS44MTMtNy4yOTUgMzcuNTE0LTI2LjQ3NyAxMDcuMTUzLTI2LjQ3NyA2OS4wMTQgMCAxMDQuNjk0IDE4Ljg0MyAxMDcuMDk3IDI2LjI3OS0yLjQwMyA3LjQzNS0zOC4wODMgMjYuMjc4LTEwNy4wOTcgMjYuMjc4LTY5LjYzOSAwLTEwNS4zMzktMTkuMTgzLTEwNy4xNTMtMjYuMDhabTIxNC4yODggNzguNDdjLTEuOTEyIDcuMzItMzcuNjAxIDI2LjQ0Ni0xMDcuMTM1IDI2LjQ0Ni02OS42MzkgMC0xMDUuMzM5LTE5LjE4NC0xMDcuMTM1LTI2LjI3OVY5Ny40ODdjMjUuMzMgMTQuMDI1IDY3LjE2OSAyMC42NTkgMTA3LjEzNSAyMC42NTkgMzkuOTY2IDAgODEuODA1LTYuNjM0IDEwNy4xMzUtMjAuNjU5djQ2Ljc3WiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yOS43NTQgNmg0NTIuOTkxdjUwMEgyOS43NTR6Ii8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="POSTGRESQL" target="database" />
+          <zeebe:input source="detailed" target="connection.authType" />
+          <zeebe:input source="=&#34;{{secret.HOST_POSTGRESQL_PMAM}}&#34;" target="connection.host" />
+          <zeebe:input source="=&#34;{{secret.PORT_POSTGRESQL_PMAM}}&#34;" target="connection.port" />
+          <zeebe:input source="=&#34;{{secret.USERNAME_POSTGRESQL_PMAM}}&#34;" target="connection.username" />
+          <zeebe:input source="=&#34;{{secret.PASSWORD_POSTGRESQL_PMAM}}&#34;" target="connection.password" />
+          <zeebe:input source="=&#34;{{secret.DB_NAME_POSTGRESQL_PMAM}}&#34;" target="connection.databaseName" />
+          <zeebe:input source="=true" target="data.returnResults" />
+          <zeebe:input source="=&#34;UPDATE public.dc_audits SET status = &#39;no_approve&#39; WHERE doc_no = :doc_no&#34;" target="data.query" />
+          <zeebe:input source="={doc_no: doc_no}" target="data.variables" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="sql" />
+          <zeebe:header key="elementTemplateVersion" value="3" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.Jdbc.v1" />
+          <zeebe:header key="resultVariable" value="output" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_122pizf</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f54oc2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1xwpy89" name="อัพเดตฐานข้อมูล" zeebe:modelerTemplate="cloud-sql-connector" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTMiIGhlaWdodD0iNTEyIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNTEzIDUxMiI+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik00MjIuMDY5IDQxNi45OTVWMjUzLjA0NGgtMjQuNzU2VjQ0NC4zMmg5OS4wMjR2LTI3LjMyNWgtNzQuMjY4Wm0tNzQuMjY4LTE2My45NTFoLTQ5LjUxMmMtNi41NjUgMC0xMi44NjIgMi44NzktMTcuNTA1IDguMDA0LTQuNjQzIDUuMTI0LTcuMjUxIDEyLjA3NC03LjI1MSAxOS4zMjJ2MTM2LjYyNWMwIDcuMjQ3IDIuNjA4IDE0LjE5NyA3LjI1MSAxOS4zMjEgNC42NDMgNS4xMjUgMTAuOTQgOC4wMDQgMTcuNTA1IDguMDA0aDEyLjM3OHYyNy4zMjVjMCA3LjI0NyAyLjYwOCAxNC4xOTcgNy4yNTEgMTkuMzIxIDQuNjQzIDUuMTI1IDEwLjk0IDguMDA0IDE3LjUwNSA4LjAwNGgyNC43NTZ2LTI3LjMyNWgtMjQuNzU2VjQ0NC4zMmgxMi4zNzhjNi41NjYgMCAxMi44NjMtMi44NzkgMTcuNTA1LTguMDA0IDQuNjQzLTUuMTI0IDcuMjUxLTEyLjA3NCA3LjI1MS0xOS4zMjFWMjgwLjM3YzAtNy4yNDgtMi42MDgtMTQuMTk4LTcuMjUxLTE5LjMyMi00LjY0Mi01LjEyNS0xMC45MzktOC4wMDQtMTcuNTA1LTguMDA0Wm0tNDkuNTEyIDE2My45NTFWMjgwLjM3aDQ5LjUxMnYxMzYuNjI1aC00OS41MTJabS03NC4yNjggMjcuMzI1aC03NC4yNjh2LTI3LjMyNWg3NC4yNjh2LTU0LjY1aC00OS41MTJjLTYuNTY2IDAtMTIuODYyLTIuODc5LTE3LjUwNS04LjAwNC00LjY0My01LjEyNC03LjI1MS0xMi4wNzQtNy4yNTEtMTkuMzIxdi01NC42NWMwLTcuMjQ4IDIuNjA4LTE0LjE5OCA3LjI1MS0xOS4zMjIgNC42NDMtNS4xMjUgMTAuOTM5LTguMDA0IDE3LjUwNS04LjAwNGg3NC4yNjh2MjcuMzI2aC03NC4yNjh2NTQuNjVoNDkuNTEyYzYuNTY2IDAgMTIuODYzIDIuODc4IDE3LjUwNSA4LjAwMyA0LjY0MyA1LjEyNCA3LjI1MSAxMi4wNzUgNy4yNTEgMTkuMzIydjU0LjY1YzAgNy4yNDctMi42MDggMTQuMTk3LTcuMjUxIDE5LjMyMS00LjY0MiA1LjEyNS0xMC45MzkgOC4wMDQtMTcuNTA1IDguMDA0WiIvPgogICAgPHBhdGggZmlsbD0iI0M2MjlDRCIgZD0iTTE2MC42OTUgMTMuMDMyYy02My4wNjYgMC0xMzAuOTQzIDE2LjQ1LTEzMC45NDMgNTIuNTU3djIzNi41MDZjMCAyMi4wNyAyNS40MDMgMzYuNzYyIDU5LjUyIDQ0Ljg3di0yNi44ODJjLTIzLjczNi02LjIxLTM1LjA2LTE1LjAxOS0zNS43MTItMTcuOTg4di00Ni45MzhjMTcuNzggOS44NDIgMTcuNzMzIDkuMTg1IDQ1LjQyNCAxMi4wMDl2LTI2LjI0N2MtNDYuMTYyLTQuOTU5LTQzLjk2NS0xMS44OTktNDUuNDI0LTE3LjY2MXYtNDYuOTM3YzI1LjMzIDE0LjAyNSA2Ny4xNjkgMjAuNjU5IDEwNy4xMzUgMjAuNjU5IDYzLjA2NiAwIDEzMC45NDMtMTYuNDUxIDEzMC45NDMtNTIuNTU3di03OC44NGMtLjAwOS0zNi4xMDctNjcuODgxLTUyLjU1LTEzMC45NDMtNTIuNTVaTTUzLjU0MiA2NS43ODdjMS44MTMtNy4yOTUgMzcuNTE0LTI2LjQ3NyAxMDcuMTUzLTI2LjQ3NyA2OS4wMTQgMCAxMDQuNjk0IDE4Ljg0MyAxMDcuMDk3IDI2LjI3OS0yLjQwMyA3LjQzNS0zOC4wODMgMjYuMjc4LTEwNy4wOTcgMjYuMjc4LTY5LjYzOSAwLTEwNS4zMzktMTkuMTgzLTEwNy4xNTMtMjYuMDhabTIxNC4yODggNzguNDdjLTEuOTEyIDcuMzItMzcuNjAxIDI2LjQ0Ni0xMDcuMTM1IDI2LjQ0Ni02OS42MzkgMC0xMDUuMzM5LTE5LjE4NC0xMDcuMTM1LTI2LjI3OVY5Ny40ODdjMjUuMzMgMTQuMDI1IDY3LjE2OSAyMC42NTkgMTA3LjEzNSAyMC42NTkgMzkuOTY2IDAgODEuODA1LTYuNjM0IDEwNy4xMzUtMjAuNjU5djQ2Ljc3WiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yOS43NTQgNmg0NTIuOTkxdjUwMEgyOS43NTR6Ii8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="POSTGRESQL" target="database" />
+          <zeebe:input source="detailed" target="connection.authType" />
+          <zeebe:input source="=&#34;{{secret.HOST_POSTGRESQL_PMAM}}&#34;" target="connection.host" />
+          <zeebe:input source="=&#34;{{secret.PORT_POSTGRESQL_PMAM}}&#34;" target="connection.port" />
+          <zeebe:input source="=&#34;{{secret.USERNAME_POSTGRESQL_PMAM}}&#34;" target="connection.username" />
+          <zeebe:input source="=&#34;{{secret.PASSWORD_POSTGRESQL_PMAM}}&#34;" target="connection.password" />
+          <zeebe:input source="=&#34;{{secret.DB_NAME_POSTGRESQL_PMAM}}&#34;" target="connection.databaseName" />
+          <zeebe:input source="=true" target="data.returnResults" />
+          <zeebe:input source="=&#34;UPDATE public.dc_audits SET status = &#39;open&#39; WHERE doc_no = :doc_no&#34;" target="data.query" />
+          <zeebe:input source="={doc_no: doc_no}" target="data.variables" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="sql" />
+          <zeebe:header key="elementTemplateVersion" value="3" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.Jdbc.v1" />
+          <zeebe:header key="resultVariable" value="output" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0233bdk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kc9n7q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_189sxwk" name="อัพเดตฐานข้อมูล" zeebe:modelerTemplate="cloud-sql-connector" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTMiIGhlaWdodD0iNTEyIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNTEzIDUxMiI+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik00MjIuMDY5IDQxNi45OTVWMjUzLjA0NGgtMjQuNzU2VjQ0NC4zMmg5OS4wMjR2LTI3LjMyNWgtNzQuMjY4Wm0tNzQuMjY4LTE2My45NTFoLTQ5LjUxMmMtNi41NjUgMC0xMi44NjIgMi44NzktMTcuNTA1IDguMDA0LTQuNjQzIDUuMTI0LTcuMjUxIDEyLjA3NC03LjI1MSAxOS4zMjJ2MTM2LjYyNWMwIDcuMjQ3IDIuNjA4IDE0LjE5NyA3LjI1MSAxOS4zMjEgNC42NDMgNS4xMjUgMTAuOTQgOC4wMDQgMTcuNTA1IDguMDA0aDEyLjM3OHYyNy4zMjVjMCA3LjI0NyAyLjYwOCAxNC4xOTcgNy4yNTEgMTkuMzIxIDQuNjQzIDUuMTI1IDEwLjk0IDguMDA0IDE3LjUwNSA4LjAwNGgyNC43NTZ2LTI3LjMyNWgtMjQuNzU2VjQ0NC4zMmgxMi4zNzhjNi41NjYgMCAxMi44NjMtMi44NzkgMTcuNTA1LTguMDA0IDQuNjQzLTUuMTI0IDcuMjUxLTEyLjA3NCA3LjI1MS0xOS4zMjFWMjgwLjM3YzAtNy4yNDgtMi42MDgtMTQuMTk4LTcuMjUxLTE5LjMyMi00LjY0Mi01LjEyNS0xMC45MzktOC4wMDQtMTcuNTA1LTguMDA0Wm0tNDkuNTEyIDE2My45NTFWMjgwLjM3aDQ5LjUxMnYxMzYuNjI1aC00OS41MTJabS03NC4yNjggMjcuMzI1aC03NC4yNjh2LTI3LjMyNWg3NC4yNjh2LTU0LjY1aC00OS41MTJjLTYuNTY2IDAtMTIuODYyLTIuODc5LTE3LjUwNS04LjAwNC00LjY0My01LjEyNC03LjI1MS0xMi4wNzQtNy4yNTEtMTkuMzIxdi01NC42NWMwLTcuMjQ4IDIuNjA4LTE0LjE5OCA3LjI1MS0xOS4zMjIgNC42NDMtNS4xMjUgMTAuOTM5LTguMDA0IDE3LjUwNS04LjAwNGg3NC4yNjh2MjcuMzI2aC03NC4yNjh2NTQuNjVoNDkuNTEyYzYuNTY2IDAgMTIuODYzIDIuODc4IDE3LjUwNSA4LjAwMyA0LjY0MyA1LjEyNCA3LjI1MSAxMi4wNzUgNy4yNTEgMTkuMzIydjU0LjY1YzAgNy4yNDctMi42MDggMTQuMTk3LTcuMjUxIDE5LjMyMS00LjY0MiA1LjEyNS0xMC45MzkgOC4wMDQtMTcuNTA1IDguMDA0WiIvPgogICAgPHBhdGggZmlsbD0iI0M2MjlDRCIgZD0iTTE2MC42OTUgMTMuMDMyYy02My4wNjYgMC0xMzAuOTQzIDE2LjQ1LTEzMC45NDMgNTIuNTU3djIzNi41MDZjMCAyMi4wNyAyNS40MDMgMzYuNzYyIDU5LjUyIDQ0Ljg3di0yNi44ODJjLTIzLjczNi02LjIxLTM1LjA2LTE1LjAxOS0zNS43MTItMTcuOTg4di00Ni45MzhjMTcuNzggOS44NDIgMTcuNzMzIDkuMTg1IDQ1LjQyNCAxMi4wMDl2LTI2LjI0N2MtNDYuMTYyLTQuOTU5LTQzLjk2NS0xMS44OTktNDUuNDI0LTE3LjY2MXYtNDYuOTM3YzI1LjMzIDE0LjAyNSA2Ny4xNjkgMjAuNjU5IDEwNy4xMzUgMjAuNjU5IDYzLjA2NiAwIDEzMC45NDMtMTYuNDUxIDEzMC45NDMtNTIuNTU3di03OC44NGMtLjAwOS0zNi4xMDctNjcuODgxLTUyLjU1LTEzMC45NDMtNTIuNTVaTTUzLjU0MiA2NS43ODdjMS44MTMtNy4yOTUgMzcuNTE0LTI2LjQ3NyAxMDcuMTUzLTI2LjQ3NyA2OS4wMTQgMCAxMDQuNjk0IDE4Ljg0MyAxMDcuMDk3IDI2LjI3OS0yLjQwMyA3LjQzNS0zOC4wODMgMjYuMjc4LTEwNy4wOTcgMjYuMjc4LTY5LjYzOSAwLTEwNS4zMzktMTkuMTgzLTEwNy4xNTMtMjYuMDhabTIxNC4yODggNzguNDdjLTEuOTEyIDcuMzItMzcuNjAxIDI2LjQ0Ni0xMDcuMTM1IDI2LjQ0Ni02OS42MzkgMC0xMDUuMzM5LTE5LjE4NC0xMDcuMTM1LTI2LjI3OVY5Ny40ODdjMjUuMzMgMTQuMDI1IDY3LjE2OSAyMC42NTkgMTA3LjEzNSAyMC42NTkgMzkuOTY2IDAgODEuODA1LTYuNjM0IDEwNy4xMzUtMjAuNjU5djQ2Ljc3WiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yOS43NTQgNmg0NTIuOTkxdjUwMEgyOS43NTR6Ii8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="customConnector" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="POSTGRESQL" target="database" />
+          <zeebe:input source="detailed" target="connection.authType" />
+          <zeebe:input source="=&#34;{{secret.HOST_POSTGRESQL_PMAM}}&#34;" target="connection.host" />
+          <zeebe:input source="=&#34;{{secret.PORT_POSTGRESQL_PMAM}}&#34;" target="connection.port" />
+          <zeebe:input source="=&#34;{{secret.USERNAME_POSTGRESQL_PMAM}}&#34;" target="connection.username" />
+          <zeebe:input source="=&#34;{{secret.PASSWORD_POSTGRESQL_PMAM}}&#34;" target="connection.password" />
+          <zeebe:input source="=&#34;{{secret.DB_NAME_POSTGRESQL_PMAM}}&#34;" target="connection.databaseName" />
+          <zeebe:input source="=true" target="data.returnResults" />
+          <zeebe:input source="=&#34;UPDATE public.dc_audits SET status = &#39;edit_form&#39; WHERE doc_no = :doc_no&#34;" target="data.query" />
+          <zeebe:input source="={doc_no: doc_no}" target="data.variables" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="service" value="sql" />
+          <zeebe:header key="elementTemplateVersion" value="3" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.Jdbc.v1" />
+          <zeebe:header key="resultVariable" value="output" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ek9wkr</bpmn:incoming>
+      <bpmn:outgoing>Flow_19fqwek</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="Activity_0bofazd" name="ฟอร์มลิ้ง">
+      <bpmn:extensionElements>
+        <zeebe:script expression="=&#34;http://localhost:3000/sca-isa/view?doc_no=&#34;" resultVariable="textfield_x7f24" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0lw4t1l</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hpndlj</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0v6malb" sourceRef="StartEvent_1" targetRef="Activity_0pyyi0f" />
+    <bpmn:sequenceFlow id="Flow_109mj1q" sourceRef="Activity_0pyyi0f" targetRef="Gateway_1kaih1a" />
+    <bpmn:sequenceFlow id="Flow_0lfl1uw" sourceRef="Gateway_0028equ" targetRef="Activity_1ql9iot" />
+    <bpmn:sequenceFlow id="Flow_0lw4t1l" sourceRef="Activity_1ql9iot" targetRef="Activity_0bofazd" />
+    <bpmn:sequenceFlow id="Flow_022xvk4" name="CARs or Suggestions &#62; 0" sourceRef="Gateway_1kaih1a" targetRef="Gateway_0028equ">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=(cars &gt; 0) or (suggestions &gt; 0)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0wrlxk2" sourceRef="Activity_18cxgwn" targetRef="Gateway_0028equ" />
+    <bpmn:sequenceFlow id="Flow_19fqwek" sourceRef="Activity_189sxwk" targetRef="Activity_0heeo9f" />
+    <bpmn:sequenceFlow id="Flow_0oe8qs6" sourceRef="Activity_0heeo9f" targetRef="Activity_18cxgwn" />
+    <bpmn:sequenceFlow id="Flow_1hryfbb" name="CARs and Suggestions = 0" sourceRef="Gateway_1kaih1a" targetRef="Activity_1119cw9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=(cars = 0) and (suggestions = 0)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0g2lqlv" sourceRef="Activity_1119cw9" targetRef="Event_1h4fuk5" />
+    <bpmn:sequenceFlow id="Flow_00bwp54" sourceRef="Activity_0tvzhci" targetRef="Gateway_0r34qte" />
+    <bpmn:sequenceFlow id="Flow_07tc3sw" name="แก้ไข" sourceRef="Gateway_0r34qte" targetRef="Activity_1eu545m">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=select_h4zi1vi = "ส่งกลับแก้ไข"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1r11yru" name="อนุมัติ" sourceRef="Gateway_0r34qte" targetRef="Activity_1xvoh1h">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=select_h4zi1vi = "อนุมัติ"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_122pizf" name="ไม่อนุมัติ" sourceRef="Gateway_0r34qte" targetRef="Activity_1yvtpy5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=select_h4zi1vi = "ไม่อนุมัติ"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0hpndlj" sourceRef="Activity_0bofazd" targetRef="Activity_0tvzhci" />
+    <bpmn:sequenceFlow id="Flow_1f54oc2" sourceRef="Activity_1yvtpy5" targetRef="Activity_125zzpm" />
+    <bpmn:sequenceFlow id="Flow_1i4cfnw" sourceRef="Activity_125zzpm" targetRef="Event_1277tu6" />
+    <bpmn:sequenceFlow id="Flow_0kc9n7q" sourceRef="Activity_1xwpy89" targetRef="Activity_0h5h0qb" />
+    <bpmn:sequenceFlow id="Flow_154ella" sourceRef="Activity_0h5h0qb" targetRef="Event_1nqmgyr" />
+    <bpmn:sequenceFlow id="Flow_0233bdk" sourceRef="Activity_1xvoh1h" targetRef="Activity_1xwpy89" />
+    <bpmn:sequenceFlow id="Flow_0ek9wkr" sourceRef="Activity_1eu545m" targetRef="Activity_189sxwk" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0sg235o">
+      <bpmndi:BPMNShape id="Participant_00u8z1f_di" bpmnElement="Participant_00u8z1f" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1740" height="1360" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0bjtkm2_di" bpmnElement="Lane_0bjtkm2" isHorizontal="true" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="190" y="80" width="1710" height="580" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0hstz43_di" bpmnElement="Lane_0hstz43" isHorizontal="true" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="190" y="660" width="1710" height="780" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="302" y="174" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="278" y="217" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xhtvta_di" bpmnElement="Activity_0pyyi0f">
+        <dc:Bounds x="460" y="152" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pvc5nm_di" bpmnElement="Activity_1ql9iot">
+        <dc:Bounds x="1070" y="152" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0028equ_di" bpmnElement="Gateway_0028equ" isMarkerVisible="true">
+        <dc:Bounds x="855" y="167" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qowbob_di" bpmnElement="Activity_0heeo9f">
+        <dc:Bounds x="830" y="500" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1iwdu1l" bpmnElement="Gateway_1kaih1a" isMarkerVisible="true">
+        <dc:Bounds x="645" y="167" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1gxm8y5" bpmnElement="Event_1h4fuk5" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="652" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="637" y="545" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0jzn5ec" bpmnElement="Activity_1119cw9">
+        <dc:Bounds x="620" y="353" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1wh12d1" bpmnElement="Activity_18cxgwn">
+        <dc:Bounds x="830" y="300" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0r34qte_di" bpmnElement="Gateway_0r34qte" isMarkerVisible="true">
+        <dc:Bounds x="1095" y="1085" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_08j2slr_di" bpmnElement="Activity_0tvzhci">
+        <dc:Bounds x="1070" y="937" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1hi0jbz" bpmnElement="Activity_125zzpm">
+        <dc:Bounds x="1570" y="1070" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0cula09" bpmnElement="Activity_0h5h0qb">
+        <dc:Bounds x="1570" y="1287" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1277tu6_di" bpmnElement="Event_1277tu6" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1792" y="1092" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1777" y="1133" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nqmgyr_di" bpmnElement="Event_1nqmgyr" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1792" y="1309" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1777" y="1354" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ec9zdp_di" bpmnElement="Activity_1xvoh1h">
+        <dc:Bounds x="1070" y="1287" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06ppw6l_di" bpmnElement="Activity_1eu545m">
+        <dc:Bounds x="830" y="1070" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1xx6y94" bpmnElement="Activity_1yvtpy5">
+        <dc:Bounds x="1320" y="1070" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1j12jkt" bpmnElement="Activity_1xwpy89">
+        <dc:Bounds x="1320" y="1287" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ens615" bpmnElement="Activity_189sxwk">
+        <dc:Bounds x="830" y="760" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jzs3og_di" bpmnElement="Activity_0bofazd">
+        <dc:Bounds x="1070" y="760" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0v6malb_di" bpmnElement="Flow_0v6malb">
+        <di:waypoint x="338" y="192" />
+        <di:waypoint x="460" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_109mj1q_di" bpmnElement="Flow_109mj1q">
+        <di:waypoint x="560" y="192" />
+        <di:waypoint x="645" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lfl1uw_di" bpmnElement="Flow_0lfl1uw">
+        <di:waypoint x="905" y="192" />
+        <di:waypoint x="1070" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lw4t1l_di" bpmnElement="Flow_0lw4t1l">
+        <di:waypoint x="1120" y="232" />
+        <di:waypoint x="1120" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_022xvk4_di" bpmnElement="Flow_022xvk4">
+        <di:waypoint x="695" y="192" />
+        <di:waypoint x="855" y="192" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="732" y="156" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wrlxk2_di" bpmnElement="Flow_0wrlxk2">
+        <di:waypoint x="880" y="300" />
+        <di:waypoint x="880" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19fqwek_di" bpmnElement="Flow_19fqwek">
+        <di:waypoint x="880" y="760" />
+        <di:waypoint x="880" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oe8qs6_di" bpmnElement="Flow_0oe8qs6">
+        <di:waypoint x="880" y="500" />
+        <di:waypoint x="880" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_073yutt" bpmnElement="Flow_1hryfbb">
+        <di:waypoint x="670" y="217" />
+        <di:waypoint x="670" y="353" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="570" y="266" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g2lqlv_di" bpmnElement="Flow_0g2lqlv">
+        <di:waypoint x="670" y="433" />
+        <di:waypoint x="670" y="502" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00bwp54_di" bpmnElement="Flow_00bwp54">
+        <di:waypoint x="1120" y="1017" />
+        <di:waypoint x="1120" y="1085" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07tc3sw_di" bpmnElement="Flow_07tc3sw">
+        <di:waypoint x="1095" y="1110" />
+        <di:waypoint x="930" y="1110" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1065" y="1050" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1r11yru_di" bpmnElement="Flow_1r11yru">
+        <di:waypoint x="1120" y="1135" />
+        <di:waypoint x="1120" y="1287" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1076" y="1150" width="28" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_122pizf_di" bpmnElement="Flow_122pizf">
+        <di:waypoint x="1145" y="1110" />
+        <di:waypoint x="1320" y="1110" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1153" y="1083" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hpndlj_di" bpmnElement="Flow_0hpndlj">
+        <di:waypoint x="1120" y="840" />
+        <di:waypoint x="1120" y="937" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f54oc2_di" bpmnElement="Flow_1f54oc2">
+        <di:waypoint x="1420" y="1110" />
+        <di:waypoint x="1570" y="1110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i4cfnw_di" bpmnElement="Flow_1i4cfnw">
+        <di:waypoint x="1670" y="1110" />
+        <di:waypoint x="1792" y="1110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kc9n7q_di" bpmnElement="Flow_0kc9n7q">
+        <di:waypoint x="1420" y="1327" />
+        <di:waypoint x="1570" y="1327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_154ella_di" bpmnElement="Flow_154ella">
+        <di:waypoint x="1670" y="1327" />
+        <di:waypoint x="1792" y="1327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0233bdk_di" bpmnElement="Flow_0233bdk">
+        <di:waypoint x="1170" y="1327" />
+        <di:waypoint x="1320" y="1327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ek9wkr_di" bpmnElement="Flow_0ek9wkr">
+        <di:waypoint x="880" y="1070" />
+        <di:waypoint x="880" y="840" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_00ojzhq_di" bpmnElement="TextAnnotation_00ojzhq">
+        <dc:Bounds x="1170" y="1212" width="160" height="40" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0zgf74e_di" bpmnElement="TextAnnotation_0zgf74e">
+        <dc:Bounds x="900" y="440" width="150" height="40" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_15e4ci5_di" bpmnElement="TextAnnotation_15e4ci5">
+        <dc:Bounds x="1420" y="990" width="100" height="40" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ra50hh_di" bpmnElement="TextAnnotation_1ra50hh">
+        <dc:Bounds x="1420" y="1200" width="140" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1y9f5x8_di" bpmnElement="TextAnnotation_1y9f5x8">
+        <dc:Bounds x="930" y="680" width="100" height="40" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0pvjck4_di" bpmnElement="TextAnnotation_0pvjck4">
+        <dc:Bounds x="930" y="220" width="100" height="40" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_07t3ivl_di" bpmnElement="Association_07t3ivl">
+        <di:waypoint x="921" y="500" />
+        <di:waypoint x="940" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_08qktuv_di" bpmnElement="Association_08qktuv">
+        <di:waypoint x="918" y="300" />
+        <di:waypoint x="956" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0qrrtqb_di" bpmnElement="Association_0qrrtqb">
+        <di:waypoint x="1161" y="1287" />
+        <di:waypoint x="1198" y="1252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1eyy6ux_di" bpmnElement="Association_1eyy6ux">
+        <di:waypoint x="1408" y="1070" />
+        <di:waypoint x="1446" y="1030" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1jdtv8f_di" bpmnElement="Association_1jdtv8f">
+        <di:waypoint x="1406" y="1287" />
+        <di:waypoint x="1430" y="1260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0gd3ptv_di" bpmnElement="Association_0gd3ptv">
+        <di:waypoint x="918" y="760" />
+        <di:waypoint x="956" y="720" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

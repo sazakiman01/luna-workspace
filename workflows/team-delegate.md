@@ -18,6 +18,7 @@ description: บังคับ Luna ให้เรียกทีมงาน�
 4. **Luna รีวิว:** ตรวจคุณภาพ + เพิ่มความเห็น
 5. **Luna เสนอ:** สรุปให้พี่แมน + 🌙
 6. **บันทึก** `<repo>/Luna/team/daily/YYYY-MM-DD.md` (ใช้ workflow `daily-log`)
+7. **Session Restart:** หลังบันทึก daily log → restart session (ถ้ามีงานถัดไปที่ต่าง domain)
 
 ## งานซับซ้อน
 เรียกหลาย Role ร่วมกันได้ (Primary + Supporting จาก team-config)

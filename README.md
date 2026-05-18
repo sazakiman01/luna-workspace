@@ -28,7 +28,7 @@ Luna จะวิเคราะห์งาน → เรียกทีมง�
 |-----------|-------------|
 | บริษัท | Repo (โปรเจกต์) |
 | เลขาส่วนตัว | **Luna** |
-| ทีมงาน 12 คน | **Orion, Nova, Stella, Nebula, Cosmos, Sirius, Galaxy, Vega, Aurora, Pulsar, Lyra, Polaris** |
+| ทีมงาน 13 คน | **Orion, Nova, Stella, Nebula, Cosmos, Sirius, Galaxy, Vega, Aurora, Pulsar, Lyra, Polaris, Comet** |
 | คู่มือบริษัท | `README.md`, `rules/`, `ARCHITECTURE.md` |
 | งานประจำวัน | `Luna/team/daily/` |
 | การประชุมสรุป | `team/retrospective/` |
@@ -42,15 +42,17 @@ Luna จะวิเคราะห์งาน → เรียกทีมง�
 ```
 luna-workspace/
 ├── 🔧 SYSTEM (ย้ายข้ามเครื่องได้)
+│   ├── .windsurfrules                ← กฎหลักของ Luna (critical config)
 │   ├── rules/                       ← กฎหลักของ Luna
 │   ├── workflows/                   ← คำสั่ง (/weekly-audit, /weekly-retro, ...)
 │   ├── templates/                   ← แม่แบบทุกชนิด + scripts
-│   ├── team/roles/                  ← role definitions (12 คน)
+│   ├── guides/                      ← Windsurf best practices
+│   ├── team/roles/                  ← role definitions (13 คน)
 │   ├── team/<role>/skills/           ← principal skills + basic skills
 │   ├── team/<role>/knowledge/        ← domain knowledge
 │   ├── knowledge-package-generic/    ← universal coding principles
 │   ├── knowledge-package-pmam/       ← PMAM-specific standards
-│   └── Luna/skills/                 ← Luna’s own principal skill
+│   └── Luna/skills/                 ← Luna's own principal skill
 │
 ├── 📊 DATA (เกิดจากการใช้งาน)
 │   ├── Luna/team/daily/             ← บันทึกงานทีมรายวัน
@@ -62,7 +64,8 @@ luna-workspace/
 │   ├── team/retrospective/          ← retro รายสัปดาห์
 │   ├── team/performance.md          ← คะแนนทีม (rubric-calibrated)
 │   ├── team/health-dashboard.md     ← system health ภาพรวม
-│   └── plans/                       ← แผนงานที่กำลังทำ
+│   ├── plans/                       ← แผนงานที่กำลังทำ
+│   └── repo-index/                  ← per-repo state (reviews, processes)
 │
 └── 🔗 MIXED (เริ่มว่าง → เติมจากงานจริง)
     └── team/preferences/<role>.md    ← learnings ของแต่ละ role
@@ -119,6 +122,7 @@ Luna มีทีมงาน 12 คน ทุกคนมี principal skill �
 | **Pulsar** | Project Manager | จัดการ timeline, retro | 8.6 🌟 |
 | **Lyra** | Windsurf Tooling | ปรับแต่งเครื่องมือ, workflows | 9.3 🌟 |
 | **Polaris** | Luna System Auditor | ตรวจสอบคุณภาพ, ความถูกต้อง | 9.3 🌟 |
+| **Comet** | BPMN/Camunda Expert | ออกแบบ workflow, process design | 4.3 🟡 |
 
 > คะแนนใช้ **Scoring Rubric 3-Part** — ดู `templates/scoring-rubric.md`
 > 🌟 Principal (8.5+) · 🟢 Genuine (7.0+) · 🟡 Skeleton (4.0+) · 🔴 Fail (<4.0)
@@ -232,4 +236,4 @@ Luna Principal Elevation Roadmap — **เสร็จครบ 5 phases:**
 
 ---
 
-*อัปเดต: 2026-04-27 — Phase 5 complete, SYSTEM/DATA separation, 12 roles scored 🌙*
+*อัปเดต: 2026-05-18 — Add .windsurfrules, guides/, repo-index/, 13 roles, BPMN processes reorganized 🌙*

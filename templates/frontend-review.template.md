@@ -7,6 +7,10 @@
 **Review Time:** [HH:MM]
 **Review Round:** [N]
 
+**File Naming Convention:** `[component-name]-frontend-review-r[round]-YYYY-MM-DD-[HHMM].md`
+**Example:** `audit-reports-frontend-review-r1-2026-05-12-1745.md`
+**Save Location:** `repo-index/<repo-name>/reviews/frontend/`
+
 ---
 
 ## 🎯 TL;DR สำหรับ Junior Dev (อ่าน 30 วิ)
@@ -323,4 +327,4 @@
 **ถ้ามีคำถาม:** ถามได้เลย ไม่ต้องเกร็ง 🙌
 
 ---
-*Template สำหรับ Frontend Review - ใช้โดย Stella (Frontend Dev)*
+*Template สำหรับ Frontend Review - ใช้โดย K.Sansakrit (Dev Lead)*

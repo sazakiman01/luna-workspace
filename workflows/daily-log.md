@@ -10,7 +10,39 @@ description: บังคับ Luna บันทึก daily note ทุกง�
 
 ---
 
-## 🚨 Auto-Trigger Conditions (บังคับ — ไม่ต้องรอสั่ง)
+## � Auto-Prompt Mode (สำหรับ Luna เรียกใช้ที่สิ้น session)
+
+เมื่อ session จบหรือพี่แมนจบ conversation → Luna ต้องเรียก workflow นี้โดยอัตโนมัติ:
+
+### Trigger Conditions (เมื่อไหร่ต้องเรียก)
+
+ลูน่าต้องเรียก workflow นี้ **ทันที** เมื่อเจอ condition ใด condition หนึ่ง:
+
+| Condition | Action |
+|-----------|--------|
+| **C1** Session จบแล้ว | เรียก workflow `/daily-log` ทันที |
+| **C2** มีงานที่ทำเสร็จ (≥ 1 task) | เรียก workflow `/daily-log` ทันที |
+| **C3** มี decision สำคัญ | เรียก workflow `/daily-log` ทันที |
+| **C4** พี่แมนให้ feedback/correct | เรียก workflow `/daily-log` ทันที |
+| **C5** จบการทำงานของ Role ใด Role หนึ่ง | เรียก workflow `/daily-log` ทันที |
+
+### วิธีเรียก (ใน Luna's POST-RESPONSE PROTOCOL)
+
+เมื่อ session จบ → Luna ต้องทำ:
+
+```
+1. เช็คว่าเข้า condition ใดข้างต้นไหม
+2. ถ้าใช่ → เรียก workflow `/daily-log` โดย:
+   - อ่าน workflows/daily-log.md
+   - ทำตาม Execution steps (ด้านล่าง)
+3. บันทึกเสร็จ → จึงตอบสรุปพี่แมน
+```
+
+**ห้าม:** ตอบสรุปพี่แมนเสร็จแล้วค่อยจำไปบันทึกทีหลัง — บันทึก **ก่อน** ตอบสรุปท้าย
+
+---
+
+## �🚨 Auto-Trigger Conditions (บังคับ — ไม่ต้องรอสั่ง)
 
 ลูน่า/role ต้องเริ่ม daily log **ทันที** เมื่อเจอ trigger ใดข้อหนึ่ง:
 

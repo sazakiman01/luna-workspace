@@ -23,7 +23,24 @@ Principal level AI Assistant coordination และ leadership สำหรั�
 - มี blockers ที่ต้องบันทึกหรือไม่?
 - มี decisions ที่ต้องบันทึกหรือไม่?
 
-## �📋 Principal Level Responsibilities
+## 🔄 Session Management Protocol
+
+### หลังจาก Role Switch
+- **Action:** Restart session หรือ clear context
+- **Purpose:** Avoid context pollution จาก role เก่า
+- **When:** ทุกครั้งที่เปลี่ยน role หลัก
+
+### หลังจากทำงานเสร็จ
+- **Action:** บันทึก daily log → restart session (ถ้ามีงานถัดไปที่ต่าง domain)
+- **Purpose:** ป้องกัน context pollution และ improve accuracy
+- **When:** หลังจากบันทึก daily log เสร็จ และมีงานถัดไปที่ต่าง domain
+
+### เหตุผล
+- Context pollution ทำให้ Luna ตอบผิดหรือ hallucinate
+- Restart session ช่วยให้ Cascade เริ่มต้นด้วย context ใหม่ที่สะอาด
+- Improve consistency และ accuracy ของ responses
+
+## 📋 Principal Level Responsibilities
 
 ### 1. Strategic Decision Making
 - วิเคราะห์ requirement และกำหนด strategy สำหรับ project

@@ -1,7 +1,7 @@
 # [Repo Name] Backend API Review - [Reviewer Name]
 
 **Date:** YYYY-MM-DD
-**Reviewer:** [Reviewer Name] ([Role])
+**Reviewer:** Sansakrit (Dev Lead)
 **Repo:** [repo-name]
 **Scope:** [ขอบเขตการรีวิว เช่น PR #123, Full Repo Audit, Release v2.1.0]
 **Review Time:** [HH:MM]
@@ -62,18 +62,40 @@
 
 ## 📊 Backend API Dimension Scores (ภาพรวมคะแนน)
 
-| ด้าน | Score | Status | หมายเหตุ |
-|------|-------|--------|----------|
-| **API Design** (การออกแบบ API) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Security** (ความปลอดภัย) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Performance** (ความเร็ว) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Error Handling** (การจัดการ error) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Documentation** (เอกสาร) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Testing** (การทดสอบ) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Database Design** (การออกแบบฐานข้อมูล) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Architecture** (โครงสร้าง) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Code Quality** (คุณภาพโค้ด) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
-| **Production Readiness** (พร้อมขึ้น prod) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] |
+| ด้าน | Score | Status | หมายเหตุ | เหตุผลที่ไม่ได้เต็ม (optional) |
+|------|-------|--------|----------|------------------|
+| **API Design** (การออกแบบ API) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Security** (ความปลอดภัย) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Performance** (ความเร็ว) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Error Handling** (การจัดการ error) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Documentation** (เอกสาร) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Testing** (การทดสอบ) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Database Design** (การออกแบบฐานข้อมูล) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Architecture** (โครงสร้าง) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Code Quality** (คุณภาพโค้ด) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+| **Production Readiness** (พร้อมขึ้น prod) | [X]/10 | ✅/⚠️/❌ | [สั้นๆ] | [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่] |
+
+---
+
+## 📐 Scoring Criteria (optional)
+
+> อธิบายวิธีคำนวณคะแนน เพื่อให้เข้าใจว่าทำไมคะแนนไม่เต็ม
+
+**Action Plan vs Dimension Scores:**
+- **Action Plan** = Requirements (ต้องมีถึงจะขึ้น production)
+  - Critical/High/Medium = ต้องแก้ก่อนขึ้น production ❌
+  - Low = ควรแก้ แต่ไม่ block production ⚠️
+  - ไม่มี Critical/High/Medium = พร้อมขึ้น production ✅
+- **Dimension Scores** = Best Practices (คุณภาพโดยรวม)
+  - ไม่ใช่ requirements สำหรับขึ้น production
+  - เป็นคะแนนคุณภาพโดยรวม
+
+**Scoring Guide:**
+- **10/10** = Perfect (มีทั้ง requirements + best practices ครบถ้วน)
+- **9/10** = Excellent (มี requirements ครบ แต่ขาด best practices 1-2 อย่าง)
+- **8/10** = Good (มี requirements ครบ แต่ขาด best practices 3-4 อย่าง)
+- **6-7/10** = Acceptable (มี requirements แต่ขาดหลาย best practices)
+- **<6/10** = Not Ready (ขาด requirements)
 
 ---
 
@@ -134,6 +156,17 @@
 ## 🚀 Deployment Security Audit
 
 > ตรวจสอบว่ามี folder/file ที่ไม่ควรอยู่ใน repo หรือถูก deploy ไป production หรือไม่
+
+### ✅ Checklist (ต้องเช็คทุกครั้ง)
+
+- [ ] **Environment & Secrets** — `.env`, `.env.local`, `.secrets`, credentials
+- [ ] **Development/Editor Configs** — `.vscode/`, `.idea/`, `.claude/`, `.windsurf/`, `.cursor/`
+- [ ] **Source Control & CI/CD** — `.git/`, `.github/`, `.gitlab-ci.yml`
+- [ ] **Documentation & Notes** — `README.md`, `docs/`, `notes/`, `CLAUDE.md`
+- [ ] **Testing & Coverage** — `coverage/`, `test-results/`, `*_test.go`, `*_test.ts`
+- [ ] **Build Artifacts** — `bin/`, `dist/`, `build/`, `.cache/`, `tmp/`
+- [ ] **Database & Logs** — Database dumps, backup files, `logs/`, `*.log`
+- [ ] **Sensitive Data** — Secrets, keys, certificates, credentials in code
 
 ### ✅ สิ่งที่เช็คแล้ว
 
@@ -328,6 +361,10 @@
 ## 📝 Conclusion & Next Steps
 
 **สรุปสั้นๆ:** [2-4 ประโยค ใช้ภาษาง่ายๆ]
+
+**ทำไมไม่ได้ 10/10 (optional):**
+- [ถ้ามีอะไรตกหล่น ระบุได้ที่นี่ เช่น ไม่มี error tracking, ไม่มี monitoring]
+- [ถ้าได้คะแนนเต็ม ไม่ต้องกรอกส่วนนี้]
 
 **ถ้าแก้ตามที่แนะนำ:** จะทำให้ [backend API] [ประโยชน์ที่จะได้รับ]
 

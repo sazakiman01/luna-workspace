@@ -52,7 +52,12 @@ Format:
 - **Occurrences:** [จำนวนครั้ง]
 ```
 
-- *ยังไม่มี anti-patterns*
+### ❌ ไม่บันทึก QA review report ที่ครบถ้วน
+- **เหตุผลที่ผิด:** PMAM testing review (2026-04-23) ได้ Score 3/10 (Critical) แต่ไม่พบ report file ใน repo-index → ทำให้ไม่สามารถ investigate และ fix issues ได้
+- **วิธีที่ถูกต้อง:** ทุก QA review ต้องบันทึก report file ตาม naming convention ใน repo-index พร้อม findings และ recommendations
+- **ครั้งล่าสุดที่ผิด:** 2026-04-23
+- **Context:** PMAM testing & QA review — Score 3/10 (flagged Critical ใน W18 baseline audit)
+- **Occurrences:** 1
 
 ## 📚 Role-Specific Learnings
 
@@ -63,7 +68,7 @@ Format:
 - **[YYYY-MM-DD]** [Learning] — Context: [repo/task]
 ```
 
-- *ยังไม่มี learnings*
+- **[2026-05-06]** QA review report ต้องบันทึกใน repo-index เสมอ — Context: Investigation พบว่า PMAM testing review (2026-04-23, Score 3/10) ไม่มี report file → ทำให้ไม่สามารถ investigate และ fix issues ได้ - Recommendation: ทุก QA review ต้องบันทึก report file ตาม naming convention `[repo-name]-qa-review-r[round]-YYYY-MM-DD-HHMM.md` ใน repo-index พร้อม findings และ recommendations
 
 ## 🔗 Learning Triggers ของ Role นี้
 
