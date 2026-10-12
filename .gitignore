@@ -1,14 +1,42 @@
-﻿# Local backups
+# Luna System — allowlist: เก็บเฉพาะที่จำเป็นให้ระบบทำงาน
+# (ไม่เก็บ memory / log / plan — เครื่องใหม่เรียนรู้ใหม่)
+/*
+
+# --- core config ---
+!/.gitignore
+!/CLAUDE.md
+!/settings.json
+!/luna-statusline.ps1
+
+# --- team / skills / commands / rules ---
+!/agents/
+!/commands/
+!/rules/
+!/skills/
+/skills/synced/
+/skills/.trash/
+
+# --- luna-workspace: เฉพาะเอกสาร/สคริปต์ที่ระบบอ้างถึง ---
+!/luna-workspace/
+/luna-workspace/*
+!/luna-workspace/.gitignore
+!/luna-workspace/README.md
+!/luna-workspace/ARCHITECTURE.md
+!/luna-workspace/rules/
+!/luna-workspace/scripts/
+!/luna-workspace/workflows/
+!/luna-workspace/templates/
+!/luna-workspace/governance/
+!/luna-workspace/team/
+/luna-workspace/team/*
+!/luna-workspace/team/team-config.md
+!/luna-workspace/team/roles/
+
+# --- never ---
 *.bak
-*.zip
-*.tmp
-
-# OS
-Thumbs.db
-.DS_Store
-
-# Editor
-.vscode/settings.json
-
-# Logs
-*.log
+*.bak-*
+.credentials.json
+settings.local.json
+*.env
+*.key
+*.pem

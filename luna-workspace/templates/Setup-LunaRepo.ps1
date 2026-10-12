@@ -1,0 +1,107 @@
+﻿# Setup-LunaRepo.ps1
+# ตั้งค่า Luna + Team ให้กับ repo ใหม่ (Hybrid structure)
+#
+# การใช้งาน:
+#   . "C:\Users\sansakritsuk\.claude\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo" -ProjectName "MyNewRepo"
+#
+# Parameters:
+#   -RepoPath       path ของ repo (required)
+#   -ProjectName    ชื่อโปรเจกต์ (default = ชื่อโฟลเดอร์)
+#   -Force          overwrite ไฟล์ที่มีอยู่แล้ว
+
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$RepoPath,
+
+    [string]$ProjectName = "",
+
+    [switch]$Force
+)
+
+$ErrorActionPreference = "Stop"
+$GlobalRoot = "$env:USERPROFILE\.claude\luna-workspace"
+
+# Validate
+if (-not (Test-Path $RepoPath)) {
+    Write-Error "Repo path ไม่พบ: $RepoPath"
+    exit 1
+}
+
+if (-not (Test-Path $GlobalRoot)) {
+    Write-Error "Global Luna workspace ไม่พบ: $GlobalRoot`nกรุณาติดตั้ง Luna ก่อน (copy luna-workspace folder ไปที่ $env:USERPROFILE\.claude\)"
+    exit 1
+}
+
+if ([string]::IsNullOrWhiteSpace($ProjectName)) {
+    $ProjectName = Split-Path $RepoPath -Leaf
+}
+
+Write-Host "?? Luna Repo Setup" -ForegroundColor Cyan
+Write-Host "   Repo: $RepoPath" -ForegroundColor Gray
+Write-Host "   Name: $ProjectName" -ForegroundColor Gray
+Write-Host ""
+
+# 1. สร้างโครงสร้างโฟลเดอร์
+$dirs = @(
+    "$RepoPath\.claude\rules",
+    "$RepoPath\Luna\daily",
+    "$RepoPath\Luna\retrospective",
+    "$RepoPath\team\daily",
+    "$RepoPath\team\roles"
+)
+
+foreach ($d in $dirs) {
+    if (-not (Test-Path $d)) {
+        New-Item -ItemType Directory -Path $d -Force | Out-Null
+        Write-Host "  ? Created: $($d.Replace($RepoPath, '<repo>'))" -ForegroundColor Green
+    } else {
+        Write-Host "  • Exists:  $($d.Replace($RepoPath, '<repo>'))" -ForegroundColor DarkGray
+    }
+}
+
+# 2. Copy project-context.md จาก template
+$ctxDest = "$RepoPath\.claude\rules\project-context.md"
+if ((Test-Path $ctxDest) -and -not $Force) {
+    Write-Host "  • Exists:  <repo>\.claude\rules\project-context.md (ไม่แตะ, ใช้ -Force ถ้าต้องการ overwrite)" -ForegroundColor DarkGray
+} else {
+    $tpl = Get-Content "$GlobalRoot\templates\project-context.template.md" -Raw
+    $tpl = $tpl -replace '\[PROJECT_NAME\]', $ProjectName
+    Set-Content -Path $ctxDest -Value $tpl -Encoding UTF8
+    Write-Host "  ? Created: <repo>\.claude\rules\project-context.md (ต้องแก้ tech stack + constraints)" -ForegroundColor Green
+}
+
+# 2b. Copy team-local.md จาก template
+$teamLocalDest = "$RepoPath\team\team-local.md"
+$teamLocalTpl = "$GlobalRoot\templates\team-local.template.md"
+if ((Test-Path $teamLocalDest) -and -not $Force) {
+    Write-Host "  • Exists:  <repo>\team\team-local.md" -ForegroundColor DarkGray
+} elseif (Test-Path $teamLocalTpl) {
+    $tpl2 = Get-Content $teamLocalTpl -Raw
+    $tpl2 = $tpl2 -replace '\[PROJECT_NAME\]', $ProjectName
+    Set-Content -Path $teamLocalDest -Value $tpl2 -Encoding UTF8
+    Write-Host "  ? Created: <repo>\team\team-local.md (list specialist ของ repo นี้)" -ForegroundColor Green
+}
+
+# 3. สร้างไฟล์เริ่มต้น (ว่างๆ)
+$files = @{
+    "$RepoPath\Luna\decisions.md"   = "# Decisions - $ProjectName`n`n*บันทึกการตัดสินใจสำคัญของโปรเจกต์*`n"
+    "$RepoPath\Luna\feedback.md"    = "# Feedback - $ProjectName`n`n*Feedback จากพี่แมน + บทเรียน*`n"
+    "$RepoPath\team\performance.md" = "# Team Performance - $ProjectName`n`n*Performance ของแต่ละ Role ใน repo นี้*`n"
+}
+
+foreach ($f in $files.GetEnumerator()) {
+    if ((Test-Path $f.Key) -and -not $Force) {
+        Write-Host "  • Exists:  $($f.Key.Replace($RepoPath, '<repo>'))" -ForegroundColor DarkGray
+    } else {
+        Set-Content -Path $f.Key -Value $f.Value -Encoding UTF8
+        Write-Host "  ? Created: $($f.Key.Replace($RepoPath, '<repo>'))" -ForegroundColor Green
+    }
+}
+
+Write-Host ""
+Write-Host "? Luna พร้อมใช้งานที่ $RepoPath แล้วค่ะ ??" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "ขั้นต่อไป:" -ForegroundColor Yellow
+Write-Host "  1. เปิด repo ใน Claude Code" -ForegroundColor White
+Write-Host "  2. แก้ <repo>\.claude\rules\project-context.md ให้ตรงกับโปรเจกต์" -ForegroundColor White
+Write-Host "  3. เริ่มงานได้เลย — Luna จะอ่าน rules/team จาก global อัตโนมัติ" -ForegroundColor White
