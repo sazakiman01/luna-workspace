@@ -68,6 +68,17 @@
             "shell": "bash"
           }
         ]
+      },
+      {
+        "matcher": "^Agent$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/agent-log.ps1\"",
+            "timeout": 10,
+            "shell": "bash"
+          }
+        ]
       }
     ],
     "Stop": [

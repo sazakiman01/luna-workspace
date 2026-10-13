@@ -38,6 +38,7 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
   - ต่อ role: จำนวนรายงาน / `recorded` / `none` / `deny` จาก `luna-workspace/Luna/logs/memory-gate-YYYY-MM.tsv` (สุ่มอ่าน entry ที่ `recorded` ว่ามี Evidence จริง — ห้ามใช้จำนวนเป็นเป้า)
   - entry ที่ไม่มี **Evidence** · `MEMORY.md` ไหนเกิน 200 บรรทัด
   - บันทึกตัวเลขลง retro file ทุกสัปดาห์ → ดู trend
+- **🪶 Haiku trial** (จนถึง 2026-11-10 · เกณฑ์ `rules/luna-core.md` → Haiku trial): จาก `Luna/logs/agent-calls-*.tsv` นับงาน `haiku` · จำนวน `[redo]` · ปัญหาที่เจอ → บันทึกลง retro file
 - **Skill Promotion:** เจอ workflow/procedure ซ้ำ ≥ 3 ครั้ง → เสนอ promote เป็น skill (กฎเต็มดู `rules/luna-core.md` → Skill Promotion)
 - วาง focus สัปดาห์หน้า
 

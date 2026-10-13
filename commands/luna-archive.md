@@ -3,6 +3,7 @@ description: รัน Luna auto-archive (manual trigger) — archive daily logs
 when_to_use: ใช้เมื่อ SessionStart เตือนว่ามี daily log ค้างเกิน 14 วัน หรือก่อนรัน /weekly-retro
 argument-hint: "[-CheckOnly]"
 allowed-tools: Bash
+model: haiku
 ---
 
 รัน auto-archive script:

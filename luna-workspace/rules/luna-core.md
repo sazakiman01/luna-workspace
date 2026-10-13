@@ -339,6 +339,13 @@ type อื่นใช้รูปแบบเดียวกัน: `user` (wo
 
 *อัปเดต 2026-06-12 — เอา Fable ออก (กิน token สูงมาก) → critical roles ย้ายมาใช้ opus*
 
+**🪶 Haiku trial (2026-10-13 → ทบทวน 2026-11-10):**
+- ใช้กับ: ค้นไฟล์/grep หลายที่, เก็บตัวเลขก่อน retro/audit, สรุป/แปล/จัดรูปแบบ, คำถาม docs ตรงไปตรงมา, `/luna-archive`
+- ห้ามใช้กับ: งาน critical, verify/audit, architecture, debug ซับซ้อน, code gen ใหญ่
+- **Log อัตโนมัติ:** PostToolUse hook บน `Agent` (`scripts/agent-log.ps1`) → `Luna/logs/agent-calls-YYYY-MM.tsv` (เวลา · subagent · model · effort · description)
+- **เกณฑ์ผ่าน (วัดตอนทบทวน):** งาน haiku ≥ 10 ครั้ง · ต้องทำซ้ำด้วย model ที่สูงกว่า ≤ 10% · ไม่มีกรณีข้อมูลผิดที่หลุดไปถึงพี่แมน → ผ่าน = ใช้ถาวร + ขยายขอบเขต · ไม่ผ่าน = ถอยกลับ (ลบกฎใน CLAUDE.md + `model:` ใน luna-archive)
+- **Redo:** ถ้าลูน่าต้องส่งงานเดิมซ้ำด้วย model สูงกว่า → description ขึ้นต้น `[redo]` เพื่อให้นับได้
+
 **Effort (2026-10-13 · อิง code.claude.com/docs/en/model-config):** Opus/Sonnet 5.5 default = `medium` และ docs ระบุ Opus 5.5 medium ≥ Opus 5 high → opus roles ใช้ `medium` ยกเว้น **Polaris + Sirius = `high`** (verify/audit) และ **Nebula + Atlas = `high`** (งานหลัก = schema/money) · งาน critical หรือแก้ bug ในโค้ดเดิม → Luna ส่ง per-call `effort: high` (ทุก tier) (ลำดับ: env `CLAUDE_CODE_EFFORT_LEVEL` > per-call > frontmatter > session) · `xhigh`/`max` เฉพาะเมื่อวัดแล้วดีขึ้น · ตารางจริงดู `CLAUDE.md` / `agents/*.md`
 
 | Model | ใช้กับ | หลักคิด |

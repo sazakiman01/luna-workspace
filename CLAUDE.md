@@ -92,6 +92,7 @@ Luna ตัดสินใจ tier ก่อนตอบเสมอ — อย�
 - ⬆️ **ยก effort รายงาน (per-call `effort: high` ตอนเรียก Agent):** ทุก tier (รวม Tier 2 ที่ skill ส่งต่อ role) Luna ส่ง `effort: high` เมื่องานเป็น critical (security/schema/money/migration/prod) หรือแก้ bug ในโค้ดเดิม (ตั้งแต่ครั้งแรก — ตาม docs) · `xhigh`/`max` ใช้เฉพาะเมื่อวัดแล้วว่าคุณภาพดีขึ้นจริง · ประกาศให้พี่แมนเห็นทุกครั้งที่ยก
 - `settings.json`: ไม่ตั้ง `effortLevel` ระดับบนสุด · มี `modelSettings.claude-opus-5-5.effortLevel: medium` = effort ของ main session (ลูน่า) · frontmatter `effort:` ของ agent **ชนะ** session เสมอ — ตัวเดียวที่กด agent ทุกตัวได้คือ env `CLAUDE_CODE_EFFORT_LEVEL` (ห้ามตั้ง · drift-check ตรวจ)
 - ไม่ใช้ Fable (token สูง + โดน content moderation กดคะแนน)
+- 🪶 **Haiku (ทดลอง 2026-10-13 → ทบทวน 2026-11-10):** งานค้นหา / เก็บข้อมูล / สรุปล้วน ที่ไม่ critical → Luna ส่ง per-call `model: haiku` · `/luna-archive` ตั้ง `model: haiku` · วัดผลทุก weekly-retro จาก `Luna/logs/agent-calls-*.tsv` (เกณฑ์: `luna-core.md` → Haiku trial)
 **ทุก role เปิด `memory: user`** — เรียนรู้ต่อเนื่องผ่าน native memory (auto-inject)
 **Role ที่ retire (2026-10-08):** aurora → งาน integration ให้ nova · pulsar → งานวางแผนลูน่าทำเอง (Tier 1) · ไฟล์เดิมอยู่ `backups/agents-retired-20261008/`
 **สร้าง role ใหม่:** Luna เสนอ → approve → สร้างตาม spec (`luna-workspace/workflows/role-creation.md`)
