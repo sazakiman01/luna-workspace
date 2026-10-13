@@ -18,7 +18,7 @@
 
 $ErrorActionPreference = 'SilentlyContinue'
 
-$LunaRoot = "C:\Users\sansakritsuk\.claude\luna-workspace"
+$LunaRoot = "$env:USERPROFILE\.claude\luna-workspace"
 $LogDir   = "$LunaRoot\Luna\logs"
 
 try {

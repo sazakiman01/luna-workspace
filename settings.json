@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(powershell.exe -NoProfile -File \"C:\\Users\\sansakritsuk\\.claude\\luna-workspace\\scripts\\auto-archive.ps1\"*)",
-      "Bash(powershell.exe -NoProfile -File \"C:\\Users\\sansakritsuk\\.claude\\luna-workspace\\scripts\\session-reminders.ps1\"*)"
+      "Bash(powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/auto-archive.ps1\"*)",
+      "Bash(powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/session-reminders.ps1\"*)"
     ],
     "deny": [
       "Read(**/.env)",
@@ -42,15 +42,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -File \"C:\\Users\\sansakritsuk\\.claude\\luna-workspace\\scripts\\auto-archive.ps1\" -CheckOnly",
+            "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/auto-archive.ps1\" -CheckOnly",
             "timeout": 30,
-            "statusMessage": "Luna: ตรวจ context bloat"
+            "statusMessage": "Luna: ตรวจ context bloat",
+            "shell": "bash"
           },
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -File \"C:\\Users\\sansakritsuk\\.claude\\luna-workspace\\scripts\\session-reminders.ps1\"",
+            "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/session-reminders.ps1\"",
             "timeout": 30,
-            "statusMessage": "Luna: ตรวจ daily log + retro"
+            "statusMessage": "Luna: ตรวจ daily log + retro",
+            "shell": "bash"
           }
         ]
       }
@@ -61,8 +63,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -File \"C:\\Users\\sansakritsuk\\.claude\\luna-workspace\\scripts\\worklog-append.ps1\"",
-            "timeout": 10
+            "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/worklog-append.ps1\"",
+            "timeout": 10,
+            "shell": "bash"
           }
         ]
       }
@@ -72,9 +75,23 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -File \"C:\\Users\\sansakritsuk\\.claude\\luna-workspace\\scripts\\log-gate.ps1\"",
+            "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/log-gate.ps1\"",
             "timeout": 10,
-            "statusMessage": "Luna: ตรวจ decision log"
+            "statusMessage": "Luna: ตรวจ decision log",
+            "shell": "bash"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^SubagentHandback$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/memory-gate.ps1\"",
+            "timeout": 10,
+            "shell": "bash"
           }
         ]
       }
@@ -82,7 +99,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "powershell.exe -NoProfile -File C:/Users/sansakritsuk/.claude/luna-statusline.ps1",
+    "command": "powershell.exe -NoProfile -File ~/.claude/luna-statusline.ps1",
     "padding": 0
   },
   "extraKnownMarketplaces": {

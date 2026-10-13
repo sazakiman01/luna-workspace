@@ -1,6 +1,6 @@
 # Luna System — Global Memory (CLAUDE.md)
 
-*Last updated: 2026-07-23 — Health check remediation (retire legacy learning files, doc consistency)*
+*Last updated: 2026-10-13 — Evidence-gated learning + memory gate + effort tier ตาม Opus 5.5 docs*
 
 ---
 
@@ -81,13 +81,16 @@ Luna ตัดสินใจ tier ก่อนตอบเสมอ — อย�
 
 | Roles | `model:` | `effort:` | เหตุผล |
 |---|---|---|---|
-| orion, nova, nebula, polaris, atlas, galaxy, rigel, sirius | `opus` | `high` | critical / วิเคราะห์ยาว (sirius = adversarial verifier) |
+| orion, nova, galaxy, rigel | `opus` | `medium` | วิเคราะห์ลึก — Opus 5.5 medium ≥ Opus 5 high (docs) · งาน critical ยกเป็น high รายครั้ง |
+| nebula, atlas | `opus` | `high` | งานหลักเป็น critical อยู่แล้ว (schema / money) |
+| polaris, sirius | `opus` | `high` | verifier / auditor — งานที่การ verify สำคัญ (docs แนะนำ high) |
 | stella, vega, cosmos, comet, vela | `sonnet` | `medium` | execution — agentic coding ชนะ + คุ้ม token |
 | lyra | `inherit` | *(ไม่ตั้ง)* | ตาม main session โดยตั้งใจ |
 
 - alias resolve เป็นรุ่นล่าสุดเองอัตโนมัติ — **ห้าม pin เลขรุ่น**
-- ✅ **`effort:` ต่อ agent override session ได้** (`low|medium|high|xhigh|max`) — ตั้งแล้วทั้ง 13 role (lyra ไม่ตั้ง)
-- `settings.json` **ไม่ตั้ง `effortLevel`** — ค่าระดับ session จะกด agent ทุกตัวลงเงียบๆ ให้แต่ละ agent คุมของตัวเองแทน
+- ✅ **`effort:` ต่อ agent override session ได้** (`low|medium|high|xhigh|max`) — ตั้งแล้วทุก role ยกเว้น lyra
+- ⬆️ **ยก effort รายงาน (per-call `effort: high` ตอนเรียก Agent):** ทุก tier (รวม Tier 2 ที่ skill ส่งต่อ role) Luna ส่ง `effort: high` เมื่องานเป็น critical (security/schema/money/migration/prod) หรือแก้ bug ในโค้ดเดิม (ตั้งแต่ครั้งแรก — ตาม docs) · `xhigh`/`max` ใช้เฉพาะเมื่อวัดแล้วว่าคุณภาพดีขึ้นจริง · ประกาศให้พี่แมนเห็นทุกครั้งที่ยก
+- `settings.json`: ไม่ตั้ง `effortLevel` ระดับบนสุด · มี `modelSettings.claude-opus-5-5.effortLevel: medium` = effort ของ main session (ลูน่า) · frontmatter `effort:` ของ agent **ชนะ** session เสมอ — ตัวเดียวที่กด agent ทุกตัวได้คือ env `CLAUDE_CODE_EFFORT_LEVEL` (ห้ามตั้ง · drift-check ตรวจ)
 - ไม่ใช้ Fable (token สูง + โดน content moderation กดคะแนน)
 **ทุก role เปิด `memory: user`** — เรียนรู้ต่อเนื่องผ่าน native memory (auto-inject)
 **Role ที่ retire (2026-10-08):** aurora → งาน integration ให้ nova · pulsar → งานวางแผนลูน่าทำเอง (Tier 1) · ไฟล์เดิมอยู่ `backups/agents-retired-20261008/`
@@ -99,7 +102,7 @@ Luna ตัดสินใจ tier ก่อนตอบเสมอ — อย�
 
 **2 ระดับ:**
 - **Luna (ส่วนกลาง):** เมื่อพี่แมน feedback/correct → บันทึกลง auto-memory (`type: feedback`) ทันที
-- **แต่ละ Role:** มี persistent memory ตัวเอง (`memory: user` → `~/.claude/agent-memory/<role>/`) — บันทึก pattern/learning หลังจบงานอัตโนมัติ
+- **แต่ละ Role:** มี persistent memory ตัวเอง (`memory: user` → `~/.claude/agent-memory/<role>/`) — บันทึกเฉพาะบทเรียนที่มีหลักฐาน (gate บังคับถามก่อนส่งรายงาน) · เกณฑ์: `luna-workspace/rules/team-protocol.md` → Continuous Learning
 
 *(ระบบเดิม hypothesis.md/insights.md/preferences.md ยกเลิกแล้ว)*
 
@@ -118,7 +121,7 @@ Luna ตัดสินใจ tier ก่อนตอบเสมอ — อย�
 
 ## 🗂️ Path Convention
 
-- **Global:** `C:\Users\sansakritsuk\.claude\luna-workspace\`
+- **Global:** `~/.claude/luna-workspace/`
 - **Per-Repo:** `<repo>/Luna/` — decisions.md, feedback.md, team/daily/
 
 **กฎ:** อ่าน global เสมอ / เขียน decisions-feedback-daily ที่ `<repo>/Luna/` เมื่อทำงานในโปรเจกต์ — งานที่เกี่ยวกับตัวระบบ Luna เอง (ไม่ผูกกับ repo ไหน) เขียนที่ `luna-workspace/Luna/team/daily/` แทน

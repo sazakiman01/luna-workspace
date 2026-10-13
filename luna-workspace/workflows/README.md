@@ -53,7 +53,7 @@ description: [คำอธิบายสั้น]
 
 - `rules/team-protocol.md` — กติกาการทำงานของทีม
 - `team/team-config.md` — Role catalog สำหรับ team-delegate
-- memory tool (Luna ส่วนกลาง) — ปลายทางของ feedback-learn
+- auto memory (Luna ส่วนกลาง) — ปลายทางของ feedback-learn
 - `Luna/retrospective/` — ปลายทางของ weekly-retro (team retro แยกไฟล์ retired 2026-08-17)
 
 ---

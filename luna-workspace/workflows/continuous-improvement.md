@@ -5,7 +5,7 @@ description: Master cadence ที่เชื่อม daily-log, weekly-audit,
 # /continuous-improvement
 
 **Purpose:** ป้องกัน system decay — ทำให้ทุก workflow ทำงานเป็นจังหวะ ไม่ต้องพึ่ง "จำได้"
-**Owner:** Luna (coordinate) + Polaris (audit) + Pulsar (retro)
+**Owner:** Luna (coordinate + retro) + Polaris (audit)
 **Created:** 2026-04-27 (Phase 5)
 
 ---
@@ -22,12 +22,12 @@ description: Master cadence ที่เชื่อม daily-log, weekly-audit,
 │                                                       │
 │   WEEKLY (Friday or on-demand)                       │
 │   ├── weekly-audit.md → Polaris audit                │
-│   ├── weekly-retro.md → Pulsar retro                 │
+│   ├── weekly-retro.md → Luna retro                   │
 │   └── scoring-rubric.md → calibrate if task done     │
 │                                                       │
 │   MONTHLY (1st week)                                 │
 │   ├── Knowledge maturity review (L0-L3)              │
-│   ├── Hypothesis cleanup (>4 weeks = drop)           │
+│   ├── Memory consolidation (stale/ซ้ำ/ขัดกัน)        │
 │   └── Growth path check (promote eligible roles)     │
 │                                                       │
 │   QUARTERLY (every 12 weeks)                         │
@@ -70,12 +70,12 @@ description: Master cadence ที่เชื่อม daily-log, weekly-audit,
 | 1 | Gather data (daily logs 7 days) | — |
 | 2 | Behavior compliance check | — |
 | 3 | **Team performance check ด้วย rubric Part B** | Score ทุก active role ด้วย 5 dimensions |
-| 4 | Learning system check | Check hypothesis staleness |
+| 4 | Learning system check | agent-memory สด/dormant + feedback ซ้ำ (ดู team-protocol.md) |
 | 5 | **Knowledge maturity spot-check** | Spot-check 2-3 roles ด้วย Part C |
 | 6 | Generate report | `team/audits/YYYY-Www-weekly.md` |
 | 7 | Luna review + present พี่แมน | Decisions + action items |
 
-### Part B: Weekly Retro (Pulsar)
+### Part B: Weekly Retro (Luna)
 
 **Trigger:** Sunday evening หรือ Monday morning (หลัง audit)
 **Workflow:** `workflows/weekly-retro.md`
@@ -85,7 +85,7 @@ description: Master cadence ที่เชื่อม daily-log, weekly-audit,
 | 1 | Consume audit findings |
 | 2 | Run team retro |
 | 3 | Run Luna retro |
-| 4 | Apply changes (hypothesis promotion, stale cleanup) |
+| 4 | Apply changes (บันทึก/แก้ memory ที่มีหลักฐาน, ลบ memory ที่ stale) |
 | 5 | Present + record decisions |
 
 **Sequence:** Audit (Friday) → Retro (Sunday/Monday) → ใช้ findings จาก audit เป็น input ของ retro
@@ -102,7 +102,7 @@ description: Master cadence ที่เชื่อม daily-log, weekly-audit,
 | Check | Action | Threshold |
 |-------|--------|-----------|
 | **M1: Knowledge Maturity Review** | Score ทุก role ด้วย Part C (L0-L3) | Target: ≥ 4 roles at L2+ |
-| **M2: Hypothesis Cleanup** | ลบ hypothesis ที่ > 4 weeks + no evidence increase | Drop if stale |
+| **M2: Memory Consolidation** | รัน `workflows/memory-consolidation.md` + ตรวจ agent-memory/<role>/ + memory ส่วนกลาง (ซ้ำ/ขัดกัน/MEMORY.md > 200 บรรทัด) | Merge / แก้ / ลบ |
 | **M3: Growth Path Check** | ตรวจ roles ที่ trigger promotion conditions | See Growth Path System |
 | **M4: Rubric Calibration** | Polaris ทบทวน score consistency ย้อนหลัง | Adjust weights if needed |
 | **M5: Backlog Review** | Check pending items (Galaxy skeleton, KA3-KA5) | Prioritize or drop |
@@ -137,9 +137,9 @@ role task output ───┘         │
                     weekly-audit.md (Polaris)
                               │
                               ▼
-                    weekly-retro.md (Pulsar)
+                    weekly-retro.md (Luna)
                               │
-                              ├──► memory tool (Luna ส่วนกลาง — บันทึก/consolidate)
+                              ├──► auto memory (Luna ส่วนกลาง — บันทึก/consolidate)
                               ├──► agent-memory ของ role (memory: user)
                               └──► performance.md (update)
                                         │
@@ -160,7 +160,7 @@ role task output ───┘         │
 | **No daily log** | 2+ task days without log | Luna self-flag + Polaris audit |
 | **No weekly audit** | Skip 2 consecutive weeks | Luna alert พี่แมน |
 | **No retro** | Skip 2 consecutive weeks | Luna alert พี่แมน |
-| **Stale hypothesis** | > 4 weeks no evidence | Drop at monthly review |
+| **Feedback ซ้ำ** | feedback เรื่องเดิมซ้ำ ≥ 2 ครั้ง | memory ไม่ได้ผล → แก้ entry ให้ชัด หรือยกเป็น rule/hook |
 | **Score inflation** | Rubric dimension all 2/2 for 4+ weeks | Polaris investigate — too lenient? |
 | **Score stagnation** | Same score 4+ weeks despite activity | Check if rubric captures growth |
 | **Active rate drop** | < 50% roles active in 2 weeks | Review delegation patterns |
@@ -180,4 +180,5 @@ role task output ───┘         │
 | ดู system health รวม | `/luna-audit` หรือ `luna-dashboard` |
 
 ---
-*Phase 5 — Continuous Improvement Loop | Luna + Polaris + Pulsar*
+*Phase 5 — Continuous Improvement Loop | Luna + Polaris*
+*อัปเดต 2026-10-13: retire Pulsar/hypothesis → retro โดย Luna, learning = native memory*

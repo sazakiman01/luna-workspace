@@ -58,7 +58,7 @@ Luna เสนอพร้อมข้อมูล:
 name: <lowercase-name>
 description: <Role ไทย (ชื่อ, อายุ)> — <domain keywords สำหรับ auto-delegate>
 model: <opus | sonnet | inherit>
-effort: <high (opus) | medium (sonnet) — ไม่ตั้งถ้า inherit>
+effort: <medium (default) | high (role ที่งานหลักเป็น critical หรือ verifier) — ไม่ตั้งถ้า inherit · ดูตารางใน CLAUDE.md>
 color: <purple|blue|cyan|green|yellow|orange|pink|red>
 tools: <allowlist — อย่าใส่ Agent (subagent เรียกไม่ได้)>
 memory: user
@@ -69,9 +69,13 @@ memory: user
 
 ตอบไทย, นำเสนอเป็น <Name>, รายงานกลับ Luna เมื่อเสร็จ — <deliverable>
 
-**🧠 Memory (เรียนรู้ต่อเนื่อง):**
-- ก่อนเริ่มงาน: ทบทวน memory ตัวเอง — ใช้ pattern ที่เคยเจอ
-- หลังจบงานสำคัญ: บันทึก decision + เหตุผล, pattern, anti-pattern ลง memory
+**🧠 Memory (เรียนรู้ต่อเนื่อง — evidence-gated):**
+- ก่อนเริ่มงาน: ใช้ `MEMORY.md` ที่ inject มา + เปิด topic file ที่เกี่ยวกับงานนี้ — <หัวข้อ domain ที่ควรทบทวน>
+- บันทึกเฉพาะเมื่อมีหลักฐาน (verify ผ่าน/ไม่ผ่าน · พี่แมนยืนยัน/แก้ · gotcha ที่เสียแรงเกิน 1 รอบ) — เน้น: <หัวข้อ domain ที่ควรบันทึก>
+- ห้ามบันทึก: สิ่งที่หาได้จาก code/git/เอกสาร · activity · สมมติฐานที่ยังไม่พิสูจน์ · secret/PII
+- รูปแบบ: `MEMORY.md` = index บรรทัดละ 1 entry → topic file มี Why / How to apply / Evidence (ที่มา·วันที่·repo) · ค้นของเดิมก่อนเขียน แก้แทนสร้างซ้ำ
+- เกณฑ์เต็ม: `luna-workspace/rules/team-protocol.md` → Continuous Learning
+- จบรายงานทุกครั้งด้วยบรรทัด `🧠 Memory: บันทึก <หัวข้อ>` หรือ `🧠 Memory: ไม่มีบทเรียนใหม่` (memory gate ตรวจบรรทัดนี้)
 
 **Load on demand:** `luna-workspace/team/roles/<name>.md`
 ```
@@ -90,3 +94,4 @@ memory: user
 1. `name` ไม่ซ้ำกับ role เดิม
 2. ทดสอบ delegate: เรียก role ใหม่ผ่าน Agent tool → ตอบถูก persona
 3. team-config + CLAUDE.md อัพเดตตรงกัน
+4. เพิ่มชื่อ role ใน `$roles` regex ของ `luna-workspace/scripts/memory-gate.ps1` (retire role → เอาออก) ไม่งั้น memory gate ไม่คุม role นี้

@@ -11,7 +11,7 @@ allowed-tools: Agent, Read
 
 ทำตาม Luna team-delegate workflow:
 
-1. **อ่าน team config:** `C:\Users\sansakritsuk\.claude\luna-workspace\team\team-config.md`
+1. **อ่าน team config:** `~/.claude/luna-workspace/team/team-config.md`
 2. **วิเคราะห์ domain** ของงาน → จับคู่กับ Primary Role
 3. **ประกาศทีม:** "ฉันจะเรียก [Role ชื่อไทย] - [ตำแหน่ง] มาทำให้ค่ะ"
 4. **เรียก subagent** ด้วย Agent tool, subagent_type = ชื่อ role (เช่น stella, nova, galaxy)

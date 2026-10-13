@@ -13,20 +13,20 @@ allowed-tools: Agent, Read, Glob, Grep
 **Scope:**
 1. **Persona + Tier compliance** — ลูน่าตอบเป็นลูน่า (ไทย, ลงท้าย ค่ะ/คะ, 🌙) ไหม · ประกาศ tier ก่อนงาน Tier 2+ ไหม · เลือก tier ถูกไหม (ไม่ default ไป Tier 3)
 2. **Role invocation** — เรียก Role ตรงสายไหม / ข้ามไหม / ใช้ Tier 3 กับงานที่ Tier 1 พอไหม
-3. **Learning loop health** — `agent-memory/<role>/` role ไหนสด role ไหน dormant · role ไหนไม่เคยเขียนเลย
-4. **Central memory** — `projects/C--Users-sansakritsuk--claude/memory/MEMORY.md` มี entry ค้าง/ผิด/ซ้ำไหม · consolidation รายเดือนรันหรือยัง
+3. **Learning loop health** — `agent-memory/<role>/` role ไหนสด role ไหน dormant · role ไหนไม่เคยเขียนเลย · entry ไหนไม่มี Evidence / ขัดกัน · feedback เรื่องเดิมซ้ำ ≥ 2 (เกณฑ์+ตัวชี้วัด: `luna-workspace/rules/team-protocol.md` → Continuous Learning)
+4. **Central memory** — `projects/<project>/memory/MEMORY.md` มี entry ค้าง/ผิด/ซ้ำไหม · consolidation รายเดือนรันหรือยัง
 5. **Decision log coverage** — 7 วันล่าสุดมี session ที่ควรมี log แต่ไม่มีไหม (เทียบกับ `Luna/logs/worklog-*.tsv`)
 6. **Context economy** — CLAUDE.md size (เพดาน 200 บรรทัด), repo-index size, ไฟล์ใหญ่ผิดปกติ
 7. **Doc drift** — จำนวน role / ชื่อไทย / model-effort tier ตรงกับ `agents/*.md` ไหม
 
 **Evidence sources:**
-- `C:\Users\sansakritsuk\.claude\CLAUDE.md`
-- `C:\Users\sansakritsuk\.claude\agents\*.md` — ความจริง runtime ของ role/model/effort
-- `C:\Users\sansakritsuk\.claude\agent-memory\<role>\` — per-role learning
-- `C:\Users\sansakritsuk\.claude\projects\C--Users-sansakritsuk--claude\memory\MEMORY.md`
-- `C:\Users\sansakritsuk\.claude\luna-workspace\Luna\team\daily\` (active root — **ห้าม** recurse เข้า `_archived/`)
-- `C:\Users\sansakritsuk\.claude\luna-workspace\Luna\logs\worklog-*.tsv` — หลักฐานอัตโนมัติว่าแตะไฟล์อะไรวันไหน
-- `C:\Users\sansakritsuk\.claude\luna-workspace\Luna\retrospective\`
+- `~/.claude/CLAUDE.md`
+- `~/.claude/agents/*.md` — ความจริง runtime ของ role/model/effort
+- `~/.claude/agent-memory/<role>/` — per-role learning
+- `~/.claude/projects/<project>/memory/MEMORY.md`
+- `~/.claude/luna-workspace/Luna/team/daily/` (active root — **ห้าม** recurse เข้า `_archived/`)
+- `~/.claude/luna-workspace/Luna/logs/worklog-*.tsv` — หลักฐานอัตโนมัติว่าแตะไฟล์อะไรวันไหน
+- `~/.claude/luna-workspace/Luna/retrospective/`
 
 > ระบบ hypothesis/insights/preferences **retired 2026-07-23** — ห้ามอ้างอิงไฟล์พวกนี้ ของเก่าอยู่ใน `Luna/archive/`
 

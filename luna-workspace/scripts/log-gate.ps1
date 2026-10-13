@@ -34,7 +34,7 @@ $Enforce = $true           # enabled 2026-08-07 — observe log proved the Stop 
                            # (HEARTBEAT + WOULD BLOCK on the same day it was installed)
 $MinDistinctFiles = 3      # read-only / discussion turns never gate
 
-$LunaRoot = "C:\Users\sansakritsuk\.claude\luna-workspace"
+$LunaRoot = "$env:USERPROFILE\.claude\luna-workspace"
 $LogDir   = "$LunaRoot\Luna\logs"
 $DailyDir = "$LunaRoot\Luna\team\daily"
 $RetroDir = "$LunaRoot\Luna\retrospective"

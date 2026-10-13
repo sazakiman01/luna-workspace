@@ -8,7 +8,7 @@ allowed-tools: Bash
 รัน auto-archive script:
 
 ```
-powershell.exe -NoProfile -File "C:\Users\sansakritsuk\.claude\luna-workspace\scripts\auto-archive.ps1" $ARGUMENTS
+powershell.exe -NoProfile -File "$HOME/.claude/luna-workspace/scripts/auto-archive.ps1" $ARGUMENTS
 ```
 
 **ตัวอย่าง:**

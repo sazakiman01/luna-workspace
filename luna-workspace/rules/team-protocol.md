@@ -75,33 +75,58 @@ Luna เสนอ → พี่แมน approve → Luna สร้างตา�
 
 ## Continuous Learning
 
-### หลักการ
-แต่ละ role มี **persistent memory** ของตัวเอง (`memory: user` → `~/.claude/agent-memory/<role>/`)
-Claude inject `MEMORY.md` เข้า context อัตโนมัติทุกครั้งที่ role ทำงาน — ไม่ re-discover สิ่งที่เคยรู้
+*แหล่งความจริงเดียวของหลักการเรียนรู้ — agents/*.md, luna-core.md, workflows อ้างมาที่นี่ (อิง Claude Code docs: sub-agents / memory)*
 
-### กฎ
+### กลไก (native ของ Claude Code)
+- **Role:** `memory: user` → `~/.claude/agent-memory/<role>/` — เลือก `user` (ไม่ใช่ `project`) เพราะ role ทำงานข้ามหลาย repo · บริบทเฉพาะ repo อยู่ `<repo>/Luna/`
+- **Luna ส่วนกลาง:** `~/.claude/projects/<project>/memory/` — role มองไม่เห็น memory นี้
+- **โหลดอัตโนมัติแค่ `MEMORY.md` 200 บรรทัด / 25KB แรก** · topic file ไม่โหลด → อ่านเองเมื่อเกี่ยว
+- เขียนด้วย Read/Write/Edit ปกติ (ไม่มี tool พิเศษ) · ต้องเปิด auto memory (default) ไม่งั้น `memory:` ไม่มีผล
+- Memory = **context ไม่ใช่การบังคับ** → พฤติกรรมที่ต้องเกิดทุกครั้ง ให้ยกเป็น rule/hook
 
-**ก่อนเริ่มงาน:**
-Role ทบทวน memory ตัวเอง (auto-inject) — ใช้ pattern / gotcha ที่เคยเจอ
+### ✅ บันทึกเมื่อ (ต้องมีหลักฐานอย่างน้อย 1 ข้อ)
+1. **verify ผลแล้ว** — test/run ผ่านหรือไม่ผ่าน → บันทึกสิ่งที่ได้ผล / สาเหตุที่พลาด (ไม่ผ่าน = บันทึก **ทันที**: ครั้งหน้าทำต่างยังไง + why)
+2. **พี่แมนยืนยันหรือแก้** — approve / correct / redirect · role ไม่ได้คุยกับพี่แมนตรง → **ลูน่าเป็นคนส่งต่อ**: feedback ที่เจาะจง role ใด ลูน่าเขียนลง `agent-memory/<role>/` เอง (หรือใส่ใน brief รอบถัดไปให้ role บันทึก)
+3. **gotcha ที่เสียแรงเกิน 1 รอบ** — สิ่งที่ถ้ารู้ก่อนจะไม่เสียเวลา
 
-**หลังจบงานสำคัญ:**
-Role บันทึก learning ลง memory ตัวเองแบบกระชับ:
-- decision + เหตุผล
-- pattern / anti-pattern
-- gotcha / limitation
-- library / path สำคัญ
+### ❌ ห้ามบันทึก
+- สิ่งที่หาได้จาก code / git / CLAUDE.md / เอกสาร (ให้ชี้ path แทน)
+- activity log ("วันนี้ทำ X")
+- สมมติฐานที่ยังไม่พิสูจน์ · ความเห็นที่ไม่มีผลลัพธ์รองรับ
+- secret / PII / ข้อมูลลูกค้า (`rules/data-handling.md`)
 
-**หลัง task พลาด / verify ไม่ผ่าน (immediate reflection — Reflexion):**
-Role เขียน reflection 1-2 บรรทัดลง memory **ทันที** (ไม่รอ weekly):
-- ครั้งหน้าทำต่างออกไปยังไง + why
-- เป็น verbal learning ที่ใช้เป็น context รอบถัดไป
+### 📝 รูปแบบ
+- `MEMORY.md` = **index** บรรทัดละ 1 entry: `- [หัวข้อ](file.md) — hook สั้น`
+- เนื้อหาอยู่ topic file (1 ไฟล์ 1 เรื่อง):
+```
+<ข้อเท็จจริง/บทเรียน 1-3 บรรทัด>
+**Why:** ทำไมถึงเป็นแบบนี้
+**How to apply:** ครั้งหน้าใช้ยังไง / เมื่อไหร่
+**Evidence:** <ที่มา: verify/พี่แมน/incident> · YYYY-MM-DD · <repo หรือ path>
+```
 
-**Luna ไม่ต้อง gate ทุก entry** — role จัดการ memory ตัวเอง (native mechanism)
-แต่ pattern ที่เป็น **cross-role / สำคัญระดับทีม** → Luna บันทึกใน Claude memory tool ส่วนกลางด้วย
+### 🧹 ดูแลรักษา
+- ก่อนเขียน **ค้นของเดิมก่อน** — มีแล้ว → แก้ไฟล์เดิม ไม่สร้างซ้ำ
+- ของใหม่ขัดกับของเก่า → แก้/ลบของเก่า (อย่าปล่อยให้ขัดกัน)
+- `MEMORY.md` ใกล้ 200 บรรทัด → รวม/ตัด entry
+- Luna ไม่ gate ทุก entry — แต่ pattern **cross-role / ระดับทีม** Luna บันทึกซ้ำใน memory ส่วนกลาง
 
-**Quarterly review:**
-Polaris distill memory + decision logs → ดู `luna-workspace/workflows/quarterly-audit.md`
+### 🔔 กลไกบังคับ
+- **PreToolUse hook บน `SubagentHandback`** (`scripts/memory-gate.ps1`): role ส่งรายงานที่ไม่มีบรรทัด `🧠 Memory: ...` → ถูกปฏิเสธ 1 ครั้งพร้อมคำถาม "มีบทเรียนที่มีหลักฐานไหม" → บันทึก (ถ้ามี) + เติมบรรทัดแล้วส่งใหม่ · agent ที่ไม่ใช่ role ของลูน่า (Explore ฯลฯ) ผ่านเลย · fail-safe: script พัง = ปล่อยผ่าน
+- ทดสอบ 2026-10-13 (Desktop): vela ถูกปฏิเสธ 1 ครั้ง → ส่งใหม่พร้อม `🧠 Memory: ไม่มีบทเรียนใหม่` ✅ · Explore ไม่ถูกบล็อก ✅
+- *ไม่ใช้ SubagentStop เพราะใน Desktop ยิงหลัง handback → role ไม่ได้ทำต่อ*
+
+### 📏 วัดว่าเก่งขึ้นจริง (weekly-retro / `/luna-audit`)
+| ตัวชี้วัด | ทิศที่ดี |
+|---|---|
+| feedback เรื่องเดิมซ้ำ (พี่แมนต้องบอกซ้ำ) | ↓ ลดลง — ซ้ำ ≥ 2 = memory ไม่ได้ผล → แก้ entry หรือยกเป็น rule/hook |
+| สัดส่วน `none` ต่อ role (จาก `Luna/logs/memory-gate-YYYY-MM.tsv`) | ดูคู่กับคุณภาพ — `none` สูงไม่ผิด ถ้างานไม่มีหลักฐานใหม่จริง · ห้ามใช้เป็นเป้าบังคับเขียน |
+| entry ที่ไม่มี Evidence | 0 |
+| ขนาด `MEMORY.md` | < 200 บรรทัด |
+
+**Quarterly:** Polaris distill memory + decision logs → `workflows/quarterly-audit.md`
 
 ---
 *อัปเดต 2026-05-25: Phase 1 — เปลี่ยนจาก "บังคับ delegate ทุก domain" เป็น 4-Tier Delegation*
 *อัปเดต 2026-05-29: เปลี่ยน Continuous Learning เป็น native `memory:` field (Claude Code spec)*
+*อัปเดต 2026-10-13: Continuous Learning = evidence-gated + index/topic file + memory gate (PreToolUse บน SubagentHandback) + ตัวชี้วัด (อิง Claude Code docs)*

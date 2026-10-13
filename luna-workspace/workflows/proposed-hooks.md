@@ -75,37 +75,32 @@
 
 ---
 
-## Hook 3 (Optional): Subagent Memory Reminder (SubagentStop)
+## Hook 3: Subagent Memory Gate (PreToolUse บน SubagentHandback) — ✅ ติดตั้งแล้ว 2026-10-13
 
-### จุดประสงค์
-เมื่อ role (subagent) ทำงานเสร็จ → log เตือนว่า "role บันทึก learning ลง memory แล้วหรือยัง"
-เสริม learning loop (memory instruction อยู่ใน agent body แล้ว — hook นี้เป็น safety net)
+**ทำอะไร:** role ส่งรายงานโดยไม่มีบรรทัด `🧠 Memory: ...` → ปฏิเสธพร้อมถามเรื่องบทเรียนที่มีหลักฐาน → role บันทึก (ถ้ามี) + เติมบรรทัด → ส่งใหม่ผ่าน
+**ทำไมไม่ใช้ SubagentStop:** ทดสอบใน Desktop แล้ว SubagentStop ยิงหลัง `SubagentHandback` → `block` ไม่ทำให้ role ทำงานต่อ
+**Script:** `luna-workspace/scripts/memory-gate.ps1` · กรองเฉพาะ role ใน `agents/*.md` (regex ใน script — เพิ่ม/retire role ต้องแก้ด้วย) · fail-safe ปล่อยผ่านเมื่อ error · log: `Luna/logs/memory-gate-YYYY-MM.tsv` · debug: `LUNA_GATE_DEBUG=1`
 
-### Config Snippet
 ```json
 {
-  "hooks": {
-    "SubagentStop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '[LUNA HOOK] Subagent finished — did the role update its agent-memory with new patterns/learnings?'"
-          }
-        ]
-      }
-    ]
-  }
+  "PreToolUse": [
+    {
+      "matcher": "^SubagentHandback$",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "powershell.exe -NoProfile -File \"$HOME/.claude/luna-workspace/scripts/memory-gate.ps1\"",
+          "timeout": 10,
+          "shell": "bash"
+        }
+      ]
+    }
+  ]
 }
 ```
 
-### หมายเหตุ
-- `SubagentStop` fire เมื่อ subagent จบ (matcher = agent type name, ว่าง = ทุก role)
-- ใช้ `echo` เท่านั้น — ปลอดภัย
-- Memory instruction อยู่ใน agent body แล้ว → hook นี้เป็น optional reinforcement
-- ต้องเช็คว่า Desktop App รองรับ SubagentStop hook ไหม (อาจเป็น CLI feature)
+**ผลทดสอบ:** vela ถูกปฏิเสธ 1 ครั้ง → ส่งใหม่สำเร็จ · Explore ผ่านโดยไม่ถูกบล็อก
 
 ---
-*สร้าง 2026-05-25: Phase 3 — proposal เท่านั้น ยังไม่ apply*
 *อัปเดต 2026-05-29: เพิ่ม Hook 3 (SubagentStop memory reminder)*
+*อัปเดต 2026-10-13: Hook 3 → PreToolUse gate บน SubagentHandback (ติดตั้ง + ทดสอบแล้ว) แทน SubagentStop*

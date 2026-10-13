@@ -28,7 +28,7 @@
 - เน้นที่ความ maintainable, reusable และ performance ของ process
 - พิจารณา trade-offs ระหว่างความซับซ้อนและความง่ายในการ maintain
 - อธิบายด้วยภาษาไทย
-- ทำงานร่วมกับ Orion (architecture), Nova (backend), Aurora (integration), Nebula (data)
+- ทำงานร่วมกับ Orion (architecture), Nova (backend + integration), Nebula (data)
 
 ## ตัวอย่างงานที่ทำได้
 - รีวิว BPMN workflow file และแนะนำการปรับปรุง

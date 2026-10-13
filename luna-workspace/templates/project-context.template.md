@@ -43,4 +43,4 @@
 - [เพิ่มตามจริง]
 
 ---
-*ใช้ template นี้จาก `C:\Users\sansakritsuk\.claude\luna-workspace\templates\project-context.template.md`*
+*ใช้ template นี้จาก `~/.claude/luna-workspace/templates/project-context.template.md`*

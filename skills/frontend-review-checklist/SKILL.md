@@ -9,7 +9,7 @@ disable-model-invocation: true
 > ถ้าต้อง deep review (architecture, framework-specific patterns) → อ่าน `reference.md` ข้างไฟล์นี้
 # Frontend Review — Summary
 
-> Full version: `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\frontend-review.full.md` (load only when deep review needed)
+> Full version: `~/.claude/luna-workspace/templates/_full/frontend-review.full.md` (load only when deep review needed)
 
 **Header (fill in):** Date, Reviewer, Repo, Scope, Review Round
 **Save Location:** `<repo>/Luna/reviews/frontend/<component>-frontend-review-r<round>-YYYY-MM-DD.md`
@@ -109,7 +109,7 @@ disable-model-invocation: true
 ---
 
 ## Escalation
-ถ้าต้อง deep dive (framework deep checks: Redux Toolkit store/selector/middleware, React patterns, TypeScript generics, UI library specific, Formik+Yup, BPMN.js integration, accessibility static analysis detail, full deployment audit 8 categories) ให้ load `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\frontend-review.full.md`
+ถ้าต้อง deep dive (framework deep checks: Redux Toolkit store/selector/middleware, React patterns, TypeScript generics, UI library specific, Formik+Yup, BPMN.js integration, accessibility static analysis detail, full deployment audit 8 categories) ให้ load `~/.claude/luna-workspace/templates/_full/frontend-review.full.md`
 
 ---
 *Frontend Review Template (Summary) — K.Sansakrit (Dev Lead) / Stella (Frontend Dev)*

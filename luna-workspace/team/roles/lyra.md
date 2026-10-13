@@ -58,5 +58,4 @@
 ## ทำงานร่วมกับ Role อื่น
 - **Orion (Architect):** ปรึกษาเรื่อง team structure / protocol design
 - **Cosmos (DevOps):** แยกขอบเขต — Cosmos = Firebase/deployment, Lyra = Claude Code tooling
-- **Pulsar (PM):** ร่วม plan workflow ที่ช่วย coordination
 - **Luna:** รายงานปัญหา tool / เสนอ improvement

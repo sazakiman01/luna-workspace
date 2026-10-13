@@ -9,7 +9,7 @@ disable-model-invocation: true
 > ถ้าต้อง deep review (architecture, framework-specific patterns) → อ่าน `reference.md` ข้างไฟล์นี้
 # Backend API Review — Summary
 
-> Full version: `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\backend-api-review.full.md` (load only when deep review needed)
+> Full version: `~/.claude/luna-workspace/templates/_full/backend-api-review.full.md` (load only when deep review needed)
 
 **Header (fill in):** Date, Reviewer, Repo, Scope, Review Round
 
@@ -113,7 +113,7 @@ disable-model-invocation: true
 ---
 
 ## Escalation
-ถ้าต้อง deep dive (framework-specific: Go+Fiber, JWT/OAuth2 flow detail, repository pattern, transaction strategy, integration test mocking, full deployment audit 8 categories) ให้ load `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\backend-api-review.full.md`
+ถ้าต้อง deep dive (framework-specific: Go+Fiber, JWT/OAuth2 flow detail, repository pattern, transaction strategy, integration test mocking, full deployment audit 8 categories) ให้ load `~/.claude/luna-workspace/templates/_full/backend-api-review.full.md`
 
 ---
 *Backend API Review Template (Summary) — Nova (Backend Dev)*

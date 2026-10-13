@@ -13,13 +13,13 @@
 
 ## 🗂️ Path Convention (Hybrid Global + Per-Repo)
 
-**Claude Code native (โหลดเอง ไม่ต้องสั่งอ่าน):** `C:\Users\sansakritsuk\.claude\`
+**Claude Code native (โหลดเอง ไม่ต้องสั่งอ่าน):** `~/.claude/`
 - `CLAUDE.md` — persona + 4-Tier summary + team table (โหลดทุก session)
 - `rules/*.md` — Luna core guardrails + data-handling + team protocol (โหลดทุก session)
 - `agents/*.md` — **ความจริง runtime ของ role/model/effort** — เอกสารอื่นเป็น mirror
 - `skills/`, `commands/`, `settings.json`, `agent-memory/<role>/`
 
-**Luna workspace (เอกสาร อ่านเมื่อจำเป็น):** `C:\Users\sansakritsuk\.claude\luna-workspace\`
+**Luna workspace (เอกสาร อ่านเมื่อจำเป็น):** `~/.claude/luna-workspace/`
 - `workflows/` — team-delegate, checklist-daily-log, weekly-retro, feedback-learn
 - `team/` — team-config.md (รายชื่อ role ที่เป็นทางการ), roles/, context/
 - `Luna/` — claude-updates.md, archive/, retrospective/, team/daily/, logs/ (งานระบบ Luna เองที่ไม่ผูก repo)
@@ -204,7 +204,8 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 - **Slash commands** — `~/.claude/commands/`: `/daily-log` `/team-delegate` `/team-spawn` `/luna-audit` `/luna-archive` `/weekly-retro`
   *(commands ถูก merge เป็น skills แล้ว — ของเดิมยังใช้ได้ และรับ `allowed-tools` / `model` / `effort` / `when_to_use` ได้)*
 - **Skills** — `~/.claude/skills/` — review router (Tier 2) + `*-checklist` ที่ agent preload ผ่าน `skills:`
-- **Hooks** — `settings.json`: SessionStart (archive check + reminders) · PostToolUse (worklog) · Stop (decision-log gate)
+- **Path ข้ามเครื่อง (2026-10-13):** hook/statusLine ใช้ `"shell": "bash"` + `"$HOME/.claude/..."` / `~/.claude/...` · script `.ps1` ใช้ `$env:USERPROFILE` · เอกสารใช้ `~/.claude/` — ห้าม hard-code `C:\Users\<ชื่อ>`
+- **Hooks** — `settings.json`: SessionStart (archive check + reminders) · PreToolUse `SubagentHandback` (memory gate) · PostToolUse (worklog) · Stop (decision-log gate)
 - **Source of truth** — `luna-workspace/` (personas, workflows, templates, governance)
 
 ---
@@ -229,9 +230,12 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 
 ---
 
-## 🧠 Memory (Claude Memory Tool)
+## 🧠 Memory (Native Auto Memory)
 
-*(ระบบเดิม hypothesis.md / insights.md / preferences.md ยกเลิกแล้ว — ใช้ Claude memory tool แทน)*
+*(ระบบเดิม hypothesis.md / insights.md / preferences.md ยกเลิกแล้ว — ใช้ native auto memory แทน)*
+
+> **หลักการเต็ม (เกณฑ์หลักฐาน · ห้ามบันทึก · รูปแบบ index+topic file · ดูแลรักษา · ตัวชี้วัด):** `rules/team-protocol.md` → Continuous Learning — ใช้ชุดเดียวกันทั้ง Luna และ role
+> สรุป: บันทึกเฉพาะสิ่งที่ **มีหลักฐาน** และ **หาจาก code/git/CLAUDE.md ไม่ได้** · ทุก entry มี Why / How to apply / Evidence
 
 ### เมื่อใด Save Memory
 
@@ -256,32 +260,28 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 - ก่อนตัดสินใจสำคัญ (tech choice, architecture) → recall relevant entries
 - พี่แมนอ้างถึงงานเก่า / decision เก่า → recall `type=feedback` + `type=project`
 
-### ตัวอย่าง Memory Entries
+### ตัวอย่าง Memory Entries (รูปแบบเต็ม: `rules/team-protocol.md` → Continuous Learning)
 
+`MEMORY.md` (index):
 ```
-type=feedback
-พี่แมน correct: ห้าม commit โดยไม่ถามก่อน แม้จะมั่นใจ 100%
-Why: ป้องกัน unintended history บน main branch
-How to apply: ทุกครั้งที่จะ commit ให้ขอ confirm พี่แมนก่อนเสมอ
+- [ห้าม commit โดยไม่ถาม](feedback_commit-confirm.md) — ขอ confirm พี่แมนก่อน commit ทุกครั้ง
 ```
 
+`feedback_commit-confirm.md` (topic file):
 ```
-type=user
-พี่แมนชอบ: เห็น diff ก่อน apply — อย่า apply ทันทีโดยไม่แสดง preview
-Evidence: correct ซ้ำ 2 ครั้ง (2026-04-15, 2026-05-10)
+---
+name: feedback_commit-confirm
+description: ห้าม commit โดยไม่ถามพี่แมนก่อน แม้มั่นใจ 100%
+metadata:
+  type: feedback
+---
+ห้าม commit โดยไม่ถามก่อน แม้จะมั่นใจ 100%
+**Why:** ป้องกัน history ที่พี่แมนไม่ได้ตั้งใจบน main branch
+**How to apply:** ก่อน commit ทุกครั้ง แสดงรายการไฟล์ + ข้อความ commit แล้วรอ confirm
+**Evidence:** พี่แมน correct · 2026-05-10 · <repo>
 ```
 
-```
-type=project
-repo: pos-system | stack: React + Vite + LIFF + Cloud Functions + Firestore
-deadline: 2026-07-01 | PM: พี่แมน | Stakeholder: ร้าน X (5 สาขา)
-```
-
-```
-type=reference
-Linear workspace: luna-team | Grafana: internal-monitoring.company.com
-LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็จ)
-```
+type อื่นใช้รูปแบบเดียวกัน: `user` (working style), `project` (stack/deadline/stakeholder — ไม่ใช่สิ่งที่อ่านจาก code ได้), `reference` (ระบบภายนอก — ชี้ชื่อ/ที่อยู่ ไม่ใส่ credential)
 
 ---
 
@@ -339,9 +339,11 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 
 *อัปเดต 2026-06-12 — เอา Fable ออก (กิน token สูงมาก) → critical roles ย้ายมาใช้ opus*
 
+**Effort (2026-10-13 · อิง code.claude.com/docs/en/model-config):** Opus/Sonnet 5.5 default = `medium` และ docs ระบุ Opus 5.5 medium ≥ Opus 5 high → opus roles ใช้ `medium` ยกเว้น **Polaris + Sirius = `high`** (verify/audit) และ **Nebula + Atlas = `high`** (งานหลัก = schema/money) · งาน critical หรือแก้ bug ในโค้ดเดิม → Luna ส่ง per-call `effort: high` (ทุก tier) (ลำดับ: env `CLAUDE_CODE_EFFORT_LEVEL` > per-call > frontmatter > session) · `xhigh`/`max` เฉพาะเมื่อวัดแล้วดีขึ้น · ตารางจริงดู `CLAUDE.md` / `agents/*.md`
+
 | Model | ใช้กับ | หลักคิด |
 |-------|--------|---------|
-| **opus** | Orion, Nova, Nebula, Polaris, Atlas, Galaxy, Sirius | งาน critical + ผลกระทบถาวร + วิเคราะห์ยาว (architecture/transaction/schema/audit/finance) + deep reasoning — Sirius = adversarial verifier (เสมอผู้ทำ ไม่ด้อยกว่า) |
+| **opus** | Orion, Nova, Nebula, Polaris, Atlas, Galaxy, Rigel, Sirius | งาน critical + ผลกระทบถาวร + วิเคราะห์ยาว (architecture/transaction/schema/audit/finance) + deep reasoning — Sirius = adversarial verifier (เสมอผู้ทำ ไม่ด้อยกว่า) |
 | **sonnet** | Stella, Vega, Cosmos, Comet, Vela | execution เร็ว-คุ้ม |
 | **inherit** | Lyra | ตามโมเดลหลักของ session |
 
@@ -350,7 +352,7 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 ---
 
 ## Claude Code Integration
-- Memory tool (`create_memory`) สำหรับ feedback/preferences ข้าม session
+- Memory = ไฟล์ markdown ใน `~/.claude/projects/<project>/memory/` เขียนด้วย Write/Edit ปกติ (ไม่มี tool `create_memory`) — `MEMORY.md` เป็น index บรรทัดละ 1 entry, โหลดแค่ 200 บรรทัด/25KB แรก, topic file อ่านเมื่อจำเป็น
 - Track updates ของ Claude Code ใน `claude-updates.md`
 - ใช้ Skills/Workflows เพื่อบังคับ pattern
 

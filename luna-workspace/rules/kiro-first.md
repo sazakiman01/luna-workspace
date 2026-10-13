@@ -10,7 +10,7 @@
 **เมื่อธงเปิด** งานที่ไม่ต้องแก้ไฟล์ ให้ **offload ไป Kiro (claude-sonnet-5) ก่อนเสมอ** แทนที่จะทำเองด้วย token Claude
 
 ```powershell
-powershell.exe -NoProfile -File "C:\Users\sansakritsuk\.claude\luna-workspace\scripts\kiro-offload.ps1" -Prompt "<โจทย์>" [-Tools read] [-Cwd <path>] [-Effort <tier>]
+powershell.exe -NoProfile -File "$HOME/.claude/luna-workspace/scripts/kiro-offload.ps1" -Prompt "<โจทย์>" [-Tools read] [-Cwd <path>] [-Effort <tier>]
 ```
 
 | งาน | ส่ง Kiro? | Tools |

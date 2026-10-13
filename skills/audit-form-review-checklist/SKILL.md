@@ -9,7 +9,7 @@ disable-model-invocation: true
 > ถ้าต้อง deep review (architecture, framework-specific patterns) → อ่าน `reference.md` ข้างไฟล์นี้
 # Audit Form Review — Summary
 
-> Full version: `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\audit-form-review.full.md` (load only when deep review needed)
+> Full version: `~/.claude/luna-workspace/templates/_full/audit-form-review.full.md` (load only when deep review needed)
 
 **Header (fill in):** Date, Reviewer, Repo, Form Name/Version, Scope, Review Round
 **Save Location:** `<repo>/Luna/reviews/audit-form/<form>-audit-form-review-r<round>-YYYY-MM-DD.md`
@@ -110,7 +110,7 @@ disable-model-invocation: true
 ---
 
 ## Escalation
-ถ้าต้อง deep dive (schema/DB mapping detail, scoring engine verification ทีละสูตร, conditional logic matrix, BPMN/Camunda form integration, full traceability audit) ให้ load `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\audit-form-review.full.md` — หรือ delegate ตาม scope: schema → Nebula+Nova, UX → Vega+Stella, process → Comet
+ถ้าต้อง deep dive (schema/DB mapping detail, scoring engine verification ทีละสูตร, conditional logic matrix, BPMN/Camunda form integration, full traceability audit) ให้ load `~/.claude/luna-workspace/templates/_full/audit-form-review.full.md` — หรือ delegate ตาม scope: schema → Nebula+Nova, UX → Vega+Stella, process → Comet
 
 ---
 *Audit Form Review Template (Summary) — Galaxy (Business Analyst)*

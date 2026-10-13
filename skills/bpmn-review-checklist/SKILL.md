@@ -9,7 +9,7 @@ disable-model-invocation: true
 > ถ้าต้อง deep review (architecture, framework-specific patterns) → อ่าน `reference.md` ข้างไฟล์นี้
 # BPMN Workflow Review — Summary
 
-> Full version: `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\bpmn-review.full.md` (load only when deep review needed)
+> Full version: `~/.claude/luna-workspace/templates/_full/bpmn-review.full.md` (load only when deep review needed)
 
 **Header (fill in):** Date, Reviewer, Repo, Scope, Review Round
 **Save Location:** `<repo>/Luna/reviews/bpmn/<process>-bpmn-review-r<round>-YYYY-MM-DD.md`
@@ -110,7 +110,7 @@ disable-model-invocation: true
 ---
 
 ## Escalation
-ถ้าต้อง deep dive (5-pillar architecture, ADR rejected alternatives, cross-system flow, performance forecast 6-12mo, migration path/reversibility, framework deep checks เช่น Camunda 8.x, BPMN 2.0 event/gateway/task type details) ให้ load `C:\Users\sansakritsuk\.claude\luna-workspace\templates\_full\bpmn-review.full.md`
+ถ้าต้อง deep dive (5-pillar architecture, ADR rejected alternatives, cross-system flow, performance forecast 6-12mo, migration path/reversibility, framework deep checks เช่น Camunda 8.x, BPMN 2.0 event/gateway/task type details) ให้ load `~/.claude/luna-workspace/templates/_full/bpmn-review.full.md`
 
 ---
 *BPMN Review Template (Summary) — Comet (BPMN/Camunda Expert)*

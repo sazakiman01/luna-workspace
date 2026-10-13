@@ -16,7 +16,7 @@ description: Weekly audit of Luna system + team performance by Polaris
 
 - `<repo>/Luna/team/daily/*.md` — last 7 days
 - `luna-workspace/team/performance.md`
-- memory tool (Luna ส่วนกลาง) — feedback/learnings ที่บันทึกไว้
+- auto memory (Luna ส่วนกลาง) — feedback/learnings ที่บันทึกไว้
 - `~/.claude/agent-memory/<role>/` — agent-memory ของแต่ละ role
 - Previous week audit (ถ้ามี)
 
@@ -52,7 +52,7 @@ description: Weekly audit of Luna system + team performance by Polaris
 ## Step 4: Learning System Check
 
 - Stale memory entries (ไม่ได้ใช้ / ขัดแย้งกับพฤติกรรมจริง) → consolidate หรือลบ?
-- Pattern ใน agent-memory ของ role ที่ควร sync ขึ้น memory tool ส่วนกลาง?
+- Pattern ใน agent-memory ของ role ที่ควร sync ขึ้น auto memory ส่วนกลาง?
 - Memory entries ซ้ำซ้อน/ขัดแย้งกันเอง?
 - **NEW (Phase 5):** Knowledge maturity spot-check 2-3 roles ด้วย rubric Part C
 - **NEW (Monthly M1):** Full knowledge maturity review ทุก role (1st week of month)

@@ -18,7 +18,7 @@ param(
 )
 
 $ErrorActionPreference = 'Continue'
-$LunaRoot = "C:\Users\sansakritsuk\.claude\luna-workspace"
+$LunaRoot = "$env:USERPROFILE\.claude\luna-workspace"
 $ArchiveDir = "$LunaRoot\Luna\archive"
 $LogDir = "$LunaRoot\Luna\logs"
 $LogFile = "$LogDir\$(Get-Date -Format 'yyyy-MM-dd')-auto-archive.log"
@@ -246,7 +246,7 @@ if (Test-Path $DailyDir) {
 }
 
 # === 3. CLAUDE.md ===
-$ClaudeMd = "C:\Users\sansakritsuk\.claude\CLAUDE.md"
+$ClaudeMd = "$env:USERPROFILE\.claude\CLAUDE.md"
 if (Test-Path $ClaudeMd) {
     $lines = (Get-Content $ClaudeMd | Measure-Object -Line).Lines
     Write-Log "CLAUDE.md: $lines lines"

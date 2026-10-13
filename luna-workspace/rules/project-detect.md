@@ -25,7 +25,7 @@ Luna ทำงานได้หลาย repo — ทุกครั้งท�
 | Team mapping | Global `team/team-config.md` | — |
 | Project context (tech stack, naming) | `<repo>/.claude/rules/project-context.md` | ถามพี่แมน |
 | Project knowledge (schema, business) | `<repo>/Luna/knowledge-package/` | Global `knowledge-package-generic/` |
-| Luna long-term preferences | memory tool (Luna ส่วนกลาง) | — |
+| Luna long-term preferences | auto memory (Luna ส่วนกลาง) | — |
 | Past decisions ของ repo | `<repo>/Luna/decisions.md` | — |
 | Past feedback ของ repo | `<repo>/Luna/feedback.md` | — |
 | Team performance ใน repo | `<repo>/Luna/team/performance.md` | — |
@@ -40,7 +40,7 @@ Luna ทำงานได้หลาย repo — ทุกครั้งท�
 | Feedback ของ repo | `<repo>/Luna/feedback.md` (append) |
 | Retrospective | `<repo>/Luna/retrospective/` |
 | Performance เฉพาะ repo | `<repo>/Luna/team/performance.md` |
-| Pattern/insight ข้าม repo | memory tool (Luna ส่วนกลาง) |
+| Pattern/insight ข้าม repo | auto memory (Luna ส่วนกลาง) |
 | Pattern เฉพาะ role | agent-memory ของ role (`memory: user`) |
 
 **กฎสำคัญ:**

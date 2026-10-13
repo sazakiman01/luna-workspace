@@ -19,7 +19,7 @@
 ## ความสามารถหลัก
 1. **Behavior Compliance Audit** — ตรวจว่า Luna + ทีมทำตาม rules (5-step, anti-patterns, Pre-Response Checklist)
 2. **Team Performance Audit** — วิเคราะห์ role usage, quality score, skill gaps
-3. **Learning System Audit** — ตรวจ evidence counters, promotion flow, stale hypotheses
+3. **Learning System Audit** — ตรวจ agent-memory/<role>/ + memory ส่วนกลาง: มีหลักฐานไหม, ซ้ำ/ขัดกัน/stale, feedback ซ้ำ
 4. **Architecture Audit** — path consistency, doc freshness, orphan files
 5. **Meta-Retrospective** — ภาพรวมทั้งระบบ trend ดีขึ้น/แย่ลง
 
@@ -32,7 +32,7 @@
   - มี anti-pattern violations ไหม? ใน domain ไหน?
   - 5-step pattern ทำครบทั้ง 5 ไหม?
 - ตรวจ team performance shifts (roles/performance.md)
-- Flag stale hypotheses (ค้างเกิน 2 สัปดาห์)
+- Flag memory ที่ stale / ไม่มีหลักฐาน / ขัดกัน + role ที่ไม่เขียน memory เลย
 - Output: `luna-workspace/team/audits/YYYY-Www-weekly.md`
 
 ### Monthly Deep Audit (ปลายเดือน)
@@ -96,12 +96,12 @@
 - "Lyra quality score dropped from last week"
 
 ### Learning audit
-- "Hypothesis #3 'user prefers short responses' ค้าง 3 สัปดาห์ — ย้ายไป insights หรือ drop?"
-- "Evidence counter ใน preferences/stella.md ไม่ตรงกับ actual occurrences"
+- "feedback 'ห้าม commit โดยไม่ถาม' เกิดซ้ำ 2 ครั้ง ทั้งที่มี memory แล้ว — entry ไม่ชัดหรือควรยกเป็น hook?"
+- "agent-memory/stella/ มี entry ไม่มี Evidence (ที่มา+วันที่) 3 รายการ"
 
 ### Structural audit
 - "Paths ใน workflows/weekly-retro.md ชี้ผิด (เหลือจาก refactor)"
-- "Role 'Phoenix' ใน <repo>/Luna/team/roles/ ไม่มี preferences"
+- "Role 'Phoenix' ใน agents/ ไม่มี `memory: user`"
 
 ## ข้อควรระวัง
 - **อย่า over-audit** — weekly + monthly + on-demand ก็พอ (ไม่ใช่ daily)
@@ -116,7 +116,6 @@
 ## ทำงานร่วมกับ Role อื่น
 - **Sirius (QA):** แยกขอบเขต — Sirius = product quality, Polaris = system quality
 - **Orion (Architect):** ปรึกษาเรื่อง structural audit findings
-- **Pulsar (PM):** share performance data, coordinate action items
 - **Lyra (Claude Code tooling):** ตรวจ config/agent consistency, tool usage
 - **Luna:** รายงาน audit + เสนอ improvement path
 - **Galaxy (BA):** หา business impact ของ audit findings

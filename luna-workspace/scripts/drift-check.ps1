@@ -15,7 +15,7 @@
 $ErrorActionPreference = 'SilentlyContinue'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-$Root    = "C:\Users\sansakritsuk\.claude"
+$Root    = "$env:USERPROFILE\.claude"
 $W       = "$Root\luna-workspace"
 $Exclude = '\\(_archived|archive|audits|retrospective|plans)\\'
 
@@ -62,6 +62,12 @@ if ($settings.PSObject.Properties.Name -contains 'effortLevel') {
     Write-Host "DRIFT: settings.json มี effortLevel = '$($settings.effortLevel)' อีกแล้ว" -ForegroundColor Yellow
     Write-Host "       /effort เขียนค่านี้ลงไปและ persist ข้ามทุก session -> กด effort: ของทุก agent ที่ต่ำกว่า"
 }
+
+if ($settings.env -and ($settings.env.PSObject.Properties.Name -contains 'CLAUDE_CODE_EFFORT_LEVEL')) {
+    $found++
+    Write-Host "DRIFT: settings.json env ตั้ง CLAUDE_CODE_EFFORT_LEVEL = '$($settings.env.CLAUDE_CODE_EFFORT_LEVEL)' -> ทับ effort: ของทุก agent" -ForegroundColor Yellow
+}
+if ($env:CLAUDE_CODE_EFFORT_LEVEL) { $found++; Write-Host "DRIFT: env CLAUDE_CODE_EFFORT_LEVEL = '$env:CLAUDE_CODE_EFFORT_LEVEL' -> ทับ effort: ของทุก agent" -ForegroundColor Yellow }
 
 $claudeLines = (Get-Content "$Root\CLAUDE.md" | Measure-Object -Line).Lines
 $ruleLines   = (Get-ChildItem "$Root\rules" -File -Filter *.md | ForEach-Object { (Get-Content $_.FullName | Measure-Object -Line).Lines } | Measure-Object -Sum).Sum

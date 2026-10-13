@@ -2,7 +2,7 @@
 # ตั้งค่า Luna + Team ให้กับ repo ใหม่ (Hybrid structure)
 #
 # การใช้งาน:
-#   . "C:\Users\sansakritsuk\.claude\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo" -ProjectName "MyNewRepo"
+#   . "$env:USERPROFILE\.claude\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo" -ProjectName "MyNewRepo"
 #
 # Parameters:
 #   -RepoPath       path ของ repo (required)

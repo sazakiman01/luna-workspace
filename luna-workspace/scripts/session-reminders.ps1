@@ -12,7 +12,7 @@
 $ErrorActionPreference = 'SilentlyContinue'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-$LunaRoot   = "C:\Users\sansakritsuk\.claude\luna-workspace"
+$LunaRoot   = "$env:USERPROFILE\.claude\luna-workspace"
 $DailyDir   = "$LunaRoot\Luna\team\daily"
 # Retro อยู่ที่ Luna\retrospective\ ที่เดียว (รวมจาก team\retrospective\ เมื่อ 2026-08-07)
 # ต้องตรงกับปลายทางที่ commands\weekly-retro.md เขียน ไม่งั้น reminder จะเตือนตลอดกาล

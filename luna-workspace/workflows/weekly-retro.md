@@ -20,25 +20,30 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 
 อ่านไฟล์เหล่านี้เพื่อรวบรวม context:
 - **Memory tool (Luna ส่วนกลาง)** — feedback/decisions/patterns ที่บันทึกไว้สัปดาห์นี้ (แทน hypothesis/insights/preferences เดิม — retired 2026-07-23)
-- `C:\Users\sansakritsuk\.claude\luna-workspace\team\performance.md` — performance ของ role
-- `C:\Users\sansakritsuk\.claude\agent-memory\<role>\` — per-role learning (memory: user)
+- `~/.claude/luna-workspace/team/performance.md` — performance ของ role
+- `~/.claude/agent-memory/<role>/` — per-role learning (memory: user)
 - `<repo>/Luna/daily/` ของทุก repo ที่ active สัปดาห์นี้
 - `<repo>/Luna/team/daily/` ของทุก repo ที่ active สัปดาห์นี้
 
 ### 3. Run Retrospective (ฉบับเดียว)
 
-สร้าง `C:\Users\sansakritsuk\.claude\luna-workspace\Luna\retrospective\YYYY-Www.md` ตาม template ใน `Luna/retrospective/README.md`:
-- รีวิว feedback/pattern ที่ยังไม่ปิด (จาก memory tool)
-- บันทึก pattern ที่ evidence สะสมพอ → memory tool (type=feedback/project)
+สร้าง `~/.claude/luna-workspace/Luna/retrospective/YYYY-Www.md` ตาม template ใน `Luna/retrospective/README.md`:
+- รีวิว feedback/pattern ที่ยังไม่ปิด (จาก auto memory)
+- บันทึก pattern ที่ evidence สะสมพอ → auto memory (type=feedback/project)
 - สรุป performance + cross-role patterns (เจอใน ≥ 2 roles) และ collaboration issues ในไฟล์เดียวกันนี้
   *(team retrospective แยกไฟล์ retired 2026-08-17 — เป็นขั้นตอนที่ถูกข้ามทุกครั้ง 15 สัปดาห์ · โฟลเดอร์เดิมอยู่ที่ `Luna/archive/2026-08-team-retrospective-retired/`)*
 - ตรวจสอบว่า memory ที่มีอยู่ยัง valid (ไม่ contradict ของใหม่)
+- **📏 Learning metrics** (นิยาม: `rules/team-protocol.md` → Continuous Learning):
+  - feedback เรื่องเดิมซ้ำกี่เรื่อง (ซ้ำ ≥ 2 = memory ไม่ได้ผล → แก้ entry หรือยกเป็น rule/hook)
+  - ต่อ role: จำนวนรายงาน / `recorded` / `none` / `deny` จาก `luna-workspace/Luna/logs/memory-gate-YYYY-MM.tsv` (สุ่มอ่าน entry ที่ `recorded` ว่ามี Evidence จริง — ห้ามใช้จำนวนเป็นเป้า)
+  - entry ที่ไม่มี **Evidence** · `MEMORY.md` ไหนเกิน 200 บรรทัด
+  - บันทึกตัวเลขลง retro file ทุกสัปดาห์ → ดู trend
 - **Skill Promotion:** เจอ workflow/procedure ซ้ำ ≥ 3 ครั้ง → เสนอ promote เป็น skill (กฎเต็มดู `rules/luna-core.md` → Skill Promotion)
 - วาง focus สัปดาห์หน้า
 
 ### 4. Apply Changes
 
-- บันทึก pattern ที่ confirm แล้วลง memory tool (Luna ส่วนกลาง) หรือ agent-memory (per-role)
+- บันทึก pattern ที่ confirm แล้ว (มี Evidence) ลง memory ส่วนกลาง หรือ agent-memory (per-role) ตามรูปแบบ index + topic file
 - ปรับ/ลบ memory ที่ outdated
 - อัปเดต performance scores
 
@@ -53,7 +58,7 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 
 ### 6. บันทึก
 
-- บันทึก learnings ผ่าน memory tool (type=feedback) — "Learnings จากการทำงาน"
+- บันทึก learnings ผ่าน auto memory (type=feedback) — "Learnings จากการทำงาน"
 - อัปเดต daily notes ของวันนี้
 
 ## หมายเหตุ
