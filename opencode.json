@@ -1,0 +1,225 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "gosoft": {
+      "npm": "@ai-sdk/anthropic",
+      "name": "Gosoft LLM",
+      "options": {
+        "baseURL": "https://agent-gateway.gosoft.co.th/v1"
+      },
+      "models": {
+        "godev1": {
+          "name": "godev1",
+          "limit": {
+            "context": 128000,
+            "output": 16000
+          }
+        },
+        "godev2": {
+          "name": "godev2",
+          "limit": {
+            "context": 128000,
+            "output": 16000
+          }
+        },
+        "godev3": {
+          "name": "godev3",
+          "limit": {
+            "context": 128000,
+            "output": 16000
+          }
+        },
+        "gothink1": {
+          "name": "gothink1",
+          "limit": {
+            "context": 128000,
+            "output": 16000
+          }
+        },
+        "gothink2": {
+          "name": "gothink2",
+          "limit": {
+            "context": 128000,
+            "output": 16000
+          }
+        },
+        "gothink3": {
+          "name": "gothink3",
+          "limit": {
+            "context": 128000,
+            "output": 16000
+          }
+        }
+      }
+    }
+  },
+  "model": "gosoft/godev1",
+  "mcp": {
+    "servers": {
+      "ds": {
+        "type": "remote",
+        "url": "https://agent-gateway.gosoft.co.th/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "Bearer {env:LITELLM_KEY}",
+          "x-mcp-servers": "ds"
+        }
+      },
+      "dv": {
+        "type": "remote",
+        "url": "https://agent-gateway.gosoft.co.th/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "Bearer {env:LITELLM_KEY}",
+          "x-mcp-servers": "dv"
+        }
+      },
+      "km": {
+        "type": "remote",
+        "url": "https://agent-gateway.gosoft.co.th/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "Bearer {env:LITELLM_KEY}",
+          "x-mcp-servers": "km"
+        }
+      }
+    }
+  },
+  "instructions": [
+    "C:/Users/sansakritsuk/.config/opencode/rules/luna-guardrails.md",
+    "C:/Users/sansakritsuk/.config/opencode/rules/data-handling.md",
+    "C:/Users/sansakritsuk/.config/opencode/memory/MEMORY.md"
+  ],
+  "permissions": [
+    {
+      "action": "read",
+      "resource": "*.env",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.env.*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*credentials.json",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.key",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.pem",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.pfx",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*id_rsa",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*id_rsa.*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*/.aws/*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*\\.aws\\*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*/secrets/*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*\\secrets\\*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*opencode*service.json",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*opencode*auth.json",
+      "effect": "deny"
+    },
+    {
+      "action": "bash",
+      "resource": "git commit*",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "git push*",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "git reset --hard*",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "git clean*",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "rm *",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "Remove-Item*",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "del *",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "*deploy*",
+      "effect": "ask"
+    },
+    {
+      "action": "bash",
+      "resource": "npm publish*",
+      "effect": "ask"
+    },
+    {
+      "action": "skill",
+      "resource": "*-checklist",
+      "effect": "deny"
+    },
+    {
+      "action": "external_directory",
+      "resource": "C:/Users/sansakritsuk/.config/opencode/*",
+      "effect": "allow"
+    },
+    {
+      "action": "external_directory",
+      "resource": "C:\\Users\\sansakritsuk\\.config\\opencode\\*",
+      "effect": "allow"
+    }
+  ]
+}

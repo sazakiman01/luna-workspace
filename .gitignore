@@ -1,0 +1,39 @@
+# Luna System (opencode) - allowlist: keep only what the system needs to run
+# (no memory / logs / plans - same policy as the old ~/.claude repo)
+/*
+
+# --- core config ---
+!/.gitignore
+!/AGENTS.md
+!/opencode.json
+
+# --- team / skills / commands / rules ---
+!/agents/
+!/commands/
+!/rules/
+!/skills/
+
+# --- luna-workspace: docs/scripts the system references ---
+!/luna-workspace/
+/luna-workspace/*
+!/luna-workspace/README.md
+!/luna-workspace/ARCHITECTURE.md
+!/luna-workspace/rules/
+!/luna-workspace/scripts/
+!/luna-workspace/workflows/
+!/luna-workspace/templates/
+!/luna-workspace/governance/
+!/luna-workspace/team/
+/luna-workspace/team/*
+!/luna-workspace/team/team-config.md
+!/luna-workspace/team/roles/
+
+# --- never ---
+service.json
+auth.json
+node_modules/
+*.bak
+*.bak-*
+*.env
+*.key
+*.pem
