@@ -17,7 +17,7 @@ permissions:
     resource: '*'
     effect: deny
   - action: edit
-    resource: '*agent-memory*atlas*'
+    resource: '*.config*opencode*agent-memory*atlas*'
     effect: allow
 ---
 

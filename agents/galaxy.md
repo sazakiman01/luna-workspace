@@ -17,7 +17,7 @@ permissions:
     resource: '*'
     effect: deny
   - action: edit
-    resource: '*agent-memory*galaxy*'
+    resource: '*.config*opencode*agent-memory*galaxy*'
     effect: allow
   - action: skill
     resource: 'audit-form-review-checklist'

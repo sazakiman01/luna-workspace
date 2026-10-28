@@ -17,7 +17,7 @@ permissions:
     resource: '*'
     effect: deny
   - action: edit
-    resource: '*agent-memory*polaris*'
+    resource: '*.config*opencode*agent-memory*polaris*'
     effect: allow
 ---
 

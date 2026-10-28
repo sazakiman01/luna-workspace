@@ -17,7 +17,7 @@ permissions:
     resource: '*'
     effect: deny
   - action: edit
-    resource: '*agent-memory*vela*'
+    resource: '*.config*opencode*agent-memory*vela*'
     effect: allow
 ---
 
