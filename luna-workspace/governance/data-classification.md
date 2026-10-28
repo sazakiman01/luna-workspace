@@ -32,10 +32,11 @@ order: 2
 - **ความลับธุรกิจ:** สัญญาลูกค้า, ข้อมูลการเงินจริง
 
 ### 🛡️ กลไกบังคับ (Enforcement — ไม่ใช่แค่กฎบนกระดาษ)
-`settings.json → permissions.deny` block การอ่านไฟล์ secret patterns อัตโนมัติ ทั้ง main session + subagents:
+`opencode.json → permissions` (rule `read` effect `deny`) block การอ่านไฟล์ secret patterns อัตโนมัติ ทั้ง main session + subagents (rule ระดับ global ถูก merge เข้าทุก agent):
 ```
-.env / .env.* / .credentials.json / *.key / *.pem / *.pfx / id_rsa / .aws/** / secrets/**
+*.env / *.env.* / *credentials.json / *credentials / *.key / *.pem / *secrets* / *.aws* / *::* ฯลฯ (รายการเต็มดู opencode.json)
 ```
+⚠️ เป็น **ชั้นเสริม ไม่ใช่ security boundary** — เลี่ยงได้ด้วย shell `cat` / grep tool / ชื่อสั้น 8.3 (ผล Sirius verify 2026-10-28) · *เดิม (Claude Code): `settings.json → permissions.deny`*
 
 ---
 
@@ -58,6 +59,6 @@ order: 2
 
 ## 📌 สถานะ (partial → กำลังเสริม)
 
-- ✅ Deny list บังคับใช้แล้ว (settings.json)
+- ✅ Deny list บังคับใช้แล้ว (`opencode.json → permissions` — ชั้นเสริม เลี่ยงได้)
 - ✅ กฎ data-handling.md เขียนแล้ว
 - 🟡 ยังไม่มี auto-scanner ตรวจ PII ในเนื้อหา (ระดับ 3 — ภายหลัง)

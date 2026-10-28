@@ -5,7 +5,7 @@
 > 🔴 **ส่วนที่ต้องบังคับใช้ทุก session ย้ายไป `~/.config/opencode/rules/luna-guardrails.md` แล้ว (2026-08-07)**
 > — R0/R1/R2, ข้อห้ามเด็ดขาด, SCOPE/DISSENT/VERIFY/NO-MAGIC, pre-response checklist, subagent brief template
 > เหตุผล: ไฟล์นี้ 269 บรรทัดและเป็นแค่เอกสารที่ต้องสั่งอ่าน จึงมักไม่ถูกอ่านจริง
-> `~/.config/opencode/rules/` Claude Code โหลดเองทุก session
+> `~/.config/opencode/rules/` โหลดทุก session ผ่าน `instructions` ใน `opencode.json`
 >
 > **ที่เหลือในไฟล์นี้** (อ่านเมื่อจำเป็น): orchestration patterns · effort scaling · memory · decision log · skill promotion · model selection · token efficiency
 
@@ -13,11 +13,12 @@
 
 ## 🗂️ Path Convention (Hybrid Global + Per-Repo)
 
-**Claude Code native (โหลดเอง ไม่ต้องสั่งอ่าน):** `C:\Users\sansakritsuk\.config\opencode\`
-- `CLAUDE.md` — persona + 4-Tier summary + team table (โหลดทุก session)
-- `rules/*.md` — Luna core guardrails + data-handling + team protocol (โหลดทุก session)
-- `agents/*.md` — **ความจริง runtime ของ role/model/effort** — เอกสารอื่นเป็น mirror
-- `skills/`, `commands/`, `settings.json`, `agent-memory/<role>/`
+**opencode native (โหลดผ่าน config ไม่ต้องสั่งอ่าน):** `C:\Users\sansakritsuk\.config\opencode\`
+- `AGENTS.md` — persona + 4-Tier summary + team table (โหลดทุก session)
+- `rules/*.md` — luna-guardrails + data-handling (โหลดทุก session ผ่าน `instructions` ใน `opencode.json` · team-protocol อยู่ `luna-workspace/rules/` ไม่ auto-load)
+- `agents/*.md` — **ความจริง runtime ของ role/model/permissions** — เอกสารอื่นเป็น mirror
+- `skills/`, `commands/`, `opencode.json` (model / instructions / permissions)
+- `memory/` (ดัชนีโหลดผ่าน `instructions`), `project-memory/<slug>/`, `agent-memory/<role>/`
 
 **Luna workspace (เอกสาร อ่านเมื่อจำเป็น):** `C:\Users\sansakritsuk\.config\opencode\luna-workspace\`
 - `workflows/` — team-delegate, checklist-daily-log, weekly-retro, feedback-learn
@@ -26,12 +27,13 @@
 - `templates/`, `governance/`, `scripts/`
 - `knowledge-package-generic/` — coding-standards, best-practices (ทั่วไป)
 
-> ⚠️ `rules/`, `workflows/`, `team/` **ไม่ได้อยู่ใต้ `.claude/` โดยตรง** — อยู่ใต้ `luna-workspace/`
-> ยกเว้น `.claude/rules/` ซึ่งเป็นของ Claude Code เอง (โหลดอัตโนมัติ)
+> ⚠️ `rules/`, `workflows/`, `team/` **ไม่ได้อยู่ใต้ `~/.config/opencode/` โดยตรง** — อยู่ใต้ `luna-workspace/`
+> ยกเว้น `~/.config/opencode/rules/` (guardrails + data-handling) ที่โหลดผ่าน `instructions`
 > *ระบบ `preferences/` retired 2026-07-23 — learning ไปอยู่ที่ `agent-memory/<role>/` แทน*
 
 **Per-Repo (เฉพาะโปรเจกต์):** `<repo>/` — ทุกอย่างที่เกี่ยวกับลูน่าอยู่ใต้ `Luna/` ทั้งหมด
-- `.claude/rules/project-context.md` — บริบทเฉพาะ repo (tech stack, naming, constraints)
+- `.claude/rules/project-context.md` — บริบทเฉพาะ repo (tech stack, naming, constraints) · เดิม (Claude Code): โหลดเอง · opencode ไม่อ่าน `rules/` ให้ → เปิดอ่านเองเมื่อเริ่มงานใน repo (ถ้ามี)
+- project memory ไม่ได้อยู่ใน repo — อยู่ `~/.config/opencode/project-memory/<slug>/` (ดู AGENTS.md → Memory)
 - `Luna/README.md` — อธิบาย structure ของ Luna/ ใน repo
 - `Luna/decisions.md`, `Luna/feedback.md` — append-only, **สร้างเมื่อมี content จริง** (ยังไม่มี = ปกติ ไม่ใช่ของขาด)
 - `Luna/retrospective/weekly-YYYY-Www.md` — retrospective เฉพาะ repo
@@ -70,24 +72,24 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 **Flow:** Skill โหลด template → ตัดสินใจอีกทีว่าต้อง spawn role ลึกไหม
 **ประหยัด:** ~5-10k token (เทียบกับ spawn role โดยตรง)
 
-### Tier 3 — Subagent via Agent tool (~4%)
+### Tier 3 — Subagent via task tool (~5%)
 **เงื่อนไข:** ต้องการ specialist context ลึก
 - Code generation > 30 บรรทัด
 - Multi-file refactor
 - Architecture / design decision
 - Specialist deep dive (เช่น transaction pattern, schema design, BPMN flow)
 
-**Flow:** Luna spawn role ผ่าน Agent tool → role รายงานกลับ Luna → Luna สรุปให้พี่แมน
+**Flow:** Luna spawn role ผ่าน task tool → role รายงานกลับ Luna → Luna สรุปให้พี่แมน
 **Cost:** ~20-50k token per call (isolated context load)
 
-### Tier 4 — Agent Teams (~1%, CLI only)
+### Tier 4 — ไม่มีใน opencode → ใช้ Tier 3 หลาย role ขนาน
 **เงื่อนไข:** ต้องการ parallel multi-perspective จริงๆ
 - Parallel review หลาย perspective พร้อมกัน
 - Hypothesis debate (หลาย approach แข่งกัน)
 - Cross-layer feature (FE+BE+DB+QA ขนาน)
 
-**ข้อกำหนด:** CLI v2.1.32+, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
-**Desktop App:** ใช้ไม่ได้ — fallback Tier 3 อัตโนมัติ
+**วิธีทำใน opencode:** เรียก task tool หลายครั้งในข้อความเดียว (subagent ขนาน) แล้ว Luna สังเคราะห์ผล
+*เดิม (Claude Code): Agent Teams — CLI v2.1.32+, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`*
 
 ---
 
@@ -170,7 +172,7 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
    Output format: prose หรือ structured (งาน review/audit → ขอ JSON-like severity/location/action เพื่อ synthesize เร็ว)
    Return format: คืน executive summary ≤ 1,500-2,000 tokens + ชี้ path ไฟล์ถ้าต้องดูลึก (อย่าทุ่ม raw output กลับ Luna — เปลือง context ของ Luna เอง)
    ```
-4. เรียก Role ผ่าน Agent tool (isolated context)
+4. เรียก Role ผ่าน task tool (isolated context)
 5. **Verify:** งานทั่วไป → Luna ตรวจของจริง / งาน critical → adversarial verify (agent อื่นตรวจ)
 6. Luna รีวิว + เสนอให้พี่แมน
 7. บันทึก decision log ถ้ามี decision/learning สำคัญ
@@ -197,14 +199,14 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 
 ---
 
-## 🛠️ Native Claude Code Layer
+## 🛠️ Native opencode Layer
 
-- **Subagents** — `~/.config/opencode/agents/*.md` — Role wrappers, isolated context · `model:` + `effort:` + `skills:` + `memory:` อยู่ใน frontmatter (= **ความจริง runtime**)
-- **Rules** — `~/.config/opencode/rules/*.md` — โหลดทุก session อัตโนมัติ (`paths:` frontmatter = โหลดเฉพาะตอนแตะไฟล์ที่ match)
-- **Slash commands** — `~/.config/opencode/commands/`: `/daily-log` `/team-delegate` `/team-spawn` `/luna-audit` `/luna-archive` `/weekly-retro`
-  *(commands ถูก merge เป็น skills แล้ว — ของเดิมยังใช้ได้ และรับ `allowed-tools` / `model` / `effort` / `when_to_use` ได้)*
-- **Skills** — `~/.config/opencode/skills/` — review router (Tier 2) + `*-checklist` ที่ agent preload ผ่าน `skills:`
-- **Hooks** — `settings.json`: SessionStart (archive check + reminders) · PostToolUse (worklog) · Stop (decision-log gate)
+- **Subagents** — `~/.config/opencode/agents/*.md` (`mode: subagent`) — Role wrappers, isolated context · `model:` + `permissions` อยู่ใน frontmatter (= **ความจริง runtime**) · ไม่มี `effort:` / `skills:` preload / `memory:` → checklist โหลดด้วย skill tool (allow ใน `permissions` ของ agent) · path memory ของ role เขียนไว้ใน body ของ agent
+- **Rules** — `~/.config/opencode/rules/*.md` — โหลดทุก session ผ่าน `instructions` ใน `opencode.json` (เดิม Claude Code มี `paths:` frontmatter โหลดตาม path — ของเทียบใน opencode ยังไม่ยืนยัน)
+- **Slash commands** — `~/.config/opencode/commands/`: `/daily-log` `/team-delegate` `/luna-audit` `/luna-archive` `/weekly-retro` = wrapper ที่โหลด skill ชื่อเดียวกัน (`/team-spawn` ไม่ได้ย้ายมา)
+- **Skills** — `~/.config/opencode/skills/` — review router (Tier 2) + `*-checklist` ที่ agent โหลดเองด้วย skill tool
+- **Permissions** — `opencode.json → permissions` (+ ของแต่ละ agent) — กันอ่านไฟล์ secret / ask ก่อนคำสั่งอันตราย · เป็นชั้นเสริม เลี่ยงได้ด้วย shell / grep / ชื่อ 8.3
+- **Hooks** — plugin `plugins/luna-hooks` (เฟส 2 — กำลังทำ) · ระหว่างนี้ไม่มี hook → ลูน่าทำหน้าที่เตือน/บันทึกเอง · *เดิม (Claude Code): `settings.json` SessionStart (archive check + reminders) · PostToolUse (worklog) · Stop (decision-log gate)*
 - **Source of truth** — `luna-workspace/` (personas, workflows, templates, governance)
 
 ---
@@ -222,16 +224,17 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 - ❌ "อ่านไฟล์ X" (activity)
 - ✅ "ตัดสินใจใช้ Zustand แทน Redux เพราะ bundle size เล็กกว่า 40%" (decision)
 - ✅ "เรียนรู้ว่า LIFF iframe ไม่รองรับ postMessage cross-origin" (learning)
-- ✅ "พี่แมน correct: ห้าม commit โดยไม่ถาม → บันทึก Claude memory ด้วย" (feedback)
+- ✅ "พี่แมน correct: ห้าม commit โดยไม่ถาม → บันทึก memory ด้วย" (feedback)
 
 **Path:** `<repo>/Luna/team/daily/YYYY-MM-DD.md`
 **Template:** `luna-workspace/templates/daily-log.template.md`
 
 ---
 
-## 🧠 Memory (Claude Memory Tool)
+## 🧠 Memory (ไฟล์ memory — opencode ไม่มี auto-memory ลูน่าจัดการเอง)
 
-*(ระบบเดิม hypothesis.md / insights.md / preferences.md ยกเลิกแล้ว — ใช้ Claude memory tool แทน)*
+*(ระบบเดิม hypothesis.md / insights.md / preferences.md ยกเลิกแล้ว · เดิม (Claude Code): auto-memory / memory tool)*
+*ที่อยู่ 3 ระดับ: ส่วนกลาง `~/.config/opencode/memory/` (ดัชนี `MEMORY.md` โหลดผ่าน `instructions`) · ราย project `project-memory/<slug>/` · ราย role `agent-memory/<role>/` — รูปแบบไฟล์ดู AGENTS.md → Memory*
 
 ### เมื่อใด Save Memory
 
@@ -291,7 +294,7 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 
 - เมื่อ Luna/role เจอ **workflow/procedure เดิมซ้ำ ≥ 3 ครั้ง** (จาก memory / decision log) → Luna **เสนอ** สร้าง skill
   - draft ให้ดูก่อน: procedure + pitfalls + verification steps
-  - พี่แมน approve → เรียก `skill-creator` สร้างจริง
+  - พี่แมน approve → สร้างจริงใน `~/.config/opencode/skills/` (ให้ Lyra ทำ · `skill-creator` เดิมเป็น skill ฝั่ง Claude Code ซึ่งปิดไปแล้วด้วย `OPENCODE_DISABLE_CLAUDE_CODE_SKILLS=1`)
 - **Human-in-the-loop เสมอ** — เสนอก่อน ไม่ auto-write (ตรง security classifier + นิสัยพี่แมน)
 - ตรวจ trigger นี้ตอน weekly-retro หรือเมื่อสังเกตเห็น pattern ซ้ำระหว่างทาง
 
@@ -302,7 +305,7 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 **ทำไมต้องมี:** context อยู่ 2 ที่ — ใน session (หายตอน /clear, /compact, crash) กับใน file (คงที่). active-task.md = save point ที่ /clear แล้วโหลดต่อได้ ไม่ต้องเล่าใหม่ 15-20 นาที
 
 - **เขียน (ตอนจบ task):** งานยาว/multi-session/ยังไม่เสร็จ → อัปเดต `<repo>/Luna/active-task.md` (Goal / Progress / Next / Blockers / Context) **ก่อนตอบสรุปท้าย** — ดู `workflows/checklist-daily-log.md`
-- **อ่าน (ตอนเริ่ม):** เริ่ม session/หลัง /clear ที่งานต่อเนื่อง → **อ่าน active-task.md ก่อนลงมือ** (SessionStart hook เตือนถ้ามีค้าง)
+- **อ่าน (ตอนเริ่ม):** เริ่ม session/หลัง /clear ที่งานต่อเนื่อง → **อ่าน active-task.md ก่อนลงมือ** (ยังไม่มี hook เตือน — รอ plugin เฟส 2 · ลูน่าเช็คเอง)
 - **ปิด:** งานเสร็จ → archive/ลบ
 - template: `luna-workspace/templates/active-task.template.md`
 - ⚠️ ต้องครบทั้ง **เขียน+อ่าน** — spec ที่ไม่มีใครอ่าน = ไดอารี่ · ที่ไม่มีใครเขียน = เก่าใน 1 วัน
@@ -337,22 +340,25 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 
 ## 🧠 Model Selection (per role)
 
-*อัปเดต 2026-06-12 — เอา Fable ออก (กิน token สูงมาก) → critical roles ย้ายมาใช้ opus*
+*อัปเดต 2026-10-28 — ย้ายไป opencode ใช้ provider `gosoft` เท่านั้น (เดิม Claude Code: opus / sonnet / inherit + `effort:`)*
 
 | Model | ใช้กับ | หลักคิด |
 |-------|--------|---------|
-| **opus** | Orion, Nova, Nebula, Polaris, Atlas, Galaxy, Sirius | งาน critical + ผลกระทบถาวร + วิเคราะห์ยาว (architecture/transaction/schema/audit/finance) + deep reasoning — Sirius = adversarial verifier (เสมอผู้ทำ ไม่ด้อยกว่า) |
-| **sonnet** | Stella, Vega, Cosmos, Comet, Vela | execution เร็ว-คุ้ม |
-| **inherit** | Lyra | ตามโมเดลหลักของ session |
+| **`gosoft/gothink2`** (สลับ gothink3 ได้) | Orion, Nova, Nebula, Polaris, Atlas, Galaxy, Rigel, Sirius | งาน critical + ผลกระทบถาวร + วิเคราะห์ยาว (architecture/transaction/schema/audit/finance) + deep reasoning — Sirius = adversarial verifier (เสมอผู้ทำ ไม่ด้อยกว่า) |
+| **`gosoft/godev1`** (สลับ godev2/godev3 ได้) | Stella, Vega, Cosmos, Comet, Vela | execution เร็ว-คุ้ม |
+| **inherit** | Lyra | ตาม agent หลัก (Luna = `gosoft/godev1` จาก `opencode.json → model`) |
 
-**กฎ:** มี model ใหม่ออก → sync 4 จุด: (1) `model:` ใน `.claude/agents/*.md` (2) Model tier ใน CLAUDE.md (3) ตารางนี้ (4) **Luna Dashboard** — `cd ~/luna-dashboard && npm run scan` (+ เพิ่มสี badge ใน `ModelBadge.tsx` ถ้าเป็น model ตระกูลใหม่ แล้ว `npm run build`)
+- ไม่มี `effort:` ใน opencode — ปรับความลึกด้วยการเลือก model (think/dev)
+- **สลับ model:** `luna-workspace/scripts/set-role-model.ps1 -Group think|dev -Model <id>` (หรือ `-Role <role>`) แล้วเปิด session ใหม่ — คำสั่งเต็มดู AGENTS.md
+
+**กฎ:** เปลี่ยน/เพิ่ม model → sync 3 จุด: (1) `model:` ใน `~/.config/opencode/agents/*.md` (ผ่าน `set-role-model.ps1`) (2) ตาราง Model ใน AGENTS.md (3) ตารางนี้ · Luna Dashboard (`~/luna-dashboard`) ยังไม่รองรับ layout ใหม่ (active-task ข้อ 5) — ยังไม่ต้อง sync
 
 ---
 
-## Claude Code Integration
-- Memory tool (`create_memory`) สำหรับ feedback/preferences ข้าม session
-- Track updates ของ Claude Code ใน `claude-updates.md`
-- ใช้ Skills/Workflows เพื่อบังคับ pattern
+## opencode Integration
+- Memory = ไฟล์ใน `memory/` · `project-memory/<slug>/` · `agent-memory/<role>/` (ไม่มี memory tool — เขียนไฟล์เอง)
+- Track updates ของ opencode — ยังไม่กำหนดไฟล์ · `Luna/claude-updates.md` = ประวัติฝั่ง Claude Code
+- ใช้ Skills/Commands/Workflows เพื่อบังคับ pattern
 
 ---
 
@@ -362,3 +368,4 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 *อัปเดต 2026-06-12: Model Selection sync (เอา Fable ออก)*
 *อัปเดต 2026-06-26: Guardrails (SCOPE/DISSENT/VERIFY/NO-MAGIC) + R0/R1/R2*
 *อัปเดต 2026-07-23: Health check remediation — role count 13→15, retire hypothesis/insights/preferences ออกจาก reference ที่เหลือ, path convention ชัดเจนขึ้น (global-system vs per-repo)*
+*อัปเดต 2026-10-28: ย้ายไป opencode — path, loading (`instructions`), Tier 4, hooks (plugin เฟส 2), memory, model (gosoft)*

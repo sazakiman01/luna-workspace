@@ -8,7 +8,7 @@ updated: 2026-06-11
 
 # 📜 นโยบายการใช้ AI ในการทำงาน
 
-*ระบบ Luna (Claude Code + subagents) — ใช้อย่างมีความรับผิดชอบ*
+*ระบบ Luna (opencode + subagents · provider gosoft — ย้ายจาก Claude Code 2026-10-28) — ใช้อย่างมีความรับผิดชอบ*
 
 ---
 
@@ -63,7 +63,7 @@ updated: 2026-06-11
 ## 6. ข้อมูล (Data)
 
 - ห้ามส่ง secret/PII/ความลับลูกค้าให้ AI — ดู [[data-classification]] และ `rules/data-handling.md`
-- มีกลไกบังคับจริงผ่าน `settings.json → permissions.deny`
+- มีกลไกบังคับผ่าน `opencode.json → permissions` (ชั้นเสริม — เลี่ยงได้ด้วย shell/grep/ชื่อ 8.3)
 
 ---
 

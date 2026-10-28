@@ -34,7 +34,7 @@ D4 — จบ Tier 3-4 task ที่มี output/decision สำคัญ
    → Learnings (สิ่งที่ค้นพบ + context)
    → Feedback จากพี่แมน
 
-4. Feedback จากพี่แมน → บันทึก memory tool ด้วย (type=feedback)
+4. Feedback จากพี่แมน → บันทึก memory ส่วนกลาง (`memory/`) ด้วย (type=feedback)
 ```
 
 ---
@@ -66,7 +66,7 @@ D4 — จบ Tier 3-4 task ที่มี output/decision สำคัญ
 ## Feedback จากพี่แมน
 ### ห้าม commit โดยไม่ถาม
 - **Feedback:** พี่แมน correct ว่าห้าม commit โดยไม่ถามก่อน
-- **Action:** บันทึก memory tool type=feedback แล้ว
+- **Action:** บันทึก memory type=feedback แล้ว
 ```
 
 ---

@@ -18,7 +18,7 @@ updated: 2026-06-11
 
 | ฟังก์ชัน | ความหมาย | Luna ทำอะไร |
 |----------|---------|-------------|
-| **Govern** | วางนโยบาย, วัฒนธรรม, ความรับผิดชอบ | CLAUDE.md governance section, rules/data-handling.md, ชุดเอกสาร governance/ |
+| **Govern** | วางนโยบาย, วัฒนธรรม, ความรับผิดชอบ | AGENTS.md governance section, rules/data-handling.md, ชุดเอกสาร governance/ |
 | **Map** | รู้บริบท + ความเสี่ยง | Data classification, นิยามงาน critical |
 | **Measure** | วัด/ตรวจสอบ | Audit trail per-agent (dashboard), /code-review, weekly audit |
 | **Manage** | จัดการความเสี่ยง + ปรับปรุง | Deny list, adversarial verify, human-in-the-loop, decision log |

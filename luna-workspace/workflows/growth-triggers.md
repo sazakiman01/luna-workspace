@@ -52,7 +52,7 @@ description: Auto-trigger conditions สำหรับ role level-up (L0→L1�
 - [ ] Principal skill score ≥ 8.5 (rubric Part A — Principal band)
 - [ ] มี case study จริง ≥ 1 (from `team/case-studies/`)
 - [ ] Cross-repo knowledge ≥ 1 (contributed to knowledge outside own role)
-- [ ] Confirmed learnings ≥ 3 (ใน agent-memory ของ role (`memory: user`) หรือ memory tool ส่วนกลางที่ role เกี่ยวข้อง)
+- [ ] Confirmed learnings ≥ 3 (ใน agent-memory ของ role (`agent-memory/<role>/`) หรือ memory ส่วนกลาง (`memory/`) ที่ role เกี่ยวข้อง)
 - [ ] Active ≥ 3 sessions (consistency proof)
 - [ ] Cross-role review ≥ 1 (reviewed another role's work)
 

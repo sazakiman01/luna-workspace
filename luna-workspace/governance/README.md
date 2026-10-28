@@ -27,9 +27,9 @@ updated: 2026-06-11
 
 ## กลไกบังคับใช้จริง (ไม่ใช่แค่เอกสาร)
 
-- 🛡️ `settings.json → permissions.deny` — block อ่านไฟล์ secret อัตโนมัติ
+- 🛡️ `opencode.json → permissions` — block อ่านไฟล์ secret อัตโนมัติ (ชั้นเสริม เลี่ยงได้ด้วย shell/grep/8.3)
 - 📜 `rules/data-handling.md` — กฎ data classification ที่ Luna ยึดถือ
-- 🧭 `CLAUDE.md → Governance` — accountability + disclosure + data handling
+- 🧭 `AGENTS.md → Governance` — accountability + disclosure + data handling
 - 🔍 Dashboard → Audit — log per-agent ย้อนหลัง 15 วัน
 
 ---

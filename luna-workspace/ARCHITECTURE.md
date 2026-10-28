@@ -16,32 +16,35 @@ luna-workspace/
 
 ---
 
-## 🌐 Claude Code Instruction Load Order (verified 2026-08-07)
+## 🌐 opencode Instruction Load Order (2026-10-28)
 
 ```
 โหลดอัตโนมัติทุก session:
 1. ~/.config/opencode/AGENTS.md                     ← persona, 4-Tier summary, team table
-2. ~/.config/opencode/rules/*.md                    ← user-level rules (luna-core, data-handling, team-protocol)
-3. ~/.config/opencode/projects/<project>/memory/MEMORY.md  ← auto memory (200 บรรทัด / 25KB แรก)
+2. `instructions` ใน ~/.config/opencode/opencode.json (ตามลำดับ):
+   - rules/luna-guardrails.md                      ← R0/R1/R2, guardrails, brief template
+   - rules/data-handling.md                        ← data classification + secret/PII
+   - memory/MEMORY.md                              ← ดัชนี memory ส่วนกลาง (opencode ไม่มี auto-memory)
 
-โหลดตาม repo ที่เปิด:
-4. <repo>/CLAUDE.md  →  <repo>/CLAUDE.local.md
-5. <repo>/.claude/rules/*.md               ← rule ที่มี `paths:` โหลดเฉพาะตอนแตะไฟล์ที่ match
+ไม่ auto-load (ลูน่าเปิดอ่านเอง):
+3. ~/.config/opencode/project-memory/<slug>/MEMORY.md  ← เริ่มงานใน repo
+4. luna-workspace/rules/luna-core.md, team-protocol.md ← อ่านเมื่อจำเป็น
+
+ไฟล์ระดับ repo ที่ opencode โหลดเอง: ยังไม่ยืนยัน
 ```
 
-- **CLAUDE.md ปัจจุบัน *ไม่* ใช้ `@-import`** — ใช้ path ใน backtick แล้วอ่านเมื่อจำเป็น
-  (`@path` ยังใช้ได้แต่โหลดเต็มตอน launch — ไม่ประหยัด context)
-- เพดานที่แนะนำ: CLAUDE.md < 200 บรรทัด (`auto-archive.ps1` เตือนให้)
+- *เดิม (Claude Code): `~/.claude/CLAUDE.md` + `~/.claude/rules/*.md` + auto-memory · ระดับ repo `<repo>/CLAUDE.md` + `<repo>/.claude/rules/*.md` (`paths:`)*
+- เพดาน: AGENTS.md ≤ 200 บรรทัด และ context มีแค่ 128k → เพิ่มใน `instructions` เฉพาะที่ต้องใช้ทุกครั้ง (เดิม `auto-archive.ps1` เตือนผ่าน hook — รอ plugin เฟส 2)
 - procedure ยาวๆ ควรเป็น **skill** (โหลดตอนใช้) ไม่ใช่ rule (โหลดตลอด)
 
-**Shared between Desktop App + CLI:**
-- `~/.config/opencode/AGENTS.md` — global memory
-- `~/.config/opencode/settings.json` — permissions, hooks
-- `~/.config/opencode/skills/` — native skills
-- `~/.config/opencode/agents/` — subagents (advanced)
-- `~/.claude.json`, `.mcp.json` — MCP servers
+**Shared between opencode Desktop + CLI (`opencode-cli`):**
+- `~/.config/opencode/AGENTS.md` — global rules
+- `~/.config/opencode/opencode.json` — model, instructions, permissions, MCP (`mcp.servers`)
+- `~/.config/opencode/skills/`, `commands/` — skills + command wrapper
+- `~/.config/opencode/agents/` — subagents
+- hooks → plugin `plugins/luna-hooks` (เฟส 2 — ยังไม่เสร็จ)
 
-**Migration Note:** `.clauderules` (Windsurf legacy) → `~/.config/opencode/AGENTS.md` · ไฟล์เดิม archived 2026-08-07 เพราะ Claude Code ไม่อ่านมัน และเนื้อหาขัดกับ 4-Tier
+**Migration Note:** `.clauderules` (Windsurf legacy) → `CLAUDE.md` (archived 2026-08-07 เพราะ Claude Code ไม่อ่านมัน และเนื้อหาขัดกับ 4-Tier) → `~/.config/opencode/AGENTS.md` (ย้ายไป opencode 2026-10-28 · `~/.claude` = fallback ห้ามลบ)
 
 
 **Use cases:**
@@ -82,9 +85,9 @@ luna-workspace/
 |------|-----|----------------|
 | `Luna/team/daily/` | daily logs | ⚠️ optional (history) |
 | `Luna/retrospective/` | **retro ทุกฉบับอยู่ที่นี่ที่เดียว** (รวมจาก team retro 2026-08-07 · team retro แยกไฟล์ retired 2026-08-17) | ⚠️ optional (history) |
-| memory tool (Luna ส่วนกลาง — `projects\...\memory\`) | central feedback/learnings (แทน hypothesis/insights/preferences.md — retired 2026-07-23 → `Luna/archive/`) | 🟡 recommended |
-| `~/.config/opencode/agent-memory/<role>/` | per-role learnings (`memory: user`) | 🟡 recommended |
-| `Luna/claude-updates.md` | Claude Code update notes | ⚠️ optional |
+| `~/.config/opencode/memory/` (Luna ส่วนกลาง) + `project-memory/<slug>/` | central + per-project feedback/learnings (แทน hypothesis/insights/preferences.md — retired 2026-07-23 → `Luna/archive/`) | 🟡 recommended |
+| `~/.config/opencode/agent-memory/<role>/` | per-role learnings (path เขียนไว้ใน `agents/<role>.md`) | 🟡 recommended |
+| `Luna/claude-updates.md` | Claude Code update notes (ประวัติก่อนย้ายไป opencode) | ⚠️ optional |
 | `team/audits/` | audit reports | ⚠️ optional (history) |
 | `team/case-studies/` | real case studies | 🟡 recommended (knowledge) |
 | ~~`team/retrospective/`~~ | retired 2026-08-17 — มีแต่ README 15 สัปดาห์ · ย้ายไป `Luna/archive/2026-08-team-retrospective-retired/` | — |
@@ -109,28 +112,29 @@ luna-workspace/
 
 ### Scenario 1: ย้ายเครื่อง (ทุกอย่าง)
 
-⚠️ **`luna-workspace/` ไม่ใช่ git repo** (ไม่มี `.git` แม้จะมี `.gitignore`) — วิธี `git clone` ที่เคยเขียนไว้ตรงนี้ใช้ไม่ได้ และไม่มี history ให้ clone
+⚠️ **git คลุมแค่บางส่วน** — `~/.config/opencode/` เป็น git repo (branch `opencode`) แบบ allowlist: ใน `luna-workspace/` track เฉพาะ README, ARCHITECTURE, `rules/`, `scripts/`, `workflows/`, `templates/`, `governance/`, `team/team-config.md`, `team/roles/` · **DATA (`Luna/`, `plans/`, memory ฯลฯ) ไม่อยู่ใน git** (ดู `~/.config/opencode/.gitignore`)
 
 ```powershell
 # zip ทั้งชุด (FileShare::ReadWrite เพราะไฟล์ log อาจถูก lock ชั่วคราว)
-Compress-Archive -Path "$env:USERPROFILE\.claude\luna-workspace" `
-                 -DestinationPath "$env:USERPROFILE\.claude\backups\luna-$(Get-Date -f yyyyMMdd).zip"
+Compress-Archive -Path "$env:USERPROFILE\.config\opencode\luna-workspace" `
+                 -DestinationPath "<ปลายทาง>\luna-$(Get-Date -f yyyyMMdd).zip"
 ```
 
-> **ไม่มี backup อัตโนมัติ** — การลบไฟล์ใน `luna-workspace/` กู้ไม่ได้
+> **ไม่มี backup อัตโนมัติสำหรับ DATA** — การลบไฟล์ที่ไม่ได้ track ใน `luna-workspace/` กู้ไม่ได้
 > เพราะงั้นการ cleanup ทุกครั้งให้ **ย้ายเข้า `Luna/archive/`** ไม่ใช่ลบ (นโยบายตั้งแต่ 2026-08-07)
 
 ### Scenario 2: ให้คนอื่นใช้ (เฉพาะ system)
 ```powershell
 # ใช้ export script
-& "$env:USERPROFILE\.claude\luna-workspace\templates\Export-LunaSystem.ps1" -OutputPath "D:\luna-export"
+& "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Export-LunaSystem.ps1" -OutputPath "D:\luna-export"
 ```
+⚠️ สคริปต์ยังพิมพ์คำแนะนำปลายทางเป็น `%USERPROFILE%\.claude\luna-workspace\` (ยังไม่ได้แก้)
 → ได้เฉพาะ SYSTEM files + empty DATA folders
 
 ### Scenario 3: Reset fresh (keep system, clear data)
 ```powershell
 # ใช้ reset script
-& "$env:USERPROFILE\.claude\luna-workspace\templates\Reset-LunaData.ps1"
+& "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Reset-LunaData.ps1"
 ```
 → ลบ DATA files + reset MIXED files กลับเป็น template ว่าง
 

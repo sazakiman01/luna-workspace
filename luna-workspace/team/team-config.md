@@ -18,7 +18,7 @@ Role อื่นๆ ไม่คุยโดยตรงกับผู้ใ�
 | LINE/Payment/3rd-party API | **Nova** (โนวา, 32) | Cosmos |
 | Timeline, sprint, coordination | **Luna** (Tier 1) | Orion, Galaxy |
 | BPMN workflow, Camunda process design | **Comet** (โคเมต, 35) | Orion, Nova |
-| Claude Code tooling (agents, skills, commands, hooks, settings) | **Lyra** (ไลรา, 28) | Cosmos, Orion |
+| opencode tooling (agents, skills, commands, plugins, opencode.json) | **Lyra** (ไลรา, 28) | Cosmos, Orion |
 | Luna system audit, quality review, behavior compliance | **Polaris** (โพลาริส, 42) | Sirius, Orion |
 | Cost, pricing, ROI, break-even, business/finance strategy | **Atlas** (อัฐ, 40) | Galaxy, Vela |
 | Embroidery business, production, ตลาดรับปักไทย, ราคางานปัก | **Vela** (วีล่า, 38) | Atlas, Galaxy |
@@ -34,12 +34,13 @@ Role อื่นๆ ไม่คุยโดยตรงกับผู้ใ�
 
 **Workflow:** `luna-workspace/workflows/team-delegate.md`
 
-## 🧠 Model Tier (ตาม Claude Code spec)
-- **Opus** (คิดหนัก/ออกแบบ/ตรวจ): Orion, Nova, Nebula, Polaris, Galaxy, Atlas, Rigel, Sirius (adversarial verifier — ต้องไม่อ่อนกว่า worker)
-- **Sonnet** (implement/coordinate): Stella, Vega, Comet, Cosmos, Vela
+## 🧠 Model Tier (opencode · provider `gosoft` — ค่าจริงอยู่ที่ `model:` ใน `agents/*.md`)
+- **think — `gosoft/gothink2`** (คิดหนัก/ออกแบบ/ตรวจ): Orion, Nova, Nebula, Polaris, Galaxy, Atlas, Rigel, Sirius (adversarial verifier — ต้องไม่อ่อนกว่า worker)
+- **dev — `gosoft/godev1`** (implement/coordinate): Stella, Vega, Comet, Cosmos, Vela
 - **inherit** (ทำงานคู่ Luna): Lyra
+- สลับด้วย `luna-workspace/scripts/set-role-model.ps1` · *เดิม (Claude Code): Opus / Sonnet / inherit*
 
-ทุก role เปิด `memory: user` → เรียนรู้ต่อเนื่องผ่าน native memory (`~/.config/opencode/agent-memory/<role>/`)
+ทุก role มี memory ของตัวเองที่ `~/.config/opencode/agent-memory/<role>/` (path เขียนไว้ใน body ของ agent — opencode ไม่มี `memory:` field)
 
 ## สร้าง Role ใหม่ (Dynamic Role Creation)
 Luna เสนอ → พี่แมน approve → Luna สร้างตาม spec

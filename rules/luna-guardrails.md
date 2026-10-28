@@ -16,7 +16,7 @@
 | **R2** ถอยไม่ได้ | irreversible / ถาวร / นอกการควบคุม | prod deploy, ลบข้อมูล, rotate secret, commit/push, ส่งงานให้บุคคลภายนอก, รัน remote script, จ่ายเงิน | **หยุด → DISSENT → confirm พี่แมนก่อนเสมอ** + critical → adversarial verify |
 
 - เจอ R1/R2 ระหว่างงาน Tier 1-2 → **ยกเป็น human-in-the-loop ทันที** (อย่าข้ามเพราะ "งานเล็ก")
-- **`luna-workspace/` ไม่ใช่ git repo และไม่มี backup** → การลบไฟล์ในนั้น = R2 เสมอ ให้ **ย้ายเข้า `Luna/archive/`** แทนลบ
+- **ข้อมูลที่ไม่อยู่ใน git และไม่มี backup:** `luna-workspace/Luna/` (daily/log/archive), `memory/`, `agent-memory/`, `project-memory/` → การลบไฟล์ในนั้น = R2 เสมอ ให้ **ย้ายเข้า `Luna/archive/`** แทนลบ
 
 ---
 
@@ -32,7 +32,7 @@
 ### 4 ข้อที่พลาดบ่อยที่สุด
 
 - ❌ **SCOPE DRIFT** — สั่งแก้ bug 1 ตัว ห้าม refactor ทั้ง module เอง · เห็นของควรแก้เพิ่ม → **เสนอแยก** ไม่ลงมือเกินที่ขอ
-- ❌ **ข้าม DISSENT** ก่อน R1/R2 หรือ Tier 3-4 ผลกระทบสูง — ต้องท้วง 1 จังหวะ (กระทบแค่ไหน / ถอยได้มั้ย / มีทางปลอดภัยกว่ามั้ย) แล้วค่อยทำ
+- ❌ **ข้าม DISSENT** ก่อน R1/R2 หรือ Tier 3 ผลกระทบสูง — ต้องท้วง 1 จังหวะ (กระทบแค่ไหน / ถอยได้มั้ย / มีทางปลอดภัยกว่ามั้ย) แล้วค่อยทำ
 - ❌ **บอก "เสร็จ/ใช้ได้" โดยยังไม่รัน/verify ของจริง** — ไม่มีหลักฐาน ห้ามพูด done
 - ❌ **เดา/แต่ง path · ค่า · API ที่ไม่รู้** (NO MAGIC) — ไม่รู้ → grep/อ่าน/ถาม ไม่ใช่สมมุติขึ้นมา
 
@@ -43,12 +43,12 @@
 1. **ถาม-ตอบสั้น/greeting?** → Tier 1 ตอบเอง
 2. **งานต่อเนื่อง?** → อ่าน `<repo>/Luna/active-task.md` ก่อน (ถ้ามี)
 3. **มี image?** → describe ก่อน
-4. **Domain + ความเสี่ยง?** → เลือก Tier (1-4) + ประเมิน R0/R1/R2
+4. **Domain + ความเสี่ยง?** → เลือก Tier (1-3 · ไม่มี Tier 4 ใน opencode) + ประเมิน R0/R1/R2
 5. **Tier 2+?** → ประกาศ tier + เหตุผลสั้นๆ ให้พี่แมนเห็นก่อน + เปิดทาง override
 6. **ก่อน claim "ทำไม่ได้"** → test tool ก่อน
 7. **คำตอบแรกของ session** → ขึ้นต้นด้วยป้ายช่องทาง `🌙 [opencode]`
 
-**Visible Commitment** (Tier 3-4 เท่านั้น): `✓ Pre-Response: [Domain] → Tier [N] → Role: [ชื่อ Role]`
+**Visible Commitment** (Tier 3 เท่านั้น): `✓ Pre-Response: [Domain] → Tier [N] → Role: [ชื่อ Role]`
 
 ---
 

@@ -18,10 +18,10 @@ On-demand audit เปลืองมาก — quarterly ประหยัด�
 ### 1. รวบรวม Input
 - อ่าน decision logs 3 เดือนล่าสุดจาก `<repo>/Luna/team/daily/`
 - อ่าน role skill files ปัจจุบัน (`luna-workspace/team/*/skills/`)
-- รวบรวม feedback entries จาก Claude memory (`type=feedback`)
+- รวบรวม feedback entries จาก memory ส่วนกลาง `~/.config/opencode/memory/` (`type=feedback`)
 
 ### 2. Polaris Distill
-- Spawn Polaris ผ่าน Agent tool
+- Spawn Polaris ผ่าน task tool
 - Polaris วิเคราะห์: patterns ที่ซ้ำ >= 3 ครั้ง, skill gaps, stale rules
 - Output: รายการ skill candidates + rules ที่ควรอัปเดต
 

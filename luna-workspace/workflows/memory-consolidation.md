@@ -1,12 +1,14 @@
 # Memory Consolidation Workflow
 
-*รัน skill `anthropic-skills:consolidate-memory` ทุกเดือน เพื่อ maintain memory quality*
+*รัน consolidate ทุกเดือน เพื่อ maintain memory quality*
+
+> ⚠️ **opencode (2026-10-28):** skill `anthropic-skills:consolidate-memory` ไม่มีแล้ว (ปิด Claude-compat skills ด้วย `OPENCODE_DISABLE_CLAUDE_CODE_SKILLS=1`) → ลูน่าทำขั้นตอนด้านล่างเองกับไฟล์ใน `~/.config/opencode/memory/` (+ `project-memory/`, `agent-memory/`) จนกว่าจะมี skill ทดแทน
 
 ---
 
 ## จุดประสงค์
 
-Claude memory สะสม entries ข้าม session — ถ้าปล่อยทิ้งไว้จะมี:
+memory (ไฟล์ใน `memory/`) สะสม entries ข้าม session — ถ้าปล่อยทิ้งไว้จะมี:
 - Duplicate entries (เรื่องเดิม บันทึกหลายครั้ง)
 - Stale facts (ข้อมูลที่ outdated แล้ว)
 - Index bloat (ค้นหาช้า, เปลืองบริบท)

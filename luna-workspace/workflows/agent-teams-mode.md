@@ -1,6 +1,9 @@
 # Agent Teams Mode — Workflow
 
-*สร้าง 2026-05-25 — ใช้คู่กับ `rules/team-protocol.md` และ `CLAUDE.md` decision tree*
+> ⚠️ **ไม่ใช้แล้ว (2026-10-28)** — opencode ไม่มี Agent Teams และ `/team-spawn` ไม่ได้ย้ายมา → งาน parallel ใช้ Tier 3 หลาย role ขนาน (task tool หลายครั้งในข้อความเดียว) ดู `rules/team-protocol.md`
+> เนื้อหาด้านล่างคือประวัติฝั่ง Claude Code เก็บไว้อ้างอิงเท่านั้น
+
+*สร้าง 2026-05-25 — ใช้คู่กับ `rules/team-protocol.md` และ `CLAUDE.md` decision tree (เดิม Claude Code)*
 
 ---
 

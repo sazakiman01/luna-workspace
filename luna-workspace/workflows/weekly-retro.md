@@ -19,17 +19,17 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 ### 2. Collect Input Data
 
 อ่านไฟล์เหล่านี้เพื่อรวบรวม context:
-- **Memory tool (Luna ส่วนกลาง)** — feedback/decisions/patterns ที่บันทึกไว้สัปดาห์นี้ (แทน hypothesis/insights/preferences เดิม — retired 2026-07-23)
+- **Memory ส่วนกลาง (`~/.config/opencode/memory/`)** — feedback/decisions/patterns ที่บันทึกไว้สัปดาห์นี้ (แทน hypothesis/insights/preferences เดิม — retired 2026-07-23)
 - `C:\Users\sansakritsuk\.config\opencode\luna-workspace\team\performance.md` — performance ของ role
-- `C:\Users\sansakritsuk\.config\opencode\agent-memory\<role>\` — per-role learning (memory: user)
+- `C:\Users\sansakritsuk\.config\opencode\agent-memory\<role>\` — per-role learning (path เขียนไว้ใน agent)
 - `<repo>/Luna/daily/` ของทุก repo ที่ active สัปดาห์นี้
 - `<repo>/Luna/team/daily/` ของทุก repo ที่ active สัปดาห์นี้
 
 ### 3. Run Retrospective (ฉบับเดียว)
 
 สร้าง `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\retrospective\YYYY-Www.md` ตาม template ใน `Luna/retrospective/README.md`:
-- รีวิว feedback/pattern ที่ยังไม่ปิด (จาก memory tool)
-- บันทึก pattern ที่ evidence สะสมพอ → memory tool (type=feedback/project)
+- รีวิว feedback/pattern ที่ยังไม่ปิด (จาก memory ส่วนกลาง)
+- บันทึก pattern ที่ evidence สะสมพอ → memory ส่วนกลาง (type=feedback/project)
 - สรุป performance + cross-role patterns (เจอใน ≥ 2 roles) และ collaboration issues ในไฟล์เดียวกันนี้
   *(team retrospective แยกไฟล์ retired 2026-08-17 — เป็นขั้นตอนที่ถูกข้ามทุกครั้ง 15 สัปดาห์ · โฟลเดอร์เดิมอยู่ที่ `Luna/archive/2026-08-team-retrospective-retired/`)*
 - ตรวจสอบว่า memory ที่มีอยู่ยัง valid (ไม่ contradict ของใหม่)
@@ -38,7 +38,7 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 
 ### 4. Apply Changes
 
-- บันทึก pattern ที่ confirm แล้วลง memory tool (Luna ส่วนกลาง) หรือ agent-memory (per-role)
+- บันทึก pattern ที่ confirm แล้วลง memory ส่วนกลาง (`memory/`) หรือ agent-memory (per-role)
 - ปรับ/ลบ memory ที่ outdated
 - อัปเดต performance scores
 
@@ -53,7 +53,7 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 
 ### 6. บันทึก
 
-- บันทึก learnings ผ่าน memory tool (type=feedback) — "Learnings จากการทำงาน"
+- บันทึก learnings ลง memory ส่วนกลาง (type=feedback) — "Learnings จากการทำงาน"
 - อัปเดต daily notes ของวันนี้
 
 ## หมายเหตุ
@@ -61,6 +61,5 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 - Retrospective ที่ดีต้อง **actionable** — ไม่ใช่แค่รีวิว แต่ต้องมีการ apply change
 - ถ้าไม่มีการ retrospective ใน 2 สัปดาห์ติด → แจ้งพี่แมน
 - พี่แมนสามารถ skip retrospective ได้ถ้าสัปดาห์นั้นทำงานน้อย
-- **บังคับด้วยกลไก (2026-08-17):** `scripts/log-gate.ps1` (Stop hook) block ปลาย turn ถ้าสัปดาห์ที่แล้วไม่มีไฟล์ retro
-  และวันนี้มีงานจริง (≥ 3 ไฟล์) — ยิงไม่เกินสัปดาห์ละครั้ง (marker `Luna/logs/.gate-retro-YYYY-Www`)
-  ทางออก: รัน `/weekly-retro` หรือถามพี่แมนว่าจะ skip สัปดาห์นั้นไหม (ห้ามเงียบ ห้ามแต่งเนื้อหา)
+- **กลไกบังคับ — ยังไม่มีใน opencode:** retro gate จะทำเป็น plugin (เฟส 2) · ระหว่างนี้ลูน่าเช็คเองว่าสัปดาห์ที่แล้วมีไฟล์ retro ไหม ถ้าไม่มี → เสนอ `/weekly-retro` หรือถามพี่แมนว่าจะ skip (ห้ามเงียบ ห้ามแต่งเนื้อหา)
+  *เดิม (Claude Code, 2026-08-17): `scripts/log-gate.ps1` (Stop hook) block ปลาย turn ถ้าสัปดาห์ที่แล้วไม่มีไฟล์ retro และวันนี้มีงานจริง (≥ 3 ไฟล์) — marker `Luna/logs/.gate-retro-YYYY-Www`*

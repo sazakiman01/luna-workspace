@@ -18,7 +18,7 @@ updated: 2026-06-11
 
 | รายการ | สถานะ |
 |--------|-------|
-| Deny list กันอ่านไฟล์ secret (settings.json) | ✅ |
+| Deny list กันอ่านไฟล์ secret (`opencode.json → permissions` — ชั้นเสริม) | ✅ |
 | กฎ data classification (rules/data-handling.md) | ✅ |
 | คำเตือนเมื่อเจอ secret/PII | ✅ |
 | PDPA awareness | ✅ |
@@ -28,7 +28,7 @@ updated: 2026-06-11
 
 | รายการ | สถานะ |
 |--------|-------|
-| คนเป็นเจ้าของผลงาน (ระบุชัดใน CLAUDE.md) | ✅ |
+| คนเป็นเจ้าของผลงาน (ระบุชัดใน AGENTS.md) | ✅ |
 | Luna = interface เดียว | ✅ |
 | Human-in-the-loop | ✅ |
 | Disclosure rule (mark งาน AI) | ✅ (กฎมีแล้ว) |

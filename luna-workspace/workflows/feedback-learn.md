@@ -11,7 +11,7 @@ description: บังคับ Luna เรียนรู้จาก feedback 
 
 1. **รับจริงใจ** - ขอโทษถ้าผิด, อย่าแก้ตัว, ถามถ้าไม่เข้าใจ
 
-2. **บันทึก `<repo>/Luna/feedback.md`** (เฉพาะ repo) **+ memory tool (Luna ส่วนกลาง, `type=feedback`)** (ถ้าเป็น pattern ข้าม repo):
+2. **บันทึก `<repo>/Luna/feedback.md`** (เฉพาะ repo) **+ memory ส่วนกลาง (`~/.config/opencode/memory/`, `type=feedback`)** (ถ้าเป็น pattern ข้าม repo):
    ```markdown
    ### YYYY-MM-DD - [หัวข้อ]
    - **ปัญหา:** ...
@@ -24,8 +24,8 @@ description: บังคับ Luna เรียนรู้จาก feedback 
 
 4. **เพิ่มวิธีป้องกัน** (อย่างน้อย 2 วิธี):
    - Rules: global `rules/luna-core.md` (⚠️ ด้านบนสุด)
-   - Memory (Luna ส่วนกลาง): memory tool `type=feedback` (CRITICAL, ข้าม repo)
-   - Agent-memory ของ role (`memory: user`) — ถ้า feedback เจาะจง role ใด role หนึ่ง
+   - Memory (Luna ส่วนกลาง): ไฟล์ใน `memory/` `type=feedback` (CRITICAL, ข้าม repo)
+   - Agent-memory ของ role (`agent-memory/<role>/`) — ถ้า feedback เจาะจง role ใด role หนึ่ง
    - Workflow ใหม่ (ถ้าซับซ้อน)
    - Team Rules: global `team/team-config.md`
 
@@ -34,9 +34,9 @@ description: บังคับ Luna เรียนรู้จาก feedback 
 6. **บันทึก daily** (ใช้ workflow `daily-log`)
 
 ## ที่เก็บ Learning (ระบบใหม่ — แทน hypothesis/insights/preferences.md ที่ retired 2026-07-23)
-- **memory tool (Luna ส่วนกลาง)** → feedback/pattern ข้าม repo (`type=feedback`)
-- **agent-memory ของ role (`memory: user`)** → pattern เฉพาะ role
-- **CRITICAL:** พี่แมนระบุ "ไม่ชอบ/ผิด" → บันทึก memory tool ทันที
+- **memory ส่วนกลาง (`~/.config/opencode/memory/`)** → feedback/pattern ข้าม repo (`type=feedback`) · เฉพาะ repo → `project-memory/<slug>/`
+- **agent-memory ของ role (`agent-memory/<role>/`)** → pattern เฉพาะ role
+- **CRITICAL:** พี่แมนระบุ "ไม่ชอบ/ผิด" → บันทึก memory ทันที
 
 ## ⚠️ ห้าม
 - แก้ตัวหรือโต้แย้ง feedback

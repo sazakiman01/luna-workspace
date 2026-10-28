@@ -3,14 +3,14 @@
 **Luna คือใคร?** คือ AI Assistant ประจำตัวคุณ (เหมือนเลขาส่วนตัวที่จำได้ทุกอย่าง)
 **Team คืออะไร?** คือทีมงานที่ Luna เรียกมาช่วยทำงานต่างๆ (เหมือนมีทีม Developer ในมือ)
 
-**ติดตั้งที่:** `$env:USERPROFILE\.claude\luna-workspace\`
+**ติดตั้งที่:** `$env:USERPROFILE\.config\opencode\luna-workspace\` (ระบบลูน่ารันบน opencode ตั้งแต่ 2026-10-28 · เดิม Claude Code ที่ `~/.claude` = fallback)
 
 ---
 
 ## ⚡ เริ่มต้นใช้งานใน 3 ขั้นตอน
 
-**ขั้นตอนที่ 1 — เปิด Claude Desktop App**
-เปิด **Claude Desktop App for Windows** → Code tab → Open repo (โฟลเดอร์โปรเจกต์)
+**ขั้นตอนที่ 1 — เปิด opencode**
+เปิด **opencode Desktop** (หรือ `opencode-cli`) ในโฟลเดอร์โปรเจกต์
 
 **ขั้นตอนที่ 2 — ถาม Luna**
 พิมพ์ในช่องแชท: *"สวัสดี Luna"* หรือ *"ช่วยสร้างหน้า login ให้หน่อย"*
@@ -44,9 +44,9 @@ luna-workspace/
 ├── 🔧 SYSTEM (ย้ายข้ามเครื่องได้)
 │   │                                  (.clauderules archived 2026-08-07 — Claude Code ไม่อ่าน)
 │   ├── rules/                       ← กฎหลักของ Luna
-│   ├── workflows/                   ← คำสั่ง (/weekly-audit, /weekly-retro, ...)
+│   ├── workflows/                   ← ขั้นตอนงาน (บางตัวมี command wrapper เช่น /weekly-retro)
 │   ├── templates/                   ← แม่แบบทุกชนิด + scripts
-│   ├── guides/                      ← Claude Code best practices
+│   ├── guides/                      ← (ไม่มีโฟลเดอร์นี้แล้ว — เดิม Claude Code best practices)
 │   ├── team/roles/                  ← role definitions (จำนวน: ดู team-config.md)
 │   ├── team/<role>/skills/           ← principal skills + basic skills
 │   ├── team/<role>/knowledge/        ← domain knowledge
@@ -56,7 +56,7 @@ luna-workspace/
 │
 ├── 📊 DATA (เกิดจากการใช้งาน)
 │   ├── Luna/team/daily/             ← บันทึกงานทีมรายวัน
-│   ├── (memory tool — Luna ส่วนกลาง) ← feedback/learnings (แทน hypothesis/insights/preferences.md — retired 2026-07)
+│   ├── (memory — Luna ส่วนกลาง)      ← feedback/learnings (`~/.config/opencode/memory/` + `project-memory/<slug>/` · แทน hypothesis/insights/preferences.md — retired 2026-07)
 │   ├── (agent-memory ของ role)       ← pattern เฉพาะ role (`~/.config/opencode/agent-memory/<role>/`)
 │   ├── team/audits/                 ← รายงานตรวจสอบ
 │   ├── team/case-studies/           ← case studies จากงานจริง
@@ -79,10 +79,11 @@ luna-workspace/
 ### วิธีที่ 1: ใช้ Script (ง่ายที่สุด)
 
 ```powershell
-& "$env:USERPROFILE\.claude\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
+& "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
 ```
+⚠️ สคริปต์ยังชี้ global ไปที่ `~/.claude\luna-workspace` (ยังไม่ได้แก้)
 
-หลังรัน: แก้ไฟล์ `MyNewRepo\.claude\rules\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน Claude Desktop App → พร้อมใช้!
+หลังรัน: แก้ไฟล์ `MyNewRepo\.claude\rules\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน opencode → พร้อมใช้! (opencode ไม่โหลด `.claude/rules/` ให้เอง → ลูน่าเปิดอ่านเมื่อเริ่มงาน · memory ราย project อยู่ `~/.config/opencode/project-memory/<slug>/`)
 
 ### วิธีที่ 2: ทำเอง (Manual)
 
@@ -119,7 +120,7 @@ MyNewRepo/
 | **Vega** | UI/UX Designer | ออกแบบหน้าตา, accessibility | 7.1 🟢 |
 | **Aurora** | Integration Specialist | เชื่อมต่อ LINE, Payment | 4.3 🟡 |
 | **Pulsar** | Project Manager | จัดการ timeline, retro | 8.6 🌟 |
-| **Lyra** | Claude Code Tooling | ปรับแต่งเครื่องมือ, workflows | 9.3 🌟 |
+| **Lyra** | opencode Tooling | ปรับแต่งเครื่องมือ, workflows | 9.3 🌟 |
 | **Polaris** | Luna System Auditor | ตรวจสอบคุณภาพ, ความถูกต้อง | 9.3 🌟 |
 | **Comet** | BPMN/Camunda Expert | ออกแบบ workflow, process design | 4.3 🟡 |
 
@@ -140,21 +141,22 @@ MyNewRepo/
 
 ### วิธีที่ 1: Clone ทุกอย่าง (ย้ายเครื่อง — แนะนำ)
 ```powershell
-# ได้ทั้ง SYSTEM + DATA + history
-git clone <repo-url> "$env:USERPROFILE\.claude\luna-workspace"
+# ได้เฉพาะ SYSTEM (repo = ~/.config/opencode ทั้งก้อน, branch opencode, allowlist ใน .gitignore)
+git clone -b opencode <repo-url> "$env:USERPROFILE\.config\opencode"
 ```
+→ DATA (`Luna/`, memory, plans ฯลฯ) ไม่อยู่ใน git — ต้อง zip ย้ายแยก (ดู ARCHITECTURE.md → Scenario 1)
 
 ### วิธีที่ 2: Export เฉพาะ SYSTEM (ให้คนอื่นใช้)
 ```powershell
 # ได้เฉพาะ rules, templates, workflows, skills, knowledge
-& "$env:USERPROFILE\.claude\luna-workspace\templates\Export-LunaSystem.ps1" -OutputPath "D:\luna-export"
+& "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Export-LunaSystem.ps1" -OutputPath "D:\luna-export"
 ```
 → คนรับได้ SYSTEM พร้อมใช้ + DATA directories ว่าง (เริ่มสะสมใหม่)
 
 ### วิธีที่ 3: Reset fresh (เครื่องเดิม เริ่มใหม่)
 ```powershell
 # ลบ DATA + reset preferences → keep SYSTEM intact (backup อัตโนมัติ)
-& "$env:USERPROFILE\.claude\luna-workspace\templates\Reset-LunaData.ps1" -Confirm
+& "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Reset-LunaData.ps1" -Confirm
 ```
 
 ### ไฟล์อะไรคืออะไร?
@@ -170,13 +172,14 @@ git clone <repo-url> "$env:USERPROFILE\.claude\luna-workspace"
 
 **เมื่อไหร่ควร backup:**
 - เปลี่ยนการตั้งค่าสำคัญ
-- อัปเดต Windsurf version ใหญ่
+- อัปเดต opencode version ใหญ่
 - อย่างน้อยเดือนละ 1 ครั้ง
 
 **วิธี:**
 ```powershell
-Compress-Archive -Path "$env:USERPROFILE\.claude" -DestinationPath "D:\backup\luna-$(Get-Date -Format yyyyMMdd).zip"
+Compress-Archive -Path "$env:USERPROFILE\.config\opencode" -DestinationPath "D:\backup\luna-$(Get-Date -Format yyyyMMdd).zip"
 ```
+⚠️ โฟลเดอร์นี้มี `service.json` / `auth.json` (ความลับ) ติดไปด้วย — เก็บ zip ในที่ปลอดภัย ห้ามแชร์
 
 ---
 
@@ -196,9 +199,9 @@ Compress-Archive -Path "$env:USERPROFILE\.claude" -DestinationPath "D:\backup\lu
 | ปัญหา | แก้ไข |
 |--------|--------|
 | Luna ตอบไม่ได้ว่าทีมมีใคร | เช็ค `team/team-config.md` |
-| Luna ไม่รู้ tech stack โปรเจกต์ | แก้ `MyRepo/.claude/rules/project-context.md` |
+| Luna ไม่รู้ tech stack โปรเจกต์ | แก้ `MyRepo/.claude/rules/project-context.md` แล้วบอกลูน่าให้อ่าน หรือบันทึกลง `project-memory/<slug>/` |
 | ไม่มี daily log | สร้างโฟลเดอร์ `Luna/team/daily/` |
-| กลัวข้อมูลหาย | Backup โฟลเดอร์ `.claude` เป็น zip หรือ `git push` |
+| กลัวข้อมูลหาย | Backup โฟลเดอร์ `~/.config/opencode` เป็น zip (SYSTEM อยู่ใน git แล้ว แต่ DATA ไม่อยู่) |
 | ย้ายเครื่อง | `git clone` หรือ `Export-LunaSystem.ps1` |
 | เริ่มใหม่สะอาด | `Reset-LunaData.ps1 -Confirm` |
 
@@ -216,7 +219,7 @@ Compress-Archive -Path "$env:USERPROFILE\.claude" -DestinationPath "D:\backup\lu
 | Scoring rubric | `templates/scoring-rubric.md` |
 | Workflows ทั้งหมด | `workflows/` (10 workflows) |
 | แม่แบบทุกชนิด | `templates/` |
-| ระบบเรียนรู้ | memory tool (Luna ส่วนกลาง) + agent-memory ของ role (`memory: user`) |
+| ระบบเรียนรู้ | ไฟล์ memory (`~/.config/opencode/memory/`, `project-memory/<slug>/`) + `agent-memory/<role>/` (path เขียนไว้ใน agent) |
 | Case studies (จากงานจริง) | `team/case-studies/` |
 
 ---
@@ -236,3 +239,4 @@ Luna Principal Elevation Roadmap — **เสร็จครบ 5 phases:**
 ---
 
 *อัปเดต: 2026-05-25 — Migrated from Windsurf to Claude Code, repo-index/, BPMN processes reorganized 🌙*
+*อัปเดต: 2026-10-28 — Migrated from Claude Code to opencode (path, backup, memory, setup)*

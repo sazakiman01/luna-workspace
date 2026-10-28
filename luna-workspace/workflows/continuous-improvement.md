@@ -139,8 +139,8 @@ role task output ───┘         │
                               ▼
                     weekly-retro.md (Pulsar)
                               │
-                              ├──► memory tool (Luna ส่วนกลาง — บันทึก/consolidate)
-                              ├──► agent-memory ของ role (memory: user)
+                              ├──► memory/ (Luna ส่วนกลาง — บันทึก/consolidate)
+                              ├──► agent-memory ของ role (agent-memory/<role>/)
                               └──► performance.md (update)
                                         │
                                         ▼
