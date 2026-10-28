@@ -108,6 +108,11 @@
     },
     {
       "action": "read",
+      "resource": "*credentials",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
       "resource": "*.key",
       "effect": "deny"
     },
@@ -133,22 +138,17 @@
     },
     {
       "action": "read",
-      "resource": "*/.aws/*",
+      "resource": "*.aws*",
       "effect": "deny"
     },
     {
       "action": "read",
-      "resource": "*\\.aws\\*",
+      "resource": "*secrets*",
       "effect": "deny"
     },
     {
       "action": "read",
-      "resource": "*/secrets/*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*\\secrets\\*",
+      "resource": "*::*",
       "effect": "deny"
     },
     {
@@ -162,48 +162,58 @@
       "effect": "deny"
     },
     {
-      "action": "bash",
-      "resource": "git commit*",
+      "action": "shell",
+      "resource": "*git commit*",
       "effect": "ask"
     },
     {
-      "action": "bash",
-      "resource": "git push*",
+      "action": "shell",
+      "resource": "*git push*",
       "effect": "ask"
     },
     {
-      "action": "bash",
-      "resource": "git reset --hard*",
+      "action": "shell",
+      "resource": "*git reset --hard*",
       "effect": "ask"
     },
     {
-      "action": "bash",
-      "resource": "git clean*",
+      "action": "shell",
+      "resource": "*git clean*",
       "effect": "ask"
     },
     {
-      "action": "bash",
+      "action": "shell",
       "resource": "rm *",
       "effect": "ask"
     },
     {
-      "action": "bash",
-      "resource": "Remove-Item*",
+      "action": "shell",
+      "resource": "* rm *",
       "effect": "ask"
     },
     {
-      "action": "bash",
+      "action": "shell",
+      "resource": "*Remove-Item*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
       "resource": "del *",
       "effect": "ask"
     },
     {
-      "action": "bash",
+      "action": "shell",
+      "resource": "* del *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
       "resource": "*deploy*",
       "effect": "ask"
     },
     {
-      "action": "bash",
-      "resource": "npm publish*",
+      "action": "shell",
+      "resource": "*npm publish*",
       "effect": "ask"
     },
     {
@@ -213,12 +223,7 @@
     },
     {
       "action": "external_directory",
-      "resource": "C:/Users/sansakritsuk/.config/opencode/*",
-      "effect": "allow"
-    },
-    {
-      "action": "external_directory",
-      "resource": "C:\\Users\\sansakritsuk\\.config\\opencode\\*",
+      "resource": "*.config*opencode*",
       "effect": "allow"
     }
   ]

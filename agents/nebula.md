@@ -4,13 +4,13 @@ mode: subagent
 model: gosoft/gothink2
 color: '#06B6D4'
 permissions:
-  - action: task
+  - action: subagent
     resource: '*'
     effect: deny
   - action: websearch
     resource: '*'
     effect: deny
-  - action: bash
+  - action: shell
     resource: '*'
     effect: deny
 ---

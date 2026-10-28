@@ -4,7 +4,7 @@ mode: subagent
 model: gosoft/godev1
 color: '#22C55E'
 permissions:
-  - action: task
+  - action: subagent
     resource: '*'
     effect: deny
   - action: websearch

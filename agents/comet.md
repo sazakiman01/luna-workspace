@@ -4,13 +4,13 @@ mode: subagent
 model: gosoft/godev1
 color: '#EC4899'
 permissions:
-  - action: task
+  - action: subagent
     resource: '*'
     effect: deny
   - action: websearch
     resource: '*'
     effect: deny
-  - action: bash
+  - action: shell
     resource: '*'
     effect: deny
   - action: skill

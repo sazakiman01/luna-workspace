@@ -4,23 +4,20 @@ mode: subagent
 model: gosoft/gothink2
 color: '#A855F7'
 permissions:
-  - action: task
+  - action: subagent
     resource: '*'
     effect: deny
   - action: websearch
     resource: '*'
     effect: deny
-  - action: bash
+  - action: shell
     resource: '*'
     effect: deny
   - action: edit
     resource: '*'
     effect: deny
   - action: edit
-    resource: 'C:/Users/sansakritsuk/.config/opencode/agent-memory/galaxy/*'
-    effect: allow
-  - action: edit
-    resource: 'C:\Users\sansakritsuk\.config\opencode\agent-memory\galaxy\*'
+    resource: '*agent-memory*galaxy*'
     effect: allow
   - action: skill
     resource: 'audit-form-review-checklist'

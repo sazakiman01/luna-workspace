@@ -3,7 +3,7 @@ description: Claude Code Tooling Specialist (ไลรา, 28) — agent/skill/c
 mode: subagent
 color: '#EF4444'
 permissions:
-  - action: task
+  - action: subagent
     resource: '*'
     effect: deny
   - action: websearch
