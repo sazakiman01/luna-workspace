@@ -12,6 +12,7 @@
 !/commands/
 !/rules/
 !/skills/
+!/plugins/
 
 # --- luna-workspace: docs/scripts the system references ---
 !/luna-workspace/
