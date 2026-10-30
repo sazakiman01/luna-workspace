@@ -1,7 +1,7 @@
 # [ROLE_NAME] — Context สำหรับ [PROJECT_NAME]
 
 *ไฟล์นี้ extend global role `[ROLE_NAME]` ด้วย knowledge เฉพาะของ repo นี้*
-*Global definition อยู่ที่: `$env:USERPROFILE\.claude\luna-workspace\team\roles\[role_name].md`*
+*Global definition อยู่ที่: `$env:USERPROFILE\.config\opencode\luna-workspace\team\roles\[role_name].md`*
 
 ## 🎯 บริบทเฉพาะ repo นี้
 
@@ -32,4 +32,4 @@
 - [เช่น 2026-04-22: เพิ่ม collection `production_batches`]
 
 ---
-*Template จาก `$env:USERPROFILE\.claude\luna-workspace\templates\role-context.template.md`*
+*Template จาก `$env:USERPROFILE\.config\opencode\luna-workspace\templates\role-context.template.md`*

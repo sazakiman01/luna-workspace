@@ -41,5 +41,5 @@
 - ทำ code review สำหรับ frontend PR
 
 ## Skill ที่เกี่ยวข้อง
-- **frontend-review** (Claude Code skill) - รีวิว frontend codebase 8 dimensions (functional correctness, architecture, maintainability, accessibility, performance, security, testing, production readiness)
+- **frontend-review** (opencode skill) - รีวิว frontend codebase 8 dimensions (functional correctness, architecture, maintainability, accessibility, performance, security, testing, production readiness)
 - Pattern / learning ส่วนตัว → บันทึกใน agent-memory (`~/.config/opencode/agent-memory/stella/`)

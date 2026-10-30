@@ -1,12 +1,12 @@
 # set-role-model.ps1 - switch the gosoft model of Luna roles (opencode agents/*.md)
 # Usage:
 #   set-role-model.ps1 -Group think -Model gothink3
-#   set-role-model.ps1 -Role nova -Model gothink2
+#   set-role-model.ps1 -Role nova -Model gothink2#high
 # Start a new opencode session afterwards.
 param(
     [ValidateSet('think', 'dev')][string]$Group,
     [string]$Role,
-    [Parameter(Mandatory = $true)][ValidatePattern('^(godev[123]|gothink[123])$')][string]$Model
+    [Parameter(Mandatory = $true)][ValidatePattern('^(godev[123]|gothink[123])(#(low|medium|high|xhigh|max))?$')][string]$Model
 )
 $ErrorActionPreference = 'Stop'
 $AgentsDir = 'C:\Users\sansakritsuk\.config\opencode\agents'

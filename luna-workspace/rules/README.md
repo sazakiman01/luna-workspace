@@ -1,13 +1,13 @@
 # Rules — Luna Core Rules
 
 *Rules ที่ Luna ต้องโหลดทุกครั้งเมื่อเริ่ม session*
-*(ปรับจาก Windsurf → Claude Code: `global_rules.md` เดิมถูกแทนที่ด้วย `CLAUDE.md` ซึ่ง Claude Code inject ให้อัตโนมัติทุก session)*
+*(ปรับจาก Windsurf → Claude Code → opencode 2026-10-28: `global_rules.md`/`CLAUDE.md` เดิมถูกแทนที่ด้วย `AGENTS.md` ซึ่ง opencode inject ให้อัตโนมัติทุก session)*
 
 ---
 
 ## 📋 Reading Order
 
-Claude Code inject `CLAUDE.md` (global memory) อัตโนมัติทุก session แล้ว — ไฟล์ใน `rules/` คือ detail ที่ Luna อ่านเพิ่มเมื่อจำเป็น ตามลำดับนี้:
+opencode inject `AGENTS.md` (global memory) อัตโนมัติทุก session แล้ว — ไฟล์ใน `rules/` คือ detail ที่ Luna อ่านเพิ่มเมื่อจำเป็น ตามลำดับนี้:
 
 | # | ไฟล์ | Priority | ใช้ทำอะไร |
 |---|------|----------|-----------|
@@ -23,32 +23,32 @@ Claude Code inject `CLAUDE.md` (global memory) อัตโนมัติทุ
 ## 🔗 ความสัมพันธ์กับไฟล์อื่น
 
 ```
-C:\Users\<user>\.claude\CLAUDE.md        ← Source of truth, Claude Code inject อัตโนมัติทุก session
+C:\Users\<user>\.config\opencode\AGENTS.md   ← Source of truth, opencode inject อัตโนมัติทุก session
     ↓ expand
-rules/luna-core.md                       ← Persona + 4-Tier + Reversibility + guardrails (detail)
+rules/luna-core.md                           ← Persona + 4-Tier + Reversibility + guardrails (detail)
     ↓ reference
-rules/team-protocol.md                   ← team delegation rules
+rules/team-protocol.md                       ← team delegation rules
     ↓ reference
-<repo>/.claude/rules/project-context.md  ← per-repo tech stack & constraints
+<repo>/.opencode/project-context.md          ← per-repo tech stack & constraints (Luna เปิดอ่านเอง)
 ```
 
 ---
 
 ## ✏️ เมื่อไหร่ต้องแก้
 
-- **เปลี่ยน Luna persona/behavior:** แก้ `luna-core.md` + `CLAUDE.md` (sync ทั้งคู่)
+- **เปลี่ยน Luna persona/behavior:** แก้ `luna-core.md` + `AGENTS.md` (sync ทั้งคู่)
 - **เปลี่ยน team workflow:** แก้ `team-protocol.md`
 - **เปลี่ยน project detection logic:** แก้ `project-detect.md`
 
-**ห้ามลืม:** ถ้าแก้ behavior rule ใน `rules/` → ต้อง sync กับ `CLAUDE.md` ด้วย
+**ห้ามลืม:** ถ้าแก้ behavior rule ใน `rules/` → ต้อง sync กับ `AGENTS.md` ด้วย
 
 ---
 
-## 🔍 Per-Repo Rules
+## 🔍 Per-Repo Context
 
-แต่ละ repo มี `<repo>/.claude/rules/` ของตัวเอง:
+แต่ละ repo มี `<repo>/.opencode/project-context.md` ของตัวเอง:
 - `project-context.md` — tech stack, constraints, conventions
-- อาจมี rules อื่นเฉพาะ repo
+- opencode ไม่ auto-load ไฟล์นี้ → Luna เปิดอ่านเองเมื่อเริ่มงานใน repo
 
 ---
 *ดู `templates/project-context.template.md` สำหรับสร้าง per-repo rules*

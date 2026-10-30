@@ -34,7 +34,7 @@ luna-workspace/
 ```
 
 - *เดิม (Claude Code): `~/.claude/CLAUDE.md` + `~/.claude/rules/*.md` + auto-memory · ระดับ repo `<repo>/CLAUDE.md` + `<repo>/.claude/rules/*.md` (`paths:`)*
-- เพดาน: AGENTS.md ≤ 200 บรรทัด และ context มีแค่ 128k → เพิ่มใน `instructions` เฉพาะที่ต้องใช้ทุกครั้ง (เดิม `auto-archive.ps1` เตือนผ่าน hook — รอ plugin เฟส 2)
+- เพดาน: AGENTS.md ≤ 200 บรรทัด และ context มีแค่ 128k → เพิ่มใน `instructions` เฉพาะที่ต้องใช้ทุกครั้ง (`auto-archive.ps1` เตือนผ่าน plugin luna-hooks แล้ว ✅)
 - procedure ยาวๆ ควรเป็น **skill** (โหลดตอนใช้) ไม่ใช่ rule (โหลดตลอด)
 
 **Shared between opencode Desktop + CLI (`opencode-cli`):**
@@ -42,7 +42,7 @@ luna-workspace/
 - `~/.config/opencode/opencode.json` — model, instructions, permissions, MCP (`mcp.servers`)
 - `~/.config/opencode/skills/`, `commands/` — skills + command wrapper
 - `~/.config/opencode/agents/` — subagents
-- hooks → plugin `plugins/luna-hooks` (เฟส 2 — ยังไม่เสร็จ)
+- hooks → plugin `plugins/luna-hooks` (ทำงานแล้ว ✅ — SessionStart/PostToolUse/Stop)
 
 **Migration Note:** `.clauderules` (Windsurf legacy) → `CLAUDE.md` (archived 2026-08-07 เพราะ Claude Code ไม่อ่านมัน และเนื้อหาขัดกับ 4-Tier) → `~/.config/opencode/AGENTS.md` (ย้ายไป opencode 2026-10-28 · `~/.claude` = fallback ห้ามลบ)
 
@@ -128,7 +128,6 @@ Compress-Archive -Path "$env:USERPROFILE\.config\opencode\luna-workspace" `
 # ใช้ export script
 & "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Export-LunaSystem.ps1" -OutputPath "D:\luna-export"
 ```
-⚠️ สคริปต์ยังพิมพ์คำแนะนำปลายทางเป็น `%USERPROFILE%\.claude\luna-workspace\` (ยังไม่ได้แก้)
 → ได้เฉพาะ SYSTEM files + empty DATA folders
 
 ### Scenario 3: Reset fresh (keep system, clear data)

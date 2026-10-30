@@ -1,10 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": {
+  "providers": {
     "gosoft": {
-      "npm": "@ai-sdk/anthropic",
       "name": "Gosoft LLM",
-      "options": {
+      "package": "@opencode/ai/providers/anthropic-compatible",
+      "settings": {
         "baseURL": "https://agent-gateway.gosoft.co.th/v1"
       },
       "models": {
@@ -54,6 +54,11 @@
     }
   },
   "model": "gosoft/godev1",
+  "share": "disabled",
+  "policies": [
+    { "action": "provider.use", "resource": "*", "effect": "deny" },
+    { "action": "provider.use", "resource": "gosoft", "effect": "allow" }
+  ],
   "mcp": {
     "servers": {
       "ds": {
@@ -88,6 +93,7 @@
   "instructions": [
     "C:/Users/sansakritsuk/.config/opencode/rules/luna-guardrails.md",
     "C:/Users/sansakritsuk/.config/opencode/rules/data-handling.md",
+    "C:/Users/sansakritsuk/.config/opencode/rules/mcp-routing.md",
     "C:/Users/sansakritsuk/.config/opencode/memory/MEMORY.md"
   ],
   "permissions": [
@@ -356,5 +362,10 @@
       "resource": "*.config*opencode*",
       "effect": "allow"
     }
+  ],
+  "plugins": [
+    "opencode-token-usage",
+    "opencode-dcp",
+    "@dietrichgebert/ponytail"
   ]
 }

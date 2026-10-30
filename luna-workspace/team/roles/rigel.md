@@ -29,7 +29,7 @@
 ## ทำงานร่วมกับ
 - **Sirius** — ตรวจซ้ำผลประเมินแบบหาจุดอ่อน
 - **Galaxy / Orion / Nova / Cosmos** — ความรู้โดเมนตาม agent (requirement / design / code / pipeline-IaC)
-- **Lyra** — เฉพาะเมื่อเกี่ยวกับ tooling ของ Claude Code
+- **Lyra** — เฉพาะเมื่อเกี่ยวกับ tooling ของ opencode
 
 ## ตัวอย่างงาน
 - ทดสอบ DS-A1 ด้วย `doc/rsms/a1_test/` แล้วเสนอปรับ prompt + output format

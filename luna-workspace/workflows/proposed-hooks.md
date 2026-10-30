@@ -1,6 +1,6 @@
 # Proposed Hooks
 
-> ⚠️ **ใช้ไม่ได้ใน opencode (2026-10-28)** — snippet ด้านล่างเป็นรูปแบบ `settings.json` ของ Claude Code และ skill `update-config` ไม่มีใน opencode · hooks ของลูน่าจะทำเป็น plugin `plugins/luna-hooks` (เฟส 2 — Lyra กำลังทำ) · เก็บไฟล์นี้ไว้เป็นแนวคิด/ประวัติ
+> ⚠️ **ใช้ไม่ได้ใน opencode (2026-10-28)** — snippet ด้านล่างเป็นรูปแบบ `settings.json` ของ Claude Code · hooks ของลูน่าทำเป็น plugin `plugins/luna-hooks` เสร็จแล้ว (2026-10-28) · เก็บไฟล์นี้ไว้เป็นแนวคิด/ประวัติ
 
 *Hook config ที่แนะนำ (เดิม Claude Code) — ให้พี่แมนใช้ skill `update-config` apply ถ้าต้องการ*
 

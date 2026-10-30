@@ -81,17 +81,15 @@ luna-workspace/
 ```powershell
 & "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
 ```
-⚠️ สคริปต์ยังชี้ global ไปที่ `~/.claude\luna-workspace` (ยังไม่ได้แก้)
 
-หลังรัน: แก้ไฟล์ `MyNewRepo\.claude\rules\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน opencode → พร้อมใช้! (opencode ไม่โหลด `.claude/rules/` ให้เอง → ลูน่าเปิดอ่านเมื่อเริ่มงาน · memory ราย project อยู่ `~/.config/opencode/project-memory/<slug>/`)
+หลังรัน: แก้ไฟล์ `MyNewRepo\.opencode\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน opencode → พร้อมใช้! (opencode ไม่โหลดไฟล์นี้ให้เอง → ลูน่าเปิดอ่านเมื่อเริ่มงาน · memory ราย project อยู่ `~/.config/opencode/project-memory/<slug>/`)
 
 ### วิธีที่ 2: ทำเอง (Manual)
 
 ```
 MyNewRepo/
-├── .claude/rules/project-context.md   ← บอก Luna ว่าโปรเจกต์นี้คืออะไร
-├── Luna/team/daily/                     ← บันทึกงานทีม
-└── Luna/daily/                          ← บันทึก Luna ส่วนตัว
+├── .opencode/project-context.md       ← บอก Luna ว่าโปรเจกต์นี้คืออะไร
+└── Luna/team/daily/                   ← บันทึก decision/learning/feedback
 ```
 
 **ตัวอย่าง `project-context.md`:**
@@ -199,7 +197,7 @@ Compress-Archive -Path "$env:USERPROFILE\.config\opencode" -DestinationPath "D:\
 | ปัญหา | แก้ไข |
 |--------|--------|
 | Luna ตอบไม่ได้ว่าทีมมีใคร | เช็ค `team/team-config.md` |
-| Luna ไม่รู้ tech stack โปรเจกต์ | แก้ `MyRepo/.claude/rules/project-context.md` แล้วบอกลูน่าให้อ่าน หรือบันทึกลง `project-memory/<slug>/` |
+| Luna ไม่รู้ tech stack โปรเจกต์ | แก้ `MyRepo/.opencode/project-context.md` แล้วบอกลูน่าให้อ่าน หรือบันทึกลง `project-memory/<slug>/` |
 | ไม่มี daily log | สร้างโฟลเดอร์ `Luna/team/daily/` |
 | กลัวข้อมูลหาย | Backup โฟลเดอร์ `~/.config/opencode` เป็น zip (SYSTEM อยู่ใน git แล้ว แต่ DATA ไม่อยู่) |
 | ย้ายเครื่อง | `git clone` หรือ `Export-LunaSystem.ps1` |

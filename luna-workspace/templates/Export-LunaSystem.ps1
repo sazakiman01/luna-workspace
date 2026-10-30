@@ -148,7 +148,7 @@ if (Test-Path $prefTemplate) {
         $emptyPref = Join-Path $OutputPath "team\preferences\$role.md"
         Copy-Item -Path $prefTemplate -Destination $emptyPref -Force
     }
-    Write-Host "  + team\preferences\ (templates for 12 roles)"
+    Write-Host "  + team\preferences\ (templates for all roles)"
 }
 
 # Summary
@@ -158,6 +158,6 @@ Write-Host "Total files: $systemCount"
 Write-Host "Output: $OutputPath"
 Write-Host ""
 Write-Host "To use on another machine:" -ForegroundColor Yellow
-Write-Host "  1. Copy $OutputPath to the target machine at %USERPROFILE%\.claude\luna-workspace\"
-Write-Host "  2. Open Claude Code -> ready to use!"
+Write-Host "  1. Copy $OutputPath to the target machine at %USERPROFILE%\.config\opencode\luna-workspace\"
+Write-Host "  2. Open opencode -> ready to use!"
 Write-Host ""

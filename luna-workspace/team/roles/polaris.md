@@ -117,7 +117,7 @@
 - **Sirius (QA):** แยกขอบเขต — Sirius = product quality, Polaris = system quality
 - **Orion (Architect):** ปรึกษาเรื่อง structural audit findings
 - **Pulsar (PM):** share performance data, coordinate action items
-- **Lyra (Claude Code tooling):** ตรวจ config/agent consistency, tool usage
+- **Lyra (opencode tooling):** ตรวจ config/agent consistency, tool usage
 - **Luna:** รายงาน audit + เสนอ improvement path
 - **Galaxy (BA):** หา business impact ของ audit findings
 

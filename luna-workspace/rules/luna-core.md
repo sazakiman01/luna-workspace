@@ -32,7 +32,7 @@
 > *ระบบ `preferences/` retired 2026-07-23 — learning ไปอยู่ที่ `agent-memory/<role>/` แทน*
 
 **Per-Repo (เฉพาะโปรเจกต์):** `<repo>/` — ทุกอย่างที่เกี่ยวกับลูน่าอยู่ใต้ `Luna/` ทั้งหมด
-- `.claude/rules/project-context.md` — บริบทเฉพาะ repo (tech stack, naming, constraints) · เดิม (Claude Code): โหลดเอง · opencode ไม่อ่าน `rules/` ให้ → เปิดอ่านเองเมื่อเริ่มงานใน repo (ถ้ามี)
+- `.opencode/project-context.md` — บริบทเฉพาะ repo (tech stack, naming, constraints) · opencode ไม่โหลดให้เอง → Luna เปิดอ่านเองเมื่อเริ่มงานใน repo (ถ้ามี) · *เดิมอยู่ที่ `.claude/rules/project-context.md` ตอน Claude Code*
 - project memory ไม่ได้อยู่ใน repo — อยู่ `~/.config/opencode/project-memory/<slug>/` (ดู AGENTS.md → Memory)
 - `Luna/README.md` — อธิบาย structure ของ Luna/ ใน repo
 - `Luna/decisions.md`, `Luna/feedback.md` — append-only, **สร้างเมื่อมี content จริง** (ยังไม่มี = ปกติ ไม่ใช่ของขาด)
@@ -202,11 +202,12 @@ Luna เลือก tier ก่อนตอบทุกครั้ง ห้�
 ## 🛠️ Native opencode Layer
 
 - **Subagents** — `~/.config/opencode/agents/*.md` (`mode: subagent`) — Role wrappers, isolated context · `model:` + `permissions` อยู่ใน frontmatter (= **ความจริง runtime**) · ไม่มี `effort:` / `skills:` preload / `memory:` → checklist โหลดด้วย skill tool (allow ใน `permissions` ของ agent) · path memory ของ role เขียนไว้ใน body ของ agent
-- **Rules** — `~/.config/opencode/rules/*.md` — โหลดทุก session ผ่าน `instructions` ใน `opencode.json` (เดิม Claude Code มี `paths:` frontmatter โหลดตาม path — ของเทียบใน opencode ยังไม่ยืนยัน)
+- **Rules** — `~/.config/opencode/rules/*.md` — โหลดทุก session ผ่าน `instructions` ใน `opencode.json`
 - **Slash commands** — `~/.config/opencode/commands/`: `/daily-log` `/team-delegate` `/luna-audit` `/luna-archive` `/weekly-retro` = wrapper ที่โหลด skill ชื่อเดียวกัน (`/team-spawn` ไม่ได้ย้ายมา)
-- **Skills** — `~/.config/opencode/skills/` — review router (Tier 2) + `*-checklist` ที่ agent โหลดเองด้วย skill tool
+- **Skills** — `~/.config/opencode/skills/` — review router (Tier 2) + `*-checklist` ที่ agent โหลดเองด้วย skill tool · `~/.claude/skills` ปิดแล้วด้วย `OPENCODE_DISABLE_CLAUDE_CODE_SKILLS=1` (2026-10-29)
 - **Permissions** — `opencode.json → permissions` (+ ของแต่ละ agent) — กันอ่านไฟล์ secret / ask ก่อนคำสั่งอันตราย · เป็นชั้นเสริม เลี่ยงได้ด้วย shell / grep / ชื่อ 8.3
-- **Hooks** — plugin `plugins/luna-hooks` (เฟส 2 — กำลังทำ) · ระหว่างนี้ไม่มี hook → ลูน่าทำหน้าที่เตือน/บันทึกเอง · *เดิม (Claude Code): `settings.json` SessionStart (archive check + reminders) · PostToolUse (worklog) · Stop (decision-log gate)*
+- **Policies** — `opencode.json → policies` — binary deny/allow ระดับ provider (ตอนนี้ deny `*` ยกเว้น `gosoft` — 2026-10-29)
+- **Hooks** — plugin `plugins/luna-hooks` ทำงานแล้ว ✅ (SessionStart = session prompt hook · PostToolUse = tool execute.after · Stop = turn-end gate) · *เดิม (Claude Code): `settings.json` hooks*
 - **Source of truth** — `luna-workspace/` (personas, workflows, templates, governance)
 
 ---
@@ -305,7 +306,7 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 **ทำไมต้องมี:** context อยู่ 2 ที่ — ใน session (หายตอน /clear, /compact, crash) กับใน file (คงที่). active-task.md = save point ที่ /clear แล้วโหลดต่อได้ ไม่ต้องเล่าใหม่ 15-20 นาที
 
 - **เขียน (ตอนจบ task):** งานยาว/multi-session/ยังไม่เสร็จ → อัปเดต `<repo>/Luna/active-task.md` (Goal / Progress / Next / Blockers / Context) **ก่อนตอบสรุปท้าย** — ดู `workflows/checklist-daily-log.md`
-- **อ่าน (ตอนเริ่ม):** เริ่ม session/หลัง /clear ที่งานต่อเนื่อง → **อ่าน active-task.md ก่อนลงมือ** (ยังไม่มี hook เตือน — รอ plugin เฟส 2 · ลูน่าเช็คเอง)
+- **อ่าน (ตอนเริ่ม):** เริ่ม session/หลัง /clear ที่งานต่อเนื่อง → **อ่าน active-task.md ก่อนลงมือ** (plugin luna-hooks เตือนให้ที่ SessionStart แล้ว ✅)
 - **ปิด:** งานเสร็จ → archive/ลบ
 - template: `luna-workspace/templates/active-task.template.md`
 - ⚠️ ต้องครบทั้ง **เขียน+อ่าน** — spec ที่ไม่มีใครอ่าน = ไดอารี่ · ที่ไม่มีใครเขียน = เก่าใน 1 วัน
@@ -348,7 +349,7 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 | **`gosoft/godev1`** (สลับ godev2/godev3 ได้) | Stella, Vega, Cosmos, Comet, Vela | execution เร็ว-คุ้ม |
 | **inherit** | Lyra | ตาม agent หลัก (Luna = `gosoft/godev1` จาก `opencode.json → model`) |
 
-- ไม่มี `effort:` ใน opencode — ปรับความลึกด้วยการเลือก model (think/dev)
+- **Effort:** ใส่เป็น suffix ใน `model:` ของ frontmatter ได้ — เช่น `gosoft/gothink2#high` · variants: `low|medium|high|xhigh|max` (verify แล้ว 2026-10-29) · นอกจากนี้ปรับความลึกด้วยการเลือก model (think/dev) ได้อยู่
 - **สลับ model:** `luna-workspace/scripts/set-role-model.ps1 -Group think|dev -Model <id>` (หรือ `-Role <role>`) แล้วเปิด session ใหม่ — คำสั่งเต็มดู AGENTS.md
 
 **กฎ:** เปลี่ยน/เพิ่ม model → sync 3 จุด: (1) `model:` ใน `~/.config/opencode/agents/*.md` (ผ่าน `set-role-model.ps1`) (2) ตาราง Model ใน AGENTS.md (3) ตารางนี้ · Luna Dashboard (`~/luna-dashboard`) ยังไม่รองรับ layout ใหม่ (active-task ข้อ 5) — ยังไม่ต้อง sync
@@ -368,4 +369,4 @@ LINE OA: @luna-notify (ใช้ notify เมื่อ deploy สำเร็�
 *อัปเดต 2026-06-12: Model Selection sync (เอา Fable ออก)*
 *อัปเดต 2026-06-26: Guardrails (SCOPE/DISSENT/VERIFY/NO-MAGIC) + R0/R1/R2*
 *อัปเดต 2026-07-23: Health check remediation — role count 13→15, retire hypothesis/insights/preferences ออกจาก reference ที่เหลือ, path convention ชัดเจนขึ้น (global-system vs per-repo)*
-*อัปเดต 2026-10-28: ย้ายไป opencode — path, loading (`instructions`), Tier 4, hooks (plugin เฟส 2), memory, model (gosoft)*
+*อัปเดต 2026-10-28: ย้ายไป opencode — path, loading (`instructions`), Tier 4, hooks (plugin luna-hooks ✅), memory, model (gosoft)*

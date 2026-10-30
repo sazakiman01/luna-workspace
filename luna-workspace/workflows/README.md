@@ -13,7 +13,7 @@
 | `/team-delegate` | `team-delegate.md`, `checklist-team-delegate.md` | งาน Tier 3 | เลือก Role ที่เหมาะสม |
 | `/weekly-retro` | `weekly-retro.md` | ปลายสัปดาห์ | Weekly retro + cross-role patterns |
 | `/luna-audit` | `weekly-audit.md`, `quarterly-audit.md` | ตามรอบ / เมื่อพี่แมนขอ | Polaris audit |
-| `/luna-archive` | — (skill `luna-archive`) | log เก่ากว่า 14 วัน (ยังไม่มี hook เตือน — รอ plugin เฟส 2) | archive daily log เก่า |
+| `/luna-archive` | — (skill `luna-archive`) | log เก่ากว่า 14 วัน (plugin luna-hooks เตือนที่ SessionStart แล้ว ✅) | archive daily log เก่า |
 
 *`/team-spawn` + `agent-teams-mode.md` (Tier 4) ไม่ได้ย้ายมา — opencode ไม่มี Agent Teams → ใช้ Tier 3 หลาย role ขนานแทน · `agent-teams-mode.md` เก็บไว้เป็นประวัติ*
 
@@ -28,7 +28,7 @@
 
 ## 🎯 เมื่อไหร่ Luna ใช้ Workflow เอง
 
-- **มี decision/learning/feedback:** `/daily-log` — ยังไม่มี gate เตือน (log-gate จะทำเป็น plugin เฟส 2) → ลูน่าต้องเสนอ `/daily-log` เองก่อนจบงาน · *เดิม (Claude Code): Stop hook `scripts/log-gate.ps1`*
+- **มี decision/learning/feedback:** `/daily-log` — gate เตือนอัตโนมัติผ่าน plugin `luna-hooks` แล้ว ✅ · *เดิม (Claude Code): Stop hook `scripts/log-gate.ps1`*
 - **พี่แมน correct Luna:** อ่าน `feedback-learn.md` แล้วบันทึกเป็น memory (`type=feedback`) ทันที
 - **ปลายสัปดาห์:** `/weekly-retro`
 - **งาน Tier 3:** `/team-delegate`

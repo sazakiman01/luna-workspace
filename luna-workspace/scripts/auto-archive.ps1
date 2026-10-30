@@ -8,10 +8,10 @@
 # Triggers:
 #   daily/         : *.md files > 14 days  -> _archived/YYYY-MM/ + INDEX.md
 #   repo-index/    : snapshots not modified > 90 days -> _archived/
-#   CLAUDE.md      : warn if > 200 lines
+#   AGENTS.md      : warn if > 200 lines
 #
 # NOTE: hypothesis.md / insights.md monitoring removed 2026-07-23 —
-# that learning system retired in favor of the Claude memory tool + agent-memory.
+# that learning system retired in favor of manual memory + agent-memory.
 
 param(
     [switch]$CheckOnly
@@ -245,13 +245,13 @@ if (Test-Path $DailyDir) {
     }
 }
 
-# === 3. CLAUDE.md ===
-$ClaudeMd = "C:\Users\sansakritsuk\.config\opencode\AGENTS.md"
-if (Test-Path $ClaudeMd) {
-    $lines = (Get-Content $ClaudeMd | Measure-Object -Line).Lines
-    Write-Log "CLAUDE.md: $lines lines"
+# === 3. AGENTS.md ===
+$AgentsMd = "C:\Users\sansakritsuk\.config\opencode\AGENTS.md"
+if (Test-Path $AgentsMd) {
+    $lines = (Get-Content $AgentsMd | Measure-Object -Line).Lines
+    Write-Log "AGENTS.md: $lines lines"
     if ($lines -gt 200) {
-        Write-Log -Actionable "WARNING: CLAUDE.md > 200 lines ($lines)."
+        Write-Log -Actionable "WARNING: AGENTS.md > 200 lines ($lines)."
     }
 }
 

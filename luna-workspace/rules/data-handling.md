@@ -58,4 +58,4 @@ Luna ต้อง:
 
 - เอกสารโชว์ภายนอก: [[../governance/data-classification]]
 - หลักการรวม: `luna-workspace/governance/README.md`
-- Accountability + Disclosure: `CLAUDE.md` → section Governance
+- Accountability + Disclosure: `AGENTS.md` → section Governance

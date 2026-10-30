@@ -26,9 +26,9 @@ $checks = @(
     @{ name = 'hard-coded role count';  pattern = '\b1[2-9]\s+(roles?|Roles?|คน)|\b1[2-9]/1[2-9]\s+roles'
        why  = 'จำนวน role ไม่มีเจ้าของ - derive จาก agents/*.md เท่านั้น (ดู team-config.md)' }
     @{ name = 'ชื่อไทยผิด';              pattern = 'โอไรออน|เนบิวลา|คอสมอส|ศิริยะ|กาแล็กซี|วีกา|ออโรรา'
-       why  = 'canonical: อริย/นภา/กสิณ/ศิริ/กัลยา/วิกา/อรุณ (CLAUDE.md + team-config.md)' }
+       why  = 'canonical: อริย/นภา/กสิณ/ศิริ/กัลยา/วิกา/อรุณ (AGENTS.md + team-config.md)' }
     @{ name = 'Lyra = Windsurf Tooling'; pattern = 'Windsurf [Tt]ooling'
-       why  = 'Lyra = Claude Code Tooling Specialist ตั้งแต่ migration' }
+       why  = 'Lyra = opencode Tooling Specialist ตั้งแต่ migration 2026-10-28' }
     @{ name = 'retired learning system'; pattern = 'hypothesis\.md|insights\.md|preferences\.md'
        why  = 'retired 2026-07-23 - learning อยู่ที่ agent-memory/<role>/ · ถ้าอ้างต้องกำกับว่า retired' }
 )
@@ -50,26 +50,17 @@ foreach ($c in $checks) {
 
 # structural invariants
 $agents = Get-ChildItem "$Root\agents\*.md" -File
-$noEffort = $agents | Where-Object { $_.BaseName -ne 'lyra' -and -not (Select-String $_.FullName -Pattern '^effort:' -Quiet) }
-if ($noEffort) { $found++; Write-Host "DRIFT: agent ไม่มี effort: -> $($noEffort.BaseName -join ', ')" -ForegroundColor Yellow }
 
 $pinned = $agents | Where-Object { Select-String $_.FullName -Pattern '^model:\s*claude-' -Quiet }
-if ($pinned) { $found++; Write-Host "DRIFT: agent pin เลขรุ่น model -> $($pinned.BaseName -join ', ')" -ForegroundColor Yellow }
+if ($pinned) { $found++; Write-Host "DRIFT: agent pin model ฝั่ง claude -> $($pinned.BaseName -join ', ')" -ForegroundColor Yellow }
 
-$settings = Get-Content "$Root\settings.json" -Raw | ConvertFrom-Json
-if ($settings.PSObject.Properties.Name -contains 'effortLevel') {
-    $found++
-    Write-Host "DRIFT: settings.json มี effortLevel = '$($settings.effortLevel)' อีกแล้ว" -ForegroundColor Yellow
-    Write-Host "       /effort เขียนค่านี้ลงไปและ persist ข้ามทุก session -> กด effort: ของทุก agent ที่ต่ำกว่า"
-}
-
-$claudeLines = (Get-Content "$Root\CLAUDE.md" | Measure-Object -Line).Lines
-$ruleLines   = (Get-ChildItem "$Root\rules" -File -Filter *.md | ForEach-Object { (Get-Content $_.FullName | Measure-Object -Line).Lines } | Measure-Object -Sum).Sum
-$budget = $claudeLines + $ruleLines
+$agentsMdLines = (Get-Content "$Root\AGENTS.md" | Measure-Object -Line).Lines
+$ruleLines     = (Get-ChildItem "$Root\rules" -File -Filter *.md | ForEach-Object { (Get-Content $_.FullName | Measure-Object -Line).Lines } | Measure-Object -Sum).Sum
+$budget = $agentsMdLines + $ruleLines
 if ($budget -gt 250) { $found++; Write-Host "DRIFT: context budget = $budget บรรทัด/session (เพดาน 250)" -ForegroundColor Yellow }
 
 if ($found -eq 0) {
-    Write-Host "OK - no drift. context budget = $budget lines/session (CLAUDE.md $claudeLines + rules $ruleLines)" -ForegroundColor Green
+    Write-Host "OK - no drift. context budget = $budget lines/session (AGENTS.md $agentsMdLines + rules $ruleLines)" -ForegroundColor Green
     exit 0
 }
 Write-Host "$found drift item(s) found." -ForegroundColor Yellow

@@ -61,5 +61,5 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 - Retrospective ที่ดีต้อง **actionable** — ไม่ใช่แค่รีวิว แต่ต้องมีการ apply change
 - ถ้าไม่มีการ retrospective ใน 2 สัปดาห์ติด → แจ้งพี่แมน
 - พี่แมนสามารถ skip retrospective ได้ถ้าสัปดาห์นั้นทำงานน้อย
-- **กลไกบังคับ — ยังไม่มีใน opencode:** retro gate จะทำเป็น plugin (เฟส 2) · ระหว่างนี้ลูน่าเช็คเองว่าสัปดาห์ที่แล้วมีไฟล์ retro ไหม ถ้าไม่มี → เสนอ `/weekly-retro` หรือถามพี่แมนว่าจะ skip (ห้ามเงียบ ห้ามแต่งเนื้อหา)
+- **กลไกบังคับ:** plugin `luna-hooks` เตือนที่ SessionStart ถ้าสัปดาห์ที่แล้วไม่มีไฟล์ retro ✅ (2026-10-28) — ถ้าไม่มี → เสนอ `/weekly-retro` หรือถามพี่แมนว่าจะ skip (ห้ามเงียบ ห้ามแต่งเนื้อหา)
   *เดิม (Claude Code, 2026-08-17): `scripts/log-gate.ps1` (Stop hook) block ปลาย turn ถ้าสัปดาห์ที่แล้วไม่มีไฟล์ retro และวันนี้มีงานจริง (≥ 3 ไฟล์) — marker `Luna/logs/.gate-retro-YYYY-Www`*

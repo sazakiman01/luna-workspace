@@ -19,7 +19,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$GlobalRoot = "$env:USERPROFILE\.claude\luna-workspace"
+$GlobalRoot = "$env:USERPROFILE\.config\opencode\luna-workspace"
 
 # Validate
 if (-not (Test-Path $RepoPath)) {
@@ -28,7 +28,7 @@ if (-not (Test-Path $RepoPath)) {
 }
 
 if (-not (Test-Path $GlobalRoot)) {
-    Write-Error "Global Luna workspace ไม่พบ: $GlobalRoot`nกรุณาติดตั้ง Luna ก่อน (copy luna-workspace folder ไปที่ $env:USERPROFILE\.claude\)"
+    Write-Error "Global Luna workspace ไม่พบ: $GlobalRoot`nกรุณาติดตั้ง Luna ก่อน (copy luna-workspace folder ไปที่ $env:USERPROFILE\.config\opencode\)"
     exit 1
 }
 
@@ -41,13 +41,11 @@ Write-Host "   Repo: $RepoPath" -ForegroundColor Gray
 Write-Host "   Name: $ProjectName" -ForegroundColor Gray
 Write-Host ""
 
-# 1. สร้างโครงสร้างโฟลเดอร์
+# 1. สร้างโครงสร้างโฟลเดอร์ (opencode convention: Luna/team/daily/ ตรง AGENTS.md)
 $dirs = @(
-    "$RepoPath\.claude\rules",
-    "$RepoPath\Luna\daily",
-    "$RepoPath\Luna\retrospective",
-    "$RepoPath\team\daily",
-    "$RepoPath\team\roles"
+    "$RepoPath\.opencode",
+    "$RepoPath\Luna\team\daily",
+    "$RepoPath\Luna\retrospective"
 )
 
 foreach ($d in $dirs) {
@@ -59,34 +57,34 @@ foreach ($d in $dirs) {
     }
 }
 
-# 2. Copy project-context.md จาก template
-$ctxDest = "$RepoPath\.claude\rules\project-context.md"
+# 2. Copy project-context.md จาก template (opencode ไม่ auto-load → Luna เปิดอ่านเองเมื่อเริ่มงาน)
+$ctxDest = "$RepoPath\.opencode\project-context.md"
 if ((Test-Path $ctxDest) -and -not $Force) {
-    Write-Host "  • Exists:  <repo>\.claude\rules\project-context.md (ไม่แตะ, ใช้ -Force ถ้าต้องการ overwrite)" -ForegroundColor DarkGray
+    Write-Host "  • Exists:  <repo>\.opencode\project-context.md (ไม่แตะ, ใช้ -Force ถ้าต้องการ overwrite)" -ForegroundColor DarkGray
 } else {
     $tpl = Get-Content "$GlobalRoot\templates\project-context.template.md" -Raw
     $tpl = $tpl -replace '\[PROJECT_NAME\]', $ProjectName
     Set-Content -Path $ctxDest -Value $tpl -Encoding UTF8
-    Write-Host "  ? Created: <repo>\.claude\rules\project-context.md (ต้องแก้ tech stack + constraints)" -ForegroundColor Green
+    Write-Host "  ? Created: <repo>\.opencode\project-context.md (ต้องแก้ tech stack + constraints)" -ForegroundColor Green
 }
 
 # 2b. Copy team-local.md จาก template
-$teamLocalDest = "$RepoPath\team\team-local.md"
+$teamLocalDest = "$RepoPath\Luna\team\team-local.md"
 $teamLocalTpl = "$GlobalRoot\templates\team-local.template.md"
 if ((Test-Path $teamLocalDest) -and -not $Force) {
-    Write-Host "  • Exists:  <repo>\team\team-local.md" -ForegroundColor DarkGray
+    Write-Host "  • Exists:  <repo>\Luna\team\team-local.md" -ForegroundColor DarkGray
 } elseif (Test-Path $teamLocalTpl) {
     $tpl2 = Get-Content $teamLocalTpl -Raw
     $tpl2 = $tpl2 -replace '\[PROJECT_NAME\]', $ProjectName
     Set-Content -Path $teamLocalDest -Value $tpl2 -Encoding UTF8
-    Write-Host "  ? Created: <repo>\team\team-local.md (list specialist ของ repo นี้)" -ForegroundColor Green
+    Write-Host "  ? Created: <repo>\Luna\team\team-local.md (list specialist ของ repo นี้)" -ForegroundColor Green
 }
 
 # 3. สร้างไฟล์เริ่มต้น (ว่างๆ)
 $files = @{
-    "$RepoPath\Luna\decisions.md"   = "# Decisions - $ProjectName`n`n*บันทึกการตัดสินใจสำคัญของโปรเจกต์*`n"
-    "$RepoPath\Luna\feedback.md"    = "# Feedback - $ProjectName`n`n*Feedback จากพี่แมน + บทเรียน*`n"
-    "$RepoPath\team\performance.md" = "# Team Performance - $ProjectName`n`n*Performance ของแต่ละ Role ใน repo นี้*`n"
+    "$RepoPath\Luna\decisions.md"        = "# Decisions - $ProjectName`n`n*บันทึกการตัดสินใจสำคัญของโปรเจกต์*`n"
+    "$RepoPath\Luna\feedback.md"         = "# Feedback - $ProjectName`n`n*Feedback จากพี่แมน + บทเรียน*`n"
+    "$RepoPath\Luna\team\performance.md" = "# Team Performance - $ProjectName`n`n*Performance ของแต่ละ Role ใน repo นี้*`n"
 }
 
 foreach ($f in $files.GetEnumerator()) {
@@ -102,6 +100,6 @@ Write-Host ""
 Write-Host "? Luna พร้อมใช้งานที่ $RepoPath แล้วค่ะ ??" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "ขั้นต่อไป:" -ForegroundColor Yellow
-Write-Host "  1. เปิด repo ใน Claude Code" -ForegroundColor White
-Write-Host "  2. แก้ <repo>\.claude\rules\project-context.md ให้ตรงกับโปรเจกต์" -ForegroundColor White
-Write-Host "  3. เริ่มงานได้เลย — Luna จะอ่าน rules/team จาก global อัตโนมัติ" -ForegroundColor White
+Write-Host "  1. เปิด repo ใน opencode" -ForegroundColor White
+Write-Host "  2. แก้ <repo>\.opencode\project-context.md ให้ตรงกับโปรเจกต์" -ForegroundColor White
+Write-Host "  3. เริ่มงานได้เลย — Luna จะอ่าน project-context + project-memory ให้เองตอนเริ่มงาน" -ForegroundColor White

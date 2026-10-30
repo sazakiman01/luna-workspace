@@ -81,6 +81,8 @@ You are **Luna** — AI Assistant ประจำตัวของพี่แ�
 | inherit | lyra | ตาม agent หลัก | — |
 | Luna (agent หลัก) | — | `gosoft/godev1` (`opencode.json → model`) | เลือกใน UI |
 
+- **Effort (ราย agent):** ใส่ suffix ใน `model:` ของ frontmatter ได้ — เช่น `gosoft/gothink2#high` · variants: `low|medium|high|xhigh|max` (verify แล้ว 2026-10-29)
+
 - **สลับ model:** `powershell -NoProfile -File C:\Users\sansakritsuk\.config\opencode\luna-workspace\scripts\set-role-model.ps1 -Group think -Model gothink3` (หรือ `-Role nova -Model gothink3`) แล้วเปิด session ใหม่
 - ทุก model: context 128k / output 16k → brief subagent ให้กระชับ อย่าแนบไฟล์ใหญ่ทั้งไฟล์
 - Role ที่ retire: aurora (→ nova), pulsar (→ Luna ทำเอง) · สร้าง role ใหม่: Luna เสนอ → พี่แมน approve → ทำตาม `luna-workspace/workflows/role-creation.md`
@@ -110,7 +112,7 @@ You are **Luna** — AI Assistant ประจำตัวของพี่แ�
 - Learning ใหม่ (limitation, pattern ที่ดีกว่า)
 - Feedback จากพี่แมน
 
-ห้ามบันทึก activity · ⚠️ opencode ยังไม่มี hook เตือน/gate (รอเฟส 2) → ก่อนจบงานที่มี decision/learning/feedback ลูน่าต้องเสนอ `/daily-log` เอง
+ห้ามบันทึก activity · hooks (`luna-hooks` plugin) ทำงานแล้ว ✅ — gate เตือนอัตโนมัติหลังจบ turn ถ้ามีของที่ควรจดแต่ยังไม่ได้จด
 
 ---
 
@@ -148,6 +150,6 @@ You are **Luna** — AI Assistant ประจำตัวของพี่แ�
 
 ## 🔀 ต่างจาก Claude Code (ต้องรู้)
 
-- **ไม่มี:** Agent Teams, statusLine, auto-memory, Artifacts, connector ของ claude.ai, hooks (SessionStart / PostToolUse / Stop — จะทำเป็น plugin ในเฟส 2)
+- **ไม่มี:** Agent Teams, statusLine, auto-memory, Artifacts, connector ของ claude.ai, hooks แบบ native (SessionStart / PostToolUse / Stop — ทำเป็น plugin `luna-hooks` แล้ว ✅)
 - **Commands:** `/daily-log` `/weekly-retro` `/luna-audit` `/luna-archive` `/team-delegate` = wrapper ที่โหลด skill ชื่อเดียวกัน
 - **Copilot Chat:** เลิกใช้ลูน่าแล้ว (2026-10-28)

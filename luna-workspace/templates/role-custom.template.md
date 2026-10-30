@@ -41,4 +41,4 @@
 - [เพิ่มเติมอื่นๆ]
 
 ---
-*Template จาก `$env:USERPROFILE\.claude\luna-workspace\templates\role-custom.template.md`*
+*Template จาก `$env:USERPROFILE\.config\opencode\luna-workspace\templates\role-custom.template.md`*

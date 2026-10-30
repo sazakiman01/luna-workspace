@@ -22,9 +22,8 @@
 ├── src/              # [ถ้ามี]
 ├── firebase/         # [ถ้ามี]
 ├── knowledge-package/  # project knowledge
-├── Luna/             # Luna memory (daily, decisions, feedback)
-├── team/             # team daily + performance
-└── .claude/rules/project-context.md  # ← ไฟล์นี้
+├── Luna/             # Luna memory (team/daily, decisions, feedback)
+└── .opencode/project-context.md  # ← ไฟล์นี้
 ```
 
 ## Naming Conventions

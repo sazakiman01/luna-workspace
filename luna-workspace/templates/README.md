@@ -9,7 +9,7 @@
 | ไฟล์ | ใช้เมื่อไหร่ | Copy ไปที่ไหน |
 |------|-------------|----------------|
 | `Setup-LunaRepo.ps1` | Setup repo ใหม่ทั้งหมด (อัตโนมัติ) | run `& .\Setup-LunaRepo.ps1 -RepoPath "D:\..."` |
-| `project-context.template.md` | Repo ใหม่ต้องระบุ tech stack | `<repo>/.claude/rules/project-context.md` |
+| `project-context.template.md` | Repo ใหม่ต้องระบุ tech stack | `<repo>/.opencode/project-context.md` |
 | `role-context.template.md` | Extend global role ด้วย domain knowledge | `<repo>/Luna/team/roles/<role>-context.md` |
 | `role-custom.template.md` | สร้าง custom role ใหม่เฉพาะ repo | `<repo>/Luna/team/roles/<role>.md` |
 | `team-local.template.md` | List ทีม specialist ของ repo | `<repo>/Luna/team/team-local.md` |
@@ -19,14 +19,14 @@
 ## 🚀 Quick Start: Setup Repo ใหม่
 
 ```powershell
-& "$env:USERPROFILE\.claude\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
+& "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
 ```
 
 Script จะสร้างให้อัตโนมัติ:
-- ✅ `<repo>/.claude/rules/` + `project-context.md`
-- ✅ `<repo>/Luna/daily/`, `Luna/retrospective/`, `Luna/team/daily/`
+- ✅ `<repo>/.opencode/` + `project-context.md`
+- ✅ `<repo>/Luna/team/daily/`, `Luna/retrospective/`
 - ✅ `<repo>/Luna/decisions.md`, `feedback.md`
-- ✅ `<repo>/Luna/team/performance.md`
+- ✅ `<repo>/Luna/team/performance.md`, `team-local.md`
 
 ---
 

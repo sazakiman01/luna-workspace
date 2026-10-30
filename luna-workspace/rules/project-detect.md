@@ -7,7 +7,7 @@
 Luna ทำงานได้หลาย repo — ทุกครั้งที่เข้าใหม่ให้:
 
 1. **Detect repo** จาก workspace URI ที่ระบบให้มา (เช่น `d:\coding\UniformFlow`)
-2. **อ่าน project context** ที่ `<repo>/.claude/rules/project-context.md` (ถ้ามี)
+2. **อ่าน project context** ที่ `<repo>/.opencode/project-context.md` (ถ้ามี — opencode ไม่ auto-load, Luna เปิดอ่านเอง)
 3. **เก็บ `<repo>` ไว้เป็น path prefix** สำหรับการเขียน daily/feedback/decisions
 
 ## 📖 ลำดับการอ่านไฟล์ (ตามลำดับความสำคัญ)
@@ -23,9 +23,9 @@ Luna ทำงานได้หลาย repo — ทุกครั้งท�
 | Per-repo team roster | `<repo>/Luna/team/team-local.md` | ไม่บังคับ |
 | Role preferences | Global `team/preferences/[role].md` | — |
 | Team mapping | Global `team/team-config.md` | — |
-| Project context (tech stack, naming) | `<repo>/.claude/rules/project-context.md` | ถามพี่แมน |
+| Project context (tech stack, naming) | `<repo>/.opencode/project-context.md` | ถามพี่แมน |
 | Project knowledge (schema, business) | `<repo>/Luna/knowledge-package/` | Global `knowledge-package-generic/` |
-| Luna long-term preferences | memory tool (Luna ส่วนกลาง) | — |
+| Luna long-term preferences | `~/.config/opencode/memory/` (MEMORY.md index) | — |
 | Past decisions ของ repo | `<repo>/Luna/decisions.md` | — |
 | Past feedback ของ repo | `<repo>/Luna/feedback.md` | — |
 | Team performance ใน repo | `<repo>/Luna/team/performance.md` | — |
@@ -34,19 +34,18 @@ Luna ทำงานได้หลาย repo — ทุกครั้งท�
 
 | ประเภท | เขียนที่ |
 |--------|---------|
-| Daily log ของ Luna | `<repo>/Luna/daily/YYYY-MM-DD.md` |
-| Daily log ของ Team | `<repo>/Luna/team/daily/YYYY-MM-DD.md` |
+| Daily log | `<repo>/Luna/team/daily/YYYY-MM-DD.md` |
 | Decision ของ repo | `<repo>/Luna/decisions.md` (append) |
 | Feedback ของ repo | `<repo>/Luna/feedback.md` (append) |
 | Retrospective | `<repo>/Luna/retrospective/` |
 | Performance เฉพาะ repo | `<repo>/Luna/team/performance.md` |
-| Pattern/insight ข้าม repo | memory tool (Luna ส่วนกลาง) |
-| Pattern เฉพาะ role | agent-memory ของ role (`memory: user`) |
+| Pattern/insight ข้าม repo | `~/.config/opencode/memory/` (Luna ส่วนกลาง) |
+| Pattern เฉพาะ role | `~/.config/opencode/agent-memory/<role>/` (role เขียนเอง) |
 
 **กฎสำคัญ:**
 - ❌ อย่าเขียน daily/feedback/decisions ลงใน global
 - ❌ อย่าเขียน Luna persona / Role definition ลงใน repo
-- ✅ ถ้าไม่มี `<repo>/.claude/rules/project-context.md` → แจ้งพี่แมนเพื่อสร้างก่อน (หรือ copy จาก template)
+- ✅ ถ้าไม่มี `<repo>/.opencode/project-context.md` → แจ้งพี่แมนเพื่อสร้างก่อน (หรือ copy จาก template)
 
 ## 👥 2-Tier Team Model
 
@@ -54,7 +53,7 @@ Luna ใช้ทีมแบบ 2 ชั้น:
 
 ### Tier 1: Global Team (generic)
 - Global roles ที่รู้งานทั่วไป — ดูรายชื่อเต็มที่ `team/team-config.md`
-- อยู่ที่ `$env:USERPROFILE\.claude\luna-workspace\team\roles\`
+- อยู่ที่ `$env:USERPROFILE\.config\opencode\luna-workspace\team\roles\`
 - รายชื่อล่าสุด: ดู `team/team-config.md` (แหล่งเดียว — อย่าเขียนจำนวนซ้ำที่นี่)
 
 ### Tier 2: Per-Repo Team (specific)
@@ -72,9 +71,9 @@ Luna ใช้ทีมแบบ 2 ชั้น:
 
 ## 🆕 เมื่อเข้า repo ใหม่ครั้งแรก
 
-1. ตรวจว่ามี `<repo>/.claude/rules/project-context.md` หรือยัง
-2. ถ้าไม่มี → แนะนำพี่แมนให้ copy template จาก global `templates/project-context.template.md`
-3. สร้างโฟลเดอร์ที่ต้องใช้: `<repo>/Luna/daily/`, `<repo>/Luna/team/daily/`, `<repo>/Luna/reviews/`
+1. ตรวจว่ามี `<repo>/.opencode/project-context.md` หรือยัง
+2. ถ้าไม่มี → แนะนำพี่แมนให้ copy template จาก global `templates/project-context.template.md` (หรือรัน `templates/Setup-LunaRepo.ps1`)
+3. สร้างโฟลเดอร์ที่ต้องใช้: `<repo>/Luna/team/daily/`, `<repo>/Luna/reviews/`
 4. เริ่มทำงานตามปกติ
 
 ## 🔍 การหา `<repo>` path
