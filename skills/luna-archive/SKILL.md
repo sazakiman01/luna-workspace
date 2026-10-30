@@ -6,7 +6,7 @@ description: รัน Luna auto-archive (manual trigger) — archive daily logs
 รัน auto-archive script:
 
 ```
-powershell.exe -NoProfile -File "C:\Users\sansakritsuk\.config\opencode\luna-workspace\scripts\auto-archive.ps1" $ARGUMENTS
+powershell.exe -NoProfile -File "~/.config/opencode/luna-workspace/scripts/auto-archive.ps1" $ARGUMENTS
 ```
 
 **ตัวอย่าง:**

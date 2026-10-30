@@ -13,14 +13,14 @@
 
 ## 🗂️ Path Convention (Hybrid Global + Per-Repo)
 
-**opencode native (โหลดผ่าน config ไม่ต้องสั่งอ่าน):** `C:\Users\sansakritsuk\.config\opencode\`
+**opencode native (โหลดผ่าน config ไม่ต้องสั่งอ่าน):** `~/.config/opencode/`
 - `AGENTS.md` — persona + 4-Tier summary + team table (โหลดทุก session)
 - `rules/*.md` — luna-guardrails + data-handling (โหลดทุก session ผ่าน `instructions` ใน `opencode.json` · team-protocol อยู่ `luna-workspace/rules/` ไม่ auto-load)
 - `agents/*.md` — **ความจริง runtime ของ role/model/permissions** — เอกสารอื่นเป็น mirror
 - `skills/`, `commands/`, `opencode.json` (model / instructions / permissions)
 - `memory/` (ดัชนีโหลดผ่าน `instructions`), `project-memory/<slug>/`, `agent-memory/<role>/`
 
-**Luna workspace (เอกสาร อ่านเมื่อจำเป็น):** `C:\Users\sansakritsuk\.config\opencode\luna-workspace\`
+**Luna workspace (เอกสาร อ่านเมื่อจำเป็น):** `~/.config/opencode/luna-workspace/`
 - `workflows/` — team-delegate, checklist-daily-log, weekly-retro, feedback-learn
 - `team/` — team-config.md (รายชื่อ role ที่เป็นทางการ), roles/, context/
 - `Luna/` — claude-updates.md, archive/, retrospective/, team/daily/, logs/ (งานระบบ Luna เองที่ไม่ผูก repo)

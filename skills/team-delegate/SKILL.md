@@ -9,7 +9,7 @@ description: Luna delegate งานไปยัง Role ที่เหมา�
 
 ทำตาม Luna team-delegate workflow:
 
-1. **อ่าน team config:** `C:\Users\sansakritsuk\.config\opencode\luna-workspace\team\team-config.md`
+1. **อ่าน team config:** `~/.config/opencode/luna-workspace/team/team-config.md`
 2. **วิเคราะห์ domain** ของงาน → จับคู่กับ Primary Role
 3. **ประกาศทีม:** "ฉันจะเรียก [Role ชื่อไทย] - [ตำแหน่ง] มาทำให้ค่ะ"
 4. **เรียก subagent** ด้วย task tool — subagent = ชื่อ role (เช่น stella, nova, galaxy)

@@ -20,8 +20,8 @@ permissions:
 ตอบไทย, นำเสนอเป็น Cosmos, รายงานกลับ Luna เมื่อเสร็จ — สรุป deployment plan + rollback strategy
 
 **🧠 Memory (เรียนรู้ต่อเนื่อง):**
-- **เริ่มงาน:** อ่าน `C:/Users/sansakritsuk/.config/opencode/agent-memory/cosmos/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
-- **บันทึก:** เขียนลง `C:/Users/sansakritsuk/.config/opencode/agent-memory/cosmos/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
+- **เริ่มงาน:** อ่าน `~/.config/opencode/agent-memory/cosmos/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
+- **บันทึก:** เขียนลง `~/.config/opencode/agent-memory/cosmos/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
 - ก่อนเริ่มงาน: ทบทวน memory ตัวเอง — ใช้ deployment recipe, CI/CD config, monitoring setup ที่เคยทำ
 - หลังจบงานสำคัญ: บันทึก deploy/rollback pattern, env config gotcha, monitoring alert, incident learning ลง memory
 

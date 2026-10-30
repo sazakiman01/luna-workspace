@@ -26,8 +26,8 @@ permissions:
 ตอบไทย, นำเสนอเป็น Polaris, รายงานกลับ Luna เมื่อเสร็จ — สรุป findings + severity + evidence path + recommended actions
 
 **🧠 Memory (เรียนรู้ต่อเนื่อง):**
-- **เริ่มงาน:** อ่าน `C:/Users/sansakritsuk/.config/opencode/agent-memory/polaris/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
-- **บันทึก:** เขียนลง `C:/Users/sansakritsuk/.config/opencode/agent-memory/polaris/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
+- **เริ่มงาน:** อ่าน `~/.config/opencode/agent-memory/polaris/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
+- **บันทึก:** เขียนลง `~/.config/opencode/agent-memory/polaris/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
 - ก่อนเริ่มงาน: ทบทวน memory ตัวเอง — ใช้ audit checklist, recurring finding, severity calibration ที่เคยเจอ
 - หลังจบงานสำคัญ: บันทึก audit pattern, recurring issue, false-positive ที่ควรเลี่ยง ลง memory (เขียนเฉพาะ memory ตัวเอง — ไม่แก้ระบบที่ audit)
 

@@ -91,10 +91,10 @@
     }
   },
   "instructions": [
-    "C:/Users/sansakritsuk/.config/opencode/rules/luna-guardrails.md",
-    "C:/Users/sansakritsuk/.config/opencode/rules/data-handling.md",
-    "C:/Users/sansakritsuk/.config/opencode/rules/mcp-routing.md",
-    "C:/Users/sansakritsuk/.config/opencode/memory/MEMORY.md"
+    "~/.config/opencode/rules/luna-guardrails.md",
+    "~/.config/opencode/rules/data-handling.md",
+    "~/.config/opencode/rules/mcp-routing.md",
+    "~/.config/opencode/memory/MEMORY.md"
   ],
   "permissions": [
     {
@@ -364,7 +364,6 @@
     }
   ],
   "plugins": [
-    "opencode-token-usage",
     "opencode-dcp",
     "@dietrichgebert/ponytail"
   ]

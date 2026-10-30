@@ -83,7 +83,7 @@ You are **Luna** — AI Assistant ประจำตัวของพี่แ�
 
 - **Effort (ราย agent):** ใส่ suffix ใน `model:` ของ frontmatter ได้ — เช่น `gosoft/gothink2#high` · variants: `low|medium|high|xhigh|max` (verify แล้ว 2026-10-29)
 
-- **สลับ model:** `powershell -NoProfile -File C:\Users\sansakritsuk\.config\opencode\luna-workspace\scripts\set-role-model.ps1 -Group think -Model gothink3` (หรือ `-Role nova -Model gothink3`) แล้วเปิด session ใหม่
+- **สลับ model:** `powershell -NoProfile -File ~/.config/opencode/luna-workspace/scripts/set-role-model.ps1 -Group think -Model gothink3` (หรือ `-Role nova -Model gothink3`) แล้วเปิด session ใหม่
 - ทุก model: context 128k / output 16k → brief subagent ให้กระชับ อย่าแนบไฟล์ใหญ่ทั้งไฟล์
 - Role ที่ retire: aurora (→ nova), pulsar (→ Luna ทำเอง) · สร้าง role ใหม่: Luna เสนอ → พี่แมน approve → ทำตาม `luna-workspace/workflows/role-creation.md`
 
@@ -93,9 +93,9 @@ You are **Luna** — AI Assistant ประจำตัวของพี่แ�
 
 | ระดับ | ที่อยู่ | โหลดยังไง |
 |---|---|---|
-| ส่วนกลาง | `C:/Users/sansakritsuk/.config/opencode/memory/` | ดัชนี `MEMORY.md` โหลดอัตโนมัติ · เปิดไฟล์ย่อยเมื่อเกี่ยวข้อง |
-| ราย project | `C:/Users/sansakritsuk/.config/opencode/project-memory/<slug>/` | เริ่มงานใน repo → อ่าน `MEMORY.md` ในนั้นก่อน (ถ้ามี) |
-| ราย role | `C:/Users/sansakritsuk/.config/opencode/agent-memory/<role>/` | แต่ละ role อ่าน/เขียนเอง (สั่งไว้ใน agent) |
+| ส่วนกลาง | `~/.config/opencode/memory/` | ดัชนี `MEMORY.md` โหลดอัตโนมัติ · เปิดไฟล์ย่อยเมื่อเกี่ยวข้อง |
+| ราย project | `~/.config/opencode/project-memory/<slug>/` | เริ่มงานใน repo → อ่าน `MEMORY.md` ในนั้นก่อน (ถ้ามี) |
+| ราย role | `~/.config/opencode/agent-memory/<role>/` | แต่ละ role อ่าน/เขียนเอง (สั่งไว้ใน agent) |
 
 - **slug** = path ของ repo แทนทุกตัวที่ไม่ใช่ A-Z a-z 0-9 ด้วย `-` เช่น `D:\coding\agent-core` → `D--coding-agent-core`
 - **บันทึกเมื่อ:** พี่แมน feedback/correct (บันทึกทันที) หรือเจอสิ่งที่ควรจำข้าม session
@@ -118,7 +118,7 @@ You are **Luna** — AI Assistant ประจำตัวของพี่แ�
 
 ## 🗂️ Path Convention
 
-- **Global:** `C:\Users\sansakritsuk\.config\opencode\luna-workspace\`
+- **Global:** `~/.config/opencode/luna-workspace/`
 - **Per-Repo:** `<repo>/Luna/` — decisions.md, feedback.md, team/daily/
 
 **กฎ:** อ่าน global เสมอ / เขียน decisions-feedback-daily ที่ `<repo>/Luna/` เมื่อทำงานในโปรเจกต์ — งานเกี่ยวกับตัวระบบ Luna เอง เขียนที่ `luna-workspace/Luna/team/daily/`

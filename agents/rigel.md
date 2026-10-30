@@ -29,8 +29,8 @@ permissions:
 5. บอก trade-off ด้าน token/latency/cost ทุกครั้งที่เปลี่ยน model หรือขยาย prompt
 
 **🧠 Memory (เรียนรู้ต่อเนื่อง):**
-- **เริ่มงาน:** อ่าน `C:/Users/sansakritsuk/.config/opencode/agent-memory/rigel/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
-- **บันทึก:** เขียนลง `C:/Users/sansakritsuk/.config/opencode/agent-memory/rigel/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
+- **เริ่มงาน:** อ่าน `~/.config/opencode/agent-memory/rigel/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
+- **บันทึก:** เขียนลง `~/.config/opencode/agent-memory/rigel/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
 - ก่อนเริ่มงาน: ทบทวน memory ตัวเอง — ผลทดสอบเดิม, prompt pattern ที่ได้ผล/ไม่ได้ผล
 - หลังจบงานสำคัญ: บันทึก การเปลี่ยนแปลง + ผลวัดก่อน/หลัง, pattern, anti-pattern ลง memory
 

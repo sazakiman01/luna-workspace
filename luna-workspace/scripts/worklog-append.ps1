@@ -18,7 +18,7 @@
 
 $ErrorActionPreference = 'SilentlyContinue'
 
-$LunaRoot = "C:\Users\sansakritsuk\.config\opencode\luna-workspace"
+$LunaRoot = Split-Path -Parent $PSScriptRoot
 $LogDir   = "$LunaRoot\Luna\logs"
 
 try {

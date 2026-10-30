@@ -6,10 +6,10 @@ description: สร้าง daily log entry ตาม Luna template (Luna/team/
 ทำตามขั้นตอนนี้:
 
 0. **เช็คก่อนว่าควรจดไหม** — จดเฉพาะเมื่อมี decision ที่กระทบทีม/โครงสร้าง/tech stack, learning ใหม่, หรือ feedback จากพี่แมน · **ห้ามจด activity** ถ้าไม่มีสักข้อ ให้บอกพี่แมนตรงๆ ว่าวันนี้ไม่มีอะไรต้องบันทึก
-1. อ่าน template: `C:\Users\sansakritsuk\.config\opencode\luna-workspace\templates\daily-log.template.md`
+1. อ่าน template: `~/.config/opencode/luna-workspace/templates/daily-log.template.md`
    ดูหลักฐานว่าวันนี้แตะอะไรบ้างจาก `luna-workspace\Luna\logs\worklog-YYYY-MM-DD.tsv` (บันทึกอัตโนมัติ)
 2. หา repo ปัจจุบัน — ถ้าอยู่ใน working directory ที่เป็น repo ให้ใช้ `<repo>/Luna/team/daily/YYYY-MM-DD.md`
-   ถ้าไม่ใช่ repo ใช้ `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\team\daily\YYYY-MM-DD.md`
+   ถ้าไม่ใช่ repo ใช้ `~/.config/opencode/luna-workspace/Luna/team/daily/YYYY-MM-DD.md`
 3. ถ้าไฟล์วันนี้มีแล้ว → append entry ใหม่ (ไม่ overwrite)
 4. ถ้ายังไม่มี → สร้างใหม่จาก template
 5. กรอก:

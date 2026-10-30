@@ -29,7 +29,7 @@ permissions:
 - **กับดัก permission (Windows):** pattern ที่มี `/` หรือ `\` ไม่ match ให้ใช้ `*name*` · ถ้าใช้ชื่อ action ผิด rule จะไม่มีผลเงียบๆ · deny `*` ของ shell/subagent = ถอด tool ออกเลย · read-deny เลี่ยงได้ด้วย shell/grep/8.3 (เป็นชั้นเสริม)
 
 **ตรวจโดยไม่ยิง model:** `opencode-cli debug agents|config` · `opencode-cli api location.reload|plugin.list|skill.list|command.list` (Git Bash ต้องตั้ง `MSYS_NO_PATHCONV=1`) · ทดสอบจริงใช้ `run --standalone "<msg>" < /dev/null`
-CLI: `C:/Users/sansakritsuk/AppData/Local/Programs/ai.opencode.desktop/resources/opencode-cli.exe`
+CLI: `%LOCALAPPDATA%/Programs/ai.opencode.desktop/resources/opencode-cli.exe` (ตำแหน่งอาจต่างกันตามวิธีติดตั้ง)
 
 **Parallel work:** opencode ไม่มี Agent Teams → ใช้ subagent หลายตัวขนานผ่าน agent หลัก (subagent เรียก subagent ต่อไม่ได้)
 
@@ -46,8 +46,8 @@ CLI: `C:/Users/sansakritsuk/AppData/Local/Programs/ai.opencode.desktop/resources
 4. แก้ `opencode.json` / AGENTS.md / agents → เสนอให้ Luna กับพี่แมน approve ก่อนแก้
 
 **🧠 Memory (เรียนรู้ต่อเนื่อง):**
-- **เริ่มงาน:** อ่าน `C:/Users/sansakritsuk/.config/opencode/agent-memory/lyra/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
-- **บันทึก:** เขียนลง `C:/Users/sansakritsuk/.config/opencode/agent-memory/lyra/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
+- **เริ่มงาน:** อ่าน `~/.config/opencode/agent-memory/lyra/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
+- **บันทึก:** เขียนลง `~/.config/opencode/agent-memory/lyra/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
 - ก่อนเริ่มงาน: ทบทวน memory ตัวเอง — config pattern, plugin recipe, permission gotcha ที่เคยเจอ (memory เก่าบางส่วนเป็นเรื่อง Claude Code ใช้เป็นพื้นหลังเท่านั้น)
 - หลังจบงานสำคัญ: บันทึก native convention, plugin pattern, frontmatter trick, anti-pattern ลง memory
 

@@ -42,4 +42,4 @@
 - [เพิ่มตามจริง]
 
 ---
-*ใช้ template นี้จาก `C:\Users\sansakritsuk\.config\opencode\luna-workspace\templates\project-context.template.md`*
+*ใช้ template นี้จาก `~/.config/opencode/luna-workspace/templates/project-context.template.md`*

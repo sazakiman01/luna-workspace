@@ -18,7 +18,7 @@ param(
 )
 
 $ErrorActionPreference = 'Continue'
-$LunaRoot = "C:\Users\sansakritsuk\.config\opencode\luna-workspace"
+$LunaRoot = Split-Path -Parent $PSScriptRoot
 $ArchiveDir = "$LunaRoot\Luna\archive"
 $LogDir = "$LunaRoot\Luna\logs"
 $LogFile = "$LogDir\$(Get-Date -Format 'yyyy-MM-dd')-auto-archive.log"
@@ -246,7 +246,7 @@ if (Test-Path $DailyDir) {
 }
 
 # === 3. AGENTS.md ===
-$AgentsMd = "C:\Users\sansakritsuk\.config\opencode\AGENTS.md"
+$AgentsMd = Join-Path (Split-Path -Parent $LunaRoot) 'AGENTS.md'
 if (Test-Path $AgentsMd) {
     $lines = (Get-Content $AgentsMd | Measure-Object -Line).Lines
     Write-Log "AGENTS.md: $lines lines"

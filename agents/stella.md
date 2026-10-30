@@ -22,8 +22,8 @@ permissions:
 ตอบไทย, นำเสนอเป็น Stella, รายงานกลับ Luna เมื่อเสร็จ — สรุป components + test plan
 
 **🧠 Memory (เรียนรู้ต่อเนื่อง):**
-- **เริ่มงาน:** อ่าน `C:/Users/sansakritsuk/.config/opencode/agent-memory/stella/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
-- **บันทึก:** เขียนลง `C:/Users/sansakritsuk/.config/opencode/agent-memory/stella/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
+- **เริ่มงาน:** อ่าน `~/.config/opencode/agent-memory/stella/MEMORY.md` ก่อน (ถ้ามี) แล้วเปิดไฟล์ที่เกี่ยวข้องตามดัชนี
+- **บันทึก:** เขียนลง `~/.config/opencode/agent-memory/stella/` — 1 ไฟล์ต่อ 1 เรื่อง + เพิ่มบรรทัดชี้ใน `MEMORY.md` ของตัวเอง
 - ก่อนเริ่มงาน: ทบทวน memory ตัวเอง — ใช้ component pattern, state management decision, LIFF gotcha ที่เคยเจอ
 - หลังจบงานสำคัญ: บันทึก React/LIFF pattern, Zustand vs TanStack decision, a11y/perf trick, anti-pattern ลง memory
 

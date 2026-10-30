@@ -5,10 +5,10 @@ description: Weekly retrospective — สรุปงาน, learnings, แล�
 
 ทำ weekly retrospective:
 
-1. **อ่าน workflow:** `C:\Users\sansakritsuk\.config\opencode\luna-workspace\workflows\weekly-retro.md`
+1. **อ่าน workflow:** `~/.config/opencode/luna-workspace/workflows/weekly-retro.md`
 2. **รวบรวมหลักฐาน 7 วันล่าสุด:**
-   - `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\logs\worklog-*.tsv` — บันทึกอัตโนมัติว่าแตะไฟล์อะไรวันไหน (แหล่งหลัก — ไม่ต้องเดา)
-   - `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\team\daily\*.md` (ไม่ recurse)
+   - `~/.config/opencode/luna-workspace/Luna/logs/worklog-*.tsv` — บันทึกอัตโนมัติว่าแตะไฟล์อะไรวันไหน (แหล่งหลัก — ไม่ต้องเดา)
+   - `~/.config/opencode/luna-workspace/Luna/team/daily/*.md` (ไม่ recurse)
    - `<repo>/Luna/team/daily/*.md` (ถ้าอยู่ใน repo, ไม่ recurse)
    - **ห้าม glob `**/*.md`** — จะดึง `_archived/` มาด้วย (token waste)
    - ถ้าต้องข้อมูลเก่า > 14 วัน: อ่าน `_archived/INDEX.md` ก่อน แล้วเลือกไฟล์เฉพาะที่จำเป็น

@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)][ValidatePattern('^(godev[123]|gothink[123])(#(low|medium|high|xhigh|max))?$')][string]$Model
 )
 $ErrorActionPreference = 'Stop'
-$AgentsDir = 'C:\Users\sansakritsuk\.config\opencode\agents'
+$AgentsDir = Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'agents'
 $Groups = @{
     think = @('orion', 'nova', 'nebula', 'polaris', 'atlas', 'galaxy', 'rigel', 'sirius')
     dev   = @('stella', 'vega', 'cosmos', 'comet', 'vela')

@@ -20,14 +20,14 @@ description: รัน Weekly Retrospective ของ Luna (รีวิวส�
 
 อ่านไฟล์เหล่านี้เพื่อรวบรวม context:
 - **Memory ส่วนกลาง (`~/.config/opencode/memory/`)** — feedback/decisions/patterns ที่บันทึกไว้สัปดาห์นี้ (แทน hypothesis/insights/preferences เดิม — retired 2026-07-23)
-- `C:\Users\sansakritsuk\.config\opencode\luna-workspace\team\performance.md` — performance ของ role
-- `C:\Users\sansakritsuk\.config\opencode\agent-memory\<role>\` — per-role learning (path เขียนไว้ใน agent)
+- `~/.config/opencode/luna-workspace/team/performance.md` — performance ของ role
+- `~/.config/opencode/agent-memory/<role>/` — per-role learning (path เขียนไว้ใน agent)
 - `<repo>/Luna/daily/` ของทุก repo ที่ active สัปดาห์นี้
 - `<repo>/Luna/team/daily/` ของทุก repo ที่ active สัปดาห์นี้
 
 ### 3. Run Retrospective (ฉบับเดียว)
 
-สร้าง `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\retrospective\YYYY-Www.md` ตาม template ใน `Luna/retrospective/README.md`:
+สร้าง `~/.config/opencode/luna-workspace/Luna/retrospective/YYYY-Www.md` ตาม template ใน `Luna/retrospective/README.md`:
 - รีวิว feedback/pattern ที่ยังไม่ปิด (จาก memory ส่วนกลาง)
 - บันทึก pattern ที่ evidence สะสมพอ → memory ส่วนกลาง (type=feedback/project)
 - สรุป performance + cross-role patterns (เจอใน ≥ 2 roles) และ collaboration issues ในไฟล์เดียวกันนี้

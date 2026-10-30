@@ -15,8 +15,8 @@
 $ErrorActionPreference = 'SilentlyContinue'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-$Root    = "C:\Users\sansakritsuk\.config\opencode"
-$W       = "$Root\luna-workspace"
+$W       = Split-Path -Parent $PSScriptRoot
+$Root    = Split-Path -Parent $W
 $Exclude = '\\(_archived|archive|audits|retrospective|plans)\\'
 
 $live = Get-ChildItem $W -Recurse -Filter *.md -File |

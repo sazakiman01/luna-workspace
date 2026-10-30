@@ -11,19 +11,19 @@ description: เรียก Polaris audit Luna System (compliance + quality + l
 1. **Persona + Tier compliance** — ลูน่าตอบเป็นลูน่า (ไทย, ลงท้าย ค่ะ/คะ, 🌙) ไหม · ประกาศ tier ก่อนงาน Tier 2+ ไหม · เลือก tier ถูกไหม (ไม่ default ไป Tier 3)
 2. **Role invocation** — เรียก Role ตรงสายไหม / ข้ามไหม / ใช้ Tier 3 กับงานที่ Tier 1 พอไหม
 3. **Learning loop health** — `agent-memory/<role>/` role ไหนสด role ไหน dormant · role ไหนไม่เคยเขียนเลย
-4. **Central memory** — `projects/C--Users-sansakritsuk--claude/memory/MEMORY.md` มี entry ค้าง/ผิด/ซ้ำไหม · consolidation รายเดือนรันหรือยัง
+4. **Central memory** — `memory/MEMORY.md` has stale, wrong, or duplicate entries; has the monthly consolidation run?
 5. **Decision log coverage** — 7 วันล่าสุดมี session ที่ควรมี log แต่ไม่มีไหม (เทียบกับ `Luna/logs/worklog-*.tsv`)
 6. **Context economy** — AGENTS.md size (เพดาน 200 บรรทัด), repo-index size, ไฟล์ใหญ่ผิดปกติ
 7. **Doc drift** — จำนวน role / ชื่อไทย / model-effort tier ตรงกับ `agents/*.md` ไหม
 
 **Evidence sources:**
-- `C:\Users\sansakritsuk\.config\opencode\AGENTS.md`
-- `C:\Users\sansakritsuk\.config\opencode\agents\*.md` — ความจริง runtime ของ role/model/effort
-- `C:\Users\sansakritsuk\.config\opencode\agent-memory\<role>\` — per-role learning
-- `C:\Users\sansakritsuk\.config\opencode\memory\MEMORY.md`
-- `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\team\daily\` (active root — **ห้าม** recurse เข้า `_archived/`)
-- `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\logs\worklog-*.tsv` — หลักฐานอัตโนมัติว่าแตะไฟล์อะไรวันไหน
-- `C:\Users\sansakritsuk\.config\opencode\luna-workspace\Luna\retrospective\`
+- `~/.config/opencode/AGENTS.md`
+- `~/.config/opencode/agents/*.md` — ความจริง runtime ของ role/model/effort
+- `~/.config/opencode/agent-memory/<role>/` — per-role learning
+- `~/.config/opencode/memory/MEMORY.md`
+- `~/.config/opencode/luna-workspace/Luna/team/daily/` (active root — **ห้าม** recurse เข้า `_archived/`)
+- `~/.config/opencode/luna-workspace/Luna/logs/worklog-*.tsv` — หลักฐานอัตโนมัติว่าแตะไฟล์อะไรวันไหน
+- `~/.config/opencode/luna-workspace/Luna/retrospective/`
 
 > ระบบ hypothesis/insights/preferences **retired 2026-07-23** — ห้ามอ้างอิงไฟล์พวกนี้ ของเก่าอยู่ใน `Luna/archive/`
 

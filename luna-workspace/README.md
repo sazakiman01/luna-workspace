@@ -82,7 +82,7 @@ luna-workspace/
 & "$env:USERPROFILE\.config\opencode\luna-workspace\templates\Setup-LunaRepo.ps1" -RepoPath "D:\coding\MyNewRepo"
 ```
 
-หลังรัน: แก้ไฟล์ `MyNewRepo\.opencode\project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน opencode → พร้อมใช้! (opencode ไม่โหลดไฟล์นี้ให้เอง → ลูน่าเปิดอ่านเมื่อเริ่มงาน · memory ราย project อยู่ `~/.config/opencode/project-memory/<slug>/`)
+หลังรัน: แก้ไฟล์ `MyNewRepo/.opencode/project-context.md` — บอก Luna ว่าโปรเจกต์นี้ใช้อะไร → เปิดใน opencode → พร้อมใช้! (opencode ไม่โหลดไฟล์นี้ให้เอง → ลูน่าเปิดอ่านเมื่อเริ่มงาน · memory ราย project อยู่ `~/.config/opencode/project-memory/<slug>/`)
 
 ### วิธีที่ 2: ทำเอง (Manual)
 
@@ -104,32 +104,34 @@ MyNewRepo/
 
 ## 👥 ทีมงาน
 
-ทุกคนมี principal skill เฉพาะทาง (รายชื่อที่เป็นทางการ: `team/team-config.md`):
+รายชื่อ runtime ปัจจุบันมี **14 roles** (source of truth: `team/team-config.md`; agent definitions อยู่ที่ `~/.config/opencode/agents/*.md`):
 
-| ชื่อ | หน้าที่ | ใช้เมื่อไหร่ | Skill Score |
-|------|---------|-------------|------------|
-| **Orion** | System Architect | วางแผน architecture | 9.3 🌟 |
-| **Nova** | Backend Dev | เขียน API, Cloud Functions | 4.3 🟡 |
-| **Stella** | Frontend Dev | สร้างหน้าเว็บ, React, UI | 10.0 🌟 |
-| **Nebula** | Database Designer | ออกแบบ Firestore schema | 4.3 🟡 |
-| **Cosmos** | DevOps Engineer | Deploy, CI/CD, Firebase | 4.3 🟡 |
-| **Sirius** | QA Engineer | เทสระบบ, Risk-Coverage Matrix | 9.3 🌟 |
-| **Galaxy** | Business Analyst | วิเคราะห์ requirement | ~1.4 🔴 |
-| **Vega** | UI/UX Designer | ออกแบบหน้าตา, accessibility | 7.1 🟢 |
-| **Aurora** | Integration Specialist | เชื่อมต่อ LINE, Payment | 4.3 🟡 |
-| **Pulsar** | Project Manager | จัดการ timeline, retro | 8.6 🌟 |
-| **Lyra** | opencode Tooling | ปรับแต่งเครื่องมือ, workflows | 9.3 🌟 |
-| **Polaris** | Luna System Auditor | ตรวจสอบคุณภาพ, ความถูกต้อง | 9.3 🌟 |
-| **Comet** | BPMN/Camunda Expert | ออกแบบ workflow, process design | 4.3 🟡 |
+| Role | หน้าที่ | ใช้เมื่อไหร่ |
+|------|---------|-------------|
+| **Galaxy** | Business Analyst | วิเคราะห์ requirement และ business analysis |
+| **Vega** | UI/UX Designer | UX, naming, branding, accessibility |
+| **Orion** | System Architect | architecture และ system design |
+| **Nova** | Backend Developer | API, Cloud Functions, Firestore และ integration |
+| **Stella** | Frontend Developer | React, LIFF และ UI implementation |
+| **Nebula** | Database Designer | schema, index และ data modeling |
+| **Cosmos** | DevOps Engineer | deploy, CI/CD และ monitoring |
+| **Sirius** | QA Engineer | test strategy, E2E และ quality verification |
+| **Comet** | BPMN/Camunda Expert | workflow และ Camunda process |
+| **Lyra** | OpenCode Tooling | agents, skills, commands, plugins และ config |
+| **Polaris** | Luna System Auditor | compliance, quality และ learning-loop audit |
+| **Atlas** | Business & Finance Advisor | cost, pricing, ROI และ business strategy |
+| **Vela** | Embroidery Specialist | production และตลาดงานปักไทย |
+| **Rigel** | AI Agent Engineer | Bedrock AgentCore prompt/model/eval tuning |
 
-> คะแนนใช้ **Scoring Rubric 3-Part** — ดู `templates/scoring-rubric.md`
-> 🌟 Principal (8.5+) · 🟢 Genuine (7.0+) · 🟡 Skeleton (4.0+) · 🔴 Fail (<4.0)
+> Luna เป็น interface เดียว: เลือก Tier และ role ที่จำเป็น แล้วสรุปผลกลับให้ผู้ใช้
+> Aurora และ Pulsar เลิกใช้แล้ว: งาน integration อยู่กับ Nova และงาน coordination อยู่กับ Luna
 
-### ทีมงาน 2 ระดับ
+### วิธีทำงานของทีม
 
-**ระดับ 1: ทีมหลัก (Global)** — อยู่ใน `luna-workspace/team/roles/` ใช้ได้กับทุกโปรเจกต์
-
-**ระดับ 2: ทีมเฉพาะโปรเจกต์ (Per-Repo)** — อยู่ใน `MyRepo/team/` เพิ่ม domain knowledge
+- งานเล็ก Luna ทำตรง (Tier 1); งาน review ใช้ skill ที่ตรง (Tier 2)
+- งานใหญ่, หลายไฟล์ หรือเป็น design decision ใช้ subagent (Tier 3); OpenCode ไม่มี Agent Teams
+- งานเสี่ยงด้าน security, schema, money, migration หรือ production ต้องมี human-in-the-loop และ verifier เพิ่ม
+- ค่ารันจริงของ model อยู่ที่ frontmatter `model:` ใน `agents/*.md`; `team-config.md` เป็นข้อมูลอ้างอิง
 
 ---
 
